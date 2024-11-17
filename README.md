@@ -50,6 +50,13 @@ npx sequelize-cli db:seed:all
 
 Enjoy!
 
+## Postman
+* You can import the following Postman end-points and environment to try the backend: 
+  - [postman collection](postman/metaverse.postman_collection.json).
+  - [postman environment](postman/metaverse.postman_environment.json).
+* You can also access de postman end-points online: 
+  - [postman collection online](https://documenter.getpostman.com/view/3446841/2sAYBPmZqP).
+
 ## Prerequisites
 
 All you need is... some time and...
