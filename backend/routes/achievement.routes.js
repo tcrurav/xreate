@@ -10,6 +10,9 @@ module.exports = app => {
     // Retrieve all Achievements
     router.get("/", auth.isAuthenticated, achievements.findAll);
 
+    // Retrieve all Achievements eagerly
+    router.get("/eagerly", auth.isAuthenticated, achievements.findAllEagerly);
+
     // Retrieve a single Achievements with id
     router.get("/:id", auth.isAuthenticated, achievements.findOne);
 

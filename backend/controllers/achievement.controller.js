@@ -1,5 +1,10 @@
 const db = require("../models");
 const Achievement = db.achievement;
+const Challenge = db.challenge;
+const InActivityStudentParticipation = db.inActivityStudentParticipation;
+const User = db.user;
+const Activity = db.activity;
+const Team = db.team;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Achievement
@@ -43,6 +48,33 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all Achievements from the database.
+exports.findAllEagerly = (req, res) => {
+    Achievement.findAll({
+        include: [{
+            model: Challenge
+        }, {
+            model: InActivityStudentParticipation,
+            include: [
+                { model: Team },
+                { model: User },
+                { model: Activity }]
+        }
+        ],
+        attributes: {
+            exclude: ['challengeId', 'inActivityStudentParticipationId']
+        }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving achievements."
+            });
+        });
+};
+
 // Find a single Achievement with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -63,8 +95,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Achievement.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -88,8 +120,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Achievement.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
