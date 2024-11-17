@@ -72,3 +72,4 @@ All you need is... some time and...
 ## Acknowledgments
 
 * https://gist.github.com/PurpleBooth/109311bb0361f32d87a2. A very complete template for README.md files.
+* https://sequelize.org/docs/v6/other-topics/migrations/. Sequelize link to read about seeders.
