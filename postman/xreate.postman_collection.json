@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "e606dc90-58ee-4a37-92e2-ad93d54adbc8",
-		"name": "metaverse",
+		"name": "xreate",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "3446841",
 		"_collection_link": "https://winter-moon-623013.postman.co/workspace/dcf43378-b9b5-4f54-b4b7-0584707bd428/collection/3446841-e606dc90-58ee-4a37-92e2-ad93d54adbc8?action=share&source=collection_link&creator=3446841"
@@ -915,7 +915,7 @@
 					"response": []
 				},
 				{
-					"name": "http://{{host}}:{{port}}/api/achievements",
+					"name": "http://{{host}}:{{port}}/api/achievementItems",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -931,7 +931,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"achievementId\":\"{{achievementItemId}}\",\r\n    \"points\": \"{{achievementItemPoints}}\",\r\n    \"item\": \"{{achievementItem}}\"\r\n}",
+							"raw": "{\r\n    \"achievementId\":\"{{achievementId}}\",\r\n    \"points\": \"{{achievementItemPoints}}\",\r\n    \"item\": \"{{achievementItem}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -939,7 +939,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{port}}/api/achievements",
+							"raw": "http://{{host}}:{{port}}/api/achievementItems",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -947,7 +947,7 @@
 							"port": "{{port}}",
 							"path": [
 								"api",
-								"achievements"
+								"achievementItems"
 							]
 						}
 					},
