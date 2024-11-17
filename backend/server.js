@@ -66,8 +66,17 @@ app.use(function (req, res, next) {
   });
 });
 
-require("./routes/user.routes")(app);
+require("./routes/achievement.routes")(app);
+require("./routes/achievementItem.routes")(app);
 require("./routes/activity.routes")(app);
+require("./routes/activityChallengeConfig.routes")(app);
+require("./routes/activityChallengeConfigItem.routes")(app);
+require("./routes/challenge.routes")(app);
+require("./routes/challengeItem.routes")(app);
+require("./routes/inActivityStudentParticipation.routes")(app);
+require("./routes/inActivityTeacherParticipation.routes")(app);
+require("./routes/team.routes")(app);
+require("./routes/user.routes")(app);
 
 app.listen(port, () => {
   console.log('Server started on: ' + port);
