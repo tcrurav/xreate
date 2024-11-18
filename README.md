@@ -65,9 +65,21 @@ All you need is... some time and...
 * MySQL Server.
 * More hours than you first could think of...
 
+## Entity Relationship diagram
+![Entity Relationship diagram](docs/screenshot-01-EntityRelationship_Diagram.png)
+
+## General Use Case diagram
+![General Use Case diagram](docs/screenshot-02-General_UseCase_Diagram.png)
+
 ## Built With
 
 * [Visual Studio Code](https://code.visualstudio.com/) - The Editor used in this project
+
+## IES El Rincón students working on the project
+
+At the moment 6 students are willing to work on the project.
+
+students will work by pairs developing one scene each team.
 
 ## Acknowledgments
 
