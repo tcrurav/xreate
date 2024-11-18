@@ -75,6 +75,26 @@ All you need is... some time and...
 
 * [Visual Studio Code](https://code.visualstudio.com/) - The Editor used in this project
 
+
+## Some definitions
+
+* **Activity**. An activity is a set of students and teachers who work on a scaperoom activity made of a set of challenges. The activity has a start and an end date. 
+* **Challenge**. A challenge can be either a room or a corridor task.
+* **Team**. A team is a set of students playing together against other student teams.
+* **Achievement**. An achievement is the result of the challenge for a student. The achievement can be divided into achievement items. For example in a scene a student X could have a total achievement of 11 points. This achievement could be devided in 5 achievement items: 3 card pairs guessed which means 5 points each, and 2 minutes of thinking time in his turns which means -2 points each. The total achievement for this student X in this challenge would be 3 x 5 – 2 x 2 = 11 points.
+* **Team Achievement**. It’s the sum of team members achievements.
+
+## Role descriptions
+
+* **Admin**. Manages accounts. CRUD of accounts. CRUD means Create, Read, Update and Delete.
+* **Activity Manager**. Manages activities. An activity is a set of students and teachers who work on a scaperoom activity made of a set of challenges. The activity has a start and end date. The activity manager can manage a CRUD of activities, adding teachers, students and challenges (rooms or corridors). An activity manager says when the activity starts and finishes.
+* **Student**. uses a code to join an activity. Once joined can change his nickname and join a team. Students also solve the challenges (rooms or corridor tasks) together with his team.
+* **Teacher**. join as a teacher in an activity using his code. Join challenge tasks for teachers.
+* **Guest**. joins as guest in an activity using his code. Guests can go anywhere and observe everything.
+* **Room manager**. can enter room data like questions, complexity of scene tasks, etc.
+
+
+
 ## IES El Rincón students working on the project
 
 At the moment 6 students are willing to work on the project.
