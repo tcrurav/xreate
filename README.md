@@ -71,11 +71,6 @@ All you need is... some time and...
 ## General Use Case diagram
 ![General Use Case diagram](docs/screenshot-02-General_UseCase_Diagram.png)
 
-## Built With
-
-* [Visual Studio Code](https://code.visualstudio.com/) - The Editor used in this project
-
-
 ## Some definitions
 
 * **Activity**. An activity is a set of students and teachers who work on a scaperoom activity made of a set of challenges. The activity has a start and an end date. 
@@ -93,15 +88,21 @@ All you need is... some time and...
 * **Guest**. joins as guest in an activity using his code. Guests can go anywhere and observe everything.
 * **Room manager**. can enter room data like questions, complexity of scene tasks, etc.
 
-
-
 ## IES El Rincón students working on the project
 
 At the moment 6 students are willing to work on the project.
 
 students will work by pairs developing one scene each team.
 
+## Built With
+
+* [Visual Studio Code](https://code.visualstudio.com/) - The Editor used in this project.
+* [Express](https://code.visualstudio.com/) - Fast, unopinionated, minimalist web framework for Node.js.
+* [Sequelize](https://sequelize.org/) - Sequelize is a modern TypeScript and Node.js ORM.
+* [Unity](https://unity.com/) - Unity is a cross-platform 2D and 3D graphics engine.
+
 ## Acknowledgments
 
 * https://gist.github.com/PurpleBooth/109311bb0361f32d87a2. A very complete template for README.md files.
 * https://sequelize.org/docs/v6/other-topics/migrations/. Sequelize link to read about seeders.
+* https://github.com/tcrurav/UnityWebRequestExpressSequelize. Example project that shows a Unity CRUD consuming an API with Express + Sequelize + MySQL.
