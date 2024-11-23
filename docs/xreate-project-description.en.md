@@ -2,11 +2,7 @@
 [![en](https://img.shields.io/badge/lang-en-red.svg)](xreate-project-description.en.md)
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](xreate-project-description.es.md)
 
-
-
-This project is a first draft for a training lab in the XREATE project.
-
-At this moment only the backend is available.
+![XREATE logo](img/XREATE_Identity_Type + icon _horizontal.png)
 
 
 ## Getting Started
