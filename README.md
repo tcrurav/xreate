@@ -18,6 +18,8 @@ Clone this respository.
 git clone https://github.com/tcrurav/xreate.git
 ```
 
+* In the backend:
+
 create a backend/.env file for the backend. This is an example:
 
 ```
@@ -54,8 +56,9 @@ cd backend
 npx sequelize-cli db:seed:all
 ```
 
-For the unity frontend you need to download the following folders from:
-  - https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI 
+* In the frontend (Unity):
+
+Download the 2 folders in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and insert them into frontend/Assets 
 
 
 Enjoy!
