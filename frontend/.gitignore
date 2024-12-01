@@ -73,7 +73,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # XREATE model big files
-/[Aa]ssets/VRMPAssets/*
-/[Aa]ssets/TEST/NEW/XREATE PORT.fbm/*
-/[Aa]ssets/TEST/NEW/tex/*
-/[Aa]ssets/TEST/NEW/Materials/*
+/[Aa]ssets/VRMPAssets
+/[Aa]ssets/TEST
