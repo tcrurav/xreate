@@ -78,10 +78,10 @@ All you need is... some time and...
 * MySQL Server.
 
 ## Entity Relationship diagram
-![Entity Relationship diagram](docs/screenshot-01-EntityRelationship_Diagram.png)
+![Entity Relationship diagram](docs/screenshots/screenshot-01-EntityRelationship_Diagram.png)
 
 ## General Use Case diagram
-![General Use Case diagram](docs/screenshot-02-General_UseCase_Diagram.png)
+![General Use Case diagram](docs/screenshots/screenshot-02-General_UseCase_Diagram.png)
 
 ## Some definitions
 
