@@ -1,6 +1,6 @@
 # XREATE digital security training lab
 [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md)
+<!-- [![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md) -->
 
 This project is a first draft for a training lab in the XREATE project.
 

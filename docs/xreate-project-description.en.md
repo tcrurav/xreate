@@ -1,6 +1,6 @@
 # XREATE Project Description
 [![en](https://img.shields.io/badge/lang-en-red.svg)](xreate-project-description.en.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](xreate-project-description.es.md)
+<!-- [![es](https://img.shields.io/badge/lang-es-yellow.svg)](xreate-project-description.es.md) -->
 
 ![XREATE logo](img/XREATE-identity-type-icon-horizontal.png)
 
