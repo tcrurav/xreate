@@ -1,0 +1,952 @@
+fileFormatVersion: 2
+guid: f69b21717a29726409a98704670c6887
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_ConcreteGrayIndustrial
+    second: {fileID: 2100000, guid: f999ca37e21f4e14d850a31efc0b078d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals
+    second: {fileID: 2100000, guid: dde4328ba61406b4a97d45b013412804, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_1
+    second: {fileID: 2100000, guid: 502130533228ca24a88457ae52698357, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisBlue
+    second: {fileID: 2100000, guid: 98d4311950792664e9a7ec6ed243b3ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisGold
+    second: {fileID: 2100000, guid: 0365eb3a422b5694ca2ba4325d534301, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisGreen
+    second: {fileID: 2100000, guid: bfd7a51e536d869409f4101f748a45d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisGreen_1
+    second: {fileID: 2100000, guid: 1350c7511fd193f4697e95f107e48caf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisLight
+    second: {fileID: 2100000, guid: 849f4c90e4a9f184cbc570f32e2945e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisLight_1
+    second: {fileID: 2100000, guid: b4b1cbf954f5baa489814f0af4dcf507, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisRed
+    second: {fileID: 2100000, guid: c24b6b2b02730974d870e98178c0c3cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisRed_1
+    second: {fileID: 2100000, guid: 60bdecc3bfbd5234aa5d6a81730e30ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpots
+    second: {fileID: 2100000, guid: e190f9c40839866409c5440cacd605ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpotsB
+    second: {fileID: 2100000, guid: a245dc291f5319c4e8c093c3c0eb7c29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpotsB_1
+    second: {fileID: 2100000, guid: ca7bbb876a69e8e4f86d59ae01228f55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpots_1
+    second: {fileID: 2100000, guid: 1fed95f516a9c6a43a0660ecc9d81e41, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_GrassLawnC
+    second: {fileID: 2100000, guid: c66f3d9867c9d6146ba15dfac1a5ede9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HeatShield
+    second: {fileID: 2100000, guid: 55d94dce6dcd5d0479376eb214c7e9d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HoloColors
+    second: {fileID: 2100000, guid: fafc4c6c41150da42bf81ca048987552, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_LeatherWhiteOldA
+    second: {fileID: 2100000, guid: 6c41ed890c2c10a41bd26d840af81d68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MagneticEnergy
+    second: {fileID: 2100000, guid: 55c6a83ba96d56344acc4ab6a100b734, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalGoldenWornFillA
+    second: {fileID: 2100000, guid: ae518344cec6a87469d5964afdca6cb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelBlueTrimA
+    second: {fileID: 2100000, guid: 9498be14f281d01409053b7894a095fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelBlueTrimA_1
+    second: {fileID: 2100000, guid: 22ba7b25358eba54e96db61935265ce8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayFill
+    second: {fileID: 2100000, guid: 6dc03dbee1122e54ca00a3b5168607bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayFill_1
+    second: {fileID: 2100000, guid: 19dbbcc2b5bfadf4da7626b4690401f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimA
+    second: {fileID: 2100000, guid: 85cf73ed4b930e24cadab6fe3d23f9e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimD
+    second: {fileID: 2100000, guid: fedcb96dda299614d80ee7edc63e417f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimD_1
+    second: {fileID: 2100000, guid: f35e56437bc6a2c4781728b163422712, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimStrapsA
+    second: {fileID: 2100000, guid: 487df778aa1a45f4883df97799e71345, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimStrapsA_1
+    second: {fileID: 2100000, guid: 0f849d66e03bf8648ad4fed0465b14df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayFill
+    second: {fileID: 2100000, guid: 17f58ab2e87ee0946a319bf90c83dc5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayFill_1
+    second: {fileID: 2100000, guid: 7456af660cbbea944ba859797b95af5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimA
+    second: {fileID: 2100000, guid: 5764c195f68ebca4c9aee8831d66364b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimD
+    second: {fileID: 2100000, guid: 05dd5cf504d3ef44d96f63fe27159559, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimD_1
+    second: {fileID: 2100000, guid: bbea267226d6aaf4184a2c453d0223cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimE
+    second: {fileID: 2100000, guid: b5275838e47d66247a0d296b7484b543, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelRedFill
+    second: {fileID: 2100000, guid: e0928a19aba88f149b901a88fedaa895, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelRedTrimA
+    second: {fileID: 2100000, guid: 40fa9777ff20c664cbd9b15fe97bd41b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteFill
+    second: {fileID: 2100000, guid: fa92b40e7787b164b965b98794785c69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteFill_1
+    second: {fileID: 2100000, guid: 4575bbb19d3a1c34198342b357bac49c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimA
+    second: {fileID: 2100000, guid: 1d8b46baacef0e8419ad1549ebb5c027, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimA_1
+    second: {fileID: 2100000, guid: 012eba308f2fb1b479c659c0e394aa03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimB
+    second: {fileID: 2100000, guid: 09f6979fb136ddf4ea4bc2ce08e1e219, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimC
+    second: {fileID: 2100000, guid: 8e5e22fd41c4a5042ad6b551f6334792, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimC_1
+    second: {fileID: 2100000, guid: 81945dacf9aa55e4fa06a43624fa5c9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimD
+    second: {fileID: 2100000, guid: b6e76fc4ce963534faf1487ab17cc90e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimD_1
+    second: {fileID: 2100000, guid: e72f89151a98a434b982654da1526a9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimE
+    second: {fileID: 2100000, guid: 217dad1b56443a4488cb57a14f8e9561, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimE_1
+    second: {fileID: 2100000, guid: 81e4a50178d61ae49838a1c1b85abac3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimF
+    second: {fileID: 2100000, guid: ac38ff73ae5a81a44aa135de8768d43a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimStrapsA
+    second: {fileID: 2100000, guid: 27c5d55d766c70b46a4ee6527a154961, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimStrapsA_1
+    second: {fileID: 2100000, guid: 3c3b1c32e52f04f44bd0114d52fa557f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelYellowTrimA
+    second: {fileID: 2100000, guid: d9df4351a85f01b48b2c7fe8841a69f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalShinyB
+    second: {fileID: 2100000, guid: 78f088b744acbef4996dadfa803f6cd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalWornFillA
+    second: {fileID: 2100000, guid: 8cfded0781fda9e4b8b99693b908f06b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalWornFillA_1
+    second: {fileID: 2100000, guid: 4a5f9d61f529dc74ead093d09bb0ceb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_PaintLines
+    second: {fileID: 2100000, guid: af7e6b7d4fd40204bbb983651a7cd0e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_RubberTrimA
+    second: {fileID: 2100000, guid: 544354023abca9e41bb9b10779090185, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_RubberTrimA_1
+    second: {fileID: 2100000, guid: 805f3819c1cf7cf43b7f511d02bc13c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Screens
+    second: {fileID: 2100000, guid: 156f038ff79bb504699b3d513f9d10d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_SolarWingSTS
+    second: {fileID: 2100000, guid: 1e8fa1246c234954e83eab29ec1da268, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 429e42702a89eee4d92e5ca8e33bc8c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1
+    second: {fileID: 2100000, guid: 6dce2943df64cd84580757d971b6354a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_0
+    second: {fileID: 2100000, guid: 72d3ec99b697b354b8749060f8e3e3d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_1
+    second: {fileID: 2100000, guid: 2f746b46e6e3f6447bbe15401c032cfb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2
+    second: {fileID: 2100000, guid: 7cd5e88e1bd348b49a62bcd9dd45b290, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_ConcreteGrayIndustrial_diffuse
+    second: {fileID: 2800000, guid: d69991a0922ebac4facc0ca5f97dc5c4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_ConcreteGrayIndustrial_shininess
+    second: {fileID: 2800000, guid: 6dfd9195fd0f8f0418cd6e0d05313354, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_1_diffuse
+    second: {fileID: 2800000, guid: 238c6578a6c66b74fbb67a599f9d92e9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_1_emissive
+    second: {fileID: 2800000, guid: 5999db7848ea7fd42bdb9e5c9f0b70fe, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_1_shininess
+    second: {fileID: 2800000, guid: 95b6896a88d9f8b4d9b9af2787ecf275, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_diffuse
+    second: {fileID: 2800000, guid: 1ec406ce7bea03642a074413b8e0725c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_emissive
+    second: {fileID: 2800000, guid: d3ea7cc5814734c4fb759c2b67032850, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_Decals_shininess
+    second: {fileID: 2800000, guid: 05839b643d83c614eb1b175c7df9a9d0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisBlue_diffuse
+    second: {fileID: 2800000, guid: 8bc025179c28f144eba77afe76d3465d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisBlue_emissive
+    second: {fileID: 2800000, guid: 7377380cd5cf8c4479f3b578c5019181, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisBlue_shininess
+    second: {fileID: 2800000, guid: cffcf8b44368dec47815a40d5ef246dd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisGold_diffuse
+    second: {fileID: 2800000, guid: 02e20cce2f48e324b92c1e152d8eaf8a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisGold_emissive
+    second: {fileID: 2800000, guid: ac9d682647cdf1b44b542e85c20cf612, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_EmisGold_shininess
+    second: {fileID: 2800000, guid: e2af22ba9889f1545a957a43c94d06dc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpotsB_1_diffuse
+    second: {fileID: 2800000, guid: ca14fab18f69cff418730c1585aacbe8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpotsB_1_shininess
+    second: {fileID: 2800000, guid: 08aff04fe27ce564db0802297dcbbe68, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpotsB_diffuse
+    second: {fileID: 2800000, guid: 278c8cb17e940ef49926612fb4b6aa2b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_FloorPanelsSpotsB_shininess
+    second: {fileID: 2800000, guid: 06b0f19a092ddeb43b7d4befa643ded2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_GrassLawnC_diffuse
+    second: {fileID: 2800000, guid: b27f94c721e28e8429baa2190a926762, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_GrassLawnC_shininess
+    second: {fileID: 2800000, guid: ba36fe462cd482d43a19e204b2ab430f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HeatShield_diffuse
+    second: {fileID: 2800000, guid: 916e911de47793244ba8eaa2bc65daf8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HeatShield_shininess
+    second: {fileID: 2800000, guid: c9ff456469d32534881902d35030ff5f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HoloColors_diffuse
+    second: {fileID: 2800000, guid: 163759250c693434d89373181804ac1b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HoloColors_emissive
+    second: {fileID: 2800000, guid: 33a899d96059d6749bc3cef0cd5b5419, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_HoloColors_shininess
+    second: {fileID: 2800000, guid: ed49b240ea5714949bd42faa2247289f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_LeatherWhiteOldA_diffuse
+    second: {fileID: 2800000, guid: 1fc123bc19bf669409f6683dc3a5896e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_LeatherWhiteOldA_shininess
+    second: {fileID: 2800000, guid: 8a3b6d30d94104c48910a1aab21009c0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MagneticEnergy_diffuse
+    second: {fileID: 2800000, guid: 65f19e435efc82f4da5c8d893bd0f121, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MagneticEnergy_emissive
+    second: {fileID: 2800000, guid: 058a27cb125db864c9b23372afc98a26, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MagneticEnergy_shininess
+    second: {fileID: 2800000, guid: 184f4ef7fbb2515459caceb318500cf0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalGoldenWornFillA_diffuse
+    second: {fileID: 2800000, guid: d24b54920b76452498871ad82b958262, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalGoldenWornFillA_shininess
+    second: {fileID: 2800000, guid: 65f78b9538053df4b89bf08a3e28d3b7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelBlueTrimA_1_diffuse
+    second: {fileID: 2800000, guid: 3eccbd8257c139146bbfb70a7f4a3915, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelBlueTrimA_1_shininess
+    second: {fileID: 2800000, guid: d2b05f87fced6cf4db9dd48fb787daaf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelBlueTrimA_diffuse
+    second: {fileID: 2800000, guid: ddefbee5b3df0fa408819bb1d77d39e6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelBlueTrimA_shininess
+    second: {fileID: 2800000, guid: 98117e95e10997e40bf02d2923bae040, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayFill_1_diffuse
+    second: {fileID: 2800000, guid: af5d719d9664a9f46b9c3ae84fb0e53d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayFill_1_shininess
+    second: {fileID: 2800000, guid: 5859291d82e150544b9200c07aada89f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayFill_diffuse
+    second: {fileID: 2800000, guid: d68e6e53e1c1b0142847f896e120f0b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayFill_shininess
+    second: {fileID: 2800000, guid: 43de4e2ff3085294792d4a204d55f56d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimA_diffuse
+    second: {fileID: 2800000, guid: 2a70b81a01ca3d14c94d8db50ddf4502, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimA_shininess
+    second: {fileID: 2800000, guid: b1f84909a9f76954e937675292b9e034, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimD_1_diffuse
+    second: {fileID: 2800000, guid: f38d13fb9426c1f40a25f4e68502e68b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimD_1_shininess
+    second: {fileID: 2800000, guid: 5a86f58cc6c9595429198d4d9f145a5f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimD_diffuse
+    second: {fileID: 2800000, guid: 4017c9e4a14223e498e7b2137068e0a6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimD_shininess
+    second: {fileID: 2800000, guid: bd5a8d8a1a5fa0a4a81be93f84a885a2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimStrapsA_1_diffuse
+    second: {fileID: 2800000, guid: ce26905f106876343a212e361f8a26eb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimStrapsA_1_shininess
+    second: {fileID: 2800000, guid: 02b0fd446d962d24dbf6045933fa7a2c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimStrapsA_diffuse
+    second: {fileID: 2800000, guid: fb86ab4c8e4874347a0c7819e6d6f914, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelDGrayTrimStrapsA_shininess
+    second: {fileID: 2800000, guid: c39ca0b76b500ff46a366ff78122bd71, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayFill_1_diffuse
+    second: {fileID: 2800000, guid: 9d830192175dbe1449546fe106789214, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayFill_1_shininess
+    second: {fileID: 2800000, guid: 4e70a79d1b15bcc4aa507743872ea894, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayFill_diffuse
+    second: {fileID: 2800000, guid: 6ea46db6b17016a4d8b515a0ab980b0c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayFill_shininess
+    second: {fileID: 2800000, guid: da4dd6aa446e3024290a124bf1e8cdaf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimA_diffuse
+    second: {fileID: 2800000, guid: 87c281c99aa71d24d82a09bd9ba8413c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimA_shininess
+    second: {fileID: 2800000, guid: c1ff9d81be61cbf43b6f49f3c63d5869, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimD_1_diffuse
+    second: {fileID: 2800000, guid: 1b4aa844bbb351342b097db7943ef012, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimD_1_shininess
+    second: {fileID: 2800000, guid: d2be1f7ac68759d4985ea4b614020ef8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimE_diffuse
+    second: {fileID: 2800000, guid: c0f8f4fbef552e04b89aade70b9f91ab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelGrayTrimE_shininess
+    second: {fileID: 2800000, guid: c661df410e51c494eb8fa3d06bb129a0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelRedFill_diffuse
+    second: {fileID: 2800000, guid: 67a5236779f98fa42a586ad3199627c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelRedFill_shininess
+    second: {fileID: 2800000, guid: 6506dbd484739b04bbc4dd6699049f91, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelRedTrimA_diffuse
+    second: {fileID: 2800000, guid: e7e038a8edb404e4fa240cfb4cb53848, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelRedTrimA_shininess
+    second: {fileID: 2800000, guid: a96d830c194a16b49827401a91ac5cf6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteFill_1_diffuse
+    second: {fileID: 2800000, guid: 67d8764cb8fa16f48a0c33b2159fb04d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteFill_1_shininess
+    second: {fileID: 2800000, guid: a6d3aca4ed4093b4dae4d8f3f8f34505, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteFill_diffuse
+    second: {fileID: 2800000, guid: 19838473bbaf8094881d1ade8846f9c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteFill_shininess
+    second: {fileID: 2800000, guid: 89c1072e3bcec924795ef9a771d14aab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimA_1_diffuse
+    second: {fileID: 2800000, guid: 84ab9c18febb86349a1ff3b74b06d4e6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimA_1_shininess
+    second: {fileID: 2800000, guid: f0d14cc483c1a194eafa31510809c2b9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimB_diffuse
+    second: {fileID: 2800000, guid: 82f8278ae3e40e14c9f3fb7af344bf45, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimB_shininess
+    second: {fileID: 2800000, guid: a5319728be3a7ae4181b066b2a327556, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimC_1_diffuse
+    second: {fileID: 2800000, guid: 44d091d4c2c16284eac243b9fb75be3a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimC_1_shininess
+    second: {fileID: 2800000, guid: 632148179bf611d4fa9278f45da3602b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimC_diffuse
+    second: {fileID: 2800000, guid: 544fff9f5128e53469fb539845e6c803, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimC_shininess
+    second: {fileID: 2800000, guid: 1be381438e4e1c549992979e12709e00, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimD_1_diffuse
+    second: {fileID: 2800000, guid: 3e0abd6c807422a48993cc607d914923, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimD_1_shininess
+    second: {fileID: 2800000, guid: 9ceb9843bcb8cf343a0d5f7647ff028c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimD_diffuse
+    second: {fileID: 2800000, guid: 7c97a53c1ce584542ae1f65547171d69, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimD_shininess
+    second: {fileID: 2800000, guid: e89c7b0200e9bae42af741f8cffb8ae6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimE_1_diffuse
+    second: {fileID: 2800000, guid: 5de0e6cab06429a4dbdf37a792ccc9ff, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimE_1_shininess
+    second: {fileID: 2800000, guid: 29373998e40413e4d82db4bf94ab3b16, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimE_diffuse
+    second: {fileID: 2800000, guid: 69a48f92a05386f4f871284a66be3114, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimE_shininess
+    second: {fileID: 2800000, guid: 7f6b9b95bb729dc4bb00f324cdb1dc91, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimF_diffuse
+    second: {fileID: 2800000, guid: 90842a587bb7c1149b2f32a6cf105caa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimF_shininess
+    second: {fileID: 2800000, guid: 8cb5dee64c477a74e9c848fa7d3ff3a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimStrapsA_1_diffuse
+    second: {fileID: 2800000, guid: b711797d7c3edd64ca11ed0e088ef9ff, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimStrapsA_1_shininess
+    second: {fileID: 2800000, guid: 5c056a0efff7dce44b1a2c763a297517, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimStrapsA_diffuse
+    second: {fileID: 2800000, guid: 1e2f530c15ee07a4f8f074eb02299313, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelWhiteTrimStrapsA_shininess
+    second: {fileID: 2800000, guid: 023b6589507d36f46a4778e064228649, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelYellowTrimA_diffuse
+    second: {fileID: 2800000, guid: 132c7a60f1832ae4698706b6e6149d47, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalPanelYellowTrimA_shininess
+    second: {fileID: 2800000, guid: d6923be40512b0e46b46897cfe1789e8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalShinyB_diffuse
+    second: {fileID: 2800000, guid: aeefc4c2a24f13b4b830f1e9f51761ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalShinyB_emissive
+    second: {fileID: 2800000, guid: 55c21fac33ea321449d43d75e75c5ea9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_MetalShinyB_shininess
+    second: {fileID: 2800000, guid: 2919fb9ca57656048ab188cf4a0a6cee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_PaintLines_diffuse
+    second: {fileID: 2800000, guid: 280172a59a7de2b4097f671df8456425, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_PaintLines_shininess
+    second: {fileID: 2800000, guid: a42e35fbbb4724f4e8d244dafb0af331, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_RubberTrimA_1_diffuse
+    second: {fileID: 2800000, guid: 9bd73c2758c310c46abaeea86617e22b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_RubberTrimA_1_shininess
+    second: {fileID: 2800000, guid: ea3a6c5af90a3fd49974d2faf54c8494, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_RubberTrimA_diffuse
+    second: {fileID: 2800000, guid: bee8802a10125a246b17fd97d3636ed3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_RubberTrimA_shininess
+    second: {fileID: 2800000, guid: eeccfd819937c1c4e882c48606daa745, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_SolarWingSTS_diffuse
+    second: {fileID: 2800000, guid: 386423a830d94ba448ccebe4356e29b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_MTM_SolarWingSTS_shininess
+    second: {fileID: 2800000, guid: 29315966cc58d2142baa441cf394388c, type: 3}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 0
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
