@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class AuthController : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class AuthController : MonoBehaviour
     public TMP_InputField NameInputField;
     public TMP_InputField UsernameInputField;
     public TMP_InputField PasswordInputField;
-    public GameObject loadingSceneCanvas;
+    public GameObject loadingCanvas;
+    public GameObject errorCanvas;
 
     private void Start()
     {
@@ -19,6 +21,7 @@ public class AuthController : MonoBehaviour
 
     public void Login()
     {
+        loadingCanvas.SetActive(true);
         StartCoroutine(DoLogin());
     }
 
@@ -33,30 +36,17 @@ public class AuthController : MonoBehaviour
 
         yield return authService.Login(user);
 
-        if(authService.responseCode == 200) loadingSceneCanvas.SetActive(true);
+        Debug.Log("reponseCode");
+        Debug.Log(authService.responseCode);
 
-        //TODO: Error handling
-    }
-
-    public void Register()
-    {
-        StartCoroutine(DoRegister());
-    }
-
-    IEnumerator DoRegister()
-    {
-        User user = new()
+        if (authService.responseCode != 200)
         {
-            name = "",
-            username = UsernameInputField.text,
-            password = PasswordInputField.text
-        };
+            loadingCanvas.SetActive(false);
+            errorCanvas.SetActive(true);
+            yield break;
+        }
 
-        yield return authService.Register(user);
-
-        if (authService.responseCode == 200) loadingSceneCanvas.SetActive(true);
-
-        //TODO: Error handling
+        SceneManager.LoadSceneAsync("SpaceshipScene");
     }
 
 }

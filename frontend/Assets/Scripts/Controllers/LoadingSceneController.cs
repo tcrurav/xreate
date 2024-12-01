@@ -15,7 +15,7 @@ public class LoadingSceneController : MonoBehaviour
     }
     void Update()
     {
-        progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
+        //progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
     }
 
 

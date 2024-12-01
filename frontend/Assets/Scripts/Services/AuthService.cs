@@ -92,6 +92,7 @@ public class AuthService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
@@ -102,7 +103,6 @@ public class AuthService : MonoBehaviour
 
         string result = request.downloadHandler.text;
         Debug.Log(result);
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.responseCode != 200)
         {
