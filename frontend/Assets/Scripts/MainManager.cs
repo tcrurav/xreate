@@ -10,6 +10,8 @@ public class MainManager : MonoBehaviour
     private string accessToken;
     private readonly string URL = "http://localhost:8080";
 
+    //TODO: URL should be in .env
+
     private void Awake()
     {
         if (Instance != null)

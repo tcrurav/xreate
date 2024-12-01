@@ -4,20 +4,22 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
 public class AuthService : MonoBehaviour
 {
     private readonly string URL = MainManager.GetURL() + "/api/users";
 
-    public void Login(User user)
+    public string requestError;
+    public long responseCode;
+
+    public IEnumerator Login(User user)
     {
-        StartCoroutine(RestLogin(user));
+        yield return StartCoroutine(RestLogin(user));
     }
 
-    public void Register(User user)
+    public IEnumerator Register(User user)
     {
-        StartCoroutine(RestRegister(user));
+        yield return StartCoroutine(RestRegister(user));
     }
 
     string GetBasicAuthString(string username, string password)
@@ -43,25 +45,32 @@ public class AuthService : MonoBehaviour
 
         yield return request.SendWebRequest();
 
+        requestError = request.error;
+        responseCode = request.responseCode;
+
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(request.error);
-        }
-        else
-        {
-            string result = request.downloadHandler.text;
-            Debug.Log("User registered successfully!");
-            Debug.Log(result);
-
-            UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
-
-            MainManager.SetUser(user);
-            MainManager.SetAccessToken(userWithAccessToken.access_token);
-
-            SceneManager.LoadScene("Login");
+            request.Dispose();
+            yield break;
         }
 
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
         Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        Debug.Log("User registered successfully!");
+
+        UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
+
+        MainManager.SetUser(user);
+        MainManager.SetAccessToken(userWithAccessToken.access_token);
 
         request.Dispose();
     }
@@ -81,26 +90,33 @@ public class AuthService : MonoBehaviour
 
         yield return request.SendWebRequest();
 
+        requestError = request.error;
+        responseCode = request.responseCode;
+
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(request.error);
-        }
-        else
-        {
-            string result = request.downloadHandler.text;
-            Debug.Log("User logged in successfully!");
-            Debug.Log(result);
-
-            UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
-
-            MainManager.SetUser(user);
-            MainManager.SetAccessToken(userWithAccessToken.access_token);
-
-            SceneManager.LoadScene("SpaceshipScene");
+            request.Dispose();
+            yield break;
         }
 
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
         Debug.Log("Status Code: " + request.responseCode);
 
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        Debug.Log("User logged in successfully!");      
+
+        UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
+
+        MainManager.SetUser(user);
+        MainManager.SetAccessToken(userWithAccessToken.access_token);
+ 
         request.Dispose();
     }
 

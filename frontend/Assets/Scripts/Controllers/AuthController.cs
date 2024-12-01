@@ -10,6 +10,7 @@ public class AuthController : MonoBehaviour
     public TMP_InputField NameInputField;
     public TMP_InputField UsernameInputField;
     public TMP_InputField PasswordInputField;
+    public GameObject loadingSceneCanvas;
 
     private void Start()
     {
@@ -18,6 +19,11 @@ public class AuthController : MonoBehaviour
 
     public void Login()
     {
+        StartCoroutine(DoLogin());
+    }
+
+    IEnumerator DoLogin()
+    {
         User user = new()
         {
             name = "",
@@ -25,19 +31,32 @@ public class AuthController : MonoBehaviour
             password = PasswordInputField.text
         };
 
-        authService.Login(user);
+        yield return authService.Login(user);
+
+        if(authService.responseCode == 200) loadingSceneCanvas.SetActive(true);
+
+        //TODO: Error handling
     }
 
     public void Register()
     {
+        StartCoroutine(DoRegister());
+    }
+
+    IEnumerator DoRegister()
+    {
         User user = new()
         {
-            name = NameInputField.text,
+            name = "",
             username = UsernameInputField.text,
             password = PasswordInputField.text
         };
 
-        authService.Register(user);
+        yield return authService.Register(user);
+
+        if (authService.responseCode == 200) loadingSceneCanvas.SetActive(true);
+
+        //TODO: Error handling
     }
 
 }
