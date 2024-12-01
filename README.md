@@ -4,7 +4,9 @@
 
 This project is a first draft for a training lab in the XREATE project.
 
-At this moment only the backend is available.
+At this moment 
+  - Backend is working.
+  - Unity frontend has just the login and the model of the spaceship in the main scene.
 
 [Read more about XREATE](docs/xreate-project-description.en.md)
 
@@ -51,6 +53,10 @@ In a new console execute the seeders for the backend:
 cd backend
 npx sequelize-cli db:seed:all
 ```
+
+For the unity frontend you need to download the following folders from:
+  - https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI 
+
 
 Enjoy!
 
