@@ -102,7 +102,7 @@ All you need is... some time and...
 
 ## IES El Rincón students working on the project
 
-At the moment 6 students are working on the project. Students will work by pairs developing one scene each team.
+At the moment 7 students are working on the project. Students will work in 3 teams developing one scene each team.
 
 ## Built With
 
