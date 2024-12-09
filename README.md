@@ -58,7 +58,7 @@ npx sequelize-cli db:seed:all
 
 * In the frontend (Unity):
 
-Download the 2 folders in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and insert them into frontend/Assets 
+Download the 3 folders in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and insert them into frontend/Assets 
 
 
 Enjoy!

@@ -8,9 +8,10 @@ public class AuthController : MonoBehaviour
 {
     private AuthService authService;
 
-    public TMP_InputField NameInputField;
     public TMP_InputField UsernameInputField;
     public TMP_InputField PasswordInputField;
+    public TMP_InputField CodeInputField;
+
     public GameObject loadingCanvas;
     public GameObject errorCanvas;
 
@@ -29,9 +30,9 @@ public class AuthController : MonoBehaviour
     {
         User user = new()
         {
-            name = "",
             username = UsernameInputField.text,
-            password = PasswordInputField.text
+            password = PasswordInputField.text,
+            code = CodeInputField.text,
         };
 
         yield return authService.Login(user);
