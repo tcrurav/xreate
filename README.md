@@ -110,9 +110,11 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * [Express](https://code.visualstudio.com/) - Fast, unopinionated, minimalist web framework for Node.js.
 * [Sequelize](https://sequelize.org/) - Sequelize is a modern TypeScript and Node.js ORM.
 * [Unity](https://unity.com/) - Unity is a cross-platform 2D and 3D graphics engine.
+* [Mixamo](https://www.mixamo.com/) - To create 3D characters, skeletal rigs, and animations, ready for use in film, games, interactive experiences and illustration.
 
 ## Acknowledgments
 
 * https://gist.github.com/PurpleBooth/109311bb0361f32d87a2. A very complete template for README.md files.
 * https://sequelize.org/docs/v6/other-topics/migrations/. Sequelize link to read about seeders.
 * https://github.com/tcrurav/UnityWebRequestExpressSequelize. Example project that shows a Unity CRUD consuming an API with Express + Sequelize + MySQL.
+* https://www.youtube.com/watch?v=76Lh0UApjNI. Excellent youtube explaining how to animate mixamo .fbx characters in Unity.
