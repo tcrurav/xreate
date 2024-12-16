@@ -76,3 +76,5 @@ crashlytics-build.properties
 /[Aa]ssets/VRMPAssets/
 /[Aa]ssets/TEST/
 /[Aa]ssets/Aliens/
+/[Aa]ssets/XREATE/SharedAssets/CommonPrefabs/TEST/
+/[Aa]ssets/XREATE/SharedAssets/CommonPrefabs/Aliens/
