@@ -32,6 +32,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/XREATE/Scenes/ScapeRooms/LeisureModuleScene.unity
     guid: 82be57eff36da3b4a89db86b4cf27d6a
+  - enabled: 1
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
+  - enabled: 1
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
+  - enabled: 1
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
+  - enabled: 1
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f794e9f00a8ffba47ad00affb57a2120,
       type: 2}
