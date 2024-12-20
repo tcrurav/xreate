@@ -268,7 +268,7 @@ public class QuizManager : MonoBehaviour
     }
 
     // Verificar si la respuesta es correcta
-    void CheckAnswer(int selectedIndex)
+    public void CheckAnswer(int selectedIndex)
     {
         if (selectedIndex == currentQuestion.correctAnswerIndex)
         {
