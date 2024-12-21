@@ -32,36 +32,48 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/XREATE/Scenes/ScapeRooms/LeisureModuleScene.unity
     guid: 82be57eff36da3b4a89db86b4cf27d6a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
-  - enabled: 1
+  - enabled: 0
     path: Assets/XREATE/Scenes/MainHub/MainScene.unity
     guid: 90d2d5bc71a004846b079a5b16bc7e5a
   - enabled: 1
     path: Assets/XREATE/Scenes/ScapeRooms/RoomModuleBScene.unity
     guid: 46d9a127b45196b46bc0a12fd2932b2c
+  - enabled: 0
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
+  - enabled: 1
+    path: Assets/XREATE/Scenes/ScapeRooms/RoomModuleAScene.unity
+    guid: c4ef151c1baed1840a65b146a25638db
+  - enabled: 1
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
+  - enabled: 1
+    path: Assets/XREATE/Scenes/MainHub/MainScene.unity
+    guid: 90d2d5bc71a004846b079a5b16bc7e5a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f794e9f00a8ffba47ad00affb57a2120,
       type: 2}

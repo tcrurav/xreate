@@ -9,6 +9,8 @@ TagManager:
   - Anchor
   - PlayerHand
   - Destroyer
+  - XreatePortMainScene
+  - XreatePortRoomModuleB
   layers:
   - Default
   - TransparentFX
