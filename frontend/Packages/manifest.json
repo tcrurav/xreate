@@ -6,6 +6,7 @@
     "com.unity.learn.iet-framework": "4.0.3",
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.netcode.gameobjects": "2.1.1",
+    "com.unity.postprocessing": "3.4.0",
     "com.unity.render-pipelines.universal": "17.0.3",
     "com.unity.services.authentication": "3.4.0",
     "com.unity.services.lobby": "1.2.2",
