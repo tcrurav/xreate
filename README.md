@@ -148,3 +148,4 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://www.youtube.com/watch?v=76Lh0UApjNI. Excellent youtube explaining how to animate mixamo .fbx characters in Unity.
 * https://codefile.io/f/uoiynHl2ZS. Data sharing among scenes.
 * https://learn.unity.com/tutorial/como-implementar-la-continuacion-de-datos-entre-escenas?language=es#. Data sharing among scenes.
+* https://www.youtube.com/watch?v=JZCzJyAbKwc. How to apply Transparent PNG Textures in Unity.

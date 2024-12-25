@@ -1,6 +1,11 @@
 const db = require("../models");
 const InActivityStudentParticipation = db.inActivityStudentParticipation;
+const Achievement = db.achievement;
+const AchievementItem = db.achievementItem;
+const User = db.user;
+const Team = db.team;
 const Op = db.Sequelize.Op;
+const Sequelize = db.Sequelize;
 
 // Create and Save a new InActivityStudentParticipation
 exports.create = (req, res) => {
@@ -44,6 +49,73 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all InActivityStudentParticipations in an Activity from the database. (students participating in an activity)
+exports.findAllByActivityId = (req, res) => {
+    const activityId = req.params.activityId;
+
+    InActivityStudentParticipation.findAll({ where: { activityId: activityId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+            });
+        });
+};
+
+// Retrieve all InActivityStudentParticipation with points in an Activity (points for each student in an activity)
+exports.findAllByActivityIdWithPoints = (req, res) => {
+    const activityId = req.params.activityId;
+
+    InActivityStudentParticipation.findAll({
+        group: ['studentId', 'teamId', 'activityId'],
+        include: [{
+            model: Achievement, attributes: [],
+            include: [{ model: AchievementItem, attributes: [] }]
+        }, 
+        // { //in CASE is necessary. It works too. I don't need it now. Maybe in the future.
+        //     model: User,
+        //     attributes: [['username', 'username'], ['nickname', 'nickname']]
+        // }, {
+        //     model: Team,
+        //     attributes: [['id', 'teamId'], ['name', 'name']]
+        // }
+        ],
+        attributes: [
+            'studentId',
+            'teamId',
+            'activityId',
+            [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']],
+        where: {
+            activityId: activityId
+        },
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+        });
+    });
+};
+
+// Retrieve all InActivityStudentParticipation in an Activity for a user (student in an activity)
+exports.findAllByActivityIdAndStudentId = (req, res) => {
+    const activityId = req.params.activityId;
+    const studentId = req.params.studentId;
+
+    InActivityStudentParticipation.findAll({ where: { activityId: activityId, studentId: studentId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+            });
+        });
+};
+
 // Find a single InActivityStudentParticipation with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -64,8 +136,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     InActivityStudentParticipation.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -89,8 +161,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     InActivityStudentParticipation.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({

@@ -5,6 +5,16 @@ module.exports = (sequelize, Sequelize) => {
     },
     type: {
       type: Sequelize.STRING
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: new Date()
+    }, 
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: new Date()
     }
   });
 

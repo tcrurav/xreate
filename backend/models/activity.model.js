@@ -6,9 +6,19 @@ module.exports = (sequelize, Sequelize) => {
     endDate: {
       type: Sequelize.DATE
     },
-    started: {
+    isStarted: {
       type: Sequelize.BOOLEAN
     },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: new Date()
+    }, 
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: new Date()
+    }
   });
 
   return Activity;
