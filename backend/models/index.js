@@ -45,6 +45,9 @@ db.activityChallengeConfig.belongsTo(db.challenge, { foreignKey: 'challengeId' }
 db.challenge.hasMany(db.challengeItem, { foreignKey: 'challengeId' });
 db.challengeItem.belongsTo(db.challenge, { foreignKey: 'challengeId' });
 
+db.challengeItem.hasMany(db.achievementItem, { foreignKey: 'challengeItemId' });
+db.achievementItem.belongsTo(db.challengeItem, { foreignKey: 'challengeItemId' });
+
 db.challenge.hasMany(db.inActivityTeacherParticipation, { foreignKey: 'challengeId' });
 db.inActivityTeacherParticipation.belongsTo(db.challenge, { foreignKey: 'challengeId' });
 db.activity.hasMany(db.inActivityTeacherParticipation, { foreignKey: 'activityId' });

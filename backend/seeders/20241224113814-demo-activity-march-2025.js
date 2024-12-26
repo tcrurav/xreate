@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 module.exports = {
   async up(queryInterface, Sequelize) {
 
-    // Users - Students
+    // Users - Students - 10 students - 2 students from each country
 
     await queryInterface.bulkInsert('users', [{
       id: 10,
@@ -109,7 +109,7 @@ module.exports = {
       nationality: "dutch",
     }], {});
 
-    // Users - Teachers
+    // Users - Teachers - 5 teachers - 1 teacher from each country
 
     await queryInterface.bulkInsert('users', [{
       id: 100,
@@ -161,7 +161,7 @@ module.exports = {
       nationality: "dutch",
     }], {});
 
-    // Activity
+    // Activity - Just 1 activity for march 2025
 
     const today = new Date();
     let tomorrow = today;
@@ -173,7 +173,7 @@ module.exports = {
       isStarted: true
     }], {});
 
-    // Teams
+    // Teams - 2 teams - Each team with 5 students
 
     await queryInterface.bulkInsert('teams', [{
       name: 'Lions'
@@ -184,7 +184,7 @@ module.exports = {
     }], {});
 
 
-    // InActivityStudentParticipation
+    // InActivityStudentParticipation - 10 participations because there are 10 students
 
     await queryInterface.bulkInsert('inactivitystudentparticipations', [{
       id: 1110,
@@ -256,7 +256,7 @@ module.exports = {
       studentId: 51
     }], {});
 
-    // Challenge
+    // Challenge - 3 challenges because there are 3 scaperooms
 
     await queryInterface.bulkInsert('challenges', [{
       id: 1,
@@ -276,7 +276,72 @@ module.exports = {
       type: 'security concepts'
     }], {});
 
-    // Achievement
+    // ChallengeItem - 9 challengeItems because each challenge has 3 items.
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 11,
+      challengeId: '1',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 21,
+      challengeId: '2',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 31,
+      challengeId: '3',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 12,
+      challengeId: '1',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 22,
+      challengeId: '2',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 32,
+      challengeId: '3',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 13,
+      challengeId: '1',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 23,
+      challengeId: '2',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 33,
+      challengeId: '3',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    // Achievement - 30 achievements because each student does 3 challenges and there are 10 students.
 
     await queryInterface.bulkInsert('achievements', [{
       id: 11110,
@@ -458,198 +523,546 @@ module.exports = {
       inActivityStudentParticipationId: 1251,
     }], {});
 
-    // AchievementItem
+    // AchievementItem - 90 achievementItems because there are 10 students. Eache student does 3 challenges and each challenge has 3 items
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11110,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11110,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11110,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21110,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21110,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21110,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31110,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31110,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31110,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11120,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11120,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11120,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21120,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21120,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21120,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31120,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31120,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31120,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11130,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11130,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11130,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21130,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21130,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21130,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31130,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31130,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31130,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11140,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11140,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11140,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21140,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21140,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21140,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31140,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31140,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31140,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11150,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11150,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11150,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21150,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21150,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21150,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31150,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31150,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31150,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11211,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11211,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11211,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21211,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21211,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21211,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31211,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31211,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31211,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11221,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11221,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11221,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21221,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21221,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21221,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31221,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31221,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31221,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11231,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11231,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11231,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21231,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21231,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21231,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31231,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31231,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31231,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11241,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11241,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11241,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21241,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21241,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21241,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31241,
       points: 1,
-      item: 'some item',
+      challengeItemId: 31,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31241,
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31241,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11251,
       points: 1,
-      item: 'some item',
+      challengeItemId: 11,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11251,
+      points: 1,
+      challengeItemId: 12,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 11251,
+      points: 1,
+      challengeItemId: 13,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 21251,
       points: 1,
-      item: 'some item',
+      challengeItemId: 21,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21251,
+      points: 1,
+      challengeItemId: 22,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 21251,
+      points: 1,
+      challengeItemId: 23,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31251,
       points: 1,
-      item: 'some item',
-    }], {});
-
-    await queryInterface.bulkInsert('achievementitems', [{
-      achievementId: 21251,
-      points: 2,
-      item: 'some item',
+      challengeItemId: 31,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 31251,
-      points: 3,
-      item: 'some item',
+      points: 1,
+      challengeItemId: 32,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 31251,
+      points: 1,
+      challengeItemId: 33,
     }], {});
 
   },

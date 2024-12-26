@@ -3,6 +3,7 @@ const Team = db.team;
 const InActivityStudentParticipation = db.inActivityStudentParticipation;
 const Achievement = db.achievement;
 const AchievementItem = db.achievementItem;
+const ChallengeItem = db.challengeItem;
 const Sequelize = db.Sequelize;
 const Op = db.Sequelize.Op;
 
@@ -58,7 +59,11 @@ exports.findAllWithPoints = (req, res) => {
                 attributes: [],
                 include: [{
                     model: AchievementItem,
-                    attributes: []
+                    attributes: [],
+                    include: [{
+                        model: ChallengeItem,
+                        attributes: []
+                    }]
                 }]
             }]
         }],
@@ -68,7 +73,11 @@ exports.findAllWithPoints = (req, res) => {
             [Sequelize.fn(
                 'SUM',
                 Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.points')),
-                'points']
+                'points'],
+            [Sequelize.fn(
+                'SUM',
+                Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.ChallengeItem.points')),
+                'maxPoints']
         ],
         raw: true
     }).then(data => {

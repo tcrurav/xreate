@@ -47,7 +47,8 @@ public class AuthController : MonoBehaviour
             yield break;
         }
 
-        SceneManager.LoadSceneAsync("SpaceshipScene");
+        SceneManager.LoadSceneAsync("MainScene");
+        SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
     }
 
 }

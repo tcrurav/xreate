@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RoomChangeController : MonoBehaviour
 {
-    public GameObject XreatePortMainScene;
+    public GameObject XreatePortMain;
     //private Vector3 origin = new Vector3(90.39f, 1.36f, 4.8f);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //void Start()
@@ -11,7 +11,7 @@ public class RoomChangeController : MonoBehaviour
 
     public void ChangeToRoomModuleB()
     {
-        XreatePortMainScene.transform.position = new Vector3(7.5f, -5.0f, -34f);
+        XreatePortMain.transform.position = new Vector3(7.5f, -5.0f, -34f);
 
         GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
         XreatePortRoomModuleB.transform.position = new Vector3(7.5f, -5.0f, -34f);
@@ -19,7 +19,7 @@ public class RoomChangeController : MonoBehaviour
 
     public void ChangeToCorridorToRoomModuleB()
     {
-        XreatePortMainScene.transform.position = new Vector3(7.5f, -5.0f, -26f);
+        XreatePortMain.transform.position = new Vector3(7.5f, -5.0f, -26f);
 
         GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
         XreatePortRoomModuleB.transform.position = new Vector3(7.5f, -5.0f, -26f);
@@ -27,7 +27,7 @@ public class RoomChangeController : MonoBehaviour
 
     public void ChangeToBuildingA()
     {
-        XreatePortMainScene.transform.position = new Vector3(95.15f, 1.36f, -4.61f);
+        XreatePortMain.transform.position = new Vector3(95.15f, 1.36f, -4.61f);
 
         GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
         XreatePortRoomModuleB.transform.position = new Vector3(95.15f, 1.36f, -4.61f);

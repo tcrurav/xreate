@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const ChallengeItem = sequelize.define("ChallengeItem", {
-    value: {
-      type: Sequelize.STRING
+    points: {
+      type: Sequelize.INTEGER
     },
     item: {
       type: Sequelize.STRING

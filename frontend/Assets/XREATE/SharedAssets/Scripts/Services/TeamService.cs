@@ -6,30 +6,80 @@ using UnityEngine.Networking;
 public class TeamService : MonoBehaviour
 {
     private readonly string URL = MainManager.GetURL() + "/api/teams";
-    public void GetTeams()
+
+    // TODO - Error handling should be handled other way than through this public members
+    public string requestError;
+    public long responseCode;
+
+    // TODO - Result data should be returned other way than through this public members
+    public Team[] teams;
+    public TeamWithPoints[] teamsWithPoints;
+
+    public IEnumerator GetAll()
     {
-        StartCoroutine(RestGetAll());
+        yield return StartCoroutine(RestGetAll());
     }
 
-    public void CreateTeam(Team team)
+    public IEnumerator GetAllWithPoints()
     {
-        StartCoroutine(RestCreate(team));
+        yield return StartCoroutine(RestGetAllWithPoints());
     }
 
-    public void UpdateTeam(int id, Team team)
+    public IEnumerator Create(Team team)
     {
-        StartCoroutine(RestUpdate(id, team));
+        yield return StartCoroutine(RestCreate(team));
     }
 
-    public void DeleteTeam(int id)
+    public IEnumerator UpdateById(int id, Team team)
     {
-        StartCoroutine(RestDelete(id));
+        yield return StartCoroutine(RestUpdateById(id, team));
+    }
+
+    public IEnumerator DeleteById(int id)
+    {
+        yield return StartCoroutine(RestDeleteById(id));
     }
 
     IEnumerator RestGetAll()
     {
-        Debug.Log(URL);
         UnityWebRequest request = UnityWebRequest.Get(URL);
+
+        request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
+        request.SetRequestHeader("Content-Type", "application/json");
+
+
+        yield return request.SendWebRequest();
+
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.Log(request.error);
+            request.Dispose();
+            yield break;
+        }
+
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        Debug.Log("Teams data returned successfully!");
+
+        teams = JsonHelper.getJsonArray<Team>(result);
+
+        request.Dispose();
+    }
+
+    IEnumerator RestGetAllWithPoints()
+    {
+        UnityWebRequest request = UnityWebRequest.Get(URL + "/points");
 
         Debug.Log(MainManager.GetAccessToken());
 
@@ -39,23 +89,29 @@ public class TeamService : MonoBehaviour
 
         yield return request.SendWebRequest();
 
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(request.error);
+            request.Dispose();
+            yield break;
         }
-        else
+
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
         {
-            string result = request.downloadHandler.text;
-
-            Debug.Log(result);
-
-            var teams = JsonHelper.getJsonArray<Team>(result);
-            foreach (var t in teams)
-            {
-                Debug.Log(t.name);
-                Debug.Log(t.points);
-            }
+            request.Dispose();
+            yield break;
         }
+
+        Debug.Log("Teams with points data returned successfully!");
+
+        teamsWithPoints = JsonHelper.getJsonArray<TeamWithPoints>(result);
 
         request.Dispose();
     }
@@ -75,21 +131,45 @@ public class TeamService : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        if (request.result != UnityWebRequest.Result.Success)
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(request.error);
-        }
-        else
-        {
-            Debug.Log("Team upload complete!");
+            request.Dispose();
+            yield break;
         }
 
-        Debug.Log("Status Code: " + request.responseCode);
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        // TODO - It has to be tested. If Ok then delete following comments bellow
+
+        //if (request.result != UnityWebRequest.Result.Success)
+        //{
+        //    Debug.Log(request.error);
+        //    request.Dispose();
+        //    yield break;
+        //}
+        //else
+        //{
+        //    Debug.Log("Team upload complete!");
+        //}
+
+        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }
 
-    IEnumerator RestUpdate(int id, Team team)
+    IEnumerator RestUpdateById(int id, Team team)
     {
         var request = new UnityWebRequest(URL + "/" + id, "PUT");
 
@@ -104,21 +184,43 @@ public class TeamService : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        if (request.result != UnityWebRequest.Result.Success)
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(request.error);
-        }
-        else
-        {
-            Debug.Log("Team upload complete!");
+            request.Dispose();
+            yield break;
         }
 
-        Debug.Log("Status Code: " + request.responseCode);
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        // TODO - It has to be tested. If Ok then delete following comments bellow
+
+        //if (request.result != UnityWebRequest.Result.Success)
+        //{
+        //    Debug.Log(request.error);
+        //}
+        //else
+        //{
+        //    Debug.Log("Team upload complete!");
+        //}
+
+        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }
 
-    IEnumerator RestDelete(int id)
+    IEnumerator RestDeleteById(int id)
     {
         string URI = URL + "/" + id.ToString();
         UnityWebRequest request = UnityWebRequest.Delete(URI);
@@ -128,34 +230,40 @@ public class TeamService : MonoBehaviour
 
         yield return request.SendWebRequest();
 
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log(request.error);
-        }
-        else
-        {
-            Debug.Log("Team Deleted successfully!");
+            request.Dispose();
+            yield break;
         }
 
-        Debug.Log("Status Code: " + request.responseCode);
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        // TODO - It has to be tested. If Ok then delete following comments bellow
+
+        //if (request.result == UnityWebRequest.Result.ConnectionError)
+        //{
+        //    Debug.Log(request.error);
+        //}
+        //else
+        //{
+        //    Debug.Log("Team Deleted successfully!");
+        //}
+
+        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }
 
-    // Calling to future Tibu's Me - Maybe helpfull for Image upload - To be done USING Unity documentation
-    //List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-    //formData.Add(new MultipartFormDataSection("field1=foo&field2=bar"));
-    //formData.Add(new MultipartFormFileSection("my file data", "myfile.txt"));
-
-    //UnityWebRequest www = UnityWebRequest.Post("https://www.my-server.com/myform", formData);
-    //yield return www.SendWebRequest();
-
-    //if (www.result != UnityWebRequest.Result.Success)
-    //{
-    //    Debug.Log(www.error);
-    //}
-    //else
-    //{
-    //    Debug.Log("Form upload complete!");
-    //}
 }

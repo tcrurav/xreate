@@ -3579,9 +3579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bfcf383b661c974daa02572f064ba0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameInputField: {fileID: 0}
   UsernameInputField: {fileID: 1194538423}
   PasswordInputField: {fileID: 575620751}
+  CodeInputField: {fileID: 1177523932}
   loadingCanvas: {fileID: 1587351917}
   errorCanvas: {fileID: 683465475}
 --- !u!4 &1676962512
