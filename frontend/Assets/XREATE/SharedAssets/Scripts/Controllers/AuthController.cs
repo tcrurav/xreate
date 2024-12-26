@@ -12,6 +12,11 @@ public class AuthController : MonoBehaviour
     public TMP_InputField PasswordInputField;
     public TMP_InputField CodeInputField;
 
+    public TMP_InputField Name;
+
+    public UnityEngine.UI.Button ConfirmButton;
+    public UnityEngine.UI.Button QuickJoinButton;
+
     public GameObject loadingCanvas;
     public GameObject errorCanvas;
 
@@ -22,7 +27,7 @@ public class AuthController : MonoBehaviour
 
     public void Login()
     {
-        loadingCanvas.SetActive(true);
+        //loadingCanvas.SetActive(true);
         StartCoroutine(DoLogin());
     }
 
@@ -46,9 +51,24 @@ public class AuthController : MonoBehaviour
             errorCanvas.SetActive(true);
             yield break;
         }
+        Name.text = "carajillo";
+        Debug.Log(MainManager.GetUser().username);
+        Name.text = MainManager.GetUser().username;
+        Debug.Log(MainManager.GetUser());
 
-        SceneManager.LoadSceneAsync("MainScene");
-        SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
+        ConfirmButton.onClick.Invoke();
+
+        QuickJoinButton.onClick.Invoke();
+
+        //return;
+
+        //GameObject mainSceneContainerParent = GameObject.FindGameObjectWithTag("MainSceneContainerParent");
+        //GameObject mainSceneContainer = MainManager.FindObject(mainSceneContainerParent, "MainSceneContainer");
+        //mainSceneContainer.SetActive(true);
+
+        // Don't use this option because it loads very slowly
+        //SceneManager.LoadSceneAsync("MainScene");
+        //SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
     }
 
 }

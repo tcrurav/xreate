@@ -149,3 +149,4 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://codefile.io/f/uoiynHl2ZS. Data sharing among scenes.
 * https://learn.unity.com/tutorial/como-implementar-la-continuacion-de-datos-entre-escenas?language=es#. Data sharing among scenes.
 * https://www.youtube.com/watch?v=JZCzJyAbKwc. How to apply Transparent PNG Textures in Unity.
+* https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521. How to find an inactive gameobject.

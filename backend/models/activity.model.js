@@ -6,8 +6,13 @@ module.exports = (sequelize, Sequelize) => {
     endDate: {
       type: Sequelize.DATE
     },
-    isStarted: {
-      type: Sequelize.BOOLEAN
+    state: {   
+      type: Sequelize.STRING,  // Possible values are: "NOT_STARTED", "STARTED", "FINISHED" 
+      allowNull: false,
+      defaultValue: "NOT_STARTED",
+      validate: {
+        is: /^(NOT_STARTED|STARTED|FINISHED)$/,
+      }  
     },
     createdAt: {
       type: Sequelize.DATE,

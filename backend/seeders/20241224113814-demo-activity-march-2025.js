@@ -170,7 +170,7 @@ module.exports = {
     await queryInterface.bulkInsert('activities', [{
       startDate: today,
       endDate: tomorrow, 
-      isStarted: true
+      state: "NOT_STARTED"
     }], {});
 
     // Teams - 2 teams - Each team with 5 students

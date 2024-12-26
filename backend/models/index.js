@@ -28,6 +28,9 @@ db.inActivityStudentParticipation = require("./inActivityStudentParticipation.mo
 db.challenge.hasMany(db.achievement, { foreignKey: 'challengeId' });
 db.achievement.belongsTo(db.challenge, { foreignKey: 'challengeId' });
 
+db.challenge.hasMany(db.team, { foreignKey: 'currentChallengeId' });
+db.team.belongsTo(db.challenge, { foreignKey: 'currentChallengeId' });
+
 db.inActivityStudentParticipation.hasMany(db.achievement, { foreignKey: 'inActivityStudentParticipationId' });
 db.achievement.belongsTo(db.inActivityStudentParticipation, { foreignKey: 'inActivityStudentParticipationId' });
 

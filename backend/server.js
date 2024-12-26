@@ -24,12 +24,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
 
 // For explotation. Database is not dropped.
-db.sequelize.sync(); 
+// db.sequelize.sync(); 
 
 // Development only. Drops and re-sync db everytime the server starts.
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
 //In all future routes, this helps to know if the request is authenticated or not.
