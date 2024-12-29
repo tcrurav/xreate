@@ -5,7 +5,9 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Activity
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.startDate || !req.body.startDate || !req.body.isStarted) {
+    if (!req.body.startDate || !req.body.endDate || 
+        !req.body.state || !req.body.type ||
+        !req.body.name || !req.body.description) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -16,7 +18,10 @@ exports.create = (req, res) => {
     const activity = {
         startDate: req.body.startDate,
         endDate: req.body.endDate,
-        isStarted: req.body.isStarted == "true"? req.body.isStarted : false
+        state: req.body.state,
+        type: req.body.type,
+        name: req.body.name,
+        description: req.body.description,
     };
 
     // Save Activity in the database

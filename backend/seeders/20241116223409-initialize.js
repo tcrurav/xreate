@@ -12,7 +12,7 @@ module.exports = {
       username: process.env.ADMIN_USER,
       password: bcrypt.hashSync(process.env.ADMIN_PASSWORD),
       nickname: "admin",
-      code: "1234",
+      code: "9999",
       role: "admin",
       nationality: "spanish"
     }], {});

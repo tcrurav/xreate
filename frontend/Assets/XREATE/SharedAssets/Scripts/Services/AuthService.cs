@@ -115,7 +115,7 @@ public class AuthService : MonoBehaviour
 
         UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
 
-        MainManager.SetUser(user);
+        MainManager.SetUser(userWithAccessToken.user);
         MainManager.SetAccessToken(userWithAccessToken.access_token);
  
         request.Dispose();

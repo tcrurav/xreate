@@ -7,12 +7,26 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DATE
     },
     state: {   
-      type: Sequelize.STRING,  // Possible values are: "NOT_STARTED", "STARTED", "FINISHED" 
+      type: Sequelize.STRING,
       allowNull: false,
       defaultValue: "NOT_STARTED",
       validate: {
-        is: /^(NOT_STARTED|STARTED|FINISHED)$/,
+        is: /^(NOT_STARTED|IN_PROGRESS|FINISHED)$/,
       }  
+    },
+    type: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: "TRAINNING_LAB",
+      validate: {
+        is: /^(TRAINING_LAB|VIRTUAL_CLASSROOM|ASSET_LAB)$/,
+      }
+    },
+    name: {
+      type: Sequelize.STRING
+    },
+    description: {
+      type: Sequelize.STRING
     },
     createdAt: {
       type: Sequelize.DATE,

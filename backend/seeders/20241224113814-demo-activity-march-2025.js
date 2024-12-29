@@ -161,122 +161,454 @@ module.exports = {
       nationality: "dutch",
     }], {});
 
-    // Activity - Just 1 activity for march 2025
+    // Activity - In march 2025 the learning programme for a student has 4 following activities
 
     const today = new Date();
     let tomorrow = today;
     tomorrow.setDate(today.getDate() + 1); //adds 1 day to the current date
 
     await queryInterface.bulkInsert('activities', [{
+      id: 1,
       startDate: today,
-      endDate: tomorrow, 
-      state: "NOT_STARTED"
+      endDate: tomorrow,
+      state: "NOT_STARTED",
+      type: "VIRTUAL_CLASSROOM",
+      name: "Introduction to digital security",
+      description: "Digital security essentials to start working as an employee in any company"
     }], {});
 
-    // Teams - 2 teams - Each team with 5 students
-
-    await queryInterface.bulkInsert('teams', [{
-      name: 'Lions'
+    await queryInterface.bulkInsert('activities', [{
+      id: 2,
+      startDate: today,
+      endDate: tomorrow,
+      state: "NOT_STARTED",
+      type: "TRAINING_LAB",
+      name: "Digital security scape room",
+      description: "A digital scaperoom activity to develop your digital security skills"
     }], {});
 
-    await queryInterface.bulkInsert('teams', [{
-      name: 'Tigers'
+    await queryInterface.bulkInsert('activities', [{
+      id: 3,
+      startDate: today,
+      endDate: tomorrow,
+      state: "NOT_STARTED",
+      type: "ASSET_LAB",
+      name: "Digital security resources",
+      description: "In this laboratory you can enter at any time to learn digital security concepts independently"
     }], {});
 
-
-    // InActivityStudentParticipation - 10 participations because there are 10 students
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1110,
-      teamId: 1,
-      activityId: 1,
-      studentId: 10
+    await queryInterface.bulkInsert('activities', [{
+      id: 4,
+      startDate: today,
+      endDate: tomorrow,
+      state: "NOT_STARTED",
+      type: "VIRTUAL_CLASSROOM",
+      name: "Wrap up session",
+      description: "Wrap up classroom session to sum up all you have learned during this digital security course"
     }], {});
 
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1120,
-      teamId: 1,
-      activityId: 1,
-      studentId: 20
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1130,
-      teamId: 1,
-      activityId: 1,
-      studentId: 30
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1140,
-      teamId: 1,
-      activityId: 1,
-      studentId: 40
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1150,
-      teamId: 1,
-      activityId: 1,
-      studentId: 50
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1211,
-      teamId: 2,
-      activityId: 1,
-      studentId: 11
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1221,
-      teamId: 2,
-      activityId: 1,
-      studentId: 21
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1231,
-      teamId: 2,
-      activityId: 1,
-      studentId: 31
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1241,
-      teamId: 2,
-      activityId: 1,
-      studentId: 41
-    }], {});
-
-    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
-      id: 1251,
-      teamId: 2,
-      activityId: 1,
-      studentId: 51
-    }], {});
-
-    // Challenge - 3 challenges because there are 3 scaperooms
+    // Challenge - 4 challenges because there are 3 scaperooms and 1 corridor with asking alien
 
     await queryInterface.bulkInsert('challenges', [{
       id: 1,
       name: 'match-the-pairs',
-      type: 'match-the-pairs'
+      type: 'ROOM_CHALLENGE'
     }], {});
 
     await queryInterface.bulkInsert('challenges', [{
       id: 2,
       name: 'supervised',
-      type: 'supervised'
+      type: 'ROOM_CHALLENGE'
     }], {});
 
     await queryInterface.bulkInsert('challenges', [{
       id: 3,
       name: 'security concepts',
-      type: 'security concepts'
+      type: 'ROOM_CHALLENGE'
     }], {});
 
-    // ChallengeItem - 9 challengeItems because each challenge has 3 items.
+    await queryInterface.bulkInsert('challenges', [{
+      id: 4,
+      name: 'security concepts corridor',
+      type: 'CORRIDOR_CHALLENGE'
+    }], {});
+
+    // Teams - 2 teams in Activity 2 (digital security training lab) - Each team with 5 students
+
+    await queryInterface.bulkInsert('teams', [{
+      name: 'Lions',
+      currentChallengeId: 1
+    }], {});
+
+    await queryInterface.bulkInsert('teams', [{
+      name: 'Tigers',
+      currentChallengeId: 1
+    }], {});
+
+
+    // InActivityStudentParticipation - 40 participations because there are 10 students which participate each in 4 activities
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2110,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1, 
+      studentId: 10,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2120,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 20,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2130,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 30,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2140,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 40,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2150,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 50,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2211,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 11,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2221,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 21,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2231,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 31,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2241,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 41,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 2251,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 1,
+      studentId: 51,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1110,
+      teamId: 1,
+      activityId: 2, // Training lab - digital security
+      studentId: 10,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1120,
+      teamId: 1,
+      activityId: 2,
+      studentId: 20,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1130,
+      teamId: 1,
+      activityId: 2,
+      studentId: 30,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1140,
+      teamId: 1,
+      activityId: 2,
+      studentId: 40,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1150,
+      teamId: 1,
+      activityId: 2,
+      studentId: 50,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1211,
+      teamId: 2,
+      activityId: 2,
+      studentId: 11,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1221,
+      teamId: 2,
+      activityId: 2,
+      studentId: 21,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1231,
+      teamId: 2,
+      activityId: 2,
+      studentId: 31,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1241,
+      teamId: 2,
+      activityId: 2,
+      studentId: 41,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 1251,
+      teamId: 2,
+      activityId: 2,
+      studentId: 51,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3110,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 10,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3120,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 20,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3130,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 30,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3140,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 40,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3150,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 50,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3211,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 11,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3221,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 21,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3231,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 31,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3241,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 41,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 3251,
+      // teamId: null, //Not important in ASSET LAB activities
+      activityId: 3,  // Asset lab
+      studentId: 51,
+      state: "",
+      order: 3
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4110,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 10,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4120,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 20,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4130,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 30,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4140,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 40,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4150,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 50,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4211,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 11,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4221,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 21,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4231,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 31,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4241,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 41,
+      state: "",
+      order: 4
+    }], {});
+
+    await queryInterface.bulkInsert('inactivitystudentparticipations', [{
+      id: 4251,
+      // teamId: null, //Not important in VIRTUAL_CLASSROOM activities
+      activityId: 4,
+      studentId: 51,
+      state: "",
+      order: 4
+    }], {});
+
+    // ChallengeItem - 10 challengeItems because each room challenge has 3 items, and the corridor challenge has just 1.
 
     await queryInterface.bulkInsert('challengeItems', [{
       id: 11,
@@ -341,7 +673,14 @@ module.exports = {
       points: 1
     }], {});
 
-    // Achievement - 30 achievements because each student does 3 challenges and there are 10 students.
+    await queryInterface.bulkInsert('challengeItems', [{
+      id: 41,
+      challengeId: '4',
+      item: 'item question and answer',
+      points: 1
+    }], {});
+
+    // Achievement - 40 achievements because each student does 4 challenges (3 rooms and 1 corridor) and there are 10 students.
 
     await queryInterface.bulkInsert('achievements', [{
       id: 11110,
@@ -358,6 +697,12 @@ module.exports = {
     await queryInterface.bulkInsert('achievements', [{
       id: 31110,
       challengeId: '3',
+      inActivityStudentParticipationId: 1110,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
+      id: 41110,
+      challengeId: '4',
       inActivityStudentParticipationId: 1110,
     }], {});
 
@@ -380,6 +725,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievements', [{
+      id: 41120,
+      challengeId: '4',
+      inActivityStudentParticipationId: 1120,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
       id: 11130,
       challengeId: '1',
       inActivityStudentParticipationId: 1130,
@@ -394,6 +745,12 @@ module.exports = {
     await queryInterface.bulkInsert('achievements', [{
       id: 31130,
       challengeId: '3',
+      inActivityStudentParticipationId: 1130,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
+      id: 41130,
+      challengeId: '4',
       inActivityStudentParticipationId: 1130,
     }], {});
 
@@ -416,6 +773,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievements', [{
+      id: 41140,
+      challengeId: '4',
+      inActivityStudentParticipationId: 1140,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
       id: 11150,
       challengeId: '1',
       inActivityStudentParticipationId: 1150,
@@ -430,6 +793,12 @@ module.exports = {
     await queryInterface.bulkInsert('achievements', [{
       id: 31150,
       challengeId: '3',
+      inActivityStudentParticipationId: 1150,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
+      id: 41150,
+      challengeId: '4',
       inActivityStudentParticipationId: 1150,
     }], {});
 
@@ -452,6 +821,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievements', [{
+      id: 41211,
+      challengeId: '4',
+      inActivityStudentParticipationId: 1211,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
       id: 11221,
       challengeId: '1',
       inActivityStudentParticipationId: 1221,
@@ -466,6 +841,12 @@ module.exports = {
     await queryInterface.bulkInsert('achievements', [{
       id: 31221,
       challengeId: '3',
+      inActivityStudentParticipationId: 1221,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
+      id: 41221,
+      challengeId: '4',
       inActivityStudentParticipationId: 1221,
     }], {});
 
@@ -488,6 +869,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievements', [{
+      id: 41231,
+      challengeId: '4',
+      inActivityStudentParticipationId: 1231,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
       id: 11241,
       challengeId: '1',
       inActivityStudentParticipationId: 1241,
@@ -502,6 +889,12 @@ module.exports = {
     await queryInterface.bulkInsert('achievements', [{
       id: 31241,
       challengeId: '3',
+      inActivityStudentParticipationId: 1241,
+    }], {});
+
+    await queryInterface.bulkInsert('achievements', [{
+      id: 41241,
+      challengeId: '4',
       inActivityStudentParticipationId: 1241,
     }], {});
 
@@ -523,7 +916,15 @@ module.exports = {
       inActivityStudentParticipationId: 1251,
     }], {});
 
-    // AchievementItem - 90 achievementItems because there are 10 students. Eache student does 3 challenges and each challenge has 3 items
+    await queryInterface.bulkInsert('achievements', [{
+      id: 41251,
+      challengeId: '4',
+      inActivityStudentParticipationId: 1251,
+    }], {});
+
+    // AchievementItem - 100 achievementItems because there are 10 students. 
+    // Each student does 4 challenges (3 room challenges and 1 corridor challenge).
+    // Each room challenge has 3 items, and each corridor challenge has 1 item.
 
     await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11110,
@@ -577,6 +978,12 @@ module.exports = {
       achievementId: 31110,
       points: 1,
       challengeItemId: 33,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41110,
+      points: 1,
+      challengeItemId: 41,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
@@ -634,6 +1041,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41120,
+      points: 1,
+      challengeItemId: 41,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11130,
       points: 1,
       challengeItemId: 11,
@@ -685,6 +1098,12 @@ module.exports = {
       achievementId: 31130,
       points: 1,
       challengeItemId: 33,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41130,
+      points: 1,
+      challengeItemId: 41,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
@@ -742,6 +1161,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41140,
+      points: 1,
+      challengeItemId: 41,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11150,
       points: 1,
       challengeItemId: 11,
@@ -793,6 +1218,12 @@ module.exports = {
       achievementId: 31150,
       points: 1,
       challengeItemId: 33,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41150,
+      points: 1,
+      challengeItemId: 41,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
@@ -850,6 +1281,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41211,
+      points: 1,
+      challengeItemId: 41,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11221,
       points: 1,
       challengeItemId: 11,
@@ -901,6 +1338,12 @@ module.exports = {
       achievementId: 31221,
       points: 1,
       challengeItemId: 33,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41221,
+      points: 1,
+      challengeItemId: 41,
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
@@ -958,6 +1401,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41231,
+      points: 1,
+      challengeItemId: 41,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11241,
       points: 1,
       challengeItemId: 11,
@@ -1012,6 +1461,12 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41241,
+      points: 1,
+      challengeItemId: 41,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
       achievementId: 11251,
       points: 1,
       challengeItemId: 11,
@@ -1063,6 +1518,44 @@ module.exports = {
       achievementId: 31251,
       points: 1,
       challengeItemId: 33,
+    }], {});
+
+    await queryInterface.bulkInsert('achievementitems', [{
+      achievementId: 41251,
+      points: 1,
+      challengeItemId: 41,
+    }], {});
+
+    await queryInterface.bulkInsert('inActivityTeacherParticipations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 100,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inActivityTeacherParticipations', [{
+      challengeId: 4,
+      activityId: 2,
+      teacherId: 100,
+      state: "",
+      order: 2
+    }], {});
+
+    await queryInterface.bulkInsert('inActivityTeacherParticipations', [{
+      challengeId: 3,
+      activityId: 2,
+      teacherId: 400,
+      state: "",
+      order: 1
+    }], {});
+
+    await queryInterface.bulkInsert('inActivityTeacherParticipations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 4,
+      teacherId: 400,
+      state: "",
+      order: 2
     }], {});
 
   },

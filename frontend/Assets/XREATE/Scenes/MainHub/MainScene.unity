@@ -2163,6 +2163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1814691619}
+  - component: {fileID: 1814691621}
   - component: {fileID: 1814691620}
   m_Layer: 0
   m_Name: MainSceneContainer
@@ -2201,6 +2202,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723743b747fcd3e44991364cce177112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneContainerParents:
+  - RoomModuleBSceneContainerParent
+  sceneContainers:
+  - RoomModuleBSceneContainer
+--- !u!114 &1814691621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814691618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f5aa463eed6fb49bc6c75a89d2f7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneContainer: MenuSceneContainer
 --- !u!1001 &1922675801
 PrefabInstance:
   m_ObjectHideFlags: 0

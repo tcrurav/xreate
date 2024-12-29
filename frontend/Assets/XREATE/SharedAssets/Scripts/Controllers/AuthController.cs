@@ -51,24 +51,21 @@ public class AuthController : MonoBehaviour
             errorCanvas.SetActive(true);
             yield break;
         }
-        Name.text = "carajillo";
-        Debug.Log(MainManager.GetUser().username);
-        Name.text = MainManager.GetUser().username;
-        Debug.Log(MainManager.GetUser());
 
-        ConfirmButton.onClick.Invoke();
+        MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
 
-        QuickJoinButton.onClick.Invoke();
-
-        //return;
-
-        //GameObject mainSceneContainerParent = GameObject.FindGameObjectWithTag("MainSceneContainerParent");
-        //GameObject mainSceneContainer = MainManager.FindObject(mainSceneContainerParent, "MainSceneContainer");
-        //mainSceneContainer.SetActive(true);
-
+        // TODO - maybe remove this lines bellow
         // Don't use this option because it loads very slowly
         //SceneManager.LoadSceneAsync("MainScene");
         //SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
+    }
+
+    public void NetworkQuickJoinLoginUsingUnity6TemplateMenus()
+    {
+        // TODO - Reduce Menu scale to near 0 so that it's virtually as hiding the menu windows
+        Name.text = MainManager.GetUser().username;
+        ConfirmButton.onClick.Invoke();
+        QuickJoinButton.onClick.Invoke();
     }
 
 }

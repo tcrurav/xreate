@@ -10,7 +10,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Team
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.name || !req.body.currentChallengeId) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -20,6 +20,7 @@ exports.create = (req, res) => {
     // Create a Team
     const team = {
         name: req.body.name,
+        name: req.body.currentChallengeId
     };
 
     // Save Team in the database

@@ -1,11 +1,14 @@
 const db = require("../models");
 const InActivityTeacherParticipation = db.inActivityTeacherParticipation;
+const Activity = db.activity;
+const Challenge = db.challenge;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new InActivityTeacherParticipation
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.challengeId || !req.body.activityId || !req.body.teacherId) {
+    if (!req.body.challengeId || !req.body.activityId || !req.body.teacherId ||
+        !req.body.state || !req.body.order) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -16,7 +19,9 @@ exports.create = (req, res) => {
     const inActivityTeacherParticipation = {
         challengeId: req.body.challengeId,
         activityId: req.body.activityId,
-        teacherId: req.body.teacherId
+        teacherId: req.body.teacherId,
+        state: req.body.state,
+        order: req.body.order
     };
 
     // Save InActivityTeacherParticipation in the database
@@ -44,6 +49,53 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all InActivityTeacherParticipation by a user (This is the list of activities for a teacher)
+exports.findAllByTeacher = (req, res) => {
+    const teacherId = req.params.teacherId;
+
+    InActivityTeacherParticipation.findAll({
+        include: [{
+            model: Activity,
+            attributes: []
+        },
+        {
+            model: Challenge,
+            attributes: [
+                'name',
+                'type',
+            ]
+        }
+        ],
+        attributes: [
+            'teacherId',
+            'challengeId',
+            'activityId',
+            'state',
+            'order',
+            'Activity.startDate',
+            'Activity.endDate',
+            'Activity.state',
+            'Activity.type',
+            'Activity.name',
+            'Activity.description',
+            // ['challenge.name', 'ChallengeName'], // TODO - It should work but doesn't.
+            // ['challenge.type', 'ChallengeType'],
+        ],
+        where: {
+            teacherId: teacherId
+        },
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+            });
+        });
+};
+
 // Find a single InActivityTeacherParticipation with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -64,8 +116,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     InActivityTeacherParticipation.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -89,8 +141,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     InActivityTeacherParticipation.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
