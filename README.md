@@ -6,7 +6,10 @@ This project is a first draft for a training lab in the XREATE project.
 
 At this moment 
   - Backend is working.
-  - Unity frontend has just the login and the model of the spaceship in the main scene.
+  - Unity frontend has right now:
+      * a working login
+      * after a student logs in he/she can see his/her learning path.
+      * students can enter the digital security training lab and visit room B.
 
 [Read more about XREATE](docs/xreate-project-description.en.md)
 
@@ -87,7 +90,14 @@ Assets/
         └── RoomModuleBTeam/
 ````
 
-Now you can open frontend project with Unity.
+Now you can open the frontend project with Unity.
+
+To run the unity project first open additively the following scenes:
+* LoginScene
+* MenuScene
+* MainScene
+* RoomModuleBScene
+
 
 Enjoy!
 
@@ -113,7 +123,8 @@ All you need is... some time and...
 
 ## Some definitions
 
-* **Activity**. An activity is a set of students and teachers who work on a scaperoom activity made of a set of challenges. The activity has a start and an end date. 
+* **Learning path**. It's the set of activities that a student has to fullfill to obtain a certificate.
+* **Activity**. There are right now 3 types of activities: TRAINING_LAB, ASSET_LAB and VIRTUAL_CLASSROOM. A TRAINING_LAB activity is a set of students and teachers who work on a scaperoom activity made of a set of challenges. The activity has a start and an end date. 
 * **Challenge**. A challenge can be either a room or a corridor task.
 * **Team**. A team is a set of students playing together against other student teams.
 * **Achievement**. An achievement is the result of the challenge for a student. The achievement can be divided into achievement items. For example in a scene a student X could have a total achievement of 11 points. This achievement could be devided in 5 achievement items: 3 card pairs guessed which means 5 points each, and 2 minutes of thinking time in his turns which means -2 points each. The total achievement for this student X in this challenge would be 3 x 5 – 2 x 2 = 11 points.
@@ -127,6 +138,10 @@ All you need is... some time and...
 * **Teacher**. join as a teacher in an activity using his code. Join challenge tasks for teachers.
 * **Guest**. joins as guest in an activity using his code. Guests can go anywhere and observe everything.
 * **Room manager**. can enter room data like questions, complexity of scene tasks, etc.
+
+## Project Roadmap
+
+* March 2025: A prototype will be tested in Newcastle college. 2 students from each of the 5 country project member schools will test the protype. At that moment only Student, Teacher and Guest roles will be able to login and use the App. The student's learning path will contain only a training lab about "digital security". Students will also be able to visit the VIRTUAL_CLASSROOM and the ASSET_LAB. At the end of the learning path students will be able to request his/her certificate.
 
 ## IES El Rincón students working on the project
 
@@ -148,3 +163,6 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://www.youtube.com/watch?v=76Lh0UApjNI. Excellent youtube explaining how to animate mixamo .fbx characters in Unity.
 * https://codefile.io/f/uoiynHl2ZS. Data sharing among scenes.
 * https://learn.unity.com/tutorial/como-implementar-la-continuacion-de-datos-entre-escenas?language=es#. Data sharing among scenes.
+* https://www.youtube.com/watch?v=JZCzJyAbKwc. How to apply Transparent PNG Textures in Unity.
+* https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521. How to find an inactive gameobject.
+* https://discussions.unity.com/t/how-to-create-ui-button-dynamically/621275/5. How to create UI Button dynamically.

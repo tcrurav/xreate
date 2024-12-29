@@ -4,7 +4,7 @@
 		"name": "xreate",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "3446841",
-		"_collection_link": "https://winter-moon-623013.postman.co/workspace/dcf43378-b9b5-4f54-b4b7-0584707bd428/collection/3446841-e606dc90-58ee-4a37-92e2-ad93d54adbc8?action=share&source=collection_link&creator=3446841"
+		"_collection_link": "https://winter-moon-623013.postman.co/workspace/pruebita~dcf43378-b9b5-4f54-b4b7-0584707bd428/collection/3446841-e606dc90-58ee-4a37-92e2-ad93d54adbc8?action=share&source=collection_link&creator=3446841"
 	},
 	"item": [
 		{
@@ -409,6 +409,37 @@
 					"response": []
 				},
 				{
+					"name": "http://{{host}}:{{port}}/api/teams/points",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/teams/points",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"teams",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "http://{{host}}:{{port}}/api/teams/{{teamId}}",
 					"request": {
 						"auth": {
@@ -693,6 +724,37 @@
 							"path": [
 								"api",
 								"achievements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/achievements/eagerly",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/achievements/eagerly",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievements",
+								"eagerly"
 							]
 						}
 					},
@@ -1569,7 +1631,7 @@
 					"response": []
 				},
 				{
-					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activity/{{activityId}}",
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activities/{{activityId}}",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1584,7 +1646,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activity/{{activityId}}",
+							"raw": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activities/{{activityId}}",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -1593,7 +1655,7 @@
 							"path": [
 								"api",
 								"inActivityStudentParticipations",
-								"activity",
+								"activities",
 								"{{activityId}}"
 							]
 						}
@@ -1601,7 +1663,74 @@
 					"response": []
 				},
 				{
-					"name": "http://{{host}}:{{port}}/api/inActivityTeacherParticipationId/{{inActivityTeacherParticipationId}}",
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/points/activities/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/points/activities/{{activityId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityStudentParticipations",
+								"points",
+								"activities",
+								"{{activityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activities/{{activityId}}/students/{{studentId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activities/{{activityId}}/students/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityStudentParticipations",
+								"activities",
+								"{{activityId}}",
+								"students",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/{{inActivityStudentParticipationId}}",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1641,7 +1770,7 @@
 					"response": []
 				},
 				{
-					"name": "http://{{host}}:{{port}}/api/inActivityTeacherParticipations/{{inActivityTeacherParticipationId}}",
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/{{inActivityStudentParticipationId}}",
 					"request": {
 						"auth": {
 							"type": "bearer",

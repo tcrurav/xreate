@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Bicycles
+public class Team
 {
-    public Bicycle[] bicycles;
+    public int id;
+    public string name;
+    public int points;
 }

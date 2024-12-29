@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new AchievementItem
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.points || !req.body.item || !req.body.achievementId) {
+    if (!req.body.points || !req.body.challengeItemId || !req.body.achievementId) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     // Create a AchievementItem
     const achievementItem = {
         points: req.body.points,
-        item: req.body.item,
+        challengeItemId: req.body.challengeItemId,
         achievementId: req.body.achievementId
     };
 

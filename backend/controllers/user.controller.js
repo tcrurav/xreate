@@ -2,12 +2,14 @@ const db = require("../models");
 const User = db.user;
 const Op = db.Sequelize.Op;
 const utils = require("../utils");
-const  bcrypt  =  require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 // Create and Save a new User
 exports.create = (req, res) => {
   //Validate request
-  if (!req.body.password || !req.body.username) {
+  if (!req.body.password || !req.body.username ||
+    !req.body.nationality || !req.body.nickname ||
+    !req.body.code || !req.body.role) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
