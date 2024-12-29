@@ -123,7 +123,8 @@ exports.findLearningPath = (req, res) => {
     const studentId = req.params.studentId;
 
     InActivityStudentParticipation.findAll({
-        group: ['studentId', 'teamId', 'activityId', 'participationState', 'order'],
+        group: ['studentId', 'teamId', 'activityId', 'state', 'order'],
+        order: [['order', 'ASC']],
         include: [{
             model: Achievement, attributes: [],
             include: [{ model: AchievementItem, attributes: [] }]
@@ -137,14 +138,14 @@ exports.findLearningPath = (req, res) => {
             'teamId',
             'activityId',
             'studentId',
-            ['state','participationState'],
+            'state',
             'order',
-            'Activity.startDate',
-            'Activity.endDate',
-            'Activity.state',
-            'Activity.type',
-            'Activity.name',
-            'Activity.description',
+            [Sequelize.col("Activity.startDate"), "activityStartDate"],
+            [Sequelize.col("Activity.endDate"), "activityEndDate"],
+            [Sequelize.col("Activity.state"), "activityState"],
+            [Sequelize.col("Activity.type"), "activityType"],
+            [Sequelize.col("Activity.name"), "activityName"],
+            [Sequelize.col("Activity.description"), "activityDescription"],
             [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']
         ],
         where: {

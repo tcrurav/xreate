@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Activity
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.startDate || !req.body.endDate || 
+    if (!req.body.startDate || !req.body.endDate ||
         !req.body.state || !req.body.type ||
         !req.body.name || !req.body.description) {
         res.status(400).send({
@@ -49,6 +49,22 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all non expired Activities from the database.
+exports.findAllNonExpired = (req, res) => {
+    Activity.findAll({
+        order: [['startDate', 'ASC']],
+        where: { endDate: { [Op.gt]: new Date() } }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving activities."
+            });
+        });
+};
+
 // Find a single Activity with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -69,8 +85,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Activity.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -94,8 +110,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Activity.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({

@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Android.Gradle.Manifest;
 
-public class LearningPathController : MonoBehaviour
+public class InActivityTeacherParticipationsController : MonoBehaviour
 {
-    private InActivityStudentParticipationService inActivityStudentParticipationService;
+    private InActivityTeacherParticipationService inActivityTeacherParticipationService;
 
     public GameObject buttonPrefab;
     public GameObject buttonContainer;
@@ -17,7 +17,7 @@ public class LearningPathController : MonoBehaviour
 
     private void Start()
     {
-        inActivityStudentParticipationService = gameObject.AddComponent<InActivityStudentParticipationService>();
+        inActivityTeacherParticipationService = gameObject.AddComponent<InActivityTeacherParticipationService>();
 
         Refresh();
     }
@@ -26,22 +26,22 @@ public class LearningPathController : MonoBehaviour
     {
         Debug.Log("Refresh");
         //loadingCanvas.SetActive(true);
-        StartCoroutine(GetInActivityStudentParticipationsWithActivityAndPoints());
+        StartCoroutine(GetInActivityTeacherParticipationsWithActivityAndChallenge());
     }
 
-    IEnumerator GetInActivityStudentParticipationsWithActivityAndPoints()
+    IEnumerator GetInActivityTeacherParticipationsWithActivityAndChallenge()
     {
-        if (MainManager.GetUser().role != "student")
+        if (MainManager.GetUser().role != "teacher")
         {
-            throw new System.Exception("Error: Only students have a Learning path");
+            throw new System.Exception("Error: Only teachers can see their activities");
         }
 
-        yield return inActivityStudentParticipationService.GetAllWithActivityAndPoints(MainManager.GetUser().id);
+        yield return inActivityTeacherParticipationService.GetAllWithActivityAndChallenge(MainManager.GetUser().id);
 
         Debug.Log("reponseCode");
-        Debug.Log(inActivityStudentParticipationService.responseCode);
+        Debug.Log(inActivityTeacherParticipationService.responseCode);
 
-        if (inActivityStudentParticipationService.responseCode != 200)
+        if (inActivityTeacherParticipationService.responseCode != 200)
         {
             //loadingCanvas.SetActive(false);
             //errorCanvas.SetActive(true);
@@ -53,10 +53,10 @@ public class LearningPathController : MonoBehaviour
 
     public void CreateButtons()
     {
-        for (int i = 0; i < inActivityStudentParticipationService.inActivityStudentParticipationsWithActivityAndPoints.Length; i++)
+        for (int i = 0; i < inActivityTeacherParticipationService.inActivityTeacherParticipationsWithActivityAndChallenge.Length; i++)
         {
-            InActivityStudentParticipationWithActivityAndPoints data =
-                inActivityStudentParticipationService.inActivityStudentParticipationsWithActivityAndPoints[i];
+            InActivityTeacherParticipationWithActivityAndChallenge data =
+                inActivityTeacherParticipationService.inActivityTeacherParticipationsWithActivityAndChallenge[i];
 
             GameObject newButton = Instantiate(buttonPrefab);
             newButton.transform.SetParent(buttonContainer.transform, false);

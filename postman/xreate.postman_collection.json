@@ -264,6 +264,68 @@
 					"response": []
 				},
 				{
+					"name": "http://{{host}}:{{port}}/api/activities/nonExpired",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/activities/nonExpired",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"activities",
+								"nonExpired"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/activities/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/activities/{{activityId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"activities",
+								"{{activityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "http://{{host}}:{{port}}/api/activities/{{activityId}}",
 					"request": {
 						"auth": {
@@ -403,6 +465,37 @@
 							"path": [
 								"api",
 								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/teams/{{teamId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/teams/{{teamId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"teams",
+								"{{teamId}}"
 							]
 						}
 					},
@@ -597,6 +690,37 @@
 								}
 							]
 						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/challenges/{{challengeId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"challenges",
+								"{{challengeId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/challenges/{{challengeId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -724,6 +848,37 @@
 							"path": [
 								"api",
 								"achievements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/achievements/{{achievementId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/achievements/{{achievementId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievements",
+								"{{achievementId}}"
 							]
 						}
 					},
@@ -918,6 +1073,37 @@
 								}
 							]
 						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/achievementItems/{{achievementItemId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievementItems",
+								"{{achievementItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/achievementItems/{{achievementItemId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -1045,6 +1231,37 @@
 							"path": [
 								"api",
 								"activityChallengeConfigItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/activityChallengeConfigItems/{{activityChallengeConfigItemId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/activityChallengeConfigItems/{{activityChallengeConfigItemId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"activityChallengeConfigItems",
+								"{{activityChallengeConfigItemId}}"
 							]
 						}
 					},
@@ -1208,6 +1425,37 @@
 								}
 							]
 						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/activityChallengeConfigs/{{activityChallengeConfigId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"activityChallengeConfigs",
+								"{{activityChallengeConfigId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/activityChallengeConfigs/{{activityChallengeConfigId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -1335,6 +1583,37 @@
 							"path": [
 								"api",
 								"challengeItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/challengeItems/{{challengeItemId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/challengeItems/{{challengeItemId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"challengeItems",
+								"{{challengeItemId}}"
 							]
 						}
 					},
@@ -1486,6 +1765,69 @@
 					"response": []
 				},
 				{
+					"name": "http://{{host}}:{{port}}/api/inActivityTeacherParticipations/{{inActivityTeacherParticipationId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inActivityTeacherParticipations/{{inActivityTeacherParticipationId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityTeacherParticipations",
+								"{{inActivityTeacherParticipationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/inActivityTeacherParticipations/teachers/{{teacherId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inActivityTeacherParticipations/teachers/{{teacherId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityTeacherParticipations",
+								"teachers",
+								"{{teacherId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "http://{{host}}:{{port}}/api/inActivityTeacherParticipationId/{{inActivityTeacherParticipationId}}",
 					"request": {
 						"auth": {
@@ -1631,6 +1973,37 @@
 					"response": []
 				},
 				{
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/{{inActivityStudentParticipationId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/{{inActivityStudentParticipationId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityStudentParticipations",
+								"{{inActivityStudentParticipationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/activities/{{activityId}}",
 					"request": {
 						"auth": {
@@ -1722,6 +2095,39 @@
 								"inActivityStudentParticipations",
 								"activities",
 								"{{activityId}}",
+								"students",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/learningPath/students/{{studentId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inActivityStudentParticipations/learningPath/students/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityStudentParticipations",
+								"learningPath",
 								"students",
 								"{{studentId}}"
 							]

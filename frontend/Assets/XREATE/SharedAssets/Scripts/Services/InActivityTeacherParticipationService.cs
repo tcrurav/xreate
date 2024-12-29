@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ActivityService : MonoBehaviour
+public class InActivityTeacherParticipationService : MonoBehaviour
 {
-    private readonly string URL = MainManager.GetURL() + "/api/activities";
+    private readonly string URL = MainManager.GetURL() + "/api/inActivityTeacherParticipations";
 
     // TODO - Error handling should be handled other way than through this public members
     public string requestError;
     public long responseCode;
 
     // TODO - Result data should be returned other way than through this public members
-    public Activity[] activities;
-    public Activity[] activitiesNonExpired;
+    public InActivityTeacherParticipation[] inActivityTeacherParticipations;
+    public InActivityTeacherParticipationWithActivityAndChallenge[] inActivityTeacherParticipationsWithActivityAndChallenge;
 
     public IEnumerator GetAll()
     {
         yield return StartCoroutine(RestGetAll());
     }
 
-    public IEnumerator GetAllNonExpired()
+    public IEnumerator GetAllWithActivityAndChallenge(int teacherId)
     {
-        yield return StartCoroutine(RestGetAllNonExpired());
+        yield return StartCoroutine(RestGetAllWithActivityAndChallenge(teacherId));
     }
 
-    public IEnumerator Create(Activity activity)
+    public IEnumerator Create(InActivityTeacherParticipation inActivityTeacherParticipation)
     {
-        yield return StartCoroutine(RestCreate(activity));
+        yield return StartCoroutine(RestCreate(inActivityTeacherParticipation));
     }
 
-    public IEnumerator UpdateById(int id, Activity activity)
+    public IEnumerator UpdateById(int id, InActivityTeacherParticipation inActivityTeacherParticipation)
     {
-        yield return StartCoroutine(RestUpdateById(id, activity));
+        yield return StartCoroutine(RestUpdateById(id, inActivityTeacherParticipation));
     }
 
     public IEnumerator DeleteById(int id)
@@ -70,16 +70,16 @@ public class ActivityService : MonoBehaviour
             yield break;
         }
 
-        Debug.Log("Activities data returned successfully!");
+        Debug.Log("InActivityTeacherParticipations data returned successfully!");
 
-        activities = JsonHelper.getJsonArray<Activity>(result);
+        inActivityTeacherParticipations = JsonHelper.getJsonArray<InActivityTeacherParticipation>(result);
 
         request.Dispose();
     }
 
-    IEnumerator RestGetAllNonExpired()
+    IEnumerator RestGetAllWithActivityAndChallenge(int teacherId)
     {
-        UnityWebRequest request = UnityWebRequest.Get(URL + "/nonExpired");
+        UnityWebRequest request = UnityWebRequest.Get(URL + "/teachers/" + teacherId.ToString());
 
         Debug.Log(MainManager.GetAccessToken());
 
@@ -109,18 +109,25 @@ public class ActivityService : MonoBehaviour
             yield break;
         }
 
-        Debug.Log("Teams with points data returned successfully!");
+        Debug.Log("InActivityTeacherParticipations with Activity and Challenge data returned successfully!");
 
-        activitiesNonExpired = JsonHelper.getJsonArray<Activity>(result);
+        inActivityTeacherParticipationsWithActivityAndChallenge =
+            JsonHelper.getJsonArray<InActivityTeacherParticipationWithActivityAndChallenge>(result);
+
+        foreach (var i in inActivityTeacherParticipationsWithActivityAndChallenge)
+        {
+            Debug.Log(i.order);
+            Debug.Log(i.activityName);
+        }
 
         request.Dispose();
     }
 
-    IEnumerator RestCreate(Activity activity)
+    IEnumerator RestCreate(InActivityTeacherParticipation inActivityTeacherParticipation)
     {
         var request = new UnityWebRequest(URL, "POST");
 
-        var bodyJsonString = JsonUtility.ToJson(activity);
+        var bodyJsonString = JsonUtility.ToJson(inActivityTeacherParticipation);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(bodyJsonString);
 
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -169,11 +176,11 @@ public class ActivityService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestUpdateById(int id, Activity activity)
+    IEnumerator RestUpdateById(int id, InActivityTeacherParticipation inActivityTeacherParticipation)
     {
-        var request = new UnityWebRequest(URL + "/" + id, "PUT");
+        var request = new UnityWebRequest(URL + "/" + id.ToString(), "PUT");
 
-        var bodyJsonString = JsonUtility.ToJson(activity);
+        var bodyJsonString = JsonUtility.ToJson(inActivityTeacherParticipation);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(bodyJsonString);
 
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
