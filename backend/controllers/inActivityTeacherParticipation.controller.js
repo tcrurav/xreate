@@ -2,6 +2,7 @@ const db = require("../models");
 const InActivityTeacherParticipation = db.inActivityTeacherParticipation;
 const Activity = db.activity;
 const Challenge = db.challenge;
+const Sequelize = db.Sequelize;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new InActivityTeacherParticipation
@@ -54,16 +55,14 @@ exports.findAllByTeacher = (req, res) => {
     const teacherId = req.params.teacherId;
 
     InActivityTeacherParticipation.findAll({
+        order: [['order', 'ASC']],
         include: [{
             model: Activity,
             attributes: []
         },
         {
             model: Challenge,
-            attributes: [
-                'name',
-                'type',
-            ]
+            attributes: []
         }
         ],
         attributes: [
@@ -72,19 +71,19 @@ exports.findAllByTeacher = (req, res) => {
             'activityId',
             'state',
             'order',
-            'Activity.startDate',
-            'Activity.endDate',
-            'Activity.state',
-            'Activity.type',
-            'Activity.name',
-            'Activity.description',
-            // ['challenge.name', 'ChallengeName'], // TODO - It should work but doesn't.
-            // ['challenge.type', 'ChallengeType'],
+            [Sequelize.col("Activity.startDate"), "activityStartDate"],
+            [Sequelize.col("Activity.endDate"), "activityEndDate"],
+            [Sequelize.col("Activity.state"), "activityState"],
+            [Sequelize.col("Activity.type"), "activityType"],
+            [Sequelize.col("Activity.name"), "activityName"],
+            [Sequelize.col("Activity.description"), "activityDescription"],
+            [Sequelize.col("Challenge.type"), "challengeType"],
+            [Sequelize.col("Challenge.name"), "challengeName"],
         ],
         where: {
             teacherId: teacherId
         },
-        raw: true
+        // raw: true
     })
         .then(data => {
             res.send(data);

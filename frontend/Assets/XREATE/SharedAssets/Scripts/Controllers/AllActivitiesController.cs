@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Android.Gradle.Manifest;
 
-public class LearningPathController : MonoBehaviour
+public class AllActivitiesController : MonoBehaviour
 {
-    private InActivityStudentParticipationService inActivityStudentParticipationService;
+    private ActivityService activityService;
 
     public GameObject buttonPrefab;
     public GameObject buttonContainer;
@@ -17,7 +17,7 @@ public class LearningPathController : MonoBehaviour
 
     private void Start()
     {
-        inActivityStudentParticipationService = gameObject.AddComponent<InActivityStudentParticipationService>();
+        activityService = gameObject.AddComponent<ActivityService>();
 
         Refresh();
     }
@@ -26,22 +26,22 @@ public class LearningPathController : MonoBehaviour
     {
         Debug.Log("Refresh");
         //loadingCanvas.SetActive(true);
-        StartCoroutine(GetInActivityStudentParticipationsWithActivityAndPoints());
+        StartCoroutine(GetActivitiesNonExpired());
     }
 
-    IEnumerator GetInActivityStudentParticipationsWithActivityAndPoints()
+    IEnumerator GetActivitiesNonExpired()
     {
-        if (MainManager.GetUser().role != "student")
+        if (MainManager.GetUser().role != "guest")
         {
-            throw new System.Exception("Error: Only students have a Learning path");
+            throw new System.Exception("Error: Only teachers can see their activities");
         }
 
-        yield return inActivityStudentParticipationService.GetAllWithActivityAndPoints(MainManager.GetUser().id);
+        yield return activityService.GetAllNonExpired();
 
         Debug.Log("reponseCode");
-        Debug.Log(inActivityStudentParticipationService.responseCode);
+        Debug.Log(activityService.responseCode);
 
-        if (inActivityStudentParticipationService.responseCode != 200)
+        if (activityService.responseCode != 200)
         {
             //loadingCanvas.SetActive(false);
             //errorCanvas.SetActive(true);
@@ -53,21 +53,21 @@ public class LearningPathController : MonoBehaviour
 
     public void CreateButtons()
     {
-        for (int i = 0; i < inActivityStudentParticipationService.inActivityStudentParticipationsWithActivityAndPoints.Length; i++)
+        for (int i = 0; i < activityService.activitiesNonExpired.Length; i++)
         {
-            InActivityStudentParticipationWithActivityAndPoints data =
-                inActivityStudentParticipationService.inActivityStudentParticipationsWithActivityAndPoints[i];
+            Activity data =
+                activityService.activitiesNonExpired[i];
 
             GameObject newButton = Instantiate(buttonPrefab);
             newButton.transform.SetParent(buttonContainer.transform, false);
 
             GameObject textObject = FindObject.FindInsideParentByName(newButton, "Text (TMP)");
             textObject.GetComponent<TMP_Text>().SetText(
-                data.activityType + "<br>" +
-                data.activityName);
+                data.type + "<br>" +
+                data.name);
 
             Button tempButton = newButton.GetComponent<Button>();
-            tempButton.onClick.AddListener(() => ButtonClicked(data.activityType, data.activityName));
+            tempButton.onClick.AddListener(() => ButtonClicked(data.type, data.name));
         }
     }
     // From: https://discussions.unity.com/t/how-to-create-ui-button-dynamically/621275/5

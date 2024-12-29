@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class InActivityStudentParticipationWithActivityAndPoints
+public class InActivityTeacherParticipationWithActivityAndChallenge
 {
-    // This is an element of a student learning path
-
-    // InActivityStudentParticipation
-    public int teamId;
+    // InActivityTeacherParticipation
+    public int challengeId;
     public int activityId;
-    public int studentId;
+    public int teacherId;
     public string state;
     public int order;
 
@@ -21,6 +19,7 @@ public class InActivityStudentParticipationWithActivityAndPoints
     public string activityName;
     public string activityDescription;
 
-    // points
-    public int points;
+    // Challenge
+    public string challengeType;
+    public string challengeName;
 }

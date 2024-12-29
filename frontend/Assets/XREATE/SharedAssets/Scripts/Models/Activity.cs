@@ -7,5 +7,8 @@ public class Activity
     public int id;
     public System.DateTime startDate;
     public System.DateTime endDate;
-    public bool started;
+    public string state;
+    public string type;
+    public string name;
+    public string description;
 }

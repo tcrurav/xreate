@@ -17,6 +17,16 @@ module.exports = {
       nationality: "spanish"
     }], {});
 
+    await queryInterface.bulkInsert('users', [{
+      id: 2,
+      username: "guest",
+      password: bcrypt.hashSync("9999"),
+      nickname: "guest",
+      code: "9999",
+      role: "guest",
+      nationality: "spanish"
+    }], {});
+
   },
 
   async down(queryInterface, Sequelize) {
