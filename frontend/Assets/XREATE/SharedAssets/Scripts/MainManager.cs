@@ -48,6 +48,20 @@ public class MainManager : MonoBehaviour
     {
         return Instance.URL;
     }
+
+    public static GameObject FindObject(GameObject parent, string name)
+    {
+        Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
+        foreach (Transform t in trs)
+        {
+            if (t.name == name)
+            {
+                return t.gameObject;
+            }
+        }
+        return null;
+    }
+    // https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521
 }
 
 // https://learn.unity.com/tutorial/implement-data-persistence-between-scenes#

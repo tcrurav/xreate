@@ -1,11 +1,16 @@
 const db = require("../models");
 const InActivityStudentParticipation = db.inActivityStudentParticipation;
+const Achievement = db.achievement;
+const AchievementItem = db.achievementItem;
+const Activity = db.activity;
 const Op = db.Sequelize.Op;
+const Sequelize = db.Sequelize;
 
 // Create and Save a new InActivityStudentParticipation
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.teamId || !req.body.activityId || !req.body.studentId) {
+    if (!req.body.teamId || !req.body.activityId || !req.body.studentId ||
+        !req.body.state || !req.body.order) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -16,7 +21,9 @@ exports.create = (req, res) => {
     const inActivityStudentParticipation = {
         teamId: req.body.teamId,
         activityId: req.body.activityId,
-        studentId: req.body.studentId
+        studentId: req.body.studentId,
+        state: req.body.state,
+        order: req.body.order
     };
 
     // Save InActivityStudentParticipation in the database
@@ -34,6 +41,117 @@ exports.create = (req, res) => {
 // Retrieve all InActivityStudentParticipations from the database.
 exports.findAll = (req, res) => {
     InActivityStudentParticipation.findAll()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+            });
+        });
+};
+
+// Retrieve all InActivityStudentParticipations in an Activity from the database. (students participating in an activity)
+exports.findAllByActivityId = (req, res) => {
+    const activityId = req.params.activityId;
+
+    InActivityStudentParticipation.findAll({ where: { activityId: activityId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+            });
+        });
+};
+
+// Retrieve all InActivityStudentParticipation with points in an Activity (points for each student in an activity)
+exports.findAllByActivityIdWithPoints = (req, res) => {
+    const activityId = req.params.activityId;
+
+    InActivityStudentParticipation.findAll({
+        group: ['studentId', 'teamId', 'activityId'],
+        include: [{
+            model: Achievement, attributes: [],
+            include: [{ model: AchievementItem, attributes: [] }]
+        },
+            // { //in CASE is necessary. It works too. I don't need it now. Maybe in the future.
+            //     model: User,
+            //     attributes: [['username', 'username'], ['nickname', 'nickname']]
+            // }, {
+            //     model: Team,
+            //     attributes: [['id', 'teamId'], ['name', 'name']]
+            // }
+        ],
+        attributes: [
+            'studentId',
+            'teamId',
+            'activityId',
+            [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']],
+        where: {
+            activityId: activityId
+        },
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+        });
+    });
+};
+
+// Retrieve all InActivityStudentParticipation in an Activity for a user (student in an activity)
+exports.findAllByActivityIdAndStudentId = (req, res) => {
+    const activityId = req.params.activityId;
+    const studentId = req.params.studentId;
+
+    InActivityStudentParticipation.findAll({ where: { activityId: activityId, studentId: studentId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+            });
+        });
+};
+
+// Retrieve all InActivityStudentParticipation by a user (This is the learning path of a student)
+exports.findLearningPath = (req, res) => {
+    const studentId = req.params.studentId;
+
+    InActivityStudentParticipation.findAll({
+        group: ['studentId', 'teamId', 'activityId', 'participationState', 'order'],
+        include: [{
+            model: Achievement, attributes: [],
+            include: [{ model: AchievementItem, attributes: [] }]
+        },
+        {
+            model: Activity,
+            attributes: []
+        }
+        ],
+        attributes: [
+            'teamId',
+            'activityId',
+            'studentId',
+            ['state','participationState'],
+            'order',
+            'Activity.startDate',
+            'Activity.endDate',
+            'Activity.state',
+            'Activity.type',
+            'Activity.name',
+            'Activity.description',
+            [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']
+        ],
+        where: {
+            studentId: studentId
+        },
+        raw: true
+    })
         .then(data => {
             res.send(data);
         })
@@ -64,8 +182,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     InActivityStudentParticipation.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -89,8 +207,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     InActivityStudentParticipation.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({

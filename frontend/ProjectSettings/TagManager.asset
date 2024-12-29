@@ -9,6 +9,16 @@ TagManager:
   - Anchor
   - PlayerHand
   - Destroyer
+  - LoginSceneContainer
+  - MenuSceneContainerParent
+  - MenuSceneContainer
+  - MainSceneContainerParent
+  - MainSceneContainer
+  - XreatePortMain
+  - RoomModuleBSceneContainerParent
+  - RoomModuleBSceneContainer
+  - XreatePortRoomModuleB
+  - XREATE_Player_Appearance_UI_Name
   layers:
   - Default
   - TransparentFX

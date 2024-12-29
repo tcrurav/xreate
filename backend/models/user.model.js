@@ -17,6 +17,16 @@ module.exports = (sequelize, Sequelize) => {
     },
     nationality: {
       type: Sequelize.STRING
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: new Date()
+    }, 
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: new Date()
     }
   });
 

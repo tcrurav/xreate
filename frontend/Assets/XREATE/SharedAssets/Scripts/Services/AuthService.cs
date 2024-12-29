@@ -9,6 +9,7 @@ public class AuthService : MonoBehaviour
 {
     private readonly string URL = MainManager.GetURL() + "/api/users";
 
+    // TODO - Error handling should be handled other way than through this public members
     public string requestError;
     public long responseCode;
 
@@ -114,7 +115,7 @@ public class AuthService : MonoBehaviour
 
         UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
 
-        MainManager.SetUser(user);
+        MainManager.SetUser(userWithAccessToken.user);
         MainManager.SetAccessToken(userWithAccessToken.access_token);
  
         request.Dispose();

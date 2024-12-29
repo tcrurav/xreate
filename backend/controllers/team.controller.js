@@ -1,11 +1,16 @@
 const db = require("../models");
 const Team = db.team;
+const InActivityStudentParticipation = db.inActivityStudentParticipation;
+const Achievement = db.achievement;
+const AchievementItem = db.achievementItem;
+const ChallengeItem = db.challengeItem;
+const Sequelize = db.Sequelize;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Team
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body.name || !req.body.currentChallengeId) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,6 +20,7 @@ exports.create = (req, res) => {
     // Create a Team
     const team = {
         name: req.body.name,
+        name: req.body.currentChallengeId
     };
 
     // Save Team in the database
@@ -42,6 +48,48 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all Teams with Points from the database.
+exports.findAllWithPoints = (req, res) => {
+    Team.findAll({
+        group: 'id',
+        include: [{
+            model: InActivityStudentParticipation,
+            attributes: [],
+            include: [{
+                model: Achievement,
+                attributes: [],
+                include: [{
+                    model: AchievementItem,
+                    attributes: [],
+                    include: [{
+                        model: ChallengeItem,
+                        attributes: []
+                    }]
+                }]
+            }]
+        }],
+        attributes: [
+            'id',
+            'name',
+            [Sequelize.fn(
+                'SUM',
+                Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.points')),
+                'points'],
+            [Sequelize.fn(
+                'SUM',
+                Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.ChallengeItem.points')),
+                'maxPoints']
+        ],
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving teams."
+        });
+    });
+};
+
 // Find a single Team with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -62,8 +110,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Team.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -87,8 +135,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Team.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
