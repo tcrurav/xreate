@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Bicycle
+public class Challenge
 {
     public int id;
-    public string brand;
-    public string model;
+    public string type;
+    public string name;
 }

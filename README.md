@@ -141,7 +141,7 @@ All you need is... some time and...
 
 ## Project Roadmap
 
-* March 2025: A prototype will be tested in Newcastle college. 2 students from each of the 5 country project member schools will test the protype. At that moment only Student, Teacher and Guest roles will be able to login and use the App. The student's learning path will contain only a training lab about "digital security". Students will also be able to visit the VIRTUAL_CLASSROOM and the ASSET_LAB. At the end of the learning path students will be able to request his/her certificate.
+* **March 2025**: A prototype will be tested in Newcastle college. 2 students from each of the 5 country project member schools will test the protype. At that moment only Student, Teacher and Guest roles will be able to login and use the App. The student's learning path will contain only a training lab about "digital security". Students will also be able to visit the VIRTUAL_CLASSROOM and the ASSET_LAB. At the end of the learning path students will be able to request his/her certificate.
 
 ## IES El Rincón students working on the project
 

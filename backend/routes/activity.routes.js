@@ -10,6 +10,9 @@ module.exports = app => {
     // Retrieve all Activities
     router.get("/", auth.isAuthenticated, activities.findAll);
 
+    // Retrieve all non expired Activities from the database.
+    router.get("/nonExpired", auth.isAuthenticated, activities.findAllNonExpired);
+
     // Retrieve a single Activities with id
     router.get("/:id", auth.isAuthenticated, activities.findOne);
 
