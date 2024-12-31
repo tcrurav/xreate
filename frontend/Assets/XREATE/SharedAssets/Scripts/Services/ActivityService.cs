@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class ActivityService : MonoBehaviour
 {
-    private readonly string URL = MainManager.GetURL() + "/api/activities";
+    private string URL;
 
     // TODO - Error handling should be handled other way than through this public members
     public string requestError;
@@ -15,32 +15,42 @@ public class ActivityService : MonoBehaviour
     public Activity[] activities;
     public Activity[] activitiesNonExpired;
 
+    private void UpdateURL()
+    {
+        URL = MainManager.GetURL() + "/api/activities";
+    }
+
     public IEnumerator GetAll()
     {
+        UpdateURL();
         yield return StartCoroutine(RestGetAll());
     }
 
     public IEnumerator GetAllNonExpired()
     {
+        UpdateURL();
         yield return StartCoroutine(RestGetAllNonExpired());
     }
 
     public IEnumerator Create(Activity activity)
     {
+        UpdateURL();
         yield return StartCoroutine(RestCreate(activity));
     }
 
     public IEnumerator UpdateById(int id, Activity activity)
     {
+        UpdateURL();
         yield return StartCoroutine(RestUpdateById(id, activity));
     }
 
     public IEnumerator DeleteById(int id)
     {
+        UpdateURL();
         yield return StartCoroutine(RestDeleteById(id));
     }
 
-    IEnumerator RestGetAll()
+    private IEnumerator RestGetAll()
     {
         UnityWebRequest request = UnityWebRequest.Get(URL);
 
@@ -77,7 +87,7 @@ public class ActivityService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestGetAllNonExpired()
+    private IEnumerator RestGetAllNonExpired()
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/nonExpired");
 
@@ -116,7 +126,7 @@ public class ActivityService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestCreate(Activity activity)
+    private IEnumerator RestCreate(Activity activity)
     {
         var request = new UnityWebRequest(URL, "POST");
 
@@ -169,7 +179,7 @@ public class ActivityService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestUpdateById(int id, Activity activity)
+    private IEnumerator RestUpdateById(int id, Activity activity)
     {
         var request = new UnityWebRequest(URL + "/" + id, "PUT");
 
@@ -220,7 +230,7 @@ public class ActivityService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestDeleteById(int id)
+    private IEnumerator RestDeleteById(int id)
     {
         string URI = URL + "/" + id.ToString();
         UnityWebRequest request = UnityWebRequest.Delete(URI);

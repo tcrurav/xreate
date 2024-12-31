@@ -8,9 +8,10 @@ public class MainManager : MonoBehaviour
 
     private User user;
     private string accessToken;
-    private readonly string URL = "http://localhost:8080";
+    private string currentUrl = "http://localhost:8080";
+    private readonly string[] URL = new string[] { "http://localhost:8080", "", "" };
 
-    //TODO: URL should be in .env
+    //TODO: URLs should be in .env
 
     private void Awake()
     {
@@ -46,7 +47,13 @@ public class MainManager : MonoBehaviour
 
     public static string GetURL()
     {
-        return Instance.URL;
+        return Instance.currentUrl;
+    }
+
+    public static void SetURL(int locationId)
+    {
+        Instance.currentUrl = Instance.URL[locationId];
+        Debug.Log(Instance.currentUrl);
     }
 
     public static GameObject FindObject(GameObject parent, string name)
