@@ -53,6 +53,37 @@
 								}
 							]
 						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{host}}:{{port}}/api/users/{{userId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {

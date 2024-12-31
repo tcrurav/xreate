@@ -28,10 +28,20 @@ create a backend/.env file for the backend. This is an example:
 ```
 JWT_SECRET=V3RY#1MP0RT@NT$3CR3T#
 
-MYSQL_DATABASE=db_xreate_dev
-MYSQL_USER=root
-MYSQL_PASSWORD=sasa
-MYSQL_ROOT_PASSWORD=sasa
+MYSQL_DATABASE_DEV=db_xreate_dev
+MYSQL_USER_DEV=root
+MYSQL_PASSWORD_DEV=sasa
+MYSQL_ROOT_PASSWORD_DEV=sasa
+
+MYSQL_DATABASE_TEST=db_xreate_test
+MYSQL_USER_TEST=root
+MYSQL_PASSWORD_TEST=sasa
+MYSQL_ROOT_PASSWORD_TEST=sasa
+
+MYSQL_DATABASE_PRO=db_xreate
+MYSQL_USER_PRO=root
+MYSQL_PASSWORD_PRO=sasa
+MYSQL_ROOT_PASSWORD_PRO=sasa
 
 ADMIN_USER=admin
 ADMIN_PASSWORD=sasa
@@ -166,3 +176,6 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://www.youtube.com/watch?v=JZCzJyAbKwc. How to apply Transparent PNG Textures in Unity.
 * https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521. How to find an inactive gameobject.
 * https://discussions.unity.com/t/how-to-create-ui-button-dynamically/621275/5. How to create UI Button dynamically.
+* https://dev.to/lukekyl/testing-your-express-js-backend-server-3ae6. Testing your Express.js Backend Server.
+* https://levelup.gitconnected.com/building-an-express-api-with-sequelize-cli-and-unit-testing-882c6875ed59. Building an Express API with Sequelize CLI and Unit Testing!
+* https://stackoverflow.com/questions/14221579/how-do-i-add-comments-to-package-json-for-npm-install. How to add comments to package.json file.
