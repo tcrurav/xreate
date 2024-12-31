@@ -111,6 +111,15 @@ To run the unity project first open additively the following scenes:
 
 Enjoy!
 
+## Test the backend
+
+Jest has been used for testing the backend. At the moment there are tests for the users end-points. To run the tests just run the following commands:
+
+````
+cd backend
+npm test
+````
+
 ## Postman
 * You can import the following Postman end-points and environment to try the backend: 
   - [postman collection](postman/xreate.postman_collection.json).
@@ -164,6 +173,8 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * [Sequelize](https://sequelize.org/) - Sequelize is a modern TypeScript and Node.js ORM.
 * [Unity](https://unity.com/) - Unity is a cross-platform 2D and 3D graphics engine.
 * [Mixamo](https://www.mixamo.com/) - To create 3D characters, skeletal rigs, and animations, ready for use in film, games, interactive experiences and illustration.
+* [Jest](https://jestjs.io/) - Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
+* [supertest](https://github.com/ladjs/supertest) - provides a high-level abstraction for testing HTTP. It has been used together with Jest to test the backend.
 
 ## Acknowledgments
 
