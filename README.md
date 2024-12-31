@@ -28,10 +28,20 @@ create a backend/.env file for the backend. This is an example:
 ```
 JWT_SECRET=V3RY#1MP0RT@NT$3CR3T#
 
-MYSQL_DATABASE=db_xreate_dev
-MYSQL_USER=root
-MYSQL_PASSWORD=sasa
-MYSQL_ROOT_PASSWORD=sasa
+MYSQL_DATABASE_DEV=db_xreate_dev
+MYSQL_USER_DEV=root
+MYSQL_PASSWORD_DEV=sasa
+MYSQL_ROOT_PASSWORD_DEV=sasa
+
+MYSQL_DATABASE_TEST=db_xreate_test
+MYSQL_USER_TEST=root
+MYSQL_PASSWORD_TEST=sasa
+MYSQL_ROOT_PASSWORD_TEST=sasa
+
+MYSQL_DATABASE_PRO=db_xreate
+MYSQL_USER_PRO=root
+MYSQL_PASSWORD_PRO=sasa
+MYSQL_ROOT_PASSWORD_PRO=sasa
 
 ADMIN_USER=admin
 ADMIN_PASSWORD=sasa
@@ -101,6 +111,15 @@ To run the unity project first open additively the following scenes:
 
 Enjoy!
 
+## Test the backend
+
+Jest has been used for testing the backend. At the moment there are tests for the users end-points. To run the tests just run the following commands:
+
+````
+cd backend
+npm test
+````
+
 ## Postman
 * You can import the following Postman end-points and environment to try the backend: 
   - [postman collection](postman/xreate.postman_collection.json).
@@ -154,6 +173,8 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * [Sequelize](https://sequelize.org/) - Sequelize is a modern TypeScript and Node.js ORM.
 * [Unity](https://unity.com/) - Unity is a cross-platform 2D and 3D graphics engine.
 * [Mixamo](https://www.mixamo.com/) - To create 3D characters, skeletal rigs, and animations, ready for use in film, games, interactive experiences and illustration.
+* [Jest](https://jestjs.io/) - Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
+* [supertest](https://github.com/ladjs/supertest) - provides a high-level abstraction for testing HTTP. It has been used together with Jest to test the backend.
 
 ## Acknowledgments
 
@@ -166,3 +187,6 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://www.youtube.com/watch?v=JZCzJyAbKwc. How to apply Transparent PNG Textures in Unity.
 * https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521. How to find an inactive gameobject.
 * https://discussions.unity.com/t/how-to-create-ui-button-dynamically/621275/5. How to create UI Button dynamically.
+* https://dev.to/lukekyl/testing-your-express-js-backend-server-3ae6. Testing your Express.js Backend Server.
+* https://levelup.gitconnected.com/building-an-express-api-with-sequelize-cli-and-unit-testing-882c6875ed59. Building an Express API with Sequelize CLI and Unit Testing!
+* https://stackoverflow.com/questions/14221579/how-do-i-add-comments-to-package-json-for-npm-install. How to add comments to package.json file.
