@@ -13,6 +13,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: new Date()
     }
+  },
+  {
+    tableName: 'teams',
   });
 
   return Team;

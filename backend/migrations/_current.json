@@ -1,7 +1,7 @@
 {
     "tables": {
-        "Users": {
-            "tableName": "Users",
+        "users": {
+            "tableName": "users",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -55,8 +55,8 @@
             },
             "indexes": []
         },
-        "Activities": {
-            "tableName": "Activities",
+        "activities": {
+            "tableName": "activities",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -118,8 +118,8 @@
             },
             "indexes": []
         },
-        "Teams": {
-            "tableName": "Teams",
+        "teams": {
+            "tableName": "teams",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -153,7 +153,7 @@
                 "currentChallengeId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Challenges",
+                        "model": "challenges",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -164,8 +164,8 @@
             },
             "indexes": []
         },
-        "Challenges": {
-            "tableName": "Challenges",
+        "challenges": {
+            "tableName": "challenges",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -203,8 +203,8 @@
             },
             "indexes": []
         },
-        "Achievements": {
-            "tableName": "Achievements",
+        "achievements": {
+            "tableName": "achievements",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -234,7 +234,7 @@
                 "challengeId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Challenges",
+                        "model": "challenges",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -245,7 +245,7 @@
                 "inActivityStudentParticipationId": {
                     "allowNull": true,
                     "references": {
-                        "model": "InActivityStudentParticipations",
+                        "model": "in_activity_student_participations",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -256,8 +256,8 @@
             },
             "indexes": []
         },
-        "AchievementItems": {
-            "tableName": "AchievementItems",
+        "achievement_items": {
+            "tableName": "achievement_items",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -291,7 +291,7 @@
                 "achievementId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Achievements",
+                        "model": "achievements",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -302,7 +302,7 @@
                 "challengeItemId": {
                     "allowNull": true,
                     "references": {
-                        "model": "ChallengeItems",
+                        "model": "challenge_items",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -313,8 +313,8 @@
             },
             "indexes": []
         },
-        "ActivityChallengeConfigItems": {
-            "tableName": "ActivityChallengeConfigItems",
+        "in_activity_challenge_config_items": {
+            "tableName": "in_activity_challenge_config_items",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -352,7 +352,7 @@
                 "activityChallengeConfigId": {
                     "allowNull": true,
                     "references": {
-                        "model": "ActivityChallengeConfigs",
+                        "model": "in_activity_challenge_configs",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -363,8 +363,8 @@
             },
             "indexes": []
         },
-        "ActivityChallengeConfigs": {
-            "tableName": "ActivityChallengeConfigs",
+        "in_activity_challenge_configs": {
+            "tableName": "in_activity_challenge_configs",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -394,7 +394,7 @@
                 "activityId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Activities",
+                        "model": "activities",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -405,7 +405,7 @@
                 "challengeId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Challenges",
+                        "model": "challenges",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -416,8 +416,8 @@
             },
             "indexes": []
         },
-        "ChallengeItems": {
-            "tableName": "ChallengeItems",
+        "challenge_items": {
+            "tableName": "challenge_items",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -455,7 +455,7 @@
                 "challengeId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Challenges",
+                        "model": "challenges",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -466,8 +466,8 @@
             },
             "indexes": []
         },
-        "InActivityTeacherParticipations": {
-            "tableName": "InActivityTeacherParticipations",
+        "in_activity_teacher_participations": {
+            "tableName": "in_activity_teacher_participations",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -505,7 +505,7 @@
                 "challengeId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Challenges",
+                        "model": "challenges",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -516,7 +516,7 @@
                 "activityId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Activities",
+                        "model": "activities",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -527,7 +527,7 @@
                 "teacherId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Users",
+                        "model": "users",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -538,8 +538,8 @@
             },
             "indexes": []
         },
-        "InActivityStudentParticipations": {
-            "tableName": "InActivityStudentParticipations",
+        "in_activity_student_participations": {
+            "tableName": "in_activity_student_participations",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -577,7 +577,7 @@
                 "teamId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Teams",
+                        "model": "teams",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -588,7 +588,7 @@
                 "activityId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Activities",
+                        "model": "activities",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -599,7 +599,7 @@
                 "studentId": {
                     "allowNull": true,
                     "references": {
-                        "model": "Users",
+                        "model": "users",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",

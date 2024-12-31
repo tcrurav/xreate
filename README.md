@@ -38,10 +38,10 @@ MYSQL_USER_TEST=root
 MYSQL_PASSWORD_TEST=sasa
 MYSQL_ROOT_PASSWORD_TEST=sasa
 
-MYSQL_DATABASE_PRO=db_xreate
-MYSQL_USER_PRO=root
-MYSQL_PASSWORD_PRO=sasa
-MYSQL_ROOT_PASSWORD_PRO=sasa
+MYSQL_DATABASE=db_xreate
+MYSQL_USER=xreate
+MYSQL_PASSWORD=verysecurepassword1
+MYSQL_ROOT_PASSWORD=verysecurepassword2
 
 ADMIN_USER=admin
 ADMIN_PASSWORD=sasa
@@ -105,6 +105,19 @@ To run the unity project first open additively the following scenes:
 * MainScene
 * RoomModuleBScene
 
+
+Enjoy!
+
+## Run the backend with docker
+
+You need a local environment with docker.
+
+Once you have your docker environment ready clone the project, and run the docker-compose command:
+
+````
+git clone https://github.com/tcrurav/xreate.git
+docker-compose up
+````
 
 Enjoy!
 

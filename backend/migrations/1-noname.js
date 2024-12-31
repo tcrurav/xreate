@@ -5,24 +5,24 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "Users", deps: []
- * createTable "Activities", deps: []
- * createTable "Challenges", deps: []
- * createTable "Teams", deps: [Challenges]
- * createTable "InActivityStudentParticipations", deps: [Teams, Activities, Users]
- * createTable "ChallengeItems", deps: [Challenges]
- * createTable "ActivityChallengeConfigs", deps: [Activities, Challenges]
- * createTable "ActivityChallengeConfigItems", deps: [ActivityChallengeConfigs]
- * createTable "Achievements", deps: [Challenges, InActivityStudentParticipations]
- * createTable "InActivityTeacherParticipations", deps: [Challenges, Activities, Users]
- * createTable "AchievementItems", deps: [Achievements, ChallengeItems]
+ * createTable "users", deps: []
+ * createTable "activities", deps: []
+ * createTable "challenges", deps: []
+ * createTable "teams", deps: [challenges]
+ * createTable "in_activity_student_participations", deps: [teams, activities, users]
+ * createTable "challenge_items", deps: [challenges]
+ * createTable "in_activity_challenge_configs", deps: [activities, challenges]
+ * createTable "in_activity_challenge_config_items", deps: [in_activity_challenge_configs]
+ * createTable "achievements", deps: [challenges, in_activity_student_participations]
+ * createTable "in_activity_teacher_participations", deps: [challenges, activities, users]
+ * createTable "achievement_items", deps: [achievements, challenge_items]
  *
  **/
 
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2024-12-30T14:22:55.189Z",
+    "created": "2024-12-31T15:31:14.286Z",
     "comment": ""
 };
 
@@ -30,7 +30,7 @@ var migrationCommands = function(transaction) {
     return [{
             fn: "createTable",
             params: [
-                "Users",
+                "users",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -84,7 +84,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "Activities",
+                "activities",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -142,7 +142,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "Challenges",
+                "challenges",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -180,7 +180,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "Teams",
+                "teams",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -211,7 +211,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Challenges",
+                            "model": "challenges",
                             "key": "id"
                         },
                         "allowNull": true
@@ -225,7 +225,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "InActivityStudentParticipations",
+                "in_activity_student_participations",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -260,7 +260,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Teams",
+                            "model": "teams",
                             "key": "id"
                         },
                         "allowNull": true
@@ -271,7 +271,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Activities",
+                            "model": "activities",
                             "key": "id"
                         },
                         "allowNull": true
@@ -282,7 +282,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Users",
+                            "model": "users",
                             "key": "id"
                         },
                         "allowNull": true
@@ -296,7 +296,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "ChallengeItems",
+                "challenge_items",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -331,7 +331,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Challenges",
+                            "model": "challenges",
                             "key": "id"
                         },
                         "allowNull": true
@@ -345,7 +345,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "ActivityChallengeConfigs",
+                "in_activity_challenge_configs",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -372,7 +372,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Activities",
+                            "model": "activities",
                             "key": "id"
                         },
                         "allowNull": true
@@ -383,7 +383,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Challenges",
+                            "model": "challenges",
                             "key": "id"
                         },
                         "allowNull": true
@@ -397,7 +397,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "ActivityChallengeConfigItems",
+                "in_activity_challenge_config_items",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -432,7 +432,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "ActivityChallengeConfigs",
+                            "model": "in_activity_challenge_configs",
                             "key": "id"
                         },
                         "allowNull": true
@@ -446,7 +446,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "Achievements",
+                "achievements",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -473,7 +473,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Challenges",
+                            "model": "challenges",
                             "key": "id"
                         },
                         "allowNull": true
@@ -484,7 +484,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "InActivityStudentParticipations",
+                            "model": "in_activity_student_participations",
                             "key": "id"
                         },
                         "allowNull": true
@@ -498,7 +498,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "InActivityTeacherParticipations",
+                "in_activity_teacher_participations",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -533,7 +533,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Challenges",
+                            "model": "challenges",
                             "key": "id"
                         },
                         "allowNull": true
@@ -544,7 +544,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Activities",
+                            "model": "activities",
                             "key": "id"
                         },
                         "allowNull": true
@@ -555,7 +555,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Users",
+                            "model": "users",
                             "key": "id"
                         },
                         "allowNull": true
@@ -569,7 +569,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "AchievementItems",
+                "achievement_items",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -600,7 +600,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "Achievements",
+                            "model": "achievements",
                             "key": "id"
                         },
                         "allowNull": true
@@ -611,7 +611,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "ChallengeItems",
+                            "model": "challenge_items",
                             "key": "id"
                         },
                         "allowNull": true
@@ -627,67 +627,67 @@ var migrationCommands = function(transaction) {
 var rollbackCommands = function(transaction) {
     return [{
             fn: "dropTable",
-            params: ["Users", {
+            params: ["users", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["Activities", {
+            params: ["activities", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["Teams", {
+            params: ["teams", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["Challenges", {
+            params: ["challenges", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["Achievements", {
+            params: ["achievements", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["AchievementItems", {
+            params: ["achievement_items", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["ActivityChallengeConfigItems", {
+            params: ["in_activity_challenge_config_items", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["ActivityChallengeConfigs", {
+            params: ["in_activity_challenge_configs", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["ChallengeItems", {
+            params: ["challenge_items", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["InActivityTeacherParticipations", {
+            params: ["in_activity_teacher_participations", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["InActivityStudentParticipations", {
+            params: ["in_activity_student_participations", {
                 transaction: transaction
             }]
         }
