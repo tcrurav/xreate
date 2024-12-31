@@ -52,21 +52,18 @@ PORT=8080
 NODE_ENV=development
 ```
 
-Create the database ```db_xreate_dev``` in your MySQL Server.
-
-Install dependencies and run the backend:
+Change the directory to the backend and Install dependencies:
 
 ```
 cd backend
 npm install
-node server.js
 ```
 
-In a new console execute the seeders for the backend:
+Reset the database and run the backend:
 
 ```
-cd backend
-npx sequelize-cli db:seed:all
+npm run db:reset
+npm start
 ```
 
 * In the frontend (Unity):
