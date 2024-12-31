@@ -16,6 +16,7 @@
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:makemigrations": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js",
+    "all-in-one": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node server.js"
   },

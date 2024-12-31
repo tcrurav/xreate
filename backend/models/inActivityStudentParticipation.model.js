@@ -16,6 +16,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: new Date()
     }
+  },
+  {
+    tableName: 'in_activity_student_participations',
   });
 
   return InActivityStudentParticipation;

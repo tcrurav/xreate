@@ -16,6 +16,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: new Date()
     }
+  },
+  {
+    tableName: 'challenge_items',
   });
 
   return ChallengeItem;

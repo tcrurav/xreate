@@ -10,6 +10,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: new Date()
     }
+  },
+  {
+    tableName: 'in_activity_challenge_configs',
   });
 
   return ActivityChallengeConfig;
