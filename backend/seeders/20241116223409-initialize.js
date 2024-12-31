@@ -14,7 +14,9 @@ module.exports = {
       nickname: "admin",
       code: "9999",
       role: "admin",
-      nationality: "spanish"
+      nationality: "spanish",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
 
     await queryInterface.bulkInsert('users', [{
@@ -24,9 +26,11 @@ module.exports = {
       nickname: "guest",
       code: "9999",
       role: "guest",
-      nationality: "spanish"
+      nationality: "spanish",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
-
+    
   },
 
   async down(queryInterface, Sequelize) {

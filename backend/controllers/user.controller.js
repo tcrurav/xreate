@@ -100,6 +100,10 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
+  if (req.body.password) {
+    req.body.password = bcrypt.hashSync(req.body.password);
+  }
+
   User.update(req.body, {
     where: { id: id }
   })
