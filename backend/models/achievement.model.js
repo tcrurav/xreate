@@ -10,6 +10,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: new Date()
     }
+  },
+  {
+    tableName: 'achievements',
   });
 
   return Achievement;

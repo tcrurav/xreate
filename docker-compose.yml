@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql
+    env_file:
+      - ./backend/.env
+    volumes:
+      - xreate-mysql-db:/var/lib/mysql
+    ports:
+      - "3306:3306" # Change the first number for different port
+    networks:
+      - xreate-network
+  api:
+    image: xreate_api
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8080:8080" # Change the first number for different port
+    expose:
+      - "8080"
+    networks:
+      - xreate-network
+    depends_on:
+      - db
+      
+volumes:
+  xreate-mysql-db:
+    driver: local
+
+networks:
+  xreate-network:
+    driver: bridge

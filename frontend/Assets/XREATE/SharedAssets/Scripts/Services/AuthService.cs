@@ -7,23 +7,30 @@ using UnityEngine.Networking;
 
 public class AuthService : MonoBehaviour
 {
-    private readonly string URL = MainManager.GetURL() + "/api/users";
+    private string URL;
 
     // TODO - Error handling should be handled other way than through this public members
     public string requestError;
     public long responseCode;
 
+    private void UpdateURL()
+    {
+        URL = MainManager.GetURL() + "/api/users";
+    }
+
     public IEnumerator Login(User user)
     {
+        UpdateURL();
         yield return StartCoroutine(RestLogin(user));
     }
 
     public IEnumerator Register(User user)
     {
+        UpdateURL();
         yield return StartCoroutine(RestRegister(user));
     }
 
-    string GetBasicAuthString(string username, string password)
+    private string GetBasicAuthString(string username, string password)
     {
         string auth = username + ":" + password;
         auth = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(auth));
@@ -31,7 +38,7 @@ public class AuthService : MonoBehaviour
         return auth;
     }
 
-    IEnumerator RestRegister(User user)
+    private IEnumerator RestRegister(User user)
     {
         var request = new UnityWebRequest(URL, "POST");
 
@@ -76,7 +83,7 @@ public class AuthService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestLogin(User user)
+    private IEnumerator RestLogin(User user)
     {
         var request = new UnityWebRequest(URL + "/signin", "POST");
 
