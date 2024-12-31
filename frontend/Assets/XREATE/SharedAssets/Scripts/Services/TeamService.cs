@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class TeamService : MonoBehaviour
 {
-    private readonly string URL = MainManager.GetURL() + "/api/teams";
+    private string URL;
 
     // TODO - Error handling should be handled other way than through this public members
     public string requestError;
@@ -15,32 +15,42 @@ public class TeamService : MonoBehaviour
     public Team[] teams;
     public TeamWithPoints[] teamsWithPoints;
 
+    private void UpdateURL()
+    {
+        URL = MainManager.GetURL() + "/api/teams";
+    }
+
     public IEnumerator GetAll()
     {
+        UpdateURL();
         yield return StartCoroutine(RestGetAll());
     }
 
     public IEnumerator GetAllWithPoints()
     {
+        UpdateURL();
         yield return StartCoroutine(RestGetAllWithPoints());
     }
 
     public IEnumerator Create(Team team)
     {
+        UpdateURL();
         yield return StartCoroutine(RestCreate(team));
     }
 
     public IEnumerator UpdateById(int id, Team team)
     {
+        UpdateURL();
         yield return StartCoroutine(RestUpdateById(id, team));
     }
 
     public IEnumerator DeleteById(int id)
     {
+        UpdateURL();
         yield return StartCoroutine(RestDeleteById(id));
     }
 
-    IEnumerator RestGetAll()
+    private IEnumerator RestGetAll()
     {
         UnityWebRequest request = UnityWebRequest.Get(URL);
 
@@ -77,7 +87,7 @@ public class TeamService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestGetAllWithPoints()
+    private IEnumerator RestGetAllWithPoints()
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/points");
 
@@ -116,7 +126,7 @@ public class TeamService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestCreate(Team team)
+    private IEnumerator RestCreate(Team team)
     {
         var request = new UnityWebRequest(URL, "POST");
 
@@ -169,7 +179,7 @@ public class TeamService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestUpdateById(int id, Team team)
+    private IEnumerator RestUpdateById(int id, Team team)
     {
         var request = new UnityWebRequest(URL + "/" + id, "PUT");
 
@@ -220,7 +230,7 @@ public class TeamService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestDeleteById(int id)
+    private IEnumerator RestDeleteById(int id)
     {
         string URI = URL + "/" + id.ToString();
         UnityWebRequest request = UnityWebRequest.Delete(URI);

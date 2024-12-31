@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class InActivityStudentParticipationService : MonoBehaviour
 {
-    private readonly string URL = MainManager.GetURL() + "/api/inActivityStudentParticipations";
+    private string URL;
 
     // TODO - Error handling should be handled other way than through this public members
     public string requestError;
@@ -15,32 +15,42 @@ public class InActivityStudentParticipationService : MonoBehaviour
     public InActivityStudentParticipation[] inActivityStudentParticipations;
     public InActivityStudentParticipationWithActivityAndPoints[] inActivityStudentParticipationsWithActivityAndPoints;
 
+    private void UpdateURL()
+    {
+        URL = MainManager.GetURL() + "/api/inActivityStudentParticipations";
+    }
+
     public IEnumerator GetAll()
     {
+        UpdateURL();
         yield return StartCoroutine(RestGetAll());
     }
 
     public IEnumerator GetAllWithActivityAndPoints(int studentId)
     {
+        UpdateURL();
         yield return StartCoroutine(RestGetAllWithActivityAndPoints(studentId));
     }
 
     public IEnumerator Create(InActivityStudentParticipation inActivityStudentParticipation)
     {
+        UpdateURL();
         yield return StartCoroutine(RestCreate(inActivityStudentParticipation));
     }
 
     public IEnumerator UpdateById(int id, InActivityStudentParticipation inActivityStudentParticipation)
     {
+        UpdateURL();
         yield return StartCoroutine(RestUpdateById(id, inActivityStudentParticipation));
     }
 
     public IEnumerator DeleteById(int id)
     {
+        UpdateURL();
         yield return StartCoroutine(RestDeleteById(id));
     }
 
-    IEnumerator RestGetAll()
+    private IEnumerator RestGetAll()
     {
         UnityWebRequest request = UnityWebRequest.Get(URL);
 
@@ -77,7 +87,7 @@ public class InActivityStudentParticipationService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestGetAllWithActivityAndPoints(int studentId)
+    private IEnumerator RestGetAllWithActivityAndPoints(int studentId)
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/learningPath/students/" + studentId.ToString());
 
@@ -117,7 +127,7 @@ public class InActivityStudentParticipationService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestCreate(InActivityStudentParticipation inActivityStudentParticipation)
+    private IEnumerator RestCreate(InActivityStudentParticipation inActivityStudentParticipation)
     {
         var request = new UnityWebRequest(URL, "POST");
 
@@ -170,7 +180,7 @@ public class InActivityStudentParticipationService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestUpdateById(int id, InActivityStudentParticipation inActivityStudentParticipation)
+    private IEnumerator RestUpdateById(int id, InActivityStudentParticipation inActivityStudentParticipation)
     {
         var request = new UnityWebRequest(URL + "/" + id.ToString(), "PUT");
 
@@ -221,7 +231,7 @@ public class InActivityStudentParticipationService : MonoBehaviour
         request.Dispose();
     }
 
-    IEnumerator RestDeleteById(int id)
+    private IEnumerator RestDeleteById(int id)
     {
         string URI = URL + "/" + id.ToString();
         UnityWebRequest request = UnityWebRequest.Delete(URI);

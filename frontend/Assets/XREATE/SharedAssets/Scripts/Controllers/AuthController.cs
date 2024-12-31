@@ -27,7 +27,7 @@ public class AuthController : MonoBehaviour
 
     public void Login()
     {
-        //loadingCanvas.SetActive(true);
+        loadingCanvas.SetActive(true);
         StartCoroutine(DoLogin());
     }
 
@@ -42,7 +42,7 @@ public class AuthController : MonoBehaviour
 
         yield return authService.Login(user);
 
-        Debug.Log("reponseCode");
+        Debug.Log("reponseCode in AuthController");
         Debug.Log(authService.responseCode);
 
         if (authService.responseCode != 200)
@@ -53,6 +53,8 @@ public class AuthController : MonoBehaviour
         }
 
         MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
+
+        loadingCanvas.SetActive(false);
 
         // TODO - maybe remove this lines bellow
         // Don't use this option because it loads very slowly

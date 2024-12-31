@@ -2202,8 +2202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723743b747fcd3e44991364cce177112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneContainerParents:
-  - RoomModuleBSceneContainerParent
   sceneContainers:
   - RoomModuleBSceneContainer
 --- !u!114 &1814691621
