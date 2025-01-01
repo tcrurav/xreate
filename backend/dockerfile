@@ -13,7 +13,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 80
+# Use other port if not using https
+EXPOSE 443
 
 # ATTENTION!!! DANGER!!! THIS WILL RESET XREATE DATABASE. Use it only if you know what you are doing.
 # ENTRYPOINT [ "npm", "run", "db:reset-and-start" ]

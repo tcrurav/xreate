@@ -19,9 +19,9 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "80:80" # Change the first number for different port
+      - "443:443" # Change the first number for different port
     expose:
-      - "80"
+      - "443" # 443 is default for https
     networks:
       - xreate-network
     depends_on:

@@ -126,24 +126,26 @@ Create a .env file from the .env.example, and modify it according to the comment
 
 ````
 cd backend
-cp .env.example .env
+cp .env.example .env 
 ````
+
+**Don't forget** to read comments in .env file.
+
+Docker files in this project are ready for https. If you are not using https in default port 443 you should take a look to following files:
+* docker-compose.yml
+* backend/dockerfile
 
 **ATTENTION:** Line 19 in file backend/dockerfile will delete all data in API database.
 
-Uncomment line 19 and comment line 22 in file backend/dockerfile. Then run from the project root directory the following command:
+Uncomment line 19 and comment line 22 in file backend/dockerfile. After that run from the project root directory the following command:
 
 ````
 sudo docker compose up
 ````
 
-Your API should be working. Now try your API:
+Your API should be working. Access to public URL to test it.
 
-````
-curl http://localhost
-````
-
-**IMPORTANT:** Now comment Line 19 in file backend/dockerfile to avoid unintentional reset of the database.
+**IMPORTANT:** Now comment back Line 19 and descomment line 22 in file backend/dockerfile to avoid unintentional reset of the database.
 
 Enjoy!
 
