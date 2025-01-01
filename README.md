@@ -13,7 +13,7 @@ At this moment
 
 [Read more about XREATE](docs/xreate-project-description.en.md)
 
-## Getting Started
+## Getting Started (development)
 
 Clone this respository.
 
@@ -47,6 +47,7 @@ ADMIN_USER=admin
 ADMIN_PASSWORD=sasa
 
 DB_HOST=localhost
+
 PORT=80
 
 NODE_ENV=development
@@ -110,7 +111,7 @@ To run the unity project first open additively the following scenes:
 
 Enjoy!
 
-## ALTERNATIVE: Run the backend with docker
+## ALTERNATIVE: Run the backend with docker (production)
 
 You need a local environment with docker.
 

@@ -2,6 +2,7 @@ const app = require('./app');
 
 require('dotenv').config();
 
+const fs = require('fs');
 const https = require("https");
 const http = require("http");
 
@@ -10,9 +11,9 @@ let protocol = http;
 let options = {};
 if (process.env.HTTPS && process.env.HTTPS == "true") {
   protocol = https;
-  const key = fs.readFileSync(process.env.SERVER_KEY);
-  const cert = fs.readFileSync(process.env.SERVER_CERT);
-  options = { key, cert };
+  options = { 
+    key: fs.readFileSync(`${process.env.SERVER_KEY}`), 
+    cert: fs.readFileSync(`${process.env.SERVER_CERT}`) };
 }
 
 protocol.createServer(options, app).listen(port, () => {
