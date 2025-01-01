@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set("view engine", "ejs");
  
 // database conection
 const db = require("./models");
@@ -66,6 +68,10 @@ app.use(function (req, res, next) {
   });
 });
 
+// Views routes
+require("./routes/view.routes")(app);
+
+// API routes
 require("./routes/achievement.routes")(app);
 require("./routes/achievementItem.routes")(app);
 require("./routes/activity.routes")(app);

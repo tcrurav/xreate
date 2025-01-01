@@ -5,19 +5,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "//": [
-      {
-        "test": "jest"
-      }
-    ],
+    "////////////////////////// - 1": "COMMENT: Scripts with testing purposes",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
-    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "////////////////////////// - 2": "COMMENT: Makemigrations makes migrations from models automatically",
     "db:makemigrations": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js",
-    "all-in-one": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start",
+    "////////////////////////// - 3": "COMMENT: ATTENTION!!! db:reset & db:reset-and-start will reset XREATE database",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:reset-and-start": "npm run db:reset && npm start",
+    "////////////////////////// - 4": "COMMENT: Normal use scripts to migrate and start XREATE backend",
+    "db:migrate-and-start": "npx sequelize-cli db:migrate && npm start",
     "start": "node server.js"
   },
   "author": "",
@@ -27,6 +25,7 @@
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.3",
