@@ -9,12 +9,15 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
+# Use other port if not using https
+EXPOSE 443
 
-ENTRYPOINT [ "npm", "run", "all-in-one" ]
+# ATTENTION!!! DANGER!!! THIS WILL RESET XREATE DATABASE. Use it only if you know what you are doing.
+# ENTRYPOINT [ "npm", "run", "db:reset-and-start" ]
+
+# This is the normal use Entry point. Comment this line for the installation, and afterwards uncomment it forever.
+ENTRYPOINT [ "npm", "run", "db:migrate-and-start" ]
