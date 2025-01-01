@@ -1,6 +1,10 @@
 services:
   db:
     image: mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
     env_file:
       - ./backend/.env
     volumes:
@@ -15,13 +19,14 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "8080:8080" # Change the first number for different port
+      - "80:80" # Change the first number for different port
     expose:
-      - "8080"
+      - "80"
     networks:
       - xreate-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
       
 volumes:
   xreate-mysql-db:
