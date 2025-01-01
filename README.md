@@ -125,12 +125,13 @@ git clone https://github.com/tcrurav/xreate.git
 Create a .env file from the .env.example, and modify it according to the comments:
 
 ````
+cd backend
 cp .env.example .env
 ````
 
 **ATTENTION:** Line 19 in file backend/dockerfile will delete all data in API database.
 
-Uncomment line 19 and comment line 22 in file backend/dockerfile. Then run the following command:
+Uncomment line 19 and comment line 22 in file backend/dockerfile. Then run from the project root directory the following command:
 
 ````
 sudo docker compose up
