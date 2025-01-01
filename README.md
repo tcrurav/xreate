@@ -13,7 +13,7 @@ At this moment
 
 [Read more about XREATE](docs/xreate-project-description.en.md)
 
-## Getting Started
+## Getting Started (development)
 
 Clone this respository.
 
@@ -47,7 +47,8 @@ ADMIN_USER=admin
 ADMIN_PASSWORD=sasa
 
 DB_HOST=localhost
-PORT=8080
+
+PORT=80
 
 NODE_ENV=development
 ```
@@ -65,6 +66,8 @@ Reset the database and run the backend:
 npm run db:reset
 npm start
 ```
+
+**IMPORTANT:** after the initial installation just use ```npm start``` to start the backend. The command ````npm run db:reset```` will **RESET** the Database and all data will be **DELETED**.
 
 * In the frontend (Unity):
 
@@ -108,16 +111,42 @@ To run the unity project first open additively the following scenes:
 
 Enjoy!
 
-## Run the backend with docker
+## ALTERNATIVE: Run the backend with docker (production)
 
 You need a local environment with docker.
 
-Once you have your docker environment ready clone the project, and run the docker-compose command:
+In Ubuntu 24.04 LTS Desktop in a fresh installation it worked for me with the following instructions: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+
+Once you have your docker environment ready clone the project:
 
 ````
 git clone https://github.com/tcrurav/xreate.git
-docker-compose up
 ````
+
+Create a .env file from the .env.example, and modify it according to the comments:
+
+````
+cd backend
+cp .env.example .env 
+````
+
+**Don't forget** to read comments in .env file.
+
+Docker files in this project are ready for https. If you are not using https in default port 443 you should take a look to following files:
+* docker-compose.yml
+* backend/dockerfile
+
+**ATTENTION:** Line 19 in file backend/dockerfile will delete all data in API database.
+
+Uncomment line 19 and comment line 22 in file backend/dockerfile. After that run from the project root directory the following command:
+
+````
+sudo docker compose up
+````
+
+Your API should be working. Access to public URL to test it.
+
+**IMPORTANT:** Now comment back Line 19 and descomment line 22 in file backend/dockerfile to avoid unintentional reset of the database.
 
 Enjoy!
 
@@ -185,6 +214,7 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * [Mixamo](https://www.mixamo.com/) - To create 3D characters, skeletal rigs, and animations, ready for use in film, games, interactive experiences and illustration.
 * [Jest](https://jestjs.io/) - Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
 * [supertest](https://github.com/ladjs/supertest) - provides a high-level abstraction for testing HTTP. It has been used together with Jest to test the backend.
+* [EJS](https://ejs.co/) - Embedded JavaScript templating. View templating used in the project.
 
 ## Acknowledgments
 
