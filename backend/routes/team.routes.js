@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new Teams
-    router.post("/", auth.isAuthenticated, teams.create);
+    router.post("/", auth.isAuthenticated, auth.hasRole(["ADMIN"]), teams.create);
 
     // Retrieve all Teams
     router.get("/", auth.isAuthenticated, teams.findAll);
@@ -17,10 +17,10 @@ module.exports = app => {
     router.get("/:id", auth.isAuthenticated, teams.findOne);
 
     // Update a Teams with id
-    router.put("/:id", auth.isAuthenticated, teams.update);
+    router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), teams.update);
 
     // Delete a Teams with id
-    router.delete("/:id", auth.isAuthenticated, teams.delete);
+    router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), teams.delete);
 
     app.use('/api/teams', router);
 };
