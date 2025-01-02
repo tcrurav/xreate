@@ -8,7 +8,7 @@ public class MainManager : MonoBehaviour
 
     private User user;
     private string accessToken;
-    private string currentUrl = "http://localhost:8080";
+    private string currentUrl = "http://localhost:80";
     private readonly string[] URL = new string[] { 
         "http://localhost:80",                                                          // Localhost
         "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es",      // Gran Canaria Server

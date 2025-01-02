@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new InActivityStudentParticipation
-    router.post("/", auth.isAuthenticated, inActivityStudentParticipations.create);
+    router.post("/", auth.isAuthenticated, auth.hasRole(["ADMIN"]), inActivityStudentParticipations.create);
 
     // Retrieve all InActivityStudentParticipation
     router.get("/", auth.isAuthenticated, inActivityStudentParticipations.findAll);
@@ -26,10 +26,10 @@ module.exports = app => {
     router.get("/learningPath/students/:studentId", auth.isAuthenticated, inActivityStudentParticipations.findLearningPath);
 
     // Update a InActivityStudentParticipation with id
-    router.put("/:id", auth.isAuthenticated, inActivityStudentParticipations.update);
+    router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), inActivityStudentParticipations.update);
 
     // Delete a InActivityStudentParticipation with id
-    router.delete("/:id", auth.isAuthenticated, inActivityStudentParticipations.delete);
+    router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), inActivityStudentParticipations.delete);
 
     app.use('/api/inActivityStudentParticipations', router);
 };

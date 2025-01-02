@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new AchievementItems
-    router.post("/", auth.isAuthenticated, achievementItems.create);
+    router.post("/", auth.isAuthenticated, auth.hasRole(["ADMIN"]), achievementItems.create);
 
     // Retrieve all AchievementItems
     router.get("/", auth.isAuthenticated, achievementItems.findAll);
@@ -14,10 +14,10 @@ module.exports = app => {
     router.get("/:id", auth.isAuthenticated, achievementItems.findOne);
 
     // Update a AchievementItems with id
-    router.put("/:id", auth.isAuthenticated, achievementItems.update);
+    router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), achievementItems.update);
 
     // Delete a AchievementItems with id
-    router.delete("/:id", auth.isAuthenticated, achievementItems.delete);
+    router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), achievementItems.delete);
 
     app.use('/api/achievementItems', router);
 };

@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new InActivityTeacherParticipations
-    router.post("/", auth.isAuthenticated, inActivityTeacherParticipations.create);
+    router.post("/", auth.isAuthenticated, auth.hasRole(["ADMIN"]), inActivityTeacherParticipations.create);
 
     // Retrieve all InActivityTeacherParticipations
     router.get("/", auth.isAuthenticated, inActivityTeacherParticipations.findAll);
@@ -17,10 +17,10 @@ module.exports = app => {
     router.get("/teachers/:teacherId", auth.isAuthenticated, inActivityTeacherParticipations.findAllByTeacher);
 
     // Update a InActivityTeacherParticipations with id
-    router.put("/:id", auth.isAuthenticated, inActivityTeacherParticipations.update);
+    router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), inActivityTeacherParticipations.update);
 
     // Delete a InActivityTeacherParticipations with id
-    router.delete("/:id", auth.isAuthenticated, inActivityTeacherParticipations.delete);
+    router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), inActivityTeacherParticipations.delete);
 
     app.use('/api/inActivityTeacherParticipations', router);
 };

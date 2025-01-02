@@ -13,7 +13,7 @@ module.exports = {
       password: bcrypt.hashSync(process.env.ADMIN_PASSWORD),
       nickname: "admin",
       code: "9999",
-      role: "admin",
+      role: "ADMIN",
       nationality: "spanish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -25,7 +25,7 @@ module.exports = {
       password: bcrypt.hashSync("9999"),
       nickname: "guest",
       code: "9999",
-      role: "guest",
+      role: "GUEST",
       nationality: "spanish",
       createdAt: new Date(),
       updatedAt: new Date()
