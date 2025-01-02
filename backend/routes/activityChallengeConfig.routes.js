@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new ActivityChallengeConfigs
-    router.post("/", auth.isAuthenticated, activityChallengeConfigs.create);
+    router.post("/", auth.isAuthenticated, auth.hasRole(["ADMIN"]), activityChallengeConfigs.create);
 
     // Retrieve all ActivityChallengeConfigs
     router.get("/", auth.isAuthenticated, activityChallengeConfigs.findAll);
@@ -14,10 +14,10 @@ module.exports = app => {
     router.get("/:id", auth.isAuthenticated, activityChallengeConfigs.findOne);
 
     // Update a ActivityChallengeConfigs with id
-    router.put("/:id", auth.isAuthenticated, activityChallengeConfigs.update);
+    router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), activityChallengeConfigs.update);
 
     // Delete a ActivityChallengeConfigs with id
-    router.delete("/:id", auth.isAuthenticated, activityChallengeConfigs.delete);
+    router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), activityChallengeConfigs.delete);
 
     app.use('/api/activityChallengeConfigs', router);
 };

@@ -15,7 +15,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "spanish1",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "spanish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -27,7 +27,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "spanish2",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "spanish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -39,7 +39,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "swiss1",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "swiss",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -51,7 +51,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "swiss2",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "swiss",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -63,7 +63,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "finish1",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "finish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -75,7 +75,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "finish2",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "finish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -87,7 +87,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "english1",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "english",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -99,7 +99,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "english2",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "english",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -111,7 +111,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "english1",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "dutch",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -123,7 +123,7 @@ module.exports = {
       password: bcrypt.hashSync("1234"),
       nickname: "dutch2",
       code: "1234",
-      role: "student",
+      role: "STUDENT",
       nationality: "dutch",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -137,7 +137,7 @@ module.exports = {
       password: bcrypt.hashSync("4321"),
       nickname: "tiburcio",
       code: "4321",
-      role: "teacher",
+      role: "TEACHER",
       nationality: "spanish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -149,7 +149,7 @@ module.exports = {
       password: bcrypt.hashSync("4321"),
       nickname: "daniel",
       code: "4321",
-      role: "teacher",
+      role: "TEACHER",
       nationality: "swiss",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -161,7 +161,7 @@ module.exports = {
       password: bcrypt.hashSync("4321"),
       nickname: "hanna",
       code: "4321",
-      role: "teacher",
+      role: "TEACHER",
       nationality: "finish",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -173,7 +173,7 @@ module.exports = {
       password: bcrypt.hashSync("4321"),
       nickname: "paul",
       code: "4321",
-      role: "teacher",
+      role: "TEACHER",
       nationality: "english",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -185,7 +185,7 @@ module.exports = {
       password: bcrypt.hashSync("4321"),
       nickname: "lotte",
       code: "4321",
-      role: "teacher",
+      role: "TEACHER",
       nationality: "dutch",
       createdAt: new Date(),
       updatedAt: new Date()

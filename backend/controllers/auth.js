@@ -21,7 +21,7 @@ exports.signin = (req, res) => {
   User.findOne({ where: { username: user } })
     .then(data => {
       const result = bcrypt.compareSync(pwd, data.password);
-      if(!result) return  res.status(401).send('Password not valid!');
+      if (!result) return res.status(401).send('Password not valid!');
 
       // generate token
       const token = utils.generateToken(data);
@@ -33,7 +33,7 @@ exports.signin = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving user."
       });
     });
 };
@@ -66,6 +66,7 @@ exports.isAuthenticated = (req, res, next) => {
           });
         }
         // get basic user details
+        req.tokenRole = user.role;
         next();
       })
       .catch(err => {
@@ -74,4 +75,23 @@ exports.isAuthenticated = (req, res, next) => {
         });
       });
   });
+};
+
+exports.hasRole = (roles) => {
+  return (req, res, next) => {
+    const tokenRole = req.tokenRole;
+
+    // return 401 token role not authorized.
+    if (!tokenRole) {
+      return res.status(401).json({
+        error: true,
+        message: "token role not authorized."
+      });
+    }
+
+    if (roles.includes(tokenRole)) return next(); // authorized 
+
+    // return 401 Role Not Authorized.
+    return res.status(401).send({ message: 'Role Not Authorized' });
+  }
 };
