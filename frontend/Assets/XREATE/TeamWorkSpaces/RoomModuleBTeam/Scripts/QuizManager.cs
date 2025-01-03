@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Para TextMeshPro
+using TMPro;
 using System.Collections.Generic;
 
 public class QuizManager : MonoBehaviour
@@ -9,10 +9,26 @@ public class QuizManager : MonoBehaviour
     [System.Serializable]
     public class Question
     {
-        public string questionText;            // Texto de la pregunta
-        public List<string> answers;           // Opciones de respuestas
-        public int correctAnswerIndex;         // Índice de la respuesta correcta
+        public string questionText;     // Texto de la pregunta
+        public List<string> answers;    // Opciones de respuestas
+        public int correctAnswerIndex;  // Índice de la respuesta correcta
     }
+
+    public GameObject welcomePanelA;     // Panel de bienvenida
+    public GameObject welcomePanelB;     // Panel de bienvenida
+    public GameObject welcomePanelC;     // Panel de bienvenida
+
+    public TMP_Text welcomeTextA;        // Texto de bienvenida
+    public TMP_Text welcomeTextB;        // Texto de bienvenida
+    public TMP_Text welcomeTextC;        // Texto de bienvenida
+
+    public Button startButtonA;          // Botón de inicio
+    public Button startButtonB;          // Botón de inicio
+    public Button startButtonC;          // Botón de inicio
+
+    public GameObject quizPanelA;        // Panel del quiz
+    public GameObject quizPanelB;        // Panel del quiz
+    public GameObject quizPanelC;        // Panel del quiz
 
     public TMP_Text questionTextPanelA; // Pregunta en el panel A
     public TMP_Text questionTextPanelB; // Pregunta en el panel B
@@ -22,16 +38,59 @@ public class QuizManager : MonoBehaviour
     public Button buttonPanelB;         // Botón del panel B
     public Button buttonPanelC;         // Botón del panel C
 
-    public TMP_Text feedbackTextA;       // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextB;       // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextC;       // Texto de retroalimentación: Correcto/Incorrecto
+    public TMP_Text feedbackTextA;      // Texto de retroalimentación: Correcto/Incorrecto
+    public TMP_Text feedbackTextB;      // Texto de retroalimentación: Correcto/Incorrecto
+    public TMP_Text feedbackTextC;      // Texto de retroalimentación: Correcto/Incorrecto
 
     private List<Question> questions = new List<Question>(); // Lista de preguntas
     private Question currentQuestion;   // Pregunta actual
     private int currentQuestionIndex = 0;
 
+    private int playersReady = 0;       // Contador de jugadores listos
+    public int totalPlayers = 3;        // Número total de jugadores
+
+
     void Start()
     {
+        // Inicialmente se muestra la pantalla de bienvenida
+        quizPanelA.SetActive(false); // Ocultar el panel de preguntas inicialmente
+        quizPanelB.SetActive(false); // Ocultar el panel de preguntas inicialmente
+        quizPanelC.SetActive(false); // Ocultar el panel de preguntas inicialmente
+
+        welcomePanelA.SetActive(true); // Mostrar la pantalla de bienvenida
+        welcomePanelB.SetActive(true); // Mostrar la pantalla de bienvenida
+        welcomePanelC.SetActive(true); // Mostrar la pantalla de bienvenida
+
+        //welcomeTextA.text = "¡Bienvenidos al desafío de preguntas y respuestas! Prepárense para trabajar en equipo, ser rápidos y demostrar sus conocimientos.\n\nPresiona Start cuando estés listo!";
+        //welcomeTextB.text = "¡Bienvenidos al desafío de preguntas y respuestas! Prepárense para trabajar en equipo, ser rápidos y demostrar sus conocimientos.\n\nPresiona Start cuando estés listo!";
+        //welcomeTextC.text = "¡Bienvenidos al desafío de preguntas y respuestas! Prepárense para trabajar en equipo, ser rápidos y demostrar sus conocimientos.\n\nPresiona Start cuando estés listo!";
+        
+        startButtonA.onClick.AddListener(OnPlayerReady);
+        startButtonB.onClick.AddListener(OnPlayerReady);
+        startButtonC.onClick.AddListener(OnPlayerReady);
+    }
+
+    // Método llamado cuando un jugador presiona el botón start
+    void OnPlayerReady()
+    {
+        playersReady++;
+        if (playersReady >= totalPlayers)
+        {
+            Invoke("StartQuiz", 1.5f);
+        }
+    }
+
+    // Inicia el juego de preguntas y respuestas
+    void StartQuiz()
+    {
+        welcomePanelA.SetActive(false); // Ocultar la pantalla de bienvenida
+        welcomePanelB.SetActive(false); // Ocultar la pantalla de bienvenida
+        welcomePanelC.SetActive(false); // Ocultar la pantalla de bienvenida
+
+        quizPanelA.SetActive(true);    // Mostrar el panel del quiz
+        quizPanelB.SetActive(true);    // Mostrar el panel del quiz
+        quizPanelC.SetActive(true);    // Mostrar el panel del quiz
+
         InitializeQuestions();
         LoadQuestion();
         AssignButtonListeners();
@@ -283,7 +342,7 @@ public class QuizManager : MonoBehaviour
             feedbackTextA.text = "Respuesta Incorrecta. Intenta de nuevo.";
             feedbackTextB.text = "Respuesta Incorrecta. Intenta de nuevo.";
             feedbackTextC.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            Invoke("LoadQuestion", 1.5f); // Cargar la siguiente pregunta después de 1.5 segundos
+            Invoke("LoadQuestion", 1.5f); // Cargar la misma pregunta después de 1.5 segundos
         }
     }
 
