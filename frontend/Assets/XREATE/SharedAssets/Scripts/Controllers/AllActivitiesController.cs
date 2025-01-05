@@ -31,7 +31,7 @@ public class AllActivitiesController : MonoBehaviour
 
     IEnumerator GetActivitiesNonExpired()
     {
-        if (MainManager.GetUser().role != "guest")
+        if (MainManager.GetUser().role != "GUEST")
         {
             throw new System.Exception("Error: Only teachers can see their activities");
         }

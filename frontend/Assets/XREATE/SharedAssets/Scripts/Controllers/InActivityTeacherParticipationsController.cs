@@ -31,7 +31,7 @@ public class InActivityTeacherParticipationsController : MonoBehaviour
 
     IEnumerator GetInActivityTeacherParticipationsWithActivityAndChallenge()
     {
-        if (MainManager.GetUser().role != "teacher")
+        if (MainManager.GetUser().role != "TEACHER")
         {
             throw new System.Exception("Error: Only teachers can see their activities");
         }

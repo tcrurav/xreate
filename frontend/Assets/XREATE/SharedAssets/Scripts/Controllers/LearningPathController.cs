@@ -31,7 +31,7 @@ public class LearningPathController : MonoBehaviour
 
     IEnumerator GetInActivityStudentParticipationsWithActivityAndPoints()
     {
-        if (MainManager.GetUser().role != "student")
+        if (MainManager.GetUser().role != "STUDENT")
         {
             throw new System.Exception("Error: Only students have a Learning path");
         }

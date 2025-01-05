@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Android.Gradle.Manifest;
+using System;
 
 public class EnableMenuScenePanelsController : MonoBehaviour
 {
@@ -19,17 +20,17 @@ public class EnableMenuScenePanelsController : MonoBehaviour
 
         switch (MainManager.GetUser().role)
         {
-            case "student":
+            case "STUDENT":
                 learningPathGameObject.SetActive(true);
                 InActivityTeacherParticipationsGameObject.SetActive(false);
                 AllActivitiesGameObject.SetActive(false);
                 break;
-            case "teacher":
+            case "TEACHER":
                 learningPathGameObject.SetActive(false);
                 InActivityTeacherParticipationsGameObject.SetActive(true);
                 AllActivitiesGameObject.SetActive(false);
                 break;
-            case "guest":
+            case "GUEST":
                 learningPathGameObject.SetActive(false);
                 InActivityTeacherParticipationsGameObject.SetActive(false);
                 AllActivitiesGameObject.SetActive(true);

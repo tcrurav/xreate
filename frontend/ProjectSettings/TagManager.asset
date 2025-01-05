@@ -9,6 +9,7 @@ TagManager:
   - Anchor
   - PlayerHand
   - Destroyer
+  - LoginSceneContainerParent
   - LoginSceneContainer
   - MenuSceneContainerParent
   - MenuSceneContainer
