@@ -47,14 +47,11 @@ public class AuthController : MonoBehaviour
             yield break;
         }
 
+        MainNetworkManager.NetworkQuickJoinLoginUsingUnity6TemplateMenus();
+
         MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
 
         loadingCanvas.SetActive(false);
-
-        // TODO - maybe remove this lines bellow
-        // Don't use this option because it loads very slowly
-        //SceneManager.LoadSceneAsync("MainScene");
-        //SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
     }
 
 }

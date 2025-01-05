@@ -5,9 +5,6 @@ using UnityEngine;
 public class MainNetworkManager : MonoBehaviour
 {
     public static MainNetworkManager Instance;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    public TMP_InputField Name;
 
     public UnityEngine.UI.Button ConfirmButton;
     public UnityEngine.UI.Button QuickJoinButton;
@@ -24,6 +21,12 @@ public class MainNetworkManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void Start()
+    {
+        Instance.ConfirmButton = ConfirmButton;
+        Instance.QuickJoinButton = QuickJoinButton;
+    }
+
     public static void GetAllPlayers()
     {
         Debug.Log("GET ALL PLAYERS...............................");
@@ -37,11 +40,12 @@ public class MainNetworkManager : MonoBehaviour
         }
     }
 
-    public void NetworkQuickJoinLoginUsingUnity6TemplateMenus()
+    public static void NetworkQuickJoinLoginUsingUnity6TemplateMenus()
     {
         // TODO - Reduce Menu scale to near 0 so that it's virtually as hiding the menu windows
-        Name.text = MainManager.GetUser().username;
-        ConfirmButton.onClick.Invoke();
-        QuickJoinButton.onClick.Invoke();
+        XRMultiplayer.XRINetworkGameManager.LocalPlayerName.Value = MainManager.GetUser().username;
+        Instance.ConfirmButton.onClick.Invoke();
+        Instance.QuickJoinButton.onClick.Invoke();
     }
 }
+
