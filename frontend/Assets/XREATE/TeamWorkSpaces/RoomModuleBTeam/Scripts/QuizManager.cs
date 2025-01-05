@@ -42,13 +42,33 @@ public class QuizManager : MonoBehaviour
     public TMP_Text feedbackTextB;      // Texto de retroalimentación: Correcto/Incorrecto
     public TMP_Text feedbackTextC;      // Texto de retroalimentación: Correcto/Incorrecto
 
-    private List<Question> questions = new List<Question>(); // Lista de preguntas
-    private Question currentQuestion;   // Pregunta actual
+    public TMP_Text timerTextA;          // Texto del cronómetro para el jugador A
+    public TMP_Text timerTextB;          // Texto del cronómetro para el jugador B
+    public TMP_Text timerTextC;          // Texto del cronómetro para el jugador C
+
+    private List<Question> questions = new List<Question>();         // Lista de preguntas
+    private List<Question> selectedQuestions = new List<Question>(); // Lista de preguntas seleccionadas aleatoriamente
+    private Question currentQuestion;                                // Pregunta actual
     private int currentQuestionIndex = 0;
 
     private int playersReady = 0;       // Contador de jugadores listos
     public int totalPlayers = 3;        // Número total de jugadores
 
+    private int teamScore = 0;          // Puntaje del equipo
+    private int playerScoreA = 0;       // Puntaje del jugador A
+    private int playerScoreB = 0;       // Puntaje del jugador B
+    private int playerScoreC = 0;       // Puntaje del jugador C
+
+    public TMP_Text teamScoreA;         // Puntaje del equipo para mostrar por pantalla
+    public TMP_Text teamScoreB;         // Puntaje del equipo para mostrar por pantalla
+    public TMP_Text teamScoreC;         // Puntaje del equipo para mostrar por pantalla
+
+    public TMP_Text playerTextScoreA;   // Puntaje del jugadoer A para mostrar por pantalla
+    public TMP_Text playerTextScoreB;   // Puntaje del jugadoer B para mostrar por pantalla
+    public TMP_Text playerTextScoreC;   // Puntaje del jugadoer C para mostrar por pantalla
+
+    private float timer = 5.0f;         // Tiempo para responder cada pregunta
+    private bool isTimerRunning = false; // Indicador de si el cronómetro está activo
 
     void Start()
     {
@@ -61,10 +81,6 @@ public class QuizManager : MonoBehaviour
         welcomePanelB.SetActive(true); // Mostrar la pantalla de bienvenida
         welcomePanelC.SetActive(true); // Mostrar la pantalla de bienvenida
 
-        //welcomeTextA.text = "¡Bienvenidos al desafío de preguntas y respuestas! Prepárense para trabajar en equipo, ser rápidos y demostrar sus conocimientos.\n\nPresiona Start cuando estés listo!";
-        //welcomeTextB.text = "¡Bienvenidos al desafío de preguntas y respuestas! Prepárense para trabajar en equipo, ser rápidos y demostrar sus conocimientos.\n\nPresiona Start cuando estés listo!";
-        //welcomeTextC.text = "¡Bienvenidos al desafío de preguntas y respuestas! Prepárense para trabajar en equipo, ser rápidos y demostrar sus conocimientos.\n\nPresiona Start cuando estés listo!";
-        
         startButtonA.onClick.AddListener(OnPlayerReady);
         startButtonB.onClick.AddListener(OnPlayerReady);
         startButtonC.onClick.AddListener(OnPlayerReady);
@@ -92,6 +108,7 @@ public class QuizManager : MonoBehaviour
         quizPanelC.SetActive(true);    // Mostrar el panel del quiz
 
         InitializeQuestions();
+        SelectRandomQuestions(); // Selecciona 10 preguntas aleatorias
         LoadQuestion();
         AssignButtonListeners();
     }
@@ -292,18 +309,36 @@ public class QuizManager : MonoBehaviour
         });
     }
 
+    // Selecciona 10 preguntas aleatorias
+    void SelectRandomQuestions()
+    {
+        List<Question> tempQuestions = new List<Question>(questions);
+        for (int i = 0; i < 10; i++)
+        {
+            int randomIndex = Random.Range(0, tempQuestions.Count);
+            selectedQuestions.Add(tempQuestions[randomIndex]);
+            tempQuestions.RemoveAt(randomIndex);
+        }
+    }
+
     // Cargar una pregunta y respuestas en los paneles
     void LoadQuestion()
     {
-        if (currentQuestionIndex >= questions.Count)
+        if (currentQuestionIndex >= selectedQuestions.Count)
         {
-            feedbackTextA.text = "¡Has completado todas las preguntas!";
-            feedbackTextB.text = "¡Has completado todas las preguntas!";
-            feedbackTextC.text = "¡Has completado todas las preguntas!";
+            questionTextPanelA.text = "Juego terminado. Puntuación del equipo: " + teamScore.ToString();
+            questionTextPanelB.text = "Juego terminado. Puntuación del equipo: " + teamScore.ToString();
+            questionTextPanelC.text = "Juego terminado. Puntuación del equipo: " + teamScore.ToString();
+
+            feedbackTextA.text = ""; // Limpio el TMP Correspondiente a las preguntas
+            feedbackTextB.text = ""; // Limpio el TMP Correspondiente a las preguntas
+            feedbackTextC.text = ""; // Limpio el TMP Correspondiente a las preguntas
+
+            DisableButtons(); // Deshabilito los botones
             return;
         }
 
-        currentQuestion = questions[currentQuestionIndex];
+        currentQuestion = selectedQuestions[currentQuestionIndex];
         feedbackTextA.text = ""; // Limpiar mensajes de retroalimentación
         feedbackTextB.text = ""; // Limpiar mensajes de retroalimentación
         feedbackTextC.text = ""; // Limpiar mensajes de retroalimentación
@@ -316,34 +351,100 @@ public class QuizManager : MonoBehaviour
         feedbackTextA.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[0];
         feedbackTextB.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[1];
         feedbackTextC.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[2];
+
+        timer = 5.0f; // Reiniciar el cronómetro
+        isTimerRunning = true;
     }
 
     // Asignar eventos a los botones
     void AssignButtonListeners()
     {
-        buttonPanelA.onClick.AddListener(() => CheckAnswer(0));
-        buttonPanelB.onClick.AddListener(() => CheckAnswer(1));
-        buttonPanelC.onClick.AddListener(() => CheckAnswer(2));
+        buttonPanelA.onClick.AddListener(() => CheckAnswer(0, "A"));
+        buttonPanelB.onClick.AddListener(() => CheckAnswer(1, "B"));
+        buttonPanelC.onClick.AddListener(() => CheckAnswer(2, "C"));
     }
 
     // Verificar si la respuesta es correcta
-    public void CheckAnswer(int selectedIndex)
+    public void CheckAnswer(int selectedIndex, string player)
     {
+
         if (selectedIndex == currentQuestion.correctAnswerIndex)
         {
             feedbackTextA.text = "¡Respuesta Correcta!";
             feedbackTextB.text = "¡Respuesta Correcta!";
             feedbackTextC.text = "¡Respuesta Correcta!";
+
+            isTimerRunning = false; // Detener el cronómetro
+            int points = timer > 0 ? 5 : 3; // 5 puntos si respondió a tiempo, 3 si no
+            teamScore += points; // Sumar puntos al equipo
+
+            teamScoreA.text = "Team Score: " + teamScore.ToString();
+            teamScoreB.text = "Team Score: " + teamScore.ToString();
+            teamScoreC.text = "Team Score: " + teamScore.ToString();
+
+            if (timer > 0) // Puntos adicionales para el jugador
+            {
+                if (player == "A")
+                {
+                    playerScoreA += 2;
+                    playerTextScoreA.text = "Player Score: " + playerScoreA.ToString();
+                } 
+                else if (player == "B") 
+                {
+                    playerScoreB += 2;
+                    playerTextScoreB.text = "Player Score: " + playerScoreB.ToString();
+                }
+                else if (player == "C") 
+                {
+                    playerScoreC += 2;
+                    playerTextScoreC.text = "Player Score: " + playerScoreC.ToString();
+                }
+            }
+
             currentQuestionIndex++;
-            Invoke("LoadQuestion", 1.5f); // Cargar la siguiente pregunta después de 1.5 segundos
+            Invoke("LoadQuestion", 1.5f);
         }
         else
         {
-            feedbackTextA.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            feedbackTextB.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            feedbackTextC.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            Invoke("LoadQuestion", 1.5f); // Cargar la misma pregunta después de 1.5 segundos
+            if (player == "A")
+            {
+                feedbackTextA.text = "Respuesta Incorrecta. Intenta de nuevo.";
+            }
+            else if (player == "B")
+            {
+                feedbackTextB.text = "Respuesta Incorrecta. Intenta de nuevo.";
+            }
+            else if (player == "C")
+            {
+                feedbackTextC.text = "Respuesta Incorrecta. Intenta de nuevo.";
+            }
         }
+    }
+
+    // Actualizar el cronómetro
+    void Update()
+    {
+        if (isTimerRunning)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                timer = 0;
+                isTimerRunning = false; // Detener el cronómetro
+            }
+
+            // Mostrar tiempo en los paneles
+            timerTextA.text = "Tiempo: " + Mathf.Ceil(timer).ToString();
+            timerTextB.text = "Tiempo: " + Mathf.Ceil(timer).ToString();
+            timerTextC.text = "Tiempo: " + Mathf.Ceil(timer).ToString();
+        }
+    }
+
+    void DisableButtons()
+    {
+        buttonPanelA.interactable = false;
+        buttonPanelB.interactable = false;
+        buttonPanelC.interactable = false;
     }
 
 }
