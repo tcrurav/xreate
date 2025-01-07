@@ -67,14 +67,16 @@ public class AllActivitiesController : MonoBehaviour
                 data.name);
 
             Button tempButton = newButton.GetComponent<Button>();
-            tempButton.onClick.AddListener(() => ButtonClicked(data.type, data.name));
+            tempButton.onClick.AddListener(() => ButtonClicked(data.type, data.name, data.id));
         }
     }
     // From: https://discussions.unity.com/t/how-to-create-ui-button-dynamically/621275/5
 
-    private void ButtonClicked(string activityType, string activityName)
+    // TODO - (DRY - Don't Repeat Yourselfe) ButtonClicked should NOT be repeated in: InActivityTeacherParticipationController, AllActivitiesController and LearningPathController. 
+    private void ButtonClicked(string activityType, string activityName, int activityId)
     {
-        
+        CurrentActivityManager.SetCurrentActivityId(activityId);
+
         switch (activityType)
         {
             case "TRAINING_LAB":
