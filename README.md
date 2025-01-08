@@ -227,3 +227,4 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://stackoverflow.com/questions/14221579/how-do-i-add-comments-to-package-json-for-npm-install. How to add comments to package.json file.
 * https://medium.com/@davidmauriciotoranzo/layers-en-unity-f2bf89d6f39d. Layers in Unity.
 * https://docs-multiplayer.unity3d.com/mppm/current/about/. Use Multiplayer Play Mode to test multiplayer functionality within the Unity Editor. You can simulate up to four Players (the main Editor Player and three Virtual Players) simultaneously on the same development device while using the same source assets on disk.
+* https://void.void. A completely useless link.
