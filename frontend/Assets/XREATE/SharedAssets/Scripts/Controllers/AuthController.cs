@@ -12,11 +12,6 @@ public class AuthController : MonoBehaviour
     public TMP_InputField PasswordInputField;
     public TMP_InputField CodeInputField;
 
-    public TMP_InputField Name;
-
-    public UnityEngine.UI.Button ConfirmButton;
-    public UnityEngine.UI.Button QuickJoinButton;
-
     public GameObject loadingCanvas;
     public GameObject errorCanvas;
 
@@ -52,22 +47,11 @@ public class AuthController : MonoBehaviour
             yield break;
         }
 
+        MainNetworkManager.NetworkQuickJoinLoginUsingUnity6TemplateMenus();
+
         MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
 
         loadingCanvas.SetActive(false);
-
-        // TODO - maybe remove this lines bellow
-        // Don't use this option because it loads very slowly
-        //SceneManager.LoadSceneAsync("MainScene");
-        //SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
-    }
-
-    public void NetworkQuickJoinLoginUsingUnity6TemplateMenus()
-    {
-        // TODO - Reduce Menu scale to near 0 so that it's virtually as hiding the menu windows
-        Name.text = MainManager.GetUser().username;
-        ConfirmButton.onClick.Invoke();
-        QuickJoinButton.onClick.Invoke();
     }
 
 }

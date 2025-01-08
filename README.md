@@ -102,12 +102,7 @@ Assets/
 
 Now you can open the frontend project with Unity.
 
-To run the unity project first open additively the following scenes:
-* LoginScene
-* MenuScene
-* MainScene
-* RoomModuleBScene
-
+To run the unity project first open the scene LoginScene.
 
 Enjoy!
 
@@ -115,7 +110,7 @@ Enjoy!
 
 You need a local environment with docker.
 
-In Ubuntu 24.04 LTS Desktop in a fresh installation it worked for me with the following instructions: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+In Ubuntu 22.04 LTS Desktop in a fresh installation it worked for me with the following instructions: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
 Once you have your docker environment ready clone the project:
 
@@ -230,3 +225,5 @@ At the moment 7 students are working on the project. Students will work in 3 tea
 * https://dev.to/lukekyl/testing-your-express-js-backend-server-3ae6. Testing your Express.js Backend Server.
 * https://levelup.gitconnected.com/building-an-express-api-with-sequelize-cli-and-unit-testing-882c6875ed59. Building an Express API with Sequelize CLI and Unit Testing!
 * https://stackoverflow.com/questions/14221579/how-do-i-add-comments-to-package-json-for-npm-install. How to add comments to package.json file.
+* https://medium.com/@davidmauriciotoranzo/layers-en-unity-f2bf89d6f39d. Layers in Unity.
+* https://docs-multiplayer.unity3d.com/mppm/current/about/. Use Multiplayer Play Mode to test multiplayer functionality within the Unity Editor. You can simulate up to four Players (the main Editor Player and three Virtual Players) simultaneously on the same development device while using the same source assets on disk.

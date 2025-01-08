@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Unity.Android.Gradle.Manifest;
 
 public class LearningPathController : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class LearningPathController : MonoBehaviour
 
     IEnumerator GetInActivityStudentParticipationsWithActivityAndPoints()
     {
-        if (MainManager.GetUser().role != "student")
+        if (MainManager.GetUser().role != "STUDENT")
         {
             throw new System.Exception("Error: Only students have a Learning path");
         }
@@ -67,14 +66,16 @@ public class LearningPathController : MonoBehaviour
                 data.activityName);
 
             Button tempButton = newButton.GetComponent<Button>();
-            tempButton.onClick.AddListener(() => ButtonClicked(data.activityType, data.activityName));
+            tempButton.onClick.AddListener(() => ButtonClicked(data.activityType, data.activityName, data.activityId));
         }
     }
     // From: https://discussions.unity.com/t/how-to-create-ui-button-dynamically/621275/5
 
-    private void ButtonClicked(string activityType, string activityName)
+    // TODO - (DRY - Don't Repeat Yourselfe) ButtonClicked should NOT be repeated in: InActivityTeacherParticipationController, AllActivitiesController and LearningPathController. 
+    private void ButtonClicked(string activityType, string activityName, int activityId)
     {
-        
+        CurrentActivityManager.SetCurrentActivityId(activityId);
+
         switch (activityType)
         {
             case "TRAINING_LAB":
