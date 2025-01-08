@@ -102,12 +102,7 @@ Assets/
 
 Now you can open the frontend project with Unity.
 
-To run the unity project first open additively the following scenes:
-* LoginScene
-* MenuScene
-* MainScene
-* RoomModuleBScene
-
+To run the unity project first open the scene LoginScene.
 
 Enjoy!
 
@@ -115,7 +110,7 @@ Enjoy!
 
 You need a local environment with docker.
 
-In Ubuntu 24.04 LTS Desktop in a fresh installation it worked for me with the following instructions: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+In Ubuntu 22.04 LTS Desktop in a fresh installation it worked for me with the following instructions: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
 Once you have your docker environment ready clone the project:
 
