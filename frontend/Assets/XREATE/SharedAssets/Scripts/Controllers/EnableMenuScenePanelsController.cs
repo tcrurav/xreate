@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using Unity.Android.Gradle.Manifest;
 
 public class EnableMenuScenePanelsController : MonoBehaviour
 {
@@ -11,7 +6,7 @@ public class EnableMenuScenePanelsController : MonoBehaviour
     {
         EnableAccordingToRole();
     }
-    private void EnableAccordingToRole()
+    public void EnableAccordingToRole()
     {
         GameObject learningPathGameObject = FindObject.FindInsideParentByName(gameObject, "LearningPath Spatial Panel UI");
         GameObject InActivityTeacherParticipationsGameObject = FindObject.FindInsideParentByName(gameObject, "InActivityTeacherParticipations Spatial Panel UI");
@@ -19,17 +14,17 @@ public class EnableMenuScenePanelsController : MonoBehaviour
 
         switch (MainManager.GetUser().role)
         {
-            case "student":
+            case "STUDENT":
                 learningPathGameObject.SetActive(true);
                 InActivityTeacherParticipationsGameObject.SetActive(false);
                 AllActivitiesGameObject.SetActive(false);
                 break;
-            case "teacher":
+            case "TEACHER":
                 learningPathGameObject.SetActive(false);
                 InActivityTeacherParticipationsGameObject.SetActive(true);
                 AllActivitiesGameObject.SetActive(false);
                 break;
-            case "guest":
+            case "GUEST":
                 learningPathGameObject.SetActive(false);
                 InActivityTeacherParticipationsGameObject.SetActive(false);
                 AllActivitiesGameObject.SetActive(true);

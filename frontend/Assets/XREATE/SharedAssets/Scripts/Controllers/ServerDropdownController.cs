@@ -9,5 +9,7 @@ public class ServerDropdownController : MonoBehaviour
     public void ChangeURL()
     {
         MainManager.SetURL(serverDropdown.value);
+
+        MainNetworkManager.GetAllPlayers();
     }
 }
