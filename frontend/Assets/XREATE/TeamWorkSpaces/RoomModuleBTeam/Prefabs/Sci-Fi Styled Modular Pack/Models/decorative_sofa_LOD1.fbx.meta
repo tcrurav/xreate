@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 65173919170defb40bc0157bcbf757f0
+guid: 0830a5eb8b946da4cb0530f0ae2b350e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -97,10 +97,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_sofa_LOD1.fbx
-  uploadId: 276156

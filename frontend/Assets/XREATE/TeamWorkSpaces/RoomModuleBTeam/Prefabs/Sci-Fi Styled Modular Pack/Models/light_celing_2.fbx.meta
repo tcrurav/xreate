@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b8645cde48e62db41a99dad390ab5661
+guid: adab679c646e38d4588fe70c6ce50025
 timeCreated: 1486827106
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/light_celing_2.fbx
-  uploadId: 276156

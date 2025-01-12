@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b3b88c627c794d0468531a164197c8a7
+guid: 57d95d712ef2df34bba5b1053e3cba31
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -76,10 +76,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/frame_door_3.fbx
-  uploadId: 276156

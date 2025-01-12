@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7364b60afe0462741bed3c6b259737d5
+guid: 026929794556d5c45882bb3f6f04769e
 timeCreated: 1487074643
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/sing_small.fbx
-  uploadId: 276156

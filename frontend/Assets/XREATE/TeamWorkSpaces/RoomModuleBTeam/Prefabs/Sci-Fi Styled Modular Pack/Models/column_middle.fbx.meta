@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c1e1578589b5f84c82931f52c63f41d
+guid: c1e173e4074480247ab4dee4fb626a9f
 timeCreated: 1486827101
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/column_middle.fbx
-  uploadId: 276156

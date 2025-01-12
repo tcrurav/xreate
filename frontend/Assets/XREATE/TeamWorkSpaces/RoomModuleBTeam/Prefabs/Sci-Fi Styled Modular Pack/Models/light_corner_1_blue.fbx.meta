@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a819203f13c18b4882fc327623cf504
+guid: aa78fdfe071f6dc4faa0b319aef3463e
 timeCreated: 1486827769
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/light_corner_1_blue.fbx
-  uploadId: 276156

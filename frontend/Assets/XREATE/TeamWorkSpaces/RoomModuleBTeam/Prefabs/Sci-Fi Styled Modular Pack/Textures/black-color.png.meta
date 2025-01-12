@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d35a86981ce0835469c36ee0215785b3
+guid: 888d0ee0b3e0ca34f8afced1a26e0927
 timeCreated: 1486754754
 licenseType: Store
 TextureImporter:
@@ -55,10 +55,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/black-color.png
-  uploadId: 276156

@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 51d587eafcd13384bafd060c5bc7cb82
-timeCreated: 1486827101
-licenseType: Store
+guid: f496d4b0c8462f848823a37750b56c44
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Materials/projector_warning.mat
-  uploadId: 276156

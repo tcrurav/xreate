@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 100fc9940c400c240b007aa43d269cc3
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/keyboard.png
-  uploadId: 276156
+guid: 33c240ddbf089484eac963d759c1ad98
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

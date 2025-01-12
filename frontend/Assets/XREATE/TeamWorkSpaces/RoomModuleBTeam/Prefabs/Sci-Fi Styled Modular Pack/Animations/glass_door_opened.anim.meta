@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 131b4130ff95e2741a8a06898318756f
-timeCreated: 1486917311
-licenseType: Store
+guid: 9a75b8d5c5b5d3b428bdda8cab0d37b8
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Animations/glass_door_opened.anim
-  uploadId: 276156

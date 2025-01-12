@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 459b4de4eb731864c8a8bec5b721f907
+guid: ab80b8cfa76419c4f852112e7b47897a
 timeCreated: 1486799199
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_with_side.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2127a279fcaa46847ac918e39e53bad8
+guid: 5e47bf21ff7bf3d429b791c9c6aef1ce
 timeCreated: 1486799198
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/computer_station.fbx
-  uploadId: 276156

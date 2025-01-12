@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e022ff0c9dac29d48a070accea073e45
+guid: 4cb9eb61c4043934ea2e77eb21f40d81
 timeCreated: 1486799203
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_table_glass.fbx
-  uploadId: 276156

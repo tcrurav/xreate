@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 888614259d2d71142a4ba0b538e54caf
+guid: 1679df9e285e14a458d85be6b1931cb3
 timeCreated: 1487065077
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Machines/Capacitor.prefab
-  uploadId: 276156

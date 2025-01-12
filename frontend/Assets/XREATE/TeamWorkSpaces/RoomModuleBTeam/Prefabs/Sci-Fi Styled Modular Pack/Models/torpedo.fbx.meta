@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dd04980a43cc8ed45a5f9ff0f231bdee
+guid: af070b3a6884c794baee80bdc419e89d
 timeCreated: 1487074644
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/torpedo.fbx
-  uploadId: 276156

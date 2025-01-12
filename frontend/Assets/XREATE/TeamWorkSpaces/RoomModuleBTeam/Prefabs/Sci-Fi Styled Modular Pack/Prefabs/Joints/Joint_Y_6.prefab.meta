@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: a7e2f529ec077f5449e53f9dd39452fe
+guid: 63b24a062d3c91f40a203066fec4f106
 timeCreated: 1487315674
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Joints/Joint_Y_6.prefab
-  uploadId: 276156

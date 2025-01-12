@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b94be10dedfa9c246b5c439440e580f5
+guid: 9bd6c111799ac5b45a840df96ff74c09
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -107,10 +107,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/projector_LOD1.fbx
-  uploadId: 276156

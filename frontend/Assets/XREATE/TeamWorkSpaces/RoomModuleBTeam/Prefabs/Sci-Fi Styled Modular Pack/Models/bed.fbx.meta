@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9f483ba0e96f1414a84ea4b0fbc13414
+guid: 7a44ea9ddfd694a40ae0984672258692
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/bed.fbx
-  uploadId: 276156

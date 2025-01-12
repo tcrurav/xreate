@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 10c805e783fd2d64f84bdbb6fae5d25f
+guid: c1b0b49516bbde54fb1cca906e969e7f
 timeCreated: 1487074642
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/wall_big_no_side_full_LOD0.fbx
-  uploadId: 276156

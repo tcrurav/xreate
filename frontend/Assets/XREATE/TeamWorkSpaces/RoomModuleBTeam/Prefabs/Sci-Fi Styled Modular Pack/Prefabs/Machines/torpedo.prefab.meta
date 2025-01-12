@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 26f7afb3718727245a184c5904ea5cfa
+guid: 40d18aca12c56524aa5f603092080916
 timeCreated: 1487075353
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Machines/torpedo.prefab
-  uploadId: 276156

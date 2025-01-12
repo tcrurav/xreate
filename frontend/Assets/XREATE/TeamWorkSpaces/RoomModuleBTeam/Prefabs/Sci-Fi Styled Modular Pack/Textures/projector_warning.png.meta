@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2e2333c960274e741a36e9f3cc903039
+guid: 1758b212f3c95e241aef45ccba4a7fce
 timeCreated: 1486827469
 licenseType: Store
 TextureImporter:
@@ -55,10 +55,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/projector_warning.png
-  uploadId: 276156

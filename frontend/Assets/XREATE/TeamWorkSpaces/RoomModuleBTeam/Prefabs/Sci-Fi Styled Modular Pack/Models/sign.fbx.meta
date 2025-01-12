@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0408209e84f13ea468a6199efe18a92e
+guid: 8633fe22fad57754484130574c376d3a
 timeCreated: 1486827094
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/sign.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad8c3b0ce9b6cce45ae865d0312ddc0f
+guid: 82e52655b47c9514faf01c50c86111ce
 timeCreated: 1487074644
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/rotor.fbx
-  uploadId: 276156

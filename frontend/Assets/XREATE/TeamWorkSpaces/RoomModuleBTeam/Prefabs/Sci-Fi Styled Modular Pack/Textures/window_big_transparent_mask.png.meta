@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: c4d2256bf54ca0948bc30a5cc74fb153
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/window_big_transparent_mask.png
-  uploadId: 276156
+guid: 4d30b00fd82f4e74498d31af4cf0f8ca
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

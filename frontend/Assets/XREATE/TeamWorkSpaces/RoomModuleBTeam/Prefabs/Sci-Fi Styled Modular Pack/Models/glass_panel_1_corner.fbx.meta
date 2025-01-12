@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87697a119091a8042b8edd7358266a70
+guid: b5d7432919cda564e95f46e71d02a4d9
 timeCreated: 1486799201
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/glass_panel_1_corner.fbx
-  uploadId: 276156

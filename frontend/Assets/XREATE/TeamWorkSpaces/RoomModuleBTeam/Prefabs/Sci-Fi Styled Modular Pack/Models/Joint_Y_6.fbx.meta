@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 904be4b57549ec146a70ee2ea74168f0
+guid: 023c544ed04a38843ade26601ea87a80
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/Joint_Y_6.fbx
-  uploadId: 276156

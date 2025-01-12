@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 43373d8b4f572cf468859751b9dcbbfd
+guid: 79fcfae7f6ff54644832e78e92f2db12
 timeCreated: 1486801849
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Lights/light_corner_1.prefab
-  uploadId: 276156

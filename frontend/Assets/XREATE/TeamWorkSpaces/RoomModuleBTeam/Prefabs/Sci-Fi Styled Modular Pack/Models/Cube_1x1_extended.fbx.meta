@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7f4ff057efa234740842b9442ebc75e6
+guid: 9e36e460799987249b94045bd662e344
 timeCreated: 1487074643
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/Cube_1x1_extended.fbx
-  uploadId: 276156

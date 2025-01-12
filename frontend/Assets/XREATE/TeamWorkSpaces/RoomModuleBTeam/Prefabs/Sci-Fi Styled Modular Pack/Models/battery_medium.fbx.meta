@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c1c48e1341ea35d4fa172cdb915ed140
+guid: 73f3cf30fd47c7249b493f64ad5bfbd9
 timeCreated: 1486827107
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/battery_medium.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 885fc31b4eec82746bf3f7ee9b1a65b3
+guid: 9d289a04a11d615449caa5d65b840806
 timeCreated: 1486799201
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/shelf.fbx
-  uploadId: 276156

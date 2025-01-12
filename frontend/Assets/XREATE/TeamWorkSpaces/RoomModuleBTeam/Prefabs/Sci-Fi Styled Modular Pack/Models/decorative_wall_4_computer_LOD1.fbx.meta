@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c23fae69e42c1a844878231b997a2c88
+guid: ac264ec2b4e79ef4fbd55a6744cb41d6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -112,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_wall_4_computer_LOD1.fbx
-  uploadId: 276156

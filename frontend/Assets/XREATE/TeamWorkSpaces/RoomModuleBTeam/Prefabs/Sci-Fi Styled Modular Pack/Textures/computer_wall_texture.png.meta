@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 7b98260aedcf3b0438023520105fd422
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/computer_wall_texture.png
-  uploadId: 276156
+guid: 027d5acc699f3c94d837c7fca796bf66
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

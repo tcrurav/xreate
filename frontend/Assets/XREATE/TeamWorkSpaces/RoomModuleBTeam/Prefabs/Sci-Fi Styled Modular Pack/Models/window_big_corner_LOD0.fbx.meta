@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c86d27bffd46554aae1d655796dff65
+guid: 7182fa0e9e27f234ba24da545b4a018e
 timeCreated: 1486977782
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_corner_LOD0.fbx
-  uploadId: 276156

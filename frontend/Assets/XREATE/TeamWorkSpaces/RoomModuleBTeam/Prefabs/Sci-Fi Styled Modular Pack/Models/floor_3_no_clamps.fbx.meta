@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 822e513722ef97840bad7ea57952a676
+guid: 71c9def9e27392548899c137b015727f
 timeCreated: 1486799201
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/floor_3_no_clamps.fbx
-  uploadId: 276156
