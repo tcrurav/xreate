@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d62ba206d6f3125429f5213d81c32eb0
+guid: adecc6bd178787d4da2b156fc4acadf9
 timeCreated: 1487074644
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/Cylinder_16_extended.fbx
-  uploadId: 276156

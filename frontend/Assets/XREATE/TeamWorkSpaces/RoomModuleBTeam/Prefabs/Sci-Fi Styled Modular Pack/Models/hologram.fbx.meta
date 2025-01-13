@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56b5beddc07908b44b129fcaeb971bfb
+guid: de87a6b5e2b6003419d3b39beda10912
 timeCreated: 1486827841
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/hologram.fbx
-  uploadId: 276156

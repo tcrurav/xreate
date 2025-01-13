@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 67da585b6785b484dabda72df240d375
+guid: ca1510a3e1bb6f049babe674eb5b2132
 timeCreated: 1487075154
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Stairs/stairs_small.prefab
-  uploadId: 276156

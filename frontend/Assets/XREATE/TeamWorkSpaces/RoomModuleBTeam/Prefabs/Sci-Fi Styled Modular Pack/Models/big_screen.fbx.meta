@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 752b74f5002e02f49927d7006a3e51e8
+guid: a6c9c89929307df45aba721dcb153211
 timeCreated: 1487074643
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/big_screen.fbx
-  uploadId: 276156

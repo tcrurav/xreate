@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 80b93341bf275fe408b1bd56cb261ce8
+guid: 70fe13dfef6d92c4b9dbd593a87c2e00
 timeCreated: 1486799201
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/floor_2.fbx
-  uploadId: 276156

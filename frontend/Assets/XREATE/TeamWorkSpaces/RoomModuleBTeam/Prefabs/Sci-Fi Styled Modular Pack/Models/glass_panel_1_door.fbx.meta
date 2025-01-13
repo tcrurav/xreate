@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 37fb91b59d4d2ba4da8fbcf15d055ebe
+guid: f69f10c34a3a3ea42b38ee44069e99d4
 timeCreated: 1486799199
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/glass_panel_1_door.fbx
-  uploadId: 276156

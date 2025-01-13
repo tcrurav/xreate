@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 574e37233b065eb4faed1290880c8ebf
+guid: eb58cf99be96977498299f94939c85e9
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/bunk_bed.fbx
-  uploadId: 276156

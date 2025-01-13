@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: c944460b7f1a8ef47b05ebec140bdd17
+guid: 13fc7510a32b5ad4a9c3867e4c611b87
 timeCreated: 1486799929
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Machines/storage_container_big.prefab
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 343596706f539db458d30dcc935523b4
+guid: 46f79094098f6d04a9f60634100682ad
 timeCreated: 1486756249
 licenseType: Store
 TextureImporter:
@@ -55,10 +55,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/window_big_emission_mask.png
-  uploadId: 276156

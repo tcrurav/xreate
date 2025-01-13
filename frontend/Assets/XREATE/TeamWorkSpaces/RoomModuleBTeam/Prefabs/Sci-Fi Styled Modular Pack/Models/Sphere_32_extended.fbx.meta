@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b77b89f9c619298419251cf7f172fcb3
+guid: a24f89ecbacf8ad419a8cb11df7b78a9
 timeCreated: 1487074644
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/Sphere_32_extended.fbx
-  uploadId: 276156

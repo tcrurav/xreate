@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 298751e2d47c6fc4dabd5e865463c5f5
+guid: aa8f5dfb4464d1047a209ca479c2aa76
 timeCreated: 1486896744
 licenseType: Store
 TextureImporter:
@@ -55,10 +55,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/hologram texture.png
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf9005bf881f9fc45af77110d87fecc6
+guid: 005ded35e0d31594ab607e09894e949a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -107,10 +107,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/floor_2_L_LOD1.fbx
-  uploadId: 276156

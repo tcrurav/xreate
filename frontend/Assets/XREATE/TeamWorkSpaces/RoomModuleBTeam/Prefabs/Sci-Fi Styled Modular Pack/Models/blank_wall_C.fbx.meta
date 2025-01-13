@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f977334a78ed00469d9a6558eecaa3f
+guid: 41c7be54cfe9f92468bfea0966646a8e
 timeCreated: 1487314910
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/blank_wall_C.fbx
-  uploadId: 276156

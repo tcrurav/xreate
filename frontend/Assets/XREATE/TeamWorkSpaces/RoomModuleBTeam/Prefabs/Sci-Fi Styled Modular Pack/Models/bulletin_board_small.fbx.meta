@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1a4d745aad5a4c14ea26a3818a4b4adf
+guid: 556271614ac06f843bbdcca0d8b41db3
 timeCreated: 1487314910
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/bulletin_board_small.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ee525e307c7e23c449adda79b8029a44
+guid: 2ffb449a41cb4c24b81f5becc1a2dc73
 timeCreated: 1486827109
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_plant_small.fbx
-  uploadId: 276156

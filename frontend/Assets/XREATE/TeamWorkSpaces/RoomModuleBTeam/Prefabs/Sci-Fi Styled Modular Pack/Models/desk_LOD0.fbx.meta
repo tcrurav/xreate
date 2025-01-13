@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 331afd3af774c7448aaf36a7d08c8b16
+guid: d5fa4b1e22f971c4a9b42b4120c07efd
 timeCreated: 1486897659
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/desk_LOD0.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 635460dae64fc0a48b0740cfb2e4f6d9
+guid: 87d7bb853adec6c48a0c367beef5e5b4
 timeCreated: 1486827770
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/light_wall_3_blue.fbx
-  uploadId: 276156

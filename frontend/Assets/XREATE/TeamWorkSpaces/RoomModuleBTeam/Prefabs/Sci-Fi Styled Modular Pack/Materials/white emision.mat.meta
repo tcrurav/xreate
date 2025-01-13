@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 6b6dfd77776c54a4781ec8cab4d87860
-timeCreated: 1486747800
-licenseType: Store
+guid: af1c1d0a386687e4395e9e323db74f1f
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Materials/white emision.mat
-  uploadId: 276156

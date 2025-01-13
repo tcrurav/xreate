@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 05e2bef7f8188c943aea2993fc97504b
+guid: 47634a7b684c3344bbcd581e301b2d22
 timeCreated: 1486827095
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/table_2.fbx
-  uploadId: 276156

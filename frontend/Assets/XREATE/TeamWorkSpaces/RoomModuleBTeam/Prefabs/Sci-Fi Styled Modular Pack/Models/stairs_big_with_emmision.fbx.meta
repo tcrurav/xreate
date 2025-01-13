@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ac0283f686985724b9b21574c3968db1
+guid: 6d44b9a92700c1d4a8ea1bf03cf38688
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/stairs_big_with_emmision.fbx
-  uploadId: 276156

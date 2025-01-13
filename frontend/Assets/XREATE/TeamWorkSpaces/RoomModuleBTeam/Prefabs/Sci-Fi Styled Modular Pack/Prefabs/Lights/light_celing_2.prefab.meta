@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: e15828603e27c5e42b39860e4f55da70
+guid: 51cde33bf0e353e4a873660236217d68
 timeCreated: 1486828852
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Lights/light_celing_2.prefab
-  uploadId: 276156

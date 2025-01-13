@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1b0399fc6de3a0d44bbdc4362aa0e992
+guid: 926d2333cc6683e4a9f673d624a31afe
 timeCreated: 1486763079
 licenseType: Store
 TextureImporter:
@@ -55,10 +55,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/computer_wall_metalic.png
-  uploadId: 276156

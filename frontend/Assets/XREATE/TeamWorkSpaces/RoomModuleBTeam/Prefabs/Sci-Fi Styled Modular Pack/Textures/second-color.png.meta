@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 35c79cc0b2e9d394faa8922409ffb64a
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/second-color.png
-  uploadId: 276156
+guid: fb1dedd3e8d216e41969199852bce923
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

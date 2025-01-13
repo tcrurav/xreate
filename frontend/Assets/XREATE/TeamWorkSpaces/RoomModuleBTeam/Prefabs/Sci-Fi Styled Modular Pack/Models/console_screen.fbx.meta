@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ca85bdcc81d8d24ba87f0f1135cf8fe
+guid: d51440132d060af4eafb7d6713c4cb8d
 timeCreated: 1486827097
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/console_screen.fbx
-  uploadId: 276156

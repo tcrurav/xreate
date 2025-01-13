@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 04ced07fc5a1dbb45906c40768747c8a
+guid: 6b3b841fdafac524baaa960ad184563f
 timeCreated: 1487315615
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Decorative elements/cabinet_L.prefab
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d6354010388f6a94281a09f8fe9c6790
+guid: a9fc348a03fd5ec45ad9b9b0e84d7ef2
 timeCreated: 1486799203
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/storage_container_small.fbx
-  uploadId: 276156

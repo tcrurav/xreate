@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b34895a5cbeae0246af9c017f7df4b1b
+guid: 2000503a8a04e304fabf1eb93936a090
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -76,10 +76,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/door_1_right.fbx
-  uploadId: 276156

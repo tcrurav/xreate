@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d25667413966ff9489e781bb0a679320
+guid: 0d6b41dc02f78614e8726b2504541067
 timeCreated: 1487157409
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/hydroponic.fbx
-  uploadId: 276156

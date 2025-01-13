@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2b266aa81ca5c3c4fa93f8e7f25793d0
+guid: 9d373a2db2ca8634fa04a52dd81c14d7
 timeCreated: 1486799199
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/desk_no_computer.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3112b0e09a01a2f4abd3ff0277d70a78
+guid: 5d375b734ca9ee84c874663b3e268a25
 timeCreated: 1486827097
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_plant_desk.fbx
-  uploadId: 276156

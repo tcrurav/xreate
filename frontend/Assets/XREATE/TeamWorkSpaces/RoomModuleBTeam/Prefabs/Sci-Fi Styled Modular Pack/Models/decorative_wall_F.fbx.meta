@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8561b8e487bb76348be22e3801a11dc1
+guid: 76cecd2442770c5438a5189081246e63
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_wall_F.fbx
-  uploadId: 276156

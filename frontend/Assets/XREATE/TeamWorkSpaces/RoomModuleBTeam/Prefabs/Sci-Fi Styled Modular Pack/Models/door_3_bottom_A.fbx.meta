@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 433547009282eae47a18a43ae4f16587
+guid: 1505549cd156cc74baa5340e521c632d
 timeCreated: 1486799199
 licenseType: Store
 ModelImporter:
@@ -76,10 +76,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/door_3_bottom_A.fbx
-  uploadId: 276156

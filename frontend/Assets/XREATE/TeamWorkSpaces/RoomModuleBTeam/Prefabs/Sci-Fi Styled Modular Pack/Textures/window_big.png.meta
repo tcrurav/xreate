@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 52f89a41c5c9f1b4280ba2133f0bf7b0
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/window_big.png
-  uploadId: 276156
+guid: 21595ddee17f61547ad55a080c59dcf4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

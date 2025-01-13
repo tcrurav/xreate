@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 64b3f36e835346747865afbf6cf62acf
+guid: 9e7befc88af9e9d4489d8e38f0674e81
 timeCreated: 1487062862
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Corridors/Corridor_I.prefab
-  uploadId: 276156

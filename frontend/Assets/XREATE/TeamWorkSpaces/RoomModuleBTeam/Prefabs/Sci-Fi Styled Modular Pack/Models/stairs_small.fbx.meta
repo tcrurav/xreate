@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd0a17be9280439418203fe96116cee6
+guid: 3503314de0fc00245b2ced5064fd2787
 timeCreated: 1487074644
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/stairs_small.fbx
-  uploadId: 276156

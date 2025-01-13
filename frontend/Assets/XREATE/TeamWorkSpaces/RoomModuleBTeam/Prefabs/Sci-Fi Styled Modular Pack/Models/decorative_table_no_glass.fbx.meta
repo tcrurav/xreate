@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8ad22dca44fd0454983dd1151d42180b
+guid: 548b235204e1680459c41e4661badd0e
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_table_no_glass.fbx
-  uploadId: 276156
