@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9eee1c765d8a58342beec1835ce7ce64
+guid: 5fd01ca153a8a384fad0e3b0c8c885dd
 timeCreated: 1486827105
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/column_kneel.fbx
-  uploadId: 276156

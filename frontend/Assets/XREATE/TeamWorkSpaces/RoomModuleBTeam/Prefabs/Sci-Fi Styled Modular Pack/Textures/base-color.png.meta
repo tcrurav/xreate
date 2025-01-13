@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dfcd4dcb2145c6d4f9da3e7654d22d9e
+guid: 6d4dffd3071b62c4c81ac9531635ed2d
 timeCreated: 1486719712
 licenseType: Store
 TextureImporter:
@@ -55,10 +55,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/base-color.png
-  uploadId: 276156

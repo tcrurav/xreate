@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a0d8f320763fe4945b863868635a92f5
+guid: 76cb3dae8ce9d654b92147128f7a1cf6
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/desk.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9a1b5ea44f8fd5948bb54f69cdbeb568
+guid: a2d9f2288d49c344bb66716c37c0493c
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -76,10 +76,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/door_3_top_B.fbx
-  uploadId: 276156

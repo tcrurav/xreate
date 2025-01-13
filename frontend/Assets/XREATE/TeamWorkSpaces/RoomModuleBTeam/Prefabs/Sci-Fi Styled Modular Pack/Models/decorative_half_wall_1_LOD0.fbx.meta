@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 126da1070311a154885091b4c21323c5
+guid: 496e79734d845214488afc9de81ce8cf
 timeCreated: 1486897658
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_half_wall_1_LOD0.fbx
-  uploadId: 276156

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ce77e936a9505b142a210040b9ab07e0
+guid: 5cd8840cc679c09458cd93c436ce43bd
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/cabinet_L_cutted.fbx
-  uploadId: 276156

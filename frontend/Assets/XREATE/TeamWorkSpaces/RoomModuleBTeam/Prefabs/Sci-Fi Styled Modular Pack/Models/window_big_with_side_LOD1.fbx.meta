@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7dbc85eb39ce2b940b22b0063918e3ac
+guid: f770291dd2048e34a89ddffa0bae53ba
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -112,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_with_side_LOD1.fbx
-  uploadId: 276156

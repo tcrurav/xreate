@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 96bdbf948202cef43b00e20aa0e32a51
+guid: c9bfb2d67da466d4d901128ae52db855
 timeCreated: 1486799202
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_chair.fbx
-  uploadId: 276156

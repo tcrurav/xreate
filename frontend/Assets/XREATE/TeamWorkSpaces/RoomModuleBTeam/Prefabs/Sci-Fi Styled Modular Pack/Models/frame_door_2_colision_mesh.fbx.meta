@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4e1b01f9c50ee5343afe22990d2feba9
+guid: 1a3e6910d8d84184dbd0c1b72ee0071a
 timeCreated: 1486799200
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/frame_door_2_colision_mesh.fbx
-  uploadId: 276156

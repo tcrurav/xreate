@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 144d5c35043c7f04193d57dc3c38bbcb
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Textures/nature_leaves.png
-  uploadId: 276156
+guid: a3f375604946e3c4fa4201d237abb387
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

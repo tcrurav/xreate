@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 4256c7f593c13f84bbd6e74b481a6ec4
-timeCreated: 1487157409
-licenseType: Store
+guid: b7f22f247c688f84da5e142968b461dc
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Materials/nature_bush.mat
-  uploadId: 276156

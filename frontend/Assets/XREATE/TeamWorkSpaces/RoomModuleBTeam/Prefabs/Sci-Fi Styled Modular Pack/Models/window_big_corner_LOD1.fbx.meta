@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9d05b15ebc07ee144a18b52300023b0b
+guid: 21661284d39d22d46a220fc5e65e680e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -112,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_corner_LOD1.fbx
-  uploadId: 276156

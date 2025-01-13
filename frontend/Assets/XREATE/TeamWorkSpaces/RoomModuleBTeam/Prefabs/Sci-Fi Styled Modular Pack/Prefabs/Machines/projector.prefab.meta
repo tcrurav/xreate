@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 3517d6179b17d7d41b2ab3881cb2cd67
+guid: 1b3acf69d53aa2e4d95f46cc662afe77
 timeCreated: 1486828440
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Machines/projector.prefab
-  uploadId: 276156

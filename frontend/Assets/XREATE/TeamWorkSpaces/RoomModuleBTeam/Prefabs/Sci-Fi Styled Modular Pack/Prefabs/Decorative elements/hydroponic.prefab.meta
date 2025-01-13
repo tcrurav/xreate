@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 1759eacdee08e12408d757d50755a6d0
+guid: 13f8fd1e47527334a8379857ed768ef7
 timeCreated: 1487159016
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Decorative elements/hydroponic.prefab
-  uploadId: 276156

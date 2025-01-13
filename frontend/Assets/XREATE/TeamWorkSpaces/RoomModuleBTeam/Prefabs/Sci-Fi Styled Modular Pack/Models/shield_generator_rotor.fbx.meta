@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d87e6b42fd353414cb31b1615da9d5d4
+guid: f7f81b2bb5bd0434eac5b27aa9993663
 timeCreated: 1486799203
 licenseType: Store
 ModelImporter:
@@ -76,10 +76,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/shield_generator_rotor.fbx
-  uploadId: 276156

@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 1cf3cfed14637cd42a0ad3f801ebdb71
-timeCreated: 1487316134
-licenseType: Store
+guid: 3bf5901e677c1ab4ba7098662c04b841
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/Materials/base color.mat
-  uploadId: 276156

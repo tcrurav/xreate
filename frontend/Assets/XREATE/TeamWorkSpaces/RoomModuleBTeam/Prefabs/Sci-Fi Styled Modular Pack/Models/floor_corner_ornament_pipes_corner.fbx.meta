@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b22ce922b3b4aae46bfa2eeeea927f6d
+guid: 4f450e2b347a8a04690bd01671db4e24
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/floor_corner_ornament_pipes_corner.fbx
-  uploadId: 276156

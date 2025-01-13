@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 90f9643ad123a084381069ff86695c12
+guid: a72d385bf52781147ab9c4c8892a2692
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/cabinet_L.fbx
-  uploadId: 276156

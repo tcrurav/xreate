@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6a5e0bb41ac5234fb1d67dd58baab40
+guid: bd6b3c136cc12534e935ad6c9838cc3c
 timeCreated: 1487074643
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/console_celing.fbx
-  uploadId: 276156

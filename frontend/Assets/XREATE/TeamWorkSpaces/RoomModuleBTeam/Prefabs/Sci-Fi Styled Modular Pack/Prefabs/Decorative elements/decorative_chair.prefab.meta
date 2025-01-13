@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: ce9f6338cd38cc242ae7ba54eb5ca686
+guid: 1d3785100791b09409994fda7024211f
 timeCreated: 1486799885
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Decorative elements/decorative_chair.prefab
-  uploadId: 276156

@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: e521c664fa8f8c845a0f2f463f0d05b2
+guid: 48f8662369b11c34d953b8a63c8c4f5d
 timeCreated: 1486799415
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Walls/Half walls/decorative_half_wall_5.prefab
-  uploadId: 276156

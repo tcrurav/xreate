@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dd574b0211f8115498c621597dbe7485
+guid: 69c3cb392c82be545b5d4329f5f3f520
 timeCreated: 1486799203
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/decorative_pilow.fbx
-  uploadId: 276156

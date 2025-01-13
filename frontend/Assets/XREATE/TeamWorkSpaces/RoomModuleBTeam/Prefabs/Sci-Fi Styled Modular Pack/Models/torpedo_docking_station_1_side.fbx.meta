@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e051df189fc7fe4b9ebfaa0a108f41a
+guid: 69134e93aab5dfa41910250c76663f1c
 timeCreated: 1487074643
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/torpedo_docking_station_1_side.fbx
-  uploadId: 276156

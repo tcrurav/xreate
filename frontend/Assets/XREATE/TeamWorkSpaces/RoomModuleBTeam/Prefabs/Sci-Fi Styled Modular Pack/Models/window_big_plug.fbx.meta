@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f3bf6b5a90134a44c9aa28b43b484d59
+guid: 3ad8b7a2ffa3caa4295e09cf2a520e68
 timeCreated: 1486827109
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_plug.fbx
-  uploadId: 276156

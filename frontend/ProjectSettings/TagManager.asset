@@ -20,6 +20,9 @@ TagManager:
   - RoomModuleBSceneContainer
   - XreatePortRoomModuleB
   - XREATE_Player_Appearance_UI_Name
+  - XreatePortRoomModuleA
+  - RoomModuleASceneContainerParent
+  - RoomModuleASceneContainer
   layers:
   - Default
   - TransparentFX

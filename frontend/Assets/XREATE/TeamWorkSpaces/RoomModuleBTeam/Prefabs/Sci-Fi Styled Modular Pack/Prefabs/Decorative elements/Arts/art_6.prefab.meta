@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 52c2612af80526741a33c2092448618c
+guid: 280e4ae66636f3c4585d12ed6507ad8f
 timeCreated: 1486827159
 licenseType: Store
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Prefabs/Decorative elements/Arts/art_6.prefab
-  uploadId: 276156

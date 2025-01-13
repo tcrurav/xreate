@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f1f8b886020c45442804bfb2a3995b9e
+guid: 12eca67362a31cc438b6437952a95bd9
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -97,10 +97,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_blocker.fbx
-  uploadId: 276156

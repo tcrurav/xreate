@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b228052498f5e4047a1f0bce6249758f
+guid: 2b605952ef800294d881ab4a7b0737fa
 timeCreated: 1487314911
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/double_bed.fbx
-  uploadId: 276156

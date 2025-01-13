@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6e13b9f43374cc8499e762339fc31b45
+guid: 7c687c69d7ddd67469e1426ed1c857b6
 timeCreated: 1486827101
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/projector.fbx
-  uploadId: 276156

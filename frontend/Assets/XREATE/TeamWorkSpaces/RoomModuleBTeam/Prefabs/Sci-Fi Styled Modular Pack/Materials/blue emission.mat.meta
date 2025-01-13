@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 5476ae29e2e50194abce19e5cacce575
-timeCreated: 1486747801
-licenseType: Store
+guid: c33df29cc579e4747b9079d89132ea2a
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Materials/blue emission.mat
-  uploadId: 276156

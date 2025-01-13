@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7aea3c50060e0d446823b9a09fd0fb1b
+guid: 5e075896b6582c94c862a737194adc86
 timeCreated: 1486799201
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/stairs_small_corner_with_emmision.fbx
-  uploadId: 276156

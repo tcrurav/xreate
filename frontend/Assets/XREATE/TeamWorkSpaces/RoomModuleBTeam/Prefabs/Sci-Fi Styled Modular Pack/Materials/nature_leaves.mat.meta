@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: 5d84bcb5cc458944085f3169d277536d
-timeCreated: 1486719800
-licenseType: Store
+guid: 33e7855919a826e4ba7a8a0e620607d4
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Materials/nature_leaves.mat
-  uploadId: 276156

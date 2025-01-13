@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ed87d972e014b7438ab3fcd20cdf070
+guid: c4f0fc4103cfe334aabfdef8dc5b0aef
 timeCreated: 1487074643
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/vending_machine.fbx
-  uploadId: 276156

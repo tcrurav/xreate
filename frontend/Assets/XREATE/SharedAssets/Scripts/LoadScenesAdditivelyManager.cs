@@ -13,6 +13,7 @@ public class LoadScenesAdditivelyManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("RoomModuleAScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
     }
 

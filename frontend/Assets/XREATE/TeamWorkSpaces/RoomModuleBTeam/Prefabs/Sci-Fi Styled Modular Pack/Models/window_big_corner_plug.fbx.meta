@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: caed8062ac253ed45a27eed6a65cac17
+guid: 2515e28e4fdbc2440a1e9830148f842a
 timeCreated: 1486977782
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/window_big_corner_plug.fbx
-  uploadId: 276156

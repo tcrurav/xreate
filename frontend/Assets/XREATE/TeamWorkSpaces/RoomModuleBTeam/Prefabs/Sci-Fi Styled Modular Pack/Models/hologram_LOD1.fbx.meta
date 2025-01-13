@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 11769dcbd1ff2664f93a1c127f1c64e6
+guid: deb796713aea50347a9a077831c46a66
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -97,10 +97,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/hologram_LOD1.fbx
-  uploadId: 276156

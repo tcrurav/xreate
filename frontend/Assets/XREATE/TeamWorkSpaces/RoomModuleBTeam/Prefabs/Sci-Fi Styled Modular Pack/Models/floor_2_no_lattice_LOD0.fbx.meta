@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9036409ea7a8c974f80d52b06c8a4af8
+guid: df46f611b2a8d2945aafcaa952ea06ec
 timeCreated: 1486897663
 licenseType: Store
 ModelImporter:
@@ -74,10 +74,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 82913
-  packageName: Sci-Fi Styled Modular Pack
-  packageVersion: 1.1
-  assetPath: Assets/Sci-Fi Styled Modular Pack/Models/floor_2_no_lattice_LOD0.fbx
-  uploadId: 276156
