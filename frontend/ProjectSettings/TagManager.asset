@@ -23,6 +23,12 @@ TagManager:
   - XreatePortRoomModuleA
   - RoomModuleASceneContainerParent
   - RoomModuleASceneContainer
+  - TunnelConnectorCSceneContainerParent
+  - TunnelConnectorCSceneContainer
+  - XreatePortTunnelConnectorC
+  - TunnelConnectorFSceneContainerParent
+  - TunnelConnectorFSceneContainer
+  - XreatePortTunnelConnectorF
   layers:
   - Default
   - TransparentFX

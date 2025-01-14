@@ -15,6 +15,8 @@ public class LoadScenesAdditivelyManager : MonoBehaviour
         SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("RoomModuleAScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("TunnelConnectorCScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("TunnelConnectorFScene", LoadSceneMode.Additive);
     }
 
 }
