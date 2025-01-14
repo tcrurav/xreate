@@ -4,49 +4,52 @@ public class RoomChangeController : MonoBehaviour
 {
     public void ChangeToRoomModuleA()
     {
-        GameObject XreatePortMain = GameObject.FindGameObjectWithTag("XreatePortMain");
-        XreatePortMain.transform.position = new Vector3(7f, -5.0f, 17f);
-
-        GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
-        XreatePortRoomModuleB.transform.position = new Vector3(7f, -5.0f, 17f);
-
-        GameObject XreatePortRoomModuleA = GameObject.FindGameObjectWithTag("XreatePortRoomModuleA");
-        XreatePortRoomModuleA.transform.position = new Vector3(7f, -5.0f, 17f);
+        Vector3 target = new Vector3(-7.5f, 6.5f, -20f);
+        ChangePosition(target);
     }
 
-    public void ChangeToRoomModuleB()
+    public void ChangeToCorridorToRoomModuleA()
     {
-        GameObject XreatePortMain = GameObject.FindGameObjectWithTag("XreatePortMain");
-        XreatePortMain.transform.position = new Vector3(7.5f, -5.0f, -34f);
-
-        GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
-        XreatePortRoomModuleB.transform.position = new Vector3(7.5f, -5.0f, -34f);
-
-        GameObject XreatePortRoomModuleA = GameObject.FindGameObjectWithTag("XreatePortRoomModuleA");
-        XreatePortRoomModuleA.transform.position = new Vector3(7.5f, -5.0f, -34f);
+        Vector3 target = new Vector3(-7.5f, 6.75f, -13f);
+        ChangePosition(target);
     }
 
     public void ChangeToCorridorToRoomModuleB()
     {
-        GameObject XreatePortMain = GameObject.FindGameObjectWithTag("XreatePortMain");
-        XreatePortMain.transform.position = new Vector3(7.5f, -5.0f, -26f);
+        Vector3 target = new Vector3(-7.5f, 6.75f, 21f);
+        ChangePosition(target);
+    }
 
-        GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
-        XreatePortRoomModuleB.transform.position = new Vector3(7.5f, -5.0f, -26f);
-
-        GameObject XreatePortRoomModuleA = GameObject.FindGameObjectWithTag("XreatePortRoomModuleA");
-        XreatePortRoomModuleA.transform.position = new Vector3(7.5f, -5.0f, -26f);
+    public void ChangeToRoomModuleB()
+    {
+        Vector3 target = new Vector3(-7.5f, 6.5f, 32f);
+        ChangePosition(target);
     }
 
     public void ChangeToBuildingA()
     {
+        Vector3 target = new Vector3(-95.15f, 0f, 4.61f);
+        ChangePosition(target);
+    }
+
+    private void ChangePosition(Vector3 target)
+    {
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        Vector3 offset = camera.transform.position - target;
+
         GameObject XreatePortMain = GameObject.FindGameObjectWithTag("XreatePortMain");
-        XreatePortMain.transform.position = new Vector3(95.15f, 1.36f, -4.61f);
+        XreatePortMain.transform.position = offset;
 
         GameObject XreatePortRoomModuleB = GameObject.FindGameObjectWithTag("XreatePortRoomModuleB");
-        XreatePortRoomModuleB.transform.position = new Vector3(95.15f, 1.36f, -4.61f);
+        XreatePortRoomModuleB.transform.position = offset;
 
         GameObject XreatePortRoomModuleA = GameObject.FindGameObjectWithTag("XreatePortRoomModuleA");
-        XreatePortRoomModuleA.transform.position = new Vector3(95.15f, 1.36f, -4.61f);
+        XreatePortRoomModuleA.transform.position = offset;
+
+        GameObject XreatePortTunnelConnectorC = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorC");
+        XreatePortTunnelConnectorC.transform.position = offset;
+
+        GameObject XreatePortTunnelConnectorF = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorF");
+        XreatePortTunnelConnectorF.transform.position = offset;
     }
 }
