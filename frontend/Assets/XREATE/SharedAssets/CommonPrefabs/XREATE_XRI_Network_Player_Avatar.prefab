@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165756021160359066, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2597766703037335976, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -51,7 +56,7 @@ PrefabInstance:
     - target: {fileID: 3240456498834066550, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 121335645
+      value: 3916632293
       objectReference: {fileID: 0}
     - target: {fileID: 3240456498834066550, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
         type: 3}
@@ -78,10 +83,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4257447556974277867, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588994832583027022, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5358844088564582620, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
         type: 3}
       propertyPath: m_Name
-      value: XRI_Network_Player_Avatar Variant
+      value: XREATE_XRI_Network_Player_Avatar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5358844088564582620, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913818244571813981, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
         type: 3}
@@ -137,6 +157,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748949155317103359, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766417716020055518, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

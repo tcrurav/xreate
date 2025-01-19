@@ -66,14 +66,18 @@ public class CurrentActivityManager : MonoBehaviour
 
     public static int GetTeamIdByStudentId(int studentId)
     {
-        if(MainManager.GetUser().role != "STUDENT")
+        Debug.Log($"GetTeamIdByStudentId - studentId: {studentId}");
+        if (MainManager.GetUser().role != "STUDENT")
         {
             Debug.Log("Only students are in a team");
             return 0;
         }
 
+        if (Instance.inCurrentActivityStudentParticipations == null) return 0; // inCurrentActivityStudentParticipation is not updated yet.
+
         foreach (InActivityStudentParticipation i in Instance.inCurrentActivityStudentParticipations)
         {
+            Debug.Log($"i.studentId: {i.studentId}");
             if (i.studentId == studentId) return i.teamId;
         }
         return 0; // It should not happen
