@@ -11,10 +11,10 @@ public class ConnectedUsersController : MonoBehaviour
     //public GameObject loadingCanvas;
     //public GameObject errorCanvas;
 
-    void OnEnable()
-    {
-        Refresh();
-    }
+    //void OnEnable()
+    //{
+    //    Refresh();
+    //}
 
     public void Refresh()
     {

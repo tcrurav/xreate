@@ -144,10 +144,82 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('users', [{
-      id: 200,
-      username: "daniel",
+      id: 101,
+      username: "silverio",
       password: bcrypt.hashSync("4321"),
-      nickname: "daniel",
+      nickname: "silverio",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "spanish",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 102,
+      username: "jose",
+      password: bcrypt.hashSync("4321"),
+      nickname: "jose",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "spanish",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 200,
+      username: "kehl",
+      password: bcrypt.hashSync("4321"),
+      nickname: "kehl",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "swiss",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 201,
+      username: "Karin",
+      password: bcrypt.hashSync("4321"),
+      nickname: "Karin",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "swiss",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 202,
+      username: "brulisauer",
+      password: bcrypt.hashSync("4321"),
+      nickname: "brulisauer",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "swiss",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 203,
+      username: "ueli",
+      password: bcrypt.hashSync("4321"),
+      nickname: "ueli",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "swiss",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 204,
+      username: "bernana",
+      password: bcrypt.hashSync("4321"),
+      nickname: "bernana",
       code: "4321",
       role: "TEACHER",
       nationality: "swiss",
@@ -168,6 +240,18 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('users', [{
+      id: 301,
+      username: "paula",
+      password: bcrypt.hashSync("4321"),
+      nickname: "paula",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "finish",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
       id: 400,
       username: "paul",
       password: bcrypt.hashSync("4321"),
@@ -180,10 +264,70 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('users', [{
+      id: 401,
+      username: "vicky",
+      password: bcrypt.hashSync("4321"),
+      nickname: "vicky",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "english",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 402,
+      username: "murray",
+      password: bcrypt.hashSync("4321"),
+      nickname: "murray",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "english",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
       id: 500,
       username: "lotte",
       password: bcrypt.hashSync("4321"),
       nickname: "lotte",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "dutch",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 501,
+      username: "frank",
+      password: bcrypt.hashSync("4321"),
+      nickname: "frank",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "dutch",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 502,
+      username: "meike",
+      password: bcrypt.hashSync("4321"),
+      nickname: "meike",
+      code: "4321",
+      role: "TEACHER",
+      nationality: "dutch",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('users', [{
+      id: 503,
+      username: "arno",
+      password: bcrypt.hashSync("4321"),
+      nickname: "arno",
       code: "4321",
       role: "TEACHER",
       nationality: "dutch",
