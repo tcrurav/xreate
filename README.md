@@ -4,12 +4,17 @@
 
 This project is a first draft for a training lab in the XREATE project.
 
-At this moment 
+At this moment: 
   - Backend is working.
   - Unity frontend has right now:
-      * a working login
-      * after a student logs in he/she can see his/her learning path.
-      * students can enter the digital security training lab and visit room B.
+      * A working login.
+      * Once logged in a student can see his/her learning path.
+      * Once logged in a teacher can see the activities he/she is involved in.
+      * Once logged in a guest can see all the active activities.
+      * In the learning path is only available the visit to the digital security training lab.
+      * Once inside the digital security training lab all students and teachers can talk to each other.
+      * After a teacher explains the activity he can enable, by clicking on a button, the visit to 2 rooms and 3 corridors. There will soon be a 3rd room.
+      * In the corridors and rooms only students in the same team can see each other.
 
 [Read more about XREATE](docs/xreate-project-description.en.md)
 
@@ -147,7 +152,7 @@ Enjoy!
 
 ## Test the backend
 
-Jest has been used for testing the backend. At the moment there are tests for the users end-points. To run the tests just run the following commands:
+Jest has been used for testing the backend. At the moment there are tests for the users end-points only. To run the tests just run the following commands:
 
 ````
 cd backend
