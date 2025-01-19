@@ -7,3 +7,10 @@ ShaderImporter:
   userData: Version 2.0
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264045
+  packageName: CardHouse
+  packageVersion: 1.0.4
+  assetPath: Assets/TextMesh Pro/Shaders/TMPro.cginc
+  uploadId: 609594
