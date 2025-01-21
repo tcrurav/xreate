@@ -4248,6 +4248,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4922445659692209787, guid: f69b21717a29726409a98704670c6887,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5005849524076642090, guid: f69b21717a29726409a98704670c6887,
         type: 3}
       propertyPath: m_IsActive
@@ -4818,6 +4823,7 @@ MonoBehaviour:
   sceneContainers:
   - RoomModuleASceneContainer
   - RoomModuleBSceneContainer
+  - LeisureModuleSceneContainer
   - TunnelConnectorCSceneContainer
   - TunnelConnectorFSceneContainer
   - TunnelConnectorDSceneContainer
@@ -5230,12 +5236,12 @@ GameObject:
   - component: {fileID: 1990429116}
   - component: {fileID: 1990429115}
   m_Layer: 0
-  m_Name: ToRoomLeisureModule
+  m_Name: ToLeisureModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1990429114
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,18 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "text": "What is cybersecurity?",
+            "correct_answers": [
+                {
+                    "answer": "Protecting systems and networks",
+                    "words": ["Protecting", "systems", "and", "networks"]
+                },
+                {
+                    "answer": "Preventing unauthorized access",
+                    "words": ["Preventing", "unauthorized", "access"]
+                }
+            ]
+        }
+    ]
+}
