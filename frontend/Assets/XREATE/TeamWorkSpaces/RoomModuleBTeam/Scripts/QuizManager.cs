@@ -2,65 +2,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Linq;
 
 public class QuizManager : MonoBehaviour
 {
-
     [System.Serializable]
     public class Question
     {
-        public string questionText;     // Texto de la pregunta
-        public List<string> answers;    // Opciones de respuestas
-        public int correctAnswerIndex;  // Índice de la respuesta correcta
+        public string questionText;      // Texto de la pregunta
+        public List<string> answers;     // Opciones de respuestas
+        public int correctAnswerIndex;   // Índice de la respuesta correcta
     }
 
-    public GameObject welcomePanelA;     // Panel de bienvenida
-    public GameObject welcomePanelB;     // Panel de bienvenida
-    public GameObject welcomePanelC;     // Panel de bienvenida
-    public GameObject welcomePanelD;     // Panel de bienvenida
-    public GameObject welcomePanelE;     // Panel de bienvenida
+    public List<GameObject> welcomePanels;  // Lista de paneles de bienvenida
+    public List<Button> startButtons;       // Lista de botones de inicio
 
-    public TMP_Text welcomeTextA;        // Texto de bienvenida
-    public TMP_Text welcomeTextB;        // Texto de bienvenida
-    public TMP_Text welcomeTextC;        // Texto de bienvenida
-    public TMP_Text welcomeTextD;        // Texto de bienvenida
-    public TMP_Text welcomeTextE;        // Texto de bienvenida
-
-    public Button startButtonA;          // Botón de inicio
-    public Button startButtonB;          // Botón de inicio
-    public Button startButtonC;          // Botón de inicio
-    public Button startButtonD;          // Botón de inicio
-    public Button startButtonE;          // Botón de inicio
-
-    public GameObject quizPanelA;        // Panel del quiz
-    public GameObject quizPanelB;        // Panel del quiz
-    public GameObject quizPanelC;        // Panel del quiz
-    public GameObject quizPanelD;        // Panel del quiz
-    public GameObject quizPanelE;        // Panel del quiz
-
-    public TMP_Text questionTextPanelA; // Pregunta en el panel A
-    public TMP_Text questionTextPanelB; // Pregunta en el panel B
-    public TMP_Text questionTextPanelC; // Pregunta en el panel C
-    public TMP_Text questionTextPanelD; // Pregunta en el panel D
-    public TMP_Text questionTextPanelE; // Pregunta en el panel E
-
-    public Button buttonPanelA;         // Botón del panel A
-    public Button buttonPanelB;         // Botón del panel B
-    public Button buttonPanelC;         // Botón del panel C
-    public Button buttonPanelD;         // Botón del panel D
-    public Button buttonPanelE;         // Botón del panel E
-
-    public TMP_Text feedbackTextA;      // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextB;      // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextC;      // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextD;      // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextE;      // Texto de retroalimentación: Correcto/Incorrecto
-
-    public TMP_Text timerTextA;          // Texto del cronómetro para el jugador A
-    public TMP_Text timerTextB;          // Texto del cronómetro para el jugador B
-    public TMP_Text timerTextC;          // Texto del cronómetro para el jugador C
-    public TMP_Text timerTextD;          // Texto del cronómetro para el jugador D
-    public TMP_Text timerTextE;          // Texto del cronómetro para el jugador E
+    public List<GameObject> quizPanels;     // Lista de paneles de quiz
+    public List<TMP_Text> questionTexts;    // Lista de textos de preguntas
+    public List<TMP_Text> feedbackTexts;    // Lista de textos de retroalimentación
+    public List<TMP_Text> timerTexts;       // Lista de textos de cronómetros
+    public List<TMP_Text> playerScoreTexts; // Lista de textos de puntajes por jugador
+    public List<TMP_Text> teamScoreTexts;   // Lista de textos de puntajes del equipo
+    public List<Button> answerButtons;     // Lista de botones de respuestas
 
     private List<Question> questions = new List<Question>();         // Lista de preguntas
     private List<Question> selectedQuestions = new List<Question>(); // Lista de preguntas seleccionadas aleatoriamente
@@ -68,57 +31,53 @@ public class QuizManager : MonoBehaviour
     private int currentQuestionIndex = 0;
 
     private int playersReady = 0;       // Contador de jugadores listos
-    public int totalPlayers = 5;        // Número total de jugadores
+    private int totalPlayers = 2;       // Número total de jugadores (configurable)
 
     private int teamScore = 0;          // Puntaje del equipo
-    private int playerScoreA = 0;       // Puntaje del jugador A
-    private int playerScoreB = 0;       // Puntaje del jugador B
-    private int playerScoreC = 0;       // Puntaje del jugador C
-    private int playerScoreD = 0;       // Puntaje del jugador D
-    private int playerScoreE = 0;       // Puntaje del jugador E
-
-    public TMP_Text teamScoreA;         // Puntaje del equipo para mostrar por pantalla
-    public TMP_Text teamScoreB;         // Puntaje del equipo para mostrar por pantalla
-    public TMP_Text teamScoreC;         // Puntaje del equipo para mostrar por pantalla
-    public TMP_Text teamScoreD;         // Puntaje del equipo para mostrar por pantalla
-    public TMP_Text teamScoreE;         // Puntaje del equipo para mostrar por pantalla
-
-    public TMP_Text playerTextScoreA;   // Puntaje del jugador A para mostrar por pantalla
-    public TMP_Text playerTextScoreB;   // Puntaje del jugador B para mostrar por pantalla
-    public TMP_Text playerTextScoreC;   // Puntaje del jugador C para mostrar por pantalla
-    public TMP_Text playerTextScoreD;   // Puntaje del jugador D para mostrar por pantalla
-    public TMP_Text playerTextScoreE;   // Puntaje del jugador E para mostrar por pantalla
+    private List<int> playerScores = new List<int>(); // Puntajes de los jugadores
 
     private float timer = 5.0f;         // Tiempo para responder cada pregunta
     private bool isTimerRunning = false; // Indicador de si el cronómetro está activo
 
     void Start()
     {
-        // Inicialmente se muestra la pantalla de bienvenida
-        quizPanelA.SetActive(false); // Ocultar el panel de preguntas inicialmente
-        quizPanelB.SetActive(false); // Ocultar el panel de preguntas inicialmente
-        quizPanelC.SetActive(false); // Ocultar el panel de preguntas inicialmente
-        quizPanelD.SetActive(false); // Ocultar el panel de preguntas inicialmente
-        quizPanelE.SetActive(false); // Ocultar el panel de preguntas inicialmente
+        // Inicializar puntajes para todos los jugadores
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            playerScores.Add(0);
+        }
 
-        welcomePanelA.SetActive(true); // Mostrar la pantalla de bienvenida
-        welcomePanelB.SetActive(true); // Mostrar la pantalla de bienvenida
-        welcomePanelC.SetActive(true); // Mostrar la pantalla de bienvenida
-        welcomePanelD.SetActive(true); // Mostrar la pantalla de bienvenida
-        welcomePanelE.SetActive(true); // Mostrar la pantalla de bienvenida
+        // Ocultar todos los paneles de quiz y bienvenida al inicio
+        foreach (var panel in quizPanels)
+        {
+            panel.SetActive(false);
+        }
 
-        startButtonA.onClick.AddListener(OnPlayerReady);
-        startButtonB.onClick.AddListener(OnPlayerReady);
-        startButtonC.onClick.AddListener(OnPlayerReady);
-        startButtonD.onClick.AddListener(OnPlayerReady);
-        startButtonE.onClick.AddListener(OnPlayerReady);
+        foreach (var panel in welcomePanels)
+        {
+            panel.SetActive(false);
+        }
+
+        // Configurar el número de jugadores
+        if (totalPlayers < 2)
+        {
+            Debug.LogError("El número de jugadores debe ser al menos 2.");
+            return;
+        }
+
+        // Mostrar los paneles y asignar eventos a los botones de inicio
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            welcomePanels[i].SetActive(true);
+            startButtons[i].onClick.AddListener(OnPlayerReady);
+        }
     }
 
     // Método llamado cuando un jugador presiona el botón start
     void OnPlayerReady()
     {
         playersReady++;
-        if (playersReady >= totalPlayers)
+        if (playersReady == totalPlayers)
         {
             Invoke("StartQuiz", 1.5f);
         }
@@ -127,17 +86,16 @@ public class QuizManager : MonoBehaviour
     // Inicia el juego de preguntas y respuestas
     void StartQuiz()
     {
-        welcomePanelA.SetActive(false); // Ocultar la pantalla de bienvenida
-        welcomePanelB.SetActive(false); // Ocultar la pantalla de bienvenida
-        welcomePanelC.SetActive(false); // Ocultar la pantalla de bienvenida
-        welcomePanelD.SetActive(false); // Ocultar la pantalla de bienvenida
-        welcomePanelE.SetActive(false); // Ocultar la pantalla de bienvenida
+        // Ocultar los paneles de bienvenida y mostrar los paneles del quiz
+        foreach (var panel in welcomePanels)
+        {
+            panel.SetActive(false);
+        }
 
-        quizPanelA.SetActive(true);    // Mostrar el panel del quiz
-        quizPanelB.SetActive(true);    // Mostrar el panel del quiz
-        quizPanelC.SetActive(true);    // Mostrar el panel del quiz
-        quizPanelD.SetActive(true);    // Mostrar el panel del quiz
-        quizPanelE.SetActive(true);    // Mostrar el panel del quiz
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            quizPanels[i].SetActive(true);
+        }
 
         InitializeQuestions();
         SelectRandomQuestions(); // Selecciona 10 preguntas aleatorias
@@ -145,7 +103,7 @@ public class QuizManager : MonoBehaviour
         AssignButtonListeners();
     }
 
-    // Inicializar las preguntas y respuestas
+    // Inicializa preguntas y respuestas
     void InitializeQuestions()
     {
         questions.Add(new Question
@@ -230,7 +188,7 @@ public class QuizManager : MonoBehaviour
             "E: Un método de redirección maliciosa en navegadores."
         },
             correctAnswerIndex = 3
-        }); 
+        });
 
         questions.Add(new Question
         {
@@ -272,7 +230,7 @@ public class QuizManager : MonoBehaviour
             "E: Una técnica para deshabilitar configuraciones de seguridad."
         },
             correctAnswerIndex = 2
-        }); 
+        });
 
         questions.Add(new Question
         {
@@ -371,6 +329,7 @@ public class QuizManager : MonoBehaviour
         },
             correctAnswerIndex = 0
         });
+
     }
 
 
@@ -378,7 +337,7 @@ public class QuizManager : MonoBehaviour
     void SelectRandomQuestions()
     {
         List<Question> tempQuestions = new List<Question>(questions);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
         {
             int randomIndex = Random.Range(0, tempQuestions.Count);
             selectedQuestions.Add(tempQuestions[randomIndex]);
@@ -391,95 +350,108 @@ public class QuizManager : MonoBehaviour
     {
         if (currentQuestionIndex >= selectedQuestions.Count)
         {
-            questionTextPanelA.text = "Juego terminado. Puntuación del equipo: " + teamScore;
-            questionTextPanelB.text = "Juego terminado. Puntuación del equipo: " + teamScore;
-            questionTextPanelC.text = "Juego terminado. Puntuación del equipo: " + teamScore;
-            questionTextPanelD.text = "Juego terminado. Puntuación del equipo: " + teamScore;
-            questionTextPanelE.text = "Juego terminado. Puntuación del equipo: " + teamScore;
+            foreach (var text in questionTexts)
+            {
+                text.text = "Juego terminado. Puntuación del equipo: " + teamScore;
+            }
 
-            feedbackTextA.text = ""; // Limpio el TMP Correspondiente a las preguntas
-            feedbackTextB.text = "";
-            feedbackTextC.text = "";
-            feedbackTextD.text = "";
-            feedbackTextE.text = "";
+            foreach (var feedback in feedbackTexts)
+            {
+                feedback.text = ""; // Limpio los textos de retroalimentación
+            }
 
             DisableButtons();
             return;
         }
 
         currentQuestion = selectedQuestions[currentQuestionIndex];
-        feedbackTextA.text = ""; // Limpiar mensajes de retroalimentación
-        feedbackTextB.text = "";
-        feedbackTextC.text = "";
-        feedbackTextD.text = "";
-        feedbackTextE.text = "";
+
+        foreach (var feedback in feedbackTexts)
+        {
+            feedback.text = ""; // Limpiar mensajes de retroalimentación
+        }
 
         EnableButtons();
 
         // Mostrar la pregunta
-        questionTextPanelA.text = currentQuestion.questionText;
-        questionTextPanelB.text = currentQuestion.questionText;
-        questionTextPanelC.text = currentQuestion.questionText;
-        questionTextPanelD.text = currentQuestion.questionText;
-        questionTextPanelE.text = currentQuestion.questionText;
+        foreach (var text in questionTexts)
+        {
+            text.text = currentQuestion.questionText;
+        }
+        
+        // AQUÍ NO FUNCIONA!!!!!!!!!!!!!!!!!!!!!!
+        // Mezclar las respuestas y asignarlas a los paneles
+        List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
+        System.Random random = new System.Random(); // Generador de números aleatorios
 
-        // Mostrar las opciones de respuesta
-        feedbackTextA.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[0];
-        feedbackTextB.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[1];
-        feedbackTextC.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[2];
-        feedbackTextD.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[3];
-        feedbackTextE.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[4];
+        // Remover el índice de la respuesta correcta
+        numbers.Remove(currentQuestion.correctAnswerIndex);
+
+        // Crear la lista de respuestas mezcladas
+        List<int> answers = new List<int>();
+
+        // Mezclar los índices de respuestas incorrectas
+        numbers = numbers.OrderBy(x => random.Next()).ToList();
+
+        // Agregar respuestas incorrectas
+        for (int i = 0; i < totalPlayers - 1; i++)
+        {
+            answers.Add(numbers[i]);
+        }
+
+        // Agregar la respuesta correcta
+        answers.Add(currentQuestion.correctAnswerIndex);
+
+        // Mezclar las respuestas finales
+        answers = answers.OrderBy(x => random.Next()).ToList();
+
+        // Asignar las respuestas a los paneles de texto
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            feedbackTexts[i].text = currentQuestion.answers[answers[i]];
+        }
+        /////////////////////////////////////////////////////////////////////////
 
         timer = 5.0f; // Reiniciar el cronómetro
         isTimerRunning = true;
     }
 
+
     // Asignar eventos a los botones
     void AssignButtonListeners()
     {
-        buttonPanelA.onClick.AddListener(() => CheckAnswer(0, "A"));
-        buttonPanelB.onClick.AddListener(() => CheckAnswer(1, "B"));
-        buttonPanelC.onClick.AddListener(() => CheckAnswer(2, "C"));
-        buttonPanelD.onClick.AddListener(() => CheckAnswer(3, "D"));
-        buttonPanelE.onClick.AddListener(() => CheckAnswer(4, "E"));
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            int index = i;
+            answerButtons[i].onClick.AddListener(() => CheckAnswer(index));
+        }
     }
 
     // Verificar si la respuesta es correcta
-    public void CheckAnswer(int selectedIndex, string player)
+    public void CheckAnswer(int selectedIndex)
     {
         if (selectedIndex == currentQuestion.correctAnswerIndex)
         {
             DisableButtons();
 
-            feedbackTextA.text = "¡Respuesta Correcta!";
-            feedbackTextB.text = "¡Respuesta Correcta!";
-            feedbackTextC.text = "¡Respuesta Correcta!";
-            feedbackTextD.text = "¡Respuesta Correcta!";
-            feedbackTextE.text = "¡Respuesta Correcta!";
+            foreach (var feedback in feedbackTexts)
+            {
+                feedback.text = "¡Respuesta Correcta!";
+            }
 
             isTimerRunning = false; // Detener el cronómetro
             int points = timer > 0 ? 5 : 3; // 5 puntos si respondió a tiempo, 3 si no
             teamScore += points; // Sumar puntos al equipo
 
-            teamScoreA.text = "Team Score: " + teamScore;
-            teamScoreB.text = "Team Score: " + teamScore;
-            teamScoreC.text = "Team Score: " + teamScore;
-            teamScoreD.text = "Team Score: " + teamScore;
-            teamScoreE.text = "Team Score: " + teamScore;
+            foreach (var text in teamScoreTexts)
+            {
+                text.text = "Team Score: " + teamScore;
+            }
 
             if (timer > 0) // Puntos adicionales para el jugador
             {
-                if (player == "A") playerScoreA += 2;
-                if (player == "B") playerScoreB += 2;
-                if (player == "C") playerScoreC += 2;
-                if (player == "D") playerScoreD += 2;
-                if (player == "E") playerScoreE += 2;
-
-                playerTextScoreA.text = "Player Score: " + playerScoreA;
-                playerTextScoreB.text = "Player Score: " + playerScoreB;
-                playerTextScoreC.text = "Player Score: " + playerScoreC;
-                playerTextScoreD.text = "Player Score: " + playerScoreD;
-                playerTextScoreE.text = "Player Score: " + playerScoreE;
+                playerScores[selectedIndex] += 2;
+                playerScoreTexts[selectedIndex].text = "Player Score: " + playerScores[selectedIndex];
             }
 
             currentQuestionIndex++;
@@ -487,11 +459,7 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            if (player == "A") feedbackTextA.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            if (player == "B") feedbackTextB.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            if (player == "C") feedbackTextC.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            if (player == "D") feedbackTextD.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            if (player == "E") feedbackTextE.text = "Respuesta Incorrecta. Intenta de nuevo.";
+            feedbackTexts[selectedIndex].text = "Respuesta Incorrecta. Intenta de nuevo.";
         }
     }
 
@@ -507,36 +475,26 @@ public class QuizManager : MonoBehaviour
                 isTimerRunning = false; // Detener el cronómetro
             }
 
-            // Mostrar tiempo en los paneles
-            timerTextA.text = "Tiempo: " + Mathf.Ceil(timer);
-            timerTextB.text = "Tiempo: " + Mathf.Ceil(timer);
-            timerTextC.text = "Tiempo: " + Mathf.Ceil(timer);
-            timerTextD.text = "Tiempo: " + Mathf.Ceil(timer);
-            timerTextE.text = "Tiempo: " + Mathf.Ceil(timer);
+            for (int i = 0; i < totalPlayers; i++)
+            {
+                timerTexts[i].text = "Tiempo: " + Mathf.Ceil(timer);
+            }
         }
     }
 
     void DisableButtons()
     {
-        buttonPanelA.interactable = false;
-        buttonPanelB.interactable = false;
-        buttonPanelC.interactable = false;
-        buttonPanelD.interactable = false;
-        buttonPanelE.interactable = false;
+        foreach (var button in answerButtons)
+        {
+            button.interactable = false;
+        }
     }
 
     void EnableButtons()
     {
-        buttonPanelA.interactable = true;
-        buttonPanelB.interactable = true;
-        buttonPanelC.interactable = true;
-        buttonPanelD.interactable = true;
-        buttonPanelE.interactable = true;
+        foreach (var button in answerButtons)
+        {
+            button.interactable = true;
+        }
     }
-
 }
-
-
-
-
-
