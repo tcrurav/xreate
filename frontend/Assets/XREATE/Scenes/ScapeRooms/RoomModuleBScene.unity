@@ -2941,57 +2941,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80491e529df01949bb8c5476166e637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomePanelA: {fileID: 2072353278}
-  welcomePanelB: {fileID: 1103434326}
-  welcomePanelC: {fileID: 1877839826}
-  welcomePanelD: {fileID: 558866243}
-  welcomePanelE: {fileID: 939501106}
-  welcomeTextA: {fileID: 2072353287}
-  welcomeTextB: {fileID: 1103434325}
-  welcomeTextC: {fileID: 1877839825}
-  welcomeTextD: {fileID: 558866242}
-  welcomeTextE: {fileID: 939501105}
-  startButtonA: {fileID: 2072353286}
-  startButtonB: {fileID: 1103434324}
-  startButtonC: {fileID: 1877839824}
-  startButtonD: {fileID: 558866241}
-  startButtonE: {fileID: 939501104}
-  quizPanelA: {fileID: 2072353285}
-  quizPanelB: {fileID: 1103434323}
-  quizPanelC: {fileID: 1877839823}
-  quizPanelD: {fileID: 558866240}
-  quizPanelE: {fileID: 939501103}
-  questionTextPanelA: {fileID: 2072353284}
-  questionTextPanelB: {fileID: 1103434322}
-  questionTextPanelC: {fileID: 1877839822}
-  questionTextPanelD: {fileID: 558866239}
-  questionTextPanelE: {fileID: 939501102}
-  buttonPanelA: {fileID: 2072353283}
-  buttonPanelB: {fileID: 1103434321}
-  buttonPanelC: {fileID: 1877839821}
-  buttonPanelD: {fileID: 558866238}
-  buttonPanelE: {fileID: 939501101}
-  feedbackTextA: {fileID: 2072353282}
-  feedbackTextB: {fileID: 1103434320}
-  feedbackTextC: {fileID: 1877839820}
-  feedbackTextD: {fileID: 558866237}
-  feedbackTextE: {fileID: 939501100}
-  timerTextA: {fileID: 2072353281}
-  timerTextB: {fileID: 1103434319}
-  timerTextC: {fileID: 1877839819}
-  timerTextD: {fileID: 558866236}
-  timerTextE: {fileID: 939501099}
-  totalPlayers: 5
-  teamScoreA: {fileID: 2072353280}
-  teamScoreB: {fileID: 1103434318}
-  teamScoreC: {fileID: 1877839818}
-  teamScoreD: {fileID: 558866235}
-  teamScoreE: {fileID: 939501098}
-  playerTextScoreA: {fileID: 2072353279}
-  playerTextScoreB: {fileID: 1103434317}
-  playerTextScoreC: {fileID: 1877839817}
-  playerTextScoreD: {fileID: 558866234}
-  playerTextScoreE: {fileID: 939501097}
+  welcomePanels:
+  - {fileID: 2072353278}
+  - {fileID: 1103434326}
+  - {fileID: 1877839826}
+  - {fileID: 558866243}
+  - {fileID: 939501106}
+  startButtons:
+  - {fileID: 2072353286}
+  - {fileID: 1103434324}
+  - {fileID: 1877839824}
+  - {fileID: 558866241}
+  - {fileID: 939501104}
+  quizPanels:
+  - {fileID: 2072353285}
+  - {fileID: 1103434323}
+  - {fileID: 1877839823}
+  - {fileID: 558866240}
+  - {fileID: 939501103}
+  questionTexts:
+  - {fileID: 2072353284}
+  - {fileID: 1103434322}
+  - {fileID: 1877839822}
+  - {fileID: 558866239}
+  - {fileID: 939501102}
+  feedbackTexts:
+  - {fileID: 2072353282}
+  - {fileID: 1103434320}
+  - {fileID: 1877839820}
+  - {fileID: 558866237}
+  - {fileID: 939501100}
+  timerTexts:
+  - {fileID: 2072353281}
+  - {fileID: 1103434319}
+  - {fileID: 1877839819}
+  - {fileID: 558866236}
+  - {fileID: 939501099}
+  playerScoreTexts:
+  - {fileID: 2072353279}
+  - {fileID: 1103434317}
+  - {fileID: 1877839817}
+  - {fileID: 558866234}
+  - {fileID: 939501097}
+  teamScoreTexts:
+  - {fileID: 2072353280}
+  - {fileID: 1103434318}
+  - {fileID: 1877839818}
+  - {fileID: 558866235}
+  - {fileID: 939501098}
+  answerButtons:
+  - {fileID: 2072353283}
+  - {fileID: 1103434321}
+  - {fileID: 1877839821}
+  - {fileID: 558866238}
+  - {fileID: 939501101}
 --- !u!1 &527583279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3341,18 +3344,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &558866242 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1525794433188311375, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
-    type: 3}
-  m_PrefabInstance: {fileID: 558866232}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &558866243 stripped
@@ -4609,6 +4600,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel5
       objectReference: {fileID: 0}
+    - target: {fileID: 7104432377765500032, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7637670002463453100, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
         type: 3}
       propertyPath: m_Name
@@ -4723,18 +4719,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &939501105 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1525794433188311375, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
-    type: 3}
-  m_PrefabInstance: {fileID: 939501095}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &939501106 stripped
@@ -5949,18 +5933,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1103434325 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1525794433188311375, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
-    type: 3}
-  m_PrefabInstance: {fileID: 1103434315}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1103434326 stripped
@@ -9719,18 +9691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1877839825 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1525794433188311375, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
-    type: 3}
-  m_PrefabInstance: {fileID: 1877839815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1877839826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7637670002463453100, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
@@ -10190,6 +10150,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1525794433188311375, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_text
+      value: 'Welcome to the trivia challenge! Get ready to work as a team, be quick
+        and show off your knowledge.
+
+
+        Press Start when you are ready!'
+      objectReference: {fileID: 0}
     - target: {fileID: 1627546700565197519, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
         type: 3}
       propertyPath: m_Name
@@ -10355,18 +10324,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2072353287 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1525794433188311375, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
-    type: 3}
-  m_PrefabInstance: {fileID: 2072353276}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2081418608
