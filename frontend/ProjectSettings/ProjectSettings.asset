@@ -56,7 +56,7 @@ PlayerSettings:
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
   mipStripping: 1
-  numberOfMipsStripped: 0
+  numberOfMipsStripped: 3
   numberOfMipsStrippedPerMipmapLimitGroup: {}
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
@@ -966,7 +966,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: bee8f8c8-1c6d-4c5b-a03b-06b19adbfa0c
   framebufferDepthMemorylessMode: 0
