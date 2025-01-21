@@ -1,0 +1,11 @@
+Model Information:
+* title:	cassete neon
+* source:	https://sketchfab.com/3d-models/cassete-neon-3d3a3d78a3e94f4cbdb442542a0e11fd
+* author:	J.César Navarrete (https://sketchfab.com/JcVisualPro)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "cassete neon" (https://sketchfab.com/3d-models/cassete-neon-3d3a3d78a3e94f4cbdb442542a0e11fd) by J.César Navarrete (https://sketchfab.com/JcVisualPro) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
