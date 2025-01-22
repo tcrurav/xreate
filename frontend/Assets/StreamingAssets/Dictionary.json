@@ -1,0 +1,29 @@
+{
+    "cybersecurity_words": [
+        "malware", "spyware", "adware", "ransomware", "phishing", "pretexting", "tailgating", 
+        "encryption", "firewall", "antivirus", "trojan", "worm", "vulnerability", "exploit",
+        "password", "authentication", "biometrics", "token", "keylogger", "backdoor", 
+        "sensitive", "confidential", "secure", "data", "privacy", "breach", "threat", 
+        "attack", "protection", "policy", "access", "permissions", "monitoring", 
+        "traffic", "network", "endpoint", "server", "domain", "proxy", "filtering",
+        "log", "analysis", "alert", "system", "patch", "update", "intrusion", 
+        "detection", "response", "mitigation", "incident", "framework", "protocol",
+        "TLS", "SSL", "VPN", "IP", "DNS", "FTP", "HTTP", "HTTPS", "SFTP", "SMTP",
+        "SSH", "firewall", "antimalware", "EDR", "SIEM", "SOC", "sandbox", 
+        "quarantine", "spam", "spoofing", "bruteforce", "zero-day", "defense", 
+        "layered", "phishing", "social", "engineering", "attackers", "hackers", 
+        "cybercriminals", "passwords", "multi-factor", "authentication", 
+        "fishing", "clickbait", "pop-up", "drive-by", "malvertising", 
+        "darkweb", "deepfake", "metadata", "tracking", "cookies", "cache", 
+        "browser", "extension", "add-on", "plug-in", "application", "mobile", 
+        "device", "Wi-Fi", "hotspot", "router", "connection", "Bluetooth", 
+        "signal", "intercept", "eavesdropping", "sniffing", "spoofing", 
+        "replay", "payload", "botnet", "command", "control", "C2", 
+        "obfuscation", "key", "encryption", "decrypt", "plaintext", 
+        "ciphertext", "algorithm", "hashing", "salting", "certificate", 
+        "private", "public", "keypair", "signature", "digital", "blockchain",
+        "Bitcoin", "wallet", "NFT", "token", "identity", "verification", 
+        "fraud", "impersonation", "breach", "surveillance", "audit", 
+        "framework", "compliance", "GDPR", "HIPAA", "ISO", "security", "standard"
+    ]
+}

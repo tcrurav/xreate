@@ -7,7 +7,7 @@ public class RoomChangeController : MonoBehaviour
     private readonly Vector3 OffsetCorridorToRoomModuleB = new(-7.5f, 6.75f, 21f);
     private readonly Vector3 OffsetRoomModuleB = new(-7.5f, 6.5f, 32f);
     private readonly Vector3 OffsetCorridorToLeisureModule = new(4f, 6.75f, 16f);
-    private readonly Vector3 OffsetLeisureModule = new(-7.5f, 6.5f, 32f);
+    private readonly Vector3 OffsetLeisureModule = new(9.65f, 6.5f, 19.5f);
     private readonly Vector3 OffsetBuildingA = new(-95.15f, 0f, 4.61f);
 
     public void ChangeToRoomModuleA()
@@ -66,9 +66,8 @@ public class RoomChangeController : MonoBehaviour
         GameObject XreatePortRoomModuleA = GameObject.FindGameObjectWithTag("XreatePortRoomModuleA");
         XreatePortRoomModuleA.transform.position = offset;
 
-        // TODO - decomment when Samuel & Idafe send their first PR
-        //GameObject XreatePortLeisureModule = GameObject.FindGameObjectWithTag("XreatePortLeisureModule");
-        //XreatePortLeisureModule.transform.position = offset;
+        GameObject XreatePortLeisureModule = GameObject.FindGameObjectWithTag("XreatePortLeisureModule");
+        XreatePortLeisureModule.transform.position = offset;
 
         GameObject XreatePortTunnelConnectorC = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorC");
         XreatePortTunnelConnectorC.transform.position = offset;
