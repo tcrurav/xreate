@@ -1,0 +1,77 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "text": "Which of the following is a basic cybersecurity practice?",
+            "correct_answers": [
+                {"answer": "Do not leave the device unattended", "words": ["Do", "not", "leave", "device", "unattended"]},
+                {"answer": "Use strong and unique passwords", "words": ["Use", "strong", "unique", "passwords"]},
+                {"answer": "Enable multi-factor authentication", "words": ["Enable", "multi-factor", "authentication"]}
+            ]
+        },
+        {
+            "id": 2,
+            "text": "What is the purpose of a firewall?",
+            "correct_answers": [
+                {"answer": "To block unauthorized access to a network", "words": ["block", "unauthorized", "access", "network"]},
+                {"answer": "To monitor incoming and outgoing traffic", "words": ["monitor", "incoming", "outgoing", "traffic"]},
+                {"answer": "To enforce security policies", "words": ["enforce", "security", "policies"]}
+            ]
+        },
+        {
+            "id": 3,
+            "text": "What does encryption ensure in cybersecurity?",
+            "correct_answers": [
+                {"answer": "Confidentiality of data", "words": ["Confidentiality", "data"]},
+                {"answer": "Protection of sensitive information", "words": ["Protection", "sensitive", "information"]},
+                {"answer": "Prevention of unauthorized access", "words": ["Prevention", "unauthorized", "access"]}
+            ]
+        },
+        {
+            "id": 4,
+            "text": "Which of the following is an example of social engineering?",
+            "correct_answers": [
+                {"answer": "Phishing emails", "words": ["Phishing", "emails"]},
+                {"answer": "Pretexting", "words": ["Pretexting"]},
+                {"answer": "Tailgating", "words": ["Tailgating"]}
+            ]
+        },
+        {
+            "id": 5,
+            "text": "What is the main goal of a ransomware attack?",
+            "correct_answers": [
+                {"answer": "To encrypt victim's data and demand payment", "words": ["encrypt", "victim's", "data", "demand", "payment"]},
+                {"answer": "To extort money by holding files hostage", "words": ["extort", "money", "holding", "files", "hostage"]},
+                {"answer": "To disrupt business operations", "words": ["disrupt", "business", "operations"]}
+            ]
+        },
+        {
+            "id": 6,
+            "text": "What is a strong password characteristic?",
+            "correct_answers": [
+                {"answer": "Contains uppercase and lowercase letters", "words": ["Contains", "uppercase", "lowercase", "letters"]},
+                {"answer": "Includes numbers and special characters", "words": ["Includes", "numbers", "special", "characters"]},
+                {"answer": "Has at least 12 characters", "words": ["Has", "12", "characters"]}
+            ]
+        },
+        {
+            "id": 7,
+            "text": "Which tool is used to detect malware on a device?",
+            "correct_answers": [
+                {"answer": "Anti-virus software", "words": ["Anti-virus", "software"]},
+                {"answer": "Endpoint Detection and Response (EDR)", "words": ["Endpoint", "Detection", "Response", "EDR"]},
+                {"answer": "Malware scanner", "words": ["Malware", "scanner"]}
+            ]
+        },
+        {
+            "id": 8,
+            "text": "How can you protect your email account from phishing?",
+            "correct_answers": [
+                {"answer": "Avoid clicking on suspicious links", "words": ["Avoid", "clicking", "suspicious", "links"]},
+                {"answer": "Verify sender authenticity", "words": ["Verify", "sender", "authenticity"]},
+                {"answer": "Use multi-factor authentication", "words": ["Use", "multi-factor", "authentication"]}
+            ]
+        }
+        // Add remaining questions similarly
+    ]
+}

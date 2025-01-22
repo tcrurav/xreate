@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3223e943439ae2141a25e96e1c6b31a4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 170106
+  packageName: Sci Fi Hologram Shader
+  packageVersion: 1.1
+  assetPath: Assets/Knife/Customizable Hologramm Shader/Materials/Holo Wall/Hologram
+    Wall.mat
+  uploadId: 522592

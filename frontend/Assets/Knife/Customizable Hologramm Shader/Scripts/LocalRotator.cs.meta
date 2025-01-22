@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fe32c61157b12fe44ae5f2feac1caf2c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 170106
+  packageName: Sci Fi Hologram Shader
+  packageVersion: 1.1
+  assetPath: Assets/Knife/Customizable Hologramm Shader/Scripts/LocalRotator.cs
+  uploadId: 522592

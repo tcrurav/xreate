@@ -1,0 +1,14 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "text": "¿Qué es la vida?",
+            "words": ["Amor", "Respirar", "Comer", "Vivir", "Felicidad"]
+        },
+        {
+            "id": 2,
+            "text": "¿Qué mueve el mundo?",
+            "words": ["Dinero", "Poder", "Fuerza", "Esperanza", "Sueños"]
+        }
+    ]
+}
