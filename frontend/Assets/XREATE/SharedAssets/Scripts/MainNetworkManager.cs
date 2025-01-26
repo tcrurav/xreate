@@ -160,12 +160,17 @@ public class MainNetworkManager : MonoBehaviour
     public static void ChangeSceneTo(int playerId, string sceneName)
     {
         MainManager.SetScene(sceneName);
-        DebugManager.Log($"playerId: {playerId}, sceneName: {sceneName}");
+        DebugManager.Log($"ChangeSceneTo, playerId: {playerId}, sceneName: {sceneName}");
+        Debug.Log($"ChangeSceneTo. playerId: {playerId}, sceneName: {sceneName}");
 
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
+            Debug.Log($"ChangeSceneTo. playerId: {playerId}");
+            Debug.Log($"ChangeSceneTo. client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
+            DebugManager.Log($"ChangeSceneTo. client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
             if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
             {
+                Debug.Log($"ChangeSceneTo. Going to serverRpc: playerId: {playerId}, sceneName: {sceneName}");
                 //client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerScene(playerId, sceneName);
                 client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerSceneServerRpc(playerId, sceneName);
                 return;
@@ -177,7 +182,8 @@ public class MainNetworkManager : MonoBehaviour
     {
         Debug.Log("SetVisibilityOnSceneChange");
         Debug.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
-        if(MainManager.GetScene() == "LoginScene" ||  MainManager.GetScene() == "MenuScene")
+        DebugManager.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
+        if (MainManager.GetScene() == "LoginScene" ||  MainManager.GetScene() == "MenuScene")
         {
             SetVisibility(playerId, false);
             return;
@@ -210,10 +216,13 @@ public class MainNetworkManager : MonoBehaviour
 
     private static void SetVisibility(int playerId, bool visibility)
     {
+        Debug.Log("SetVisibility - MainNetworkManager 1");
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
+            Debug.Log("SetVisibility - MainNetworkManager 2");
             if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
             {
+                Debug.Log("SetVisibility - MainNetworkManager 3");
                 client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(visibility);
                 return;
             }

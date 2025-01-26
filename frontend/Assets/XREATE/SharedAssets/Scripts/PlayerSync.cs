@@ -100,6 +100,7 @@ using Unity.Netcode;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using Unity.Services.Lobbies.Models;
 
 public class PlayerSync : NetworkBehaviour
 {
@@ -115,19 +116,25 @@ public class PlayerSync : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        DebugManager.Log("New Network Spawn:");
+        DebugManager.Log("OnNetworkSpawn. New Network Spawn:");
+        Debug.Log("OnNetworkSpawn. New Network Spawn:");
 
         // Set the player ID when the object is spawned on the network
         if (IsOwner)
         {
+            Debug.Log($"OnNetworkSpawn. IsOwner");
             PlayerId.Value = MainManager.GetUser().id;
-            DebugManager.Log($"PlayerId.Value: {PlayerId.Value}");
+            DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+            Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
         }
 
         if (IsServer)
         {
+            Debug.Log($"OnNetworkSpawn. IsServer on Spawining");
             PlayerIds.OnListChanged += OnPlayerIdsChanged; // Subscribe to list changes
+            Debug.Log($"OnNetworkSpawn. IsServer on Spawining 1");
             UpdatePlayerSceneServerRpc(PlayerId.Value, "LoginScene");
+            Debug.Log($"OnNetworkSpawn. IsServer on Spawining 2");
         }
     }
 
@@ -146,13 +153,13 @@ public class PlayerSync : NetworkBehaviour
         // Check if the player already exists in the dictionary
         if (!PlayerScenes.ContainsKey(playerId))
         {
-            Debug.Log($"Adding new playerId {playerId} with scene {scene}.");
+            Debug.Log($"UpdatePlayerSceneServerRpc. Adding new playerId {playerId} with scene {scene}.");
             PlayerScenes[playerId] = scene;
             PlayerIds.Add(playerId); // Add playerId to the NetworkList
         }
         else
         {
-            Debug.Log($"Updating existing playerId {playerId} to scene {scene}.");
+            Debug.Log($"UpdatePlayerSceneServerRpc. Updating existing playerId {playerId} to scene {scene}.");
             PlayerScenes[playerId] = scene;
         }
 
@@ -166,15 +173,15 @@ public class PlayerSync : NetworkBehaviour
         switch (changeEvent.Type)
         {
             case NetworkListEvent<int>.EventType.Add:
-                Debug.Log($"Player {changeEvent.Value} added.");
+                Debug.Log($"OnPlayerIdsChanged. Player {changeEvent.Value} added.");
                 break;
 
             case NetworkListEvent<int>.EventType.Remove:
-                Debug.Log($"Player {changeEvent.Value} removed.");
+                Debug.Log($"OnPlayerIdsChanged. Player {changeEvent.Value} removed.");
                 break;
 
             default:
-                Debug.Log("Unhandled NetworkList event.");
+                Debug.Log("OnPlayerIdsChanged. Unhandled NetworkList event.");
                 break;
         }
     }
@@ -183,23 +190,31 @@ public class PlayerSync : NetworkBehaviour
     [ClientRpc]
     public void UpdatePlayerSceneClientRpc(int playerId, string scene)
     {
-        Debug.Log($"Client: Player {playerId}'s scene updated to {scene}");
+        Debug.Log("UpdatePlayerSceneClientRpc - FUERA");
+        if (!IsServer)
+        {
+            Debug.Log($"UpdatePlayerSceneClientRpc. Client: Player {playerId}'s scene updated to {scene}");
+            DebugManager.Log($"UpdatePlayerSceneClientRpc. Client: Player {playerId}'s scene updated to {scene}");
+            MainNetworkManager.SetVisibilityOnSceneChange(playerId, "", scene);
+        }
     }
 
 
 
-    public void UpdatePlayerScene(int playerId, string scene)
-    {
-        Debug.Log("UpdatePlayerScene");
-        UpdatePlayerSceneServerRpc(playerId, scene);
-    }
+    //public void UpdatePlayerScene(int playerId, string scene)
+    //{
+    //    Debug.Log("UpdatePlayerScene");
+    //    UpdatePlayerSceneServerRpc(playerId, scene);
+    //}
 
     public void SetVisibility(bool isVisible)
     {
         if (IsClient) // changes are made in clients only.
         {
+            Debug.Log($"SetVisibility - Fuera");
             foreach (var renderer in GetComponentsInChildren<Renderer>())
             {
+                Debug.Log($"SetVisibility - Dentro");
                 renderer.enabled = isVisible;
             }
         }
