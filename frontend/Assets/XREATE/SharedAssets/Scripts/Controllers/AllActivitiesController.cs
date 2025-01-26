@@ -23,7 +23,6 @@ public class AllActivitiesController : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh");
         //loadingCanvas.SetActive(true);
         StartCoroutine(GetActivitiesNonExpired());
     }
@@ -36,9 +35,6 @@ public class AllActivitiesController : MonoBehaviour
         }
 
         yield return activityService.GetAllNonExpired();
-
-        Debug.Log("reponseCode");
-        Debug.Log(activityService.responseCode);
 
         if (activityService.responseCode != 200)
         {

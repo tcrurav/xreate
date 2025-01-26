@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainManager : MonoBehaviour
@@ -9,7 +7,7 @@ public class MainManager : MonoBehaviour
     private User user;
     private string scene = "LoginScene";
     private string accessToken;
-    private string currentUrl = "http://localhost:80";
+    private string currentUrl = "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es";
     private readonly string[] URL = new string[] {
         "http://localhost:80",                                                          // Localhost
         "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es",      // Gran Canaria Server
@@ -66,7 +64,6 @@ public class MainManager : MonoBehaviour
     public static void SetURL(int locationId)
     {
         Instance.currentUrl = Instance.URL[locationId];
-        Debug.Log(Instance.currentUrl);
     }
 
     //public static GameObject FindObject(GameObject parent, string name)

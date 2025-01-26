@@ -73,7 +73,6 @@ public class MainNetworkManager : MonoBehaviour
         }
 
         // Restart the connection
-        //NetworkManager.Singleton.StartClient();
         NetworkQuickJoinLoginUsingUnity6TemplateMenus();
 
         // Optional: Use a retry mechanism for robustness
@@ -86,7 +85,6 @@ public class MainNetworkManager : MonoBehaviour
         while (attempts < maxRetries && !NetworkManager.Singleton.IsClient)
         {
             DebugManager.Log($"Reconnect attempt {attempts + 1}/{maxRetries}...");
-            //NetworkManager.Singleton.StartClient();
             NetworkQuickJoinLoginUsingUnity6TemplateMenus();
             attempts++;
             yield return new WaitForSeconds(retryInterval);

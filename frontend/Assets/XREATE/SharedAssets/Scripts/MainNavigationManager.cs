@@ -28,7 +28,6 @@ public class MainNavigationManager : MonoBehaviour
 
     public static void DisableSceneContainer(string container)
     {
-        Debug.Log($"Disable Scene Container: {container}");
         GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
         containerGameObject.SetActive(false);
     }
