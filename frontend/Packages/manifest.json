@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.burst": "1.8.18",
+    "com.unity.burst": "1.8.19",
     "com.unity.cloud.gltfast": "6.10.1",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.device-simulator.devices": "1.0.0",
@@ -21,7 +21,7 @@
     "com.unity.xr.hands": "1.5.0",
     "com.unity.xr.interaction.toolkit": "3.0.7",
     "com.unity.xr.management": "4.5.0",
-    "com.unity.xr.oculus": "4.4.0",
+    "com.unity.xr.oculus": "4.5.0",
     "com.unity.xr.openxr": "1.14.0",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",

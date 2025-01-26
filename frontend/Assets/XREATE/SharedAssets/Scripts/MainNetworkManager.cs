@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.XR;
 
 public class MainNetworkManager : MonoBehaviour
@@ -155,48 +157,124 @@ public class MainNetworkManager : MonoBehaviour
         Instance.CloseMenuButton.onClick.Invoke();
     }
 
-    public static void HideAllStudentsOfOtherTeams()
+    public static void ChangeSceneTo(int playerId, string sceneName)
     {
-        DebugManager.Log("HideAllStudentsOfOtherTeams");
-        if (MainManager.GetUser().role != "STUDENT")
-        {
-            DebugManager.Log("Only students are in a team. All other roles see all players");
-            return;
-        }
-
-        int thisUserTeamId = CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id);
-        DebugManager.Log("thisUserTeamId:" + thisUserTeamId.ToString());
+        MainManager.SetScene(sceneName);
+        DebugManager.Log($"playerId: {playerId}, sceneName: {sceneName}");
 
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
-            // playerObject will have the NetworkObject of the client
-            NetworkObject playerObject = client.PlayerObject;
-            int studentId = playerObject.GetComponent<PlayerIdSync>().PlayerId.Value;
-            DebugManager.Log("studentId:" + studentId.ToString());
-            int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
-            DebugManager.Log("clientTeamId:" + clientTeamId.ToString());
-
-            if (clientTeamId != thisUserTeamId)
+            if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
             {
-                //client.PlayerObject.GetComponent<Renderer>().enabled = false;
-                client.PlayerObject.GetComponent<PlayerIdSync>().SetVisibility(false);
-                DebugManager.Log($"Se deshabilitó el cliente {studentId} del equipo {clientTeamId}");
+                //client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerScene(playerId, sceneName);
+                client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerSceneServerRpc(playerId, sceneName);
+                return;
             }
         }
     }
 
-    public static void ShowAllStudents()
+    public static void SetVisibilityOnSceneChange(int playerId, string oldScene, string newScene)
     {
-        DebugManager.Log("ShowAllStudents");
+        Debug.Log("SetVisibilityOnSceneChange");
+        Debug.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
+        if(MainManager.GetScene() == "LoginScene" ||  MainManager.GetScene() == "MenuScene")
+        {
+            SetVisibility(playerId, false);
+            return;
+        }
+
+        if(newScene != MainManager.GetScene())
+        {
+            SetVisibility(playerId, false);
+            return;
+        }
+
+        if (newScene == "MainScene")
+        {
+            SetVisibility(playerId, true);
+            return;
+        }
+
+        int thisUserTeamId = CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id);
+        int playerWhoChangeSceneTeamId = CurrentActivityManager.GetTeamIdByStudentId(playerId);
+
+        if(thisUserTeamId != playerWhoChangeSceneTeamId)
+        {
+            SetVisibility(playerId, false);
+            return;
+        }
+
+        SetVisibility(playerId, true);
+        return;
+    }
+
+    private static void SetVisibility(int playerId, bool visibility)
+    {
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
-            DebugManager.Log($"Antes de Enabling client {client.PlayerObject.GetComponent<PlayerIdSync>().PlayerId.Value}");
-            //client.PlayerObject.GetComponent<Renderer>().enabled = true;
-            //if(client.PlayerObject.GetComponent<PlayerIdSync>().PlayerId.Value != MainManager.GetUser().id) client.PlayerObject.gameObject.SetActive(true);
-            client.PlayerObject.GetComponent<PlayerIdSync>().SetVisibility(true);
-            DebugManager.Log($"Después de Enabling client {client.PlayerObject.GetComponent<PlayerIdSync>().PlayerId.Value}");
+            if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
+            {
+                client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(visibility);
+                return;
+            }
         }
     }
+
+    //public static void HideAllStudentsOfOtherTeams()
+    //{
+    //    DebugManager.Log("HideAllStudentsOfOtherTeams");
+    //    if (MainManager.GetUser().role != "STUDENT")
+    //    {
+    //        DebugManager.Log("Only students are in a team. All other roles see all players");
+    //        return;
+    //    }
+
+    //    int thisUserTeamId = CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id);
+    //    DebugManager.Log("thisUserTeamId:" + thisUserTeamId.ToString());
+
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        // playerObject will have the NetworkObject of the client
+    //        NetworkObject playerObject = client.PlayerObject;
+    //        int studentId = playerObject.GetComponent<PlayerSync>().XreatePlayerId.Value;
+    //        DebugManager.Log("studentId:" + studentId.ToString());
+    //        int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
+    //        DebugManager.Log("clientTeamId:" + clientTeamId.ToString());
+
+    //        if (clientTeamId != thisUserTeamId)
+    //        {
+    //            //client.PlayerObject.GetComponent<Renderer>().enabled = false;
+    //            client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(false);
+    //            DebugManager.Log($"Se deshabilitó el cliente {studentId} del equipo {clientTeamId}");
+    //        }
+    //    }
+    //}
+
+    //public static void ShowAllStudents()
+    //{
+    //    DebugManager.Log("ShowAllStudents");
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        DebugManager.Log($"Antes de Enabling client {client.PlayerObject.GetComponent<PlayerSync>().XreatePlayerId.Value}");
+    //        //client.PlayerObject.GetComponent<Renderer>().enabled = true;
+    //        //if(client.PlayerObject.GetComponent<PlayerIdSync>().PlayerId.Value != MainManager.GetUser().id) client.PlayerObject.gameObject.SetActive(true);
+    //        client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(true);
+    //        DebugManager.Log($"Después de Enabling client {client.PlayerObject.GetComponent<PlayerSync>().XreatePlayerId.Value}");
+    //    }
+    //}
+
+    //public static void HideAllStudents()
+    //{
+    //    DebugManager.Log("HideAllStudentsExceptLocalPlayer");
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        DebugManager.Log($"Antes de Enabling client {client.PlayerObject.GetComponent<PlayerSync>().XreatePlayerId.Value}");
+    //        //client.PlayerObject.GetComponent<Renderer>().enabled = true;
+    //        //if(client.PlayerObject.GetComponent<PlayerIdSync>().PlayerId.Value != MainManager.GetUser().id) client.PlayerObject.gameObject.SetActive(true);
+    //        client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(false);
+    //        DebugManager.Log($"Después de Enabling client {client.PlayerObject.GetComponent<PlayerSync>().XreatePlayerId.Value}");
+    //    }
+    //}
 
 }
 

@@ -12,43 +12,50 @@ public class RoomChangeController : MonoBehaviour
 
     public void ChangeToRoomModuleA()
     {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        //MainNetworkManager.HideAllStudentsOfOtherTeams();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleAScene");
         ChangePosition(OffsetRoomModuleA);
     }
 
     public void ChangeToCorridorToRoomModuleA()
     {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        //MainNetworkManager.HideAllStudentsOfOtherTeams();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorCScene");
         ChangePosition(OffsetCorridorToRoomModuleA);
     }
 
     public void ChangeToCorridorToRoomModuleB()
     {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        //MainNetworkManager.HideAllStudentsOfOtherTeams();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorDScene");
         ChangePosition(OffsetCorridorToRoomModuleB);
     }
 
     public void ChangeToRoomModuleB()
     {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        //MainNetworkManager.HideAllStudentsOfOtherTeams();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleBScene");
         ChangePosition(OffsetRoomModuleB);
     }
 
     public void ChangeToCorridorToLeisureModule()
     {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        //MainNetworkManager.HideAllStudentsOfOtherTeams();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorFScene");
         ChangePosition(OffsetCorridorToLeisureModule);
     }
 
     public void ChangeToLeisureModule()
     {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        //MainNetworkManager.HideAllStudentsOfOtherTeams();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "LeisureModuleScene");
         ChangePosition(OffsetLeisureModule);
     }
 
     public void ChangeToBuildingA()
     {
-        MainNetworkManager.ShowAllStudents();
+        //MainNetworkManager.ShowAllStudents();
+        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
         ChangePosition(OffsetBuildingA);
     }
 

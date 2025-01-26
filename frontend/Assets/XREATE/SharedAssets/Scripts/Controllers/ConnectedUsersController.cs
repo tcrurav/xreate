@@ -25,7 +25,7 @@ public class ConnectedUsersController : MonoBehaviour
             Debug.Log("ADIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOSSSS");
 
             NetworkObject playerObject = client.PlayerObject;
-            int studentId = playerObject.GetComponent<PlayerIdSync>().PlayerId.Value;
+            int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
             Debug.Log("studentId:");
             Debug.Log(studentId);
             int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);

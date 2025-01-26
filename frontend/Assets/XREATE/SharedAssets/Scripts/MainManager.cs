@@ -7,6 +7,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     private User user;
+    private string scene = "LoginScene";
     private string accessToken;
     private string currentUrl = "http://localhost:80";
     private readonly string[] URL = new string[] {
@@ -38,6 +39,11 @@ public class MainManager : MonoBehaviour
         Instance.user = user;
     }
 
+    public static void SetScene(string scene)
+    {
+        Instance.scene = scene;
+    }
+
     public static string GetAccessToken()
     {
         return Instance.accessToken;
@@ -46,6 +52,10 @@ public class MainManager : MonoBehaviour
     public static User GetUser()
     {
         return Instance.user;
+    }
+    public static string GetScene()
+    {
+        return Instance.scene;
     }
 
     public static string GetURL()
