@@ -220,6 +220,17 @@ public class PlayerSync : NetworkBehaviour
         }
     }
 
+    [ServerRpc]
+    public void ChangePositionServerRpc(Vector3 newPosition)
+    {
+        if (IsOwner)
+        {
+            Debug.Log($"ChangePosition, newPosition: x: {newPosition.x}, y: {newPosition.y}, z: {newPosition.z}, ");
+            transform.position = newPosition;
+            Debug.Log($"Después, ChangePosition, transform.position: x: {transform.position.x}, y: {transform.position.y}, z: {transform.position.z}, ");
+        }
+    }
+
     //// Use a dictionary-like structure to track player scores by ClientID
     //private Dictionary<ulong, NetworkVariable<int>> XreatePlayerIds = new Dictionary<ulong, NetworkVariable<int>>();
     //private Dictionary<ulong, NetworkVariable<int>> XreatePlayerIds = new Dictionary<ulong, NetworkVariable<int>>();

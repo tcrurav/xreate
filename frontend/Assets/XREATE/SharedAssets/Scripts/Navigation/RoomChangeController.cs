@@ -1,3 +1,4 @@
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 public class RoomChangeController : MonoBehaviour
@@ -15,6 +16,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleAScene");
         ChangePosition(OffsetRoomModuleA);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
     }
 
     public void ChangeToCorridorToRoomModuleA()
@@ -22,6 +24,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorCScene");
         ChangePosition(OffsetCorridorToRoomModuleA);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToRoomModuleA);
     }
 
     public void ChangeToCorridorToRoomModuleB()
@@ -29,6 +32,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorDScene");
         ChangePosition(OffsetCorridorToRoomModuleB);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToRoomModuleB);
     }
 
     public void ChangeToRoomModuleB()
@@ -36,6 +40,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleBScene");
         ChangePosition(OffsetRoomModuleB);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetRoomModuleB);
     }
 
     public void ChangeToCorridorToLeisureModule()
@@ -43,6 +48,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorFScene");
         ChangePosition(OffsetCorridorToLeisureModule);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToLeisureModule);
     }
 
     public void ChangeToLeisureModule()
@@ -50,6 +56,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "LeisureModuleScene");
         ChangePosition(OffsetLeisureModule);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetLeisureModule);
     }
 
     public void ChangeToBuildingA()
@@ -57,6 +64,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ShowAllStudents();
         MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
         ChangePosition(OffsetBuildingA);
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
     }
 
     private void ChangePosition(Vector3 target)
@@ -90,5 +98,10 @@ public class RoomChangeController : MonoBehaviour
 
         GameObject ConnectedUsersSpatialPanelUI = GameObject.FindGameObjectWithTag("ConnectedUsersSpatialPanelUI");
         ConnectedUsersSpatialPanelUI.transform.position = camera.transform.position + new Vector3(-.5f, -0.5f, .5f);
+    }
+
+    private void ChangePlayerPosition(int playerId, Vector3 newPosition)
+    {
+        MainNetworkManager.ChangePlayerPosition(playerId, newPosition);
     }
 }

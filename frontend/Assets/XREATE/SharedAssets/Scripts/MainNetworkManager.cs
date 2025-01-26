@@ -227,6 +227,20 @@ public class MainNetworkManager : MonoBehaviour
         }
     }
 
+    public static void ChangePlayerPosition(int playerId, Vector3 newPosition)
+    {
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            Debug.Log("ChangePlayerPosition - MainNetworkManager 2");
+            if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
+            {
+                Debug.Log($"ChangePlayerPosition - MainNetworkManager 3 - PlayerId: {playerId}, newPosition: {newPosition}");
+                client.PlayerObject.GetComponent<PlayerSync>().ChangePositionServerRpc(newPosition);
+                return;
+            }
+        }
+    }
+
     //public static void HideAllStudentsOfOtherTeams()
     //{
     //    DebugManager.Log("HideAllStudentsOfOtherTeams");
