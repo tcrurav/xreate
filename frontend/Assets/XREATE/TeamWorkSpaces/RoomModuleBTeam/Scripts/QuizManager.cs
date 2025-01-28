@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
+
     [System.Serializable]
     public class Question
     {
-        public string questionText;      // Texto de la pregunta
-        public List<string> answers;     // Opciones de respuestas
-        public int correctAnswerIndex;   // Õndice de la respuesta correcta
+        public string questionText;            // Texto de la pregunta
+        public List<string> answers;           // Opciones de respuestas
+        public int correctAnswerIndex;         // √çndice de la respuesta correcta
     }
 
     public List<GameObject> welcomePanels;  // Lista de paneles de bienvenida
@@ -19,8 +20,8 @@ public class QuizManager : MonoBehaviour
 
     public List<GameObject> quizPanels;     // Lista de paneles de quiz
     public List<TMP_Text> questionTexts;    // Lista de textos de preguntas
-    public List<TMP_Text> feedbackTexts;    // Lista de textos de retroalimentaciÛn
-    public List<TMP_Text> timerTexts;       // Lista de textos de cronÛmetros
+    public List<TMP_Text> feedbackTexts;    // Lista de textos de retroalimentaci√≥n
+    public List<TMP_Text> timerTexts;       // Lista de textos de cron√≥metros
     public List<TMP_Text> playerScoreTexts; // Lista de textos de puntajes por jugador
     public List<TMP_Text> teamScoreTexts;   // Lista de textos de puntajes del equipo
 
@@ -40,13 +41,15 @@ public class QuizManager : MonoBehaviour
     private int currentQuestionIndex = 0;
 
     private int playersReady = 0;       // Contador de jugadores listos
-    private int totalPlayers = 5;       // N˙mero total de jugadores (configurable)
+    private int totalPlayers = 5;       // N√∫mero total de jugadores (configurable)
 
-    private int teamScore = 0;          // Puntaje del equipo
-    private List<int> playerScores = new List<int>(); // Puntajes de los jugadores
+    public TMP_Text feedbackTextA;       // Texto de retroalimentaci√≥n: Correcto/Incorrecto
+    public TMP_Text feedbackTextB;       // Texto de retroalimentaci√≥n: Correcto/Incorrecto
+    public TMP_Text feedbackTextC;       // Texto de retroalimentaci√≥n: Correcto/Incorrecto
 
-    private float timer = 5.0f;         // Tiempo para responder cada pregunta
-    private bool isTimerRunning = false; // Indicador de si el cronÛmetro est· activo
+    private List<Question> questions = new List<Question>(); // Lista de preguntas
+    private Question currentQuestion;   // Pregunta actual
+    private int currentQuestionIndex = 0;
 
     void Start()
     {
@@ -70,10 +73,10 @@ public class QuizManager : MonoBehaviour
             panel.SetActive(false);
         }
 
-        // Configurar el n˙mero de jugadores
+        // Configurar el n√∫mero de jugadores
         if (totalPlayers < 2)
         {
-            Debug.LogError("El n˙mero de jugadores debe ser al menos 2.");
+            Debug.LogError("El n√∫mero de jugadores debe ser al menos 2.");
             return;
         }
 
@@ -85,7 +88,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // MÈtodo llamado cuando un jugador presiona el botÛn start
+    // M√©todo llamado cuando un jugador presiona el bot√≥n start
     void OnPlayerReady()
     {
         playersReady++;
@@ -110,268 +113,213 @@ public class QuizManager : MonoBehaviour
         }
 
         InitializeQuestions();
-        SelectRandomQuestions(); // Selecciona 10 preguntas aleatorias
         LoadQuestion();
     }
 
-    // Inicializa preguntas y respuestas
+    // Inicializar las preguntas y respuestas
     void InitializeQuestions()
     {
         questions.Add(new Question
         {
-            questionText = "øQuÈ es Phishing?",
+            questionText = "¬øQu√© es Phishing?",
             answers = new List<string>
         {
-            "A: Un mÈtodo de ataque que busca obtener informaciÛn personal mediante engaÒos.",
+            "A: Un m√©todo de ataque que busca obtener informaci√≥n personal mediante enga√±os.",
             "B: Un tipo de malware que infecta sistemas operativos.",
-            "C: Un ataque para bloquear el acceso a una red.",
-            "D: Un mÈtodo para interceptar comunicaciones cifradas.",
-            "E: Un sistema para mejorar la seguridad de contraseÒas."
+            "C: Un ataque para bloquear el acceso a una red."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ hace un Ransomware?",
+            questionText = "¬øQu√© hace un Ransomware?",
             answers = new List<string>
         {
             "A: Roba credenciales de acceso.",
             "B: Cifra datos del usuario y pide un rescate para devolverlos.",
-            "C: Infecta el hardware del equipo.",
-            "D: Monitorea la actividad en el navegador web.",
-            "E: Cambia las configuraciones del sistema sin permiso."
+            "C: Infecta el hardware del equipo."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Troyano?",
+            questionText = "¬øQu√© es un Troyano?",
             answers = new List<string>
         {
-            "A: Un tipo de virus diseÒado para replicarse.",
-            "B: Una herramienta de protecciÛn contra malware.",
-            "C: Un programa malicioso disfrazado de software legÌtimo.",
-            "D: Un ataque diseÒado para saturar una red.",
-            "E: Un sistema para detectar actividad sospechosa."
+            "A: Un tipo de virus dise√±ado para replicarse.",
+            "B: Una herramienta de protecci√≥n contra malware.",
+            "C: Un programa malicioso disfrazado de software leg√≠timo."
         },
             correctAnswerIndex = 2
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque de fuerza bruta?",
+            questionText = "¬øQu√© es un ataque de fuerza bruta?",
             answers = new List<string>
         {
-            "A: Un ataque que prueba todas las combinaciones posibles para descifrar contraseÒas.",
-            "B: Una estrategia para engaÒar a un usuario mediante ingenierÌa social.",
-            "C: Un virus que borra datos autom·ticamente.",
-            "D: Un mÈtodo para obtener acceso fÌsico a servidores.",
-            "E: Una tÈcnica para manipular bases de datos."
+            "A: Un ataque que prueba todas las combinaciones posibles para descifrar contrase√±as.",
+            "B: Una estrategia para enga√±ar a un usuario mediante ingenier√≠a social.",
+            "C: Un virus que borra datos autom√°ticamente."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Botnet?",
+            questionText = "¬øQu√© es un Botnet?",
             answers = new List<string>
         {
             "A: Un programa antivirus avanzado.",
             "B: Una red de dispositivos infectados controlados de forma remota.",
-            "C: Una tÈcnica para realizar phishing.",
-            "D: Un mÈtodo para proteger la privacidad en lÌnea.",
-            "E: Un sistema para evitar ataques DoS."
+            "C: Una t√©cnica para realizar phishing."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque DoS (Denial of Service)?",
+            questionText = "¬øQu√© es un ataque DoS (Denial of Service)?",
             answers = new List<string>
         {
-            "A: Un intento de explotar vulnerabilidades de hardware.",
+            "A: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
             "B: Un ataque que roba credenciales de usuarios.",
-            "C: Un malware diseÒado para cifrar datos personales.",
-            "D: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
-            "E: Un mÈtodo de redirecciÛn maliciosa en navegadores."
-        },
-            correctAnswerIndex = 3
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "øQuÈ es un Rootkit?",
-            answers = new List<string>
-        {
-            "A: Un software que permite acceso oculto a un sistema y evita su detecciÛn.",
-            "B: Una herramienta de monitoreo de red.",
-            "C: Un ataque DoS avanzado.",
-            "D: Un programa para cifrar datos personales.",
-            "E: Un sistema de control remoto para servidores."
+            "C: Un malware dise√±ado para cifrar datos personales."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un certificado SSL?",
+            questionText = "¬øQu√© es un Rootkit?",
+            answers = new List<string>
+        {
+            "A: Un software que permite acceso oculto a un sistema y evita su detecci√≥n.",
+            "B: Una herramienta de monitoreo de red.",
+            "C: Un ataque DoS avanzado."
+        },
+            correctAnswerIndex = 0
+        });
+
+        questions.Add(new Question
+        {
+            questionText = "¬øQu√© es un certificado SSL?",
             answers = new List<string>
         {
             "A: Un ataque para descifrar datos cifrados.",
-            "B: Un sistema de autenticaciÛn para comunicaciones cifradas.",
-            "C: Un sistema para realizar ingenierÌa social avanzada.",
-            "D: Un est·ndar de seguridad para redes locales.",
-            "E: Un tipo de malware diseÒado para servidores."
+            "B: Un sistema de autenticaci√≥n para comunicaciones cifradas.",
+            "C: Un sistema para realizar ingenier√≠a social avanzada."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque SQL Injection?",
+            questionText = "¬øQu√© es un ataque SQL Injection?",
             answers = new List<string>
         {
-            "A: Un mÈtodo para prevenir el uso de contraseÒas dÈbiles.",
-            "B: Una tÈcnica para realizar ataques de phishing.",
-            "C: Un ataque que inyecta cÛdigo malicioso en bases de datos a travÈs de consultas.",
-            "D: Una vulnerabilidad que permite acceso remoto no autorizado.",
-            "E: Una tÈcnica para deshabilitar configuraciones de seguridad."
-        },
-            correctAnswerIndex = 2
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "øQuÈ significa el tÈrmino Spoofing?",
-            answers = new List<string>
-        {
-            "A: Un ataque diseÒado para robar datos personales mediante redes sociales.",
-            "B: Un tipo de malware que infecta dispositivos mÛviles.",
-            "C: Un mÈtodo para cifrar datos sensibles.",
-            "D: Un software para controlar dispositivos remotamente.",
-            "E: Una tÈcnica para falsificar la identidad o direcciÛn de origen."
-        },
-            correctAnswerIndex = 4
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "øQuÈ es un ataque de IngenierÌa Social?",
-            answers = new List<string>
-        {
-            "A: Un ataque tÈcnico dirigido a sistemas operativos.",
-            "B: Una estrategia para manipular a las personas y obtener informaciÛn confidencial.",
-            "C: Una tÈcnica para proteger informaciÛn personal.",
-            "D: Un tipo de malware diseÒado para redes sociales.",
-            "E: Un sistema de detecciÛn de intrusos."
-        },
-            correctAnswerIndex = 1
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "øQuÈ es un ataque Man-in-the-Middle (MITM)?",
-            answers = new List<string>
-        {
-            "A: Un ataque donde un tercero intercepta y manipula la comunicaciÛn entre dos partes.",
-            "B: Un malware que se propaga autom·ticamente en una red.",
-            "C: Un software que permite descifrar contraseÒas.",
-            "D: Un mÈtodo para evitar conexiones seguras.",
-            "E: Un sistema para engaÒar a usuarios mediante ingenierÌa social."
+            "A: Un ataque que inyecta c√≥digo malicioso en bases de datos a trav√©s de consultas.",
+            "B: Una t√©cnica para realizar ataques de phishing.",
+            "C: Un m√©todo para prevenir el uso de contrase√±as d√©biles."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es el Criptojacking?",
+            questionText = "¬øQu√© significa el t√©rmino Spoofing?",
+            answers = new List<string>
+        {
+            "A: Una t√©cnica para falsificar la identidad o direcci√≥n de origen.",
+            "B: Un ataque dise√±ado para robar datos personales mediante redes sociales.",
+            "C: Un tipo de malware que infecta dispositivos m√≥viles."
+        },
+            correctAnswerIndex = 0
+        });
+
+        questions.Add(new Question
+        {
+            questionText = "¬øQu√© es un ataque de Ingenier√≠a Social?",
+            answers = new List<string>
+        {
+            "A: Un ataque t√©cnico dirigido a sistemas operativos.",
+            "B: Una estrategia para manipular a las personas y obtener informaci√≥n confidencial.",
+            "C: Una t√©cnica para proteger informaci√≥n personal."
+        },
+            correctAnswerIndex = 1
+        });
+
+        questions.Add(new Question
+        {
+            questionText = "¬øQu√© es un ataque Man-in-the-Middle (MITM)?",
+            answers = new List<string>
+        {
+            "A: Un ataque donde un tercero intercepta y manipula la comunicaci√≥n entre dos partes.",
+            "B: Un malware que se propaga autom√°ticamente en una red.",
+            "C: Un software que permite descifrar contrase√±as."
+        },
+            correctAnswerIndex = 0
+        });
+
+        questions.Add(new Question
+        {
+            questionText = "¬øQu√© es el Criptojacking?",
             answers = new List<string>
         {
             "A: Un ataque que roba criptomonedas directamente de carteras digitales.",
             "B: Un ataque que utiliza recursos de dispositivos infectados para minar criptomonedas.",
-            "C: Una tÈcnica de protecciÛn contra ransomware.",
-            "D: Un software para realizar pagos seguros.",
-            "E: Un ataque para deshabilitar la red de minerÌa."
+            "C: Una t√©cnica de protecci√≥n contra ransomware."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Zero-Day?",
+            questionText = "¬øQu√© es un Zero-Day?",
             answers = new List<string>
         {
             "A: Una vulnerabilidad desconocida explotada antes de que el desarrollador lance un parche.",
-            "B: Un malware diseÒado para desactivar software antivirus.",
-            "C: Un sistema de monitoreo de tr·fico de red.",
-            "D: Un mÈtodo para proteger contraseÒas dÈbiles.",
-            "E: Un ataque dirigido a hardware obsoleto."
+            "B: Un malware dise√±ado para desactivar software antivirus.",
+            "C: Un sistema de monitoreo de tr√°fico de red."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Keylogger?",
+            questionText = "¬øQu√© es un Keylogger?",
             answers = new List<string>
         {
             "A: Un malware que registra las pulsaciones del teclado.",
             "B: Un ataque para bloquear redes sociales.",
-            "C: Una tÈcnica de recuperaciÛn de datos.",
-            "D: Un sistema para encriptar contraseÒas autom·ticamente.",
-            "E: Un ataque diseÒado para desactivar firewalls."
+            "C: Una t√©cnica de recuperaci√≥n de datos."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque de Spear Phishing?",
+            questionText = "¬øQu√© es un ataque de Spear Phishing?",
             answers = new List<string>
         {
-            "A: Una versiÛn m·s especÌfica y dirigida de un ataque de phishing.",
-            "B: Un ataque para deshabilitar contraseÒas cifradas.",
-            "C: Un software de monitoreo avanzado.",
-            "D: Una tÈcnica para infectar bases de datos.",
-            "E: Un sistema para rastrear correos electrÛnicos falsificados."
+            "A: Una versi√≥n m√°s espec√≠fica y dirigida de un ataque de phishing.",
+            "B: Un ataque para deshabilitar contrase√±as cifradas.",
+            "C: Un software de monitoreo avanzado."
         },
             correctAnswerIndex = 0
         });
-
-    }
-
-
-    // Selecciona 10 preguntas aleatorias
-    void SelectRandomQuestions()
-    {
-        List<Question> tempQuestions = new List<Question>(questions);
-        for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
-        {
-            int randomIndex = Random.Range(0, tempQuestions.Count);
-            selectedQuestions.Add(tempQuestions[randomIndex]);
-            tempQuestions.RemoveAt(randomIndex);
-        }
     }
 
     // Cargar una pregunta y respuestas en los paneles
     void LoadQuestion()
     {
-        if (currentQuestionIndex >= selectedQuestions.Count)
+        if (currentQuestionIndex >= questions.Count)
         {
-            foreach (var text in questionTexts)
-            {
-                text.text = "Juego terminado. PuntuaciÛn del equipo: " + teamScore;
-            }
-
-            foreach (var feedback in feedbackTexts)
-            {
-                feedback.text = ""; // Limpio los textos de retroalimentaciÛn
-            }
-
-            DisableButtons();
+            feedbackTextA.text = "¬°Has completado todas las preguntas!";
+            feedbackTextB.text = "¬°Has completado todas las preguntas!";
+            feedbackTextC.text = "¬°Has completado todas las preguntas!";
             return;
         }
 
@@ -384,7 +332,7 @@ public class QuizManager : MonoBehaviour
 
         foreach (var feedback in feedbackTexts)
         {
-            feedback.text = ""; // Limpiar mensajes de retroalimentaciÛn
+            feedback.text = ""; // Limpiar mensajes de retroalimentaci√≥n
         }
 
         EnableButtons();
@@ -397,15 +345,15 @@ public class QuizManager : MonoBehaviour
 
         // Mezclar las respuestas y asignarlas a los paneles
         List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
-        System.Random random = new System.Random(); // Generador de n˙meros aleatorios
+        System.Random random = new System.Random(); // Generador de n√∫meros aleatorios
 
-        // Remover el Ìndice de la respuesta correcta
+        // Remover el √≠ndice de la respuesta correcta
         numbers.Remove(currentQuestion.correctAnswerIndex);
 
         // Crear la lista de respuestas mezcladas
         List<int> answers = new List<int>();
 
-        // Mezclar los Ìndices de respuestas incorrectas
+        // Mezclar los √≠ndices de respuestas incorrectas
         numbers = numbers.OrderBy(x => random.Next()).ToList();
 
         // Agregar respuestas incorrectas
@@ -414,8 +362,10 @@ public class QuizManager : MonoBehaviour
             answers.Add(numbers[i]);
         }
 
-        // Agregar la respuesta correcta
-        answers.Add(currentQuestion.correctAnswerIndex);
+        // Mostrar la pregunta y respuestas
+        questionTextPanelA.text = currentQuestion.questionText;
+        questionTextPanelB.text = currentQuestion.questionText;
+        questionTextPanelC.text = currentQuestion.questionText;
 
         // Mezclar las respuestas finales
         answers = answers.OrderBy(x => random.Next()).ToList();
@@ -426,7 +376,7 @@ public class QuizManager : MonoBehaviour
             feedbackTexts[i].text = currentQuestion.answers[answers[i]];
         }
 
-        timer = 5.0f; // Reiniciar el cronÛmetro
+        timer = 5.0f; // Reiniciar el cron√≥metro
         isTimerRunning = true;
 
         // Limpiar y agregar listeners a los botones
@@ -455,11 +405,11 @@ public class QuizManager : MonoBehaviour
 
             foreach (var feedback in feedbackTexts)
             {
-                feedback.text = "°Respuesta Correcta!";
+                feedback.text = "¬°Respuesta Correcta!";
             }
 
-            isTimerRunning = false; // Detener el cronÛmetro
-            int points = timer > 0 ? 5 : 3; // 5 puntos si respondiÛ a tiempo, 3 si no
+            isTimerRunning = false; // Detener el cron√≥metro
+            int points = timer > 0 ? 5 : 3; // 5 puntos si respondi√≥ a tiempo, 3 si no
             teamScore += points; // Sumar puntos al equipo
 
             foreach (var text in teamScoreTexts)
@@ -486,38 +436,4 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // Actualizar el cronÛmetro
-    void Update()
-    {
-        if (isTimerRunning)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                timer = 0;
-                isTimerRunning = false; // Detener el cronÛmetro
-            }
-
-            for (int i = 0; i < totalPlayers; i++)
-            {
-                timerTexts[i].text = "Tiempo: " + Mathf.Ceil(timer);
-            }
-        }
-    }
-
-    void DisableButtons()
-    {
-        foreach (var button in answerButtons)
-        {
-            button.interactable = false;
-        }
-    }
-
-    void EnableButtons()
-    {
-        foreach (var button in answerButtons)
-        {
-            button.interactable = true;
-        }
-    }
 }

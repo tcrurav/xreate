@@ -31,6 +31,12 @@ TagManager:
   - XreatePortTunnelConnectorF
   - UI
   - ConnectedUsersSpatialPanelUI
+  - TunnelConnectorDSceneContainerParent
+  - TunnelConnectorDSceneContainer
+  - XreatePortTunnelConnectorD
+  - LeisureModuleSceneContainerParent
+  - LeisureModuleSceneContainer
+  - XreatePortLeisureModule
   layers:
   - Default
   - TransparentFX

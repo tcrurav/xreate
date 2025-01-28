@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: e99f8b80b1693284587af0c131f61f3d
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _LineGlitch: {fileID: 2800000, guid: 88eb97e78f86c604bb00864c0dbeffc1, type: 3}
+  - _Line1: {fileID: 2800000, guid: 88eb97e78f86c604bb00864c0dbeffc1, type: 3}
+  - _Line2: {fileID: 2800000, guid: 88eb97e78f86c604bb00864c0dbeffc1, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 170106
+  packageName: Sci Fi Hologram Shader
+  packageVersion: 1.1
+  assetPath: Assets/Knife/Customizable Hologramm Shader/Shaders/Hologram Shader.shader
+  uploadId: 522592

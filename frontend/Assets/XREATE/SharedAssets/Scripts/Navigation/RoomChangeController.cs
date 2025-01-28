@@ -2,47 +2,54 @@ using UnityEngine;
 
 public class RoomChangeController : MonoBehaviour
 {
-    //private Vector3 OffsetConnectedUsersSpatialPanelUI = new(0.86f, 0.71f, 0.0f);
-    //private Vector3 OffsetUI = new(0.0f, 0.0f, -11.0f);
-    private Vector3 OffsetRoomModuleA = new(-7.5f, 6.5f, -20f);
-    private Vector3 OffsetCorridorToRoomModuleA = new(-7.5f, 6.75f, -13f);
-    private Vector3 OffsetCorridorToRoomModuleB = new(-7.5f, 6.75f, 21f);
-    private Vector3 OffsetRoomModuleB = new(-7.5f, 6.5f, 32f);
-    private Vector3 OffsetBuildingA = new(-95.15f, 0f, 4.61f);
+    private readonly Vector3 OffsetRoomModuleA = new(-7.5f, 6.5f, -20f);
+    private readonly Vector3 OffsetCorridorToRoomModuleA = new(-7.5f, 6.75f, -13f);
+    private readonly Vector3 OffsetCorridorToRoomModuleB = new(-7.5f, 6.75f, 21f);
+    private readonly Vector3 OffsetRoomModuleB = new(-7.5f, 6.5f, 32f);
+    private readonly Vector3 OffsetCorridorToLeisureModule = new(4f, 6.75f, 16f);
+    private readonly Vector3 OffsetLeisureModule = new(9.65f, 6.5f, 19.5f);
+    private readonly Vector3 OffsetBuildingA = new(-95.15f, 0f, 4.61f);
 
     public void ChangeToRoomModuleA()
     {
         MainNetworkManager.HideAllStudentsOfOtherTeams();
-        Vector3 target = OffsetRoomModuleA;
-        ChangePosition(target);
+        ChangePosition(OffsetRoomModuleA);
     }
 
     public void ChangeToCorridorToRoomModuleA()
     {
         MainNetworkManager.HideAllStudentsOfOtherTeams();
-        Vector3 target = OffsetCorridorToRoomModuleA;
-        ChangePosition(target);
+        ChangePosition(OffsetCorridorToRoomModuleA);
     }
 
     public void ChangeToCorridorToRoomModuleB()
     {
         MainNetworkManager.HideAllStudentsOfOtherTeams();
-        Vector3 target = OffsetCorridorToRoomModuleB;
-        ChangePosition(target);
+        ChangePosition(OffsetCorridorToRoomModuleB);
     }
 
     public void ChangeToRoomModuleB()
     {
         MainNetworkManager.HideAllStudentsOfOtherTeams();
-        Vector3 target = OffsetRoomModuleB;
-        ChangePosition(target);
+        ChangePosition(OffsetRoomModuleB);
+    }
+
+    public void ChangeToCorridorToLeisureModule()
+    {
+        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        ChangePosition(OffsetCorridorToLeisureModule);
+    }
+
+    public void ChangeToLeisureModule()
+    {
+        MainNetworkManager.HideAllStudentsOfOtherTeams();
+        ChangePosition(OffsetLeisureModule);
     }
 
     public void ChangeToBuildingA()
     {
         MainNetworkManager.ShowAllStudents();
-        Vector3 target = OffsetBuildingA;
-        ChangePosition(target);
+        ChangePosition(OffsetBuildingA);
     }
 
     private void ChangePosition(Vector3 target)
@@ -59,14 +66,17 @@ public class RoomChangeController : MonoBehaviour
         GameObject XreatePortRoomModuleA = GameObject.FindGameObjectWithTag("XreatePortRoomModuleA");
         XreatePortRoomModuleA.transform.position = offset;
 
+        GameObject XreatePortLeisureModule = GameObject.FindGameObjectWithTag("XreatePortLeisureModule");
+        XreatePortLeisureModule.transform.position = offset;
+
         GameObject XreatePortTunnelConnectorC = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorC");
         XreatePortTunnelConnectorC.transform.position = offset;
 
         GameObject XreatePortTunnelConnectorF = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorF");
         XreatePortTunnelConnectorF.transform.position = offset;
 
-        //GameObject XreatePortTunnelConnectorD = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorD");
-        //XreatePortTunnelConnectorD.transform.position = offset;
+        GameObject XreatePortTunnelConnectorD = GameObject.FindGameObjectWithTag("XreatePortTunnelConnectorD");
+        XreatePortTunnelConnectorD.transform.position = offset;
 
         GameObject UI = GameObject.FindGameObjectWithTag("UI");
         UI.transform.position = camera.transform.position + new Vector3(.5f, -0.5f, .5f);
