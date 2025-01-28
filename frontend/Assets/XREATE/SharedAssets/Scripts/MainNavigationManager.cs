@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainNavigationManager : MonoBehaviour
@@ -31,7 +29,7 @@ public class MainNavigationManager : MonoBehaviour
         GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
         containerGameObject.SetActive(false);
     }
-    
+
 }
 
 // Data persistence between scenes has been done using a singleton class

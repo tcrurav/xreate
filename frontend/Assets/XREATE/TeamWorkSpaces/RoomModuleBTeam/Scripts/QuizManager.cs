@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -9,9 +9,9 @@ public class QuizManager : MonoBehaviour
     [System.Serializable]
     public class Question
     {
-        public string questionText;      // Texto de la pregunta
-        public List<string> answers;     // Opciones de respuestas
-        public int correctAnswerIndex;   // �ndice de la respuesta correcta
+        public string questionText;            // Texto de la pregunta
+        public List<string> answers;           // Opciones de respuestas
+        public int correctAnswerIndex;         // Índice de la respuesta correcta
     }
 
     public List<GameObject> welcomePanels;  // Lista de paneles de bienvenida
@@ -19,8 +19,8 @@ public class QuizManager : MonoBehaviour
 
     public List<GameObject> quizPanels;     // Lista de paneles de quiz
     public List<TMP_Text> questionTexts;    // Lista de textos de preguntas
-    public List<TMP_Text> feedbackTexts;    // Lista de textos de retroalimentaci�n
-    public List<TMP_Text> timerTexts;       // Lista de textos de cron�metros
+    public List<TMP_Text> feedbackTexts;    // Lista de textos de retroalimentación
+    public List<TMP_Text> timerTexts;       // Lista de textos de cronómetros
     public List<TMP_Text> playerScoreTexts; // Lista de textos de puntajes por jugador
     public List<TMP_Text> teamScoreTexts;   // Lista de textos de puntajes del equipo
 
@@ -33,6 +33,18 @@ public class QuizManager : MonoBehaviour
     public AudioClip correctSound; // Sonido para respuesta correcta
     public AudioClip incorrectSound; // Sonido para respuesta incorrecta
     private AudioSource audioSource; // Componente AudioSource para reproducir sonidos
+
+    private List<Question> questions = new List<Question>();         // Lista de preguntas
+    private List<Question> selectedQuestions = new List<Question>(); // Lista de preguntas seleccionadas aleatoriamente
+    private Question currentQuestion;                                // Pregunta actual
+    private int currentQuestionIndex = 0;
+
+    private int playersReady = 0;       // Contador de jugadores listos
+    private int totalPlayers = 5;       // Número total de jugadores (configurable)
+
+    public TMP_Text feedbackTextA;       // Texto de retroalimentación: Correcto/Incorrecto
+    public TMP_Text feedbackTextB;       // Texto de retroalimentación: Correcto/Incorrecto
+    public TMP_Text feedbackTextC;       // Texto de retroalimentación: Correcto/Incorrecto
 
     private List<Question> questions = new List<Question>();         // Lista de preguntas
     private List<Question> selectedQuestions = new List<Question>(); // Lista de preguntas seleccionadas aleatoriamente
@@ -70,10 +82,10 @@ public class QuizManager : MonoBehaviour
             panel.SetActive(false);
         }
 
-        // Configurar el n�mero de jugadores
+        // Configurar el número de jugadores
         if (totalPlayers < 2)
         {
-            Debug.LogError("El n�mero de jugadores debe ser al menos 2.");
+            Debug.LogError("El número de jugadores debe ser al menos 2.");
             return;
         }
 
@@ -85,7 +97,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // M�todo llamado cuando un jugador presiona el bot�n start
+    // Método llamado cuando un jugador presiona el botón start
     void OnPlayerReady()
     {
         playersReady++;
@@ -119,10 +131,10 @@ public class QuizManager : MonoBehaviour
     {
         questions.Add(new Question
         {
-            questionText = "�Qu� es Phishing?",
+            questionText = "¿Qué es Phishing?",
             answers = new List<string>
         {
-            "A: Un m�todo de ataque que busca obtener informaci�n personal mediante enga�os.",
+            "A: Un método de ataque que busca obtener información personal mediante engaños.",
             "B: Un tipo de malware que infecta sistemas operativos.",
             "C: Un ataque para bloquear el acceso a una red.",
             "D: Un m�todo para interceptar comunicaciones cifradas.",
@@ -133,7 +145,7 @@ public class QuizManager : MonoBehaviour
 
         questions.Add(new Question
         {
-            questionText = "�Qu� hace un Ransomware?",
+            questionText = "¿Qué hace un Ransomware?",
             answers = new List<string>
         {
             "A: Roba credenciales de acceso.",
@@ -175,7 +187,7 @@ public class QuizManager : MonoBehaviour
 
         questions.Add(new Question
         {
-            questionText = "�Qu� es un Botnet?",
+            questionText = "¿Qué es un Botnet?",
             answers = new List<string>
         {
             "A: Un programa antivirus avanzado.",
@@ -189,7 +201,7 @@ public class QuizManager : MonoBehaviour
 
         questions.Add(new Question
         {
-            questionText = "�Qu� es un ataque DoS (Denial of Service)?",
+            questionText = "¿Qué es un ataque DoS (Denial of Service)?",
             answers = new List<string>
         {
             "A: Un intento de explotar vulnerabilidades de hardware.",
@@ -203,10 +215,10 @@ public class QuizManager : MonoBehaviour
 
         questions.Add(new Question
         {
-            questionText = "�Qu� es un Rootkit?",
+            questionText = "¿Qué es un Rootkit?",
             answers = new List<string>
         {
-            "A: Un software que permite acceso oculto a un sistema y evita su detecci�n.",
+            "A: Un software que permite acceso oculto a un sistema y evita su detección.",
             "B: Una herramienta de monitoreo de red.",
             "C: Un ataque DoS avanzado.",
             "D: Un programa para cifrar datos personales.",

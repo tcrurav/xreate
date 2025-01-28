@@ -1,5 +1,5 @@
-using UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard;
 
 namespace UnityEditor.XR.Interaction.Toolkit.Samples.SpatialKeyboard
 {

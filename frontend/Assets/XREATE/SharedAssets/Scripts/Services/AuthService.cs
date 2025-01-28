@@ -1,7 +1,4 @@
-using Newtonsoft.Json.Linq;
 using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -118,13 +115,13 @@ public class AuthService : MonoBehaviour
             yield break;
         }
 
-        Debug.Log("User logged in successfully!");      
+        Debug.Log("User logged in successfully!");
 
         UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
 
         MainManager.SetUser(userWithAccessToken.user);
         MainManager.SetAccessToken(userWithAccessToken.access_token);
- 
+
         request.Dispose();
     }
 
