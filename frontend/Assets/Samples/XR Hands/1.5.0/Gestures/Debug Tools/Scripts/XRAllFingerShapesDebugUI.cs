@@ -29,7 +29,7 @@ namespace UnityEngine.XR.Hands.Samples.Gestures.DebugTools
         {
             if (m_Handedness == Handedness.Invalid)
             {
-                Debug.LogWarning($"The Handedness property of { GetType() } is set to Invalid and will default to Right.", this);
+                Debug.LogWarning($"The Handedness property of {GetType()} is set to Invalid and will default to Right.", this);
                 m_Handedness = Handedness.Right;
             }
 

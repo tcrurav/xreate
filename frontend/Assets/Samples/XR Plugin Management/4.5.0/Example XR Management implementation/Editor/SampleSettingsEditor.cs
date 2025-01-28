@@ -12,7 +12,7 @@ namespace Samples
     public class SampleSettingsEditor : Editor
     {
         static string k_RequiresProperty = "m_RequiresItem";
-        static string k_RuntimeToggleProperty  = "m_RuntimeToggle";
+        static string k_RuntimeToggleProperty = "m_RuntimeToggle";
 
         static GUIContent k_ShowBuildSettingsLabel = new GUIContent("Build Settings");
         static GUIContent k_RequiresLabel = new GUIContent("Item Requirement");

@@ -16,7 +16,7 @@ namespace Samples
     /// XRManager.
     /// </summary>
 #if UNITY_EDITOR
-    [XRSupportedBuildTarget(BuildTargetGroup.Standalone, new BuildTarget[]{ BuildTarget.StandaloneWindows, BuildTarget.StandaloneWindows64})]
+    [XRSupportedBuildTarget(BuildTargetGroup.Standalone, new BuildTarget[] { BuildTarget.StandaloneWindows, BuildTarget.StandaloneWindows64 })]
     [XRSupportedBuildTarget(BuildTargetGroup.Android)]
 #endif
     public class SampleLoader : XRLoaderHelper
@@ -43,7 +43,7 @@ namespace Samples
             return settings;
         }
 
-#region XRLoader API Implementation
+        #region XRLoader API Implementation
 
         /// <summary>Implementaion of <see cref="XRLoader.Initialize"/></summary>
         /// <returns>True if successful, false otherwise</returns>
@@ -84,6 +84,6 @@ namespace Samples
             return base.Deinitialize();
         }
 
-#endregion
+        #endregion
     }
 }

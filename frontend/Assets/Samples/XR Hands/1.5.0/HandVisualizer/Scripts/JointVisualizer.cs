@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.XR.Hands.Processing;
-
 namespace UnityEngine.XR.Hands.Samples.VisualizerSample
 {
     public class JointVisualizer : MonoBehaviour

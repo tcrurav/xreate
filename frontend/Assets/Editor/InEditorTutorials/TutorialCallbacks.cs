@@ -43,7 +43,7 @@ public class TutorialCallbacks : ScriptableObject
     {
         var path = AssetDatabase.GUIDToAssetPath(m_GUID);
         var obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-        if(obj != null)
+        if (obj != null)
             Selection.activeObject = obj;
         else
             Debug.LogError($"Object with GUID {m_GUID} not found in scene.");
@@ -72,9 +72,9 @@ public class TutorialCallbacks : ScriptableObject
     public void SelectOfflineMenuAppearancePanel()
     {
         var appearanceMenus = FindObjectsByType<PlayerAppearanceMenu>(FindObjectsSortMode.None);
-        foreach(var menu in appearanceMenus)
+        foreach (var menu in appearanceMenus)
         {
-            if(menu.transform.parent.name != "Offline Menu UI")
+            if (menu.transform.parent.name != "Offline Menu UI")
                 continue;
             Selection.activeObject = menu;
             break;
@@ -84,7 +84,7 @@ public class TutorialCallbacks : ScriptableObject
     public void SelectObjectInHeirarchyByName(string name)
     {
         var obj = GameObject.Find(name);
-        if(obj != null)
+        if (obj != null)
             Selection.activeObject = obj;
         else
             Debug.LogError($"Object with name {name} not found in scene.");

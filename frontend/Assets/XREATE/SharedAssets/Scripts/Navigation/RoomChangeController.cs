@@ -79,7 +79,7 @@ public class RoomChangeController : MonoBehaviour
         XreatePortTunnelConnectorD.transform.position = offset;
 
         GameObject UI = GameObject.FindGameObjectWithTag("UI");
-        UI.transform.position = camera.transform.position + new Vector3(.5f,-0.5f,.5f);
+        UI.transform.position = camera.transform.position + new Vector3(.5f, -0.5f, .5f);
 
         GameObject ConnectedUsersSpatialPanelUI = GameObject.FindGameObjectWithTag("ConnectedUsersSpatialPanelUI");
         ConnectedUsersSpatialPanelUI.transform.position = camera.transform.position + new Vector3(-.5f, -0.5f, .5f);

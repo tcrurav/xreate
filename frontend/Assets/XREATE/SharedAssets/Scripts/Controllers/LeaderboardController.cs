@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeaderboardController : MonoBehaviour
@@ -50,7 +49,7 @@ public class LeaderboardController : MonoBehaviour
                 teamService.teamsWithPoints[i].points / teamService.teamsWithPoints[i].maxPoints * LeaderboardManager.GetTaskLineLength();
 
             teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D = new Vector3(
-                newX, 
+                newX,
                 teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D.y,
                 teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D.z);
         }
