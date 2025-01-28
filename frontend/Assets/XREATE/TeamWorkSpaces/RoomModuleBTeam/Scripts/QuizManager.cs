@@ -6,13 +6,12 @@ using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
-
     [System.Serializable]
     public class Question
     {
-        public string questionText;            // Texto de la pregunta
-        public List<string> answers;           // Opciones de respuestas
-        public int correctAnswerIndex;         // Índice de la respuesta correcta
+        public string questionText;      // Texto de la pregunta
+        public List<string> answers;     // Opciones de respuestas
+        public int correctAnswerIndex;   // Índice de la respuesta correcta
     }
 
     public List<GameObject> welcomePanels;  // Lista de paneles de bienvenida
@@ -43,13 +42,11 @@ public class QuizManager : MonoBehaviour
     private int playersReady = 0;       // Contador de jugadores listos
     private int totalPlayers = 5;       // Número total de jugadores (configurable)
 
-    public TMP_Text feedbackTextA;       // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextB;       // Texto de retroalimentación: Correcto/Incorrecto
-    public TMP_Text feedbackTextC;       // Texto de retroalimentación: Correcto/Incorrecto
+    private int teamScore = 0;          // Puntaje del equipo
+    private List<int> playerScores = new List<int>(); // Puntajes de los jugadores
 
-    private List<Question> questions = new List<Question>(); // Lista de preguntas
-    private Question currentQuestion;   // Pregunta actual
-    private int currentQuestionIndex = 0;
+    private float timer = 5.0f;         // Tiempo para responder cada pregunta
+    private bool isTimerRunning = false; // Indicador de si el cronómetro está activo
 
     void Start()
     {
@@ -113,10 +110,11 @@ public class QuizManager : MonoBehaviour
         }
 
         InitializeQuestions();
+        SelectRandomQuestions(); // Selecciona 10 preguntas aleatorias
         LoadQuestion();
     }
 
-    // Inicializar las preguntas y respuestas
+    // Inicializa preguntas y respuestas
     void InitializeQuestions()
     {
         questions.Add(new Question
@@ -126,7 +124,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un método de ataque que busca obtener información personal mediante engaños.",
             "B: Un tipo de malware que infecta sistemas operativos.",
-            "C: Un ataque para bloquear el acceso a una red."
+            "C: Un ataque para bloquear el acceso a una red.",
+            "D: Un método para interceptar comunicaciones cifradas.",
+            "E: Un sistema para mejorar la seguridad de contraseñas."
         },
             correctAnswerIndex = 0
         });
@@ -138,7 +138,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Roba credenciales de acceso.",
             "B: Cifra datos del usuario y pide un rescate para devolverlos.",
-            "C: Infecta el hardware del equipo."
+            "C: Infecta el hardware del equipo.",
+            "D: Monitorea la actividad en el navegador web.",
+            "E: Cambia las configuraciones del sistema sin permiso."
         },
             correctAnswerIndex = 1
         });
@@ -150,7 +152,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un tipo de virus diseñado para replicarse.",
             "B: Una herramienta de protección contra malware.",
-            "C: Un programa malicioso disfrazado de software legítimo."
+            "C: Un programa malicioso disfrazado de software legítimo.",
+            "D: Un ataque diseñado para saturar una red.",
+            "E: Un sistema para detectar actividad sospechosa."
         },
             correctAnswerIndex = 2
         });
@@ -162,7 +166,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un ataque que prueba todas las combinaciones posibles para descifrar contraseñas.",
             "B: Una estrategia para engañar a un usuario mediante ingeniería social.",
-            "C: Un virus que borra datos automáticamente."
+            "C: Un virus que borra datos automáticamente.",
+            "D: Un método para obtener acceso físico a servidores.",
+            "E: Una técnica para manipular bases de datos."
         },
             correctAnswerIndex = 0
         });
@@ -174,7 +180,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un programa antivirus avanzado.",
             "B: Una red de dispositivos infectados controlados de forma remota.",
-            "C: Una técnica para realizar phishing."
+            "C: Una técnica para realizar phishing.",
+            "D: Un método para proteger la privacidad en línea.",
+            "E: Un sistema para evitar ataques DoS."
         },
             correctAnswerIndex = 1
         });
@@ -184,11 +192,13 @@ public class QuizManager : MonoBehaviour
             questionText = "¿Qué es un ataque DoS (Denial of Service)?",
             answers = new List<string>
         {
-            "A: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
+            "A: Un intento de explotar vulnerabilidades de hardware.",
             "B: Un ataque que roba credenciales de usuarios.",
-            "C: Un malware diseñado para cifrar datos personales."
+            "C: Un malware diseñado para cifrar datos personales.",
+            "D: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
+            "E: Un método de redirección maliciosa en navegadores."
         },
-            correctAnswerIndex = 0
+            correctAnswerIndex = 3
         });
 
         questions.Add(new Question
@@ -198,7 +208,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un software que permite acceso oculto a un sistema y evita su detección.",
             "B: Una herramienta de monitoreo de red.",
-            "C: Un ataque DoS avanzado."
+            "C: Un ataque DoS avanzado.",
+            "D: Un programa para cifrar datos personales.",
+            "E: Un sistema de control remoto para servidores."
         },
             correctAnswerIndex = 0
         });
@@ -210,7 +222,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un ataque para descifrar datos cifrados.",
             "B: Un sistema de autenticación para comunicaciones cifradas.",
-            "C: Un sistema para realizar ingeniería social avanzada."
+            "C: Un sistema para realizar ingeniería social avanzada.",
+            "D: Un estándar de seguridad para redes locales.",
+            "E: Un tipo de malware diseñado para servidores."
         },
             correctAnswerIndex = 1
         });
@@ -220,11 +234,13 @@ public class QuizManager : MonoBehaviour
             questionText = "¿Qué es un ataque SQL Injection?",
             answers = new List<string>
         {
-            "A: Un ataque que inyecta código malicioso en bases de datos a través de consultas.",
+            "A: Un método para prevenir el uso de contraseñas débiles.",
             "B: Una técnica para realizar ataques de phishing.",
-            "C: Un método para prevenir el uso de contraseñas débiles."
+            "C: Un ataque que inyecta código malicioso en bases de datos a través de consultas.",
+            "D: Una vulnerabilidad que permite acceso remoto no autorizado.",
+            "E: Una técnica para deshabilitar configuraciones de seguridad."
         },
-            correctAnswerIndex = 0
+            correctAnswerIndex = 2
         });
 
         questions.Add(new Question
@@ -232,11 +248,13 @@ public class QuizManager : MonoBehaviour
             questionText = "¿Qué significa el término Spoofing?",
             answers = new List<string>
         {
-            "A: Una técnica para falsificar la identidad o dirección de origen.",
-            "B: Un ataque diseñado para robar datos personales mediante redes sociales.",
-            "C: Un tipo de malware que infecta dispositivos móviles."
+            "A: Un ataque diseñado para robar datos personales mediante redes sociales.",
+            "B: Un tipo de malware que infecta dispositivos móviles.",
+            "C: Un método para cifrar datos sensibles.",
+            "D: Un software para controlar dispositivos remotamente.",
+            "E: Una técnica para falsificar la identidad o dirección de origen."
         },
-            correctAnswerIndex = 0
+            correctAnswerIndex = 4
         });
 
         questions.Add(new Question
@@ -246,7 +264,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un ataque técnico dirigido a sistemas operativos.",
             "B: Una estrategia para manipular a las personas y obtener información confidencial.",
-            "C: Una técnica para proteger información personal."
+            "C: Una técnica para proteger información personal.",
+            "D: Un tipo de malware diseñado para redes sociales.",
+            "E: Un sistema de detección de intrusos."
         },
             correctAnswerIndex = 1
         });
@@ -258,7 +278,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un ataque donde un tercero intercepta y manipula la comunicación entre dos partes.",
             "B: Un malware que se propaga automáticamente en una red.",
-            "C: Un software que permite descifrar contraseñas."
+            "C: Un software que permite descifrar contraseñas.",
+            "D: Un método para evitar conexiones seguras.",
+            "E: Un sistema para engañar a usuarios mediante ingeniería social."
         },
             correctAnswerIndex = 0
         });
@@ -270,7 +292,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un ataque que roba criptomonedas directamente de carteras digitales.",
             "B: Un ataque que utiliza recursos de dispositivos infectados para minar criptomonedas.",
-            "C: Una técnica de protección contra ransomware."
+            "C: Una técnica de protección contra ransomware.",
+            "D: Un software para realizar pagos seguros.",
+            "E: Un ataque para deshabilitar la red de minería."
         },
             correctAnswerIndex = 1
         });
@@ -282,7 +306,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Una vulnerabilidad desconocida explotada antes de que el desarrollador lance un parche.",
             "B: Un malware diseñado para desactivar software antivirus.",
-            "C: Un sistema de monitoreo de tráfico de red."
+            "C: Un sistema de monitoreo de tráfico de red.",
+            "D: Un método para proteger contraseñas débiles.",
+            "E: Un ataque dirigido a hardware obsoleto."
         },
             correctAnswerIndex = 0
         });
@@ -294,7 +320,9 @@ public class QuizManager : MonoBehaviour
         {
             "A: Un malware que registra las pulsaciones del teclado.",
             "B: Un ataque para bloquear redes sociales.",
-            "C: Una técnica de recuperación de datos."
+            "C: Una técnica de recuperación de datos.",
+            "D: Un sistema para encriptar contraseñas automáticamente.",
+            "E: Un ataque diseñado para desactivar firewalls."
         },
             correctAnswerIndex = 0
         });
@@ -306,20 +334,44 @@ public class QuizManager : MonoBehaviour
         {
             "A: Una versión más específica y dirigida de un ataque de phishing.",
             "B: Un ataque para deshabilitar contraseñas cifradas.",
-            "C: Un software de monitoreo avanzado."
+            "C: Un software de monitoreo avanzado.",
+            "D: Una técnica para infectar bases de datos.",
+            "E: Un sistema para rastrear correos electrónicos falsificados."
         },
             correctAnswerIndex = 0
         });
+
+    }
+
+
+    // Selecciona 10 preguntas aleatorias
+    void SelectRandomQuestions()
+    {
+        List<Question> tempQuestions = new List<Question>(questions);
+        for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, tempQuestions.Count);
+            selectedQuestions.Add(tempQuestions[randomIndex]);
+            tempQuestions.RemoveAt(randomIndex);
+        }
     }
 
     // Cargar una pregunta y respuestas en los paneles
     void LoadQuestion()
     {
-        if (currentQuestionIndex >= questions.Count)
+        if (currentQuestionIndex >= selectedQuestions.Count)
         {
-            feedbackTextA.text = "¡Has completado todas las preguntas!";
-            feedbackTextB.text = "¡Has completado todas las preguntas!";
-            feedbackTextC.text = "¡Has completado todas las preguntas!";
+            foreach (var text in questionTexts)
+            {
+                text.text = "Juego terminado. Puntuación del equipo: " + teamScore;
+            }
+
+            foreach (var feedback in feedbackTexts)
+            {
+                feedback.text = ""; // Limpio los textos de retroalimentación
+            }
+
+            DisableButtons();
             return;
         }
 
@@ -362,10 +414,8 @@ public class QuizManager : MonoBehaviour
             answers.Add(numbers[i]);
         }
 
-        // Mostrar la pregunta y respuestas
-        questionTextPanelA.text = currentQuestion.questionText;
-        questionTextPanelB.text = currentQuestion.questionText;
-        questionTextPanelC.text = currentQuestion.questionText;
+        // Agregar la respuesta correcta
+        answers.Add(currentQuestion.correctAnswerIndex);
 
         // Mezclar las respuestas finales
         answers = answers.OrderBy(x => random.Next()).ToList();
@@ -436,4 +486,38 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    // Actualizar el cronómetro
+    void Update()
+    {
+        if (isTimerRunning)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                timer = 0;
+                isTimerRunning = false; // Detener el cronómetro
+            }
+
+            for (int i = 0; i < totalPlayers; i++)
+            {
+                timerTexts[i].text = "Tiempo: " + Mathf.Ceil(timer);
+            }
+        }
+    }
+
+    void DisableButtons()
+    {
+        foreach (var button in answerButtons)
+        {
+            button.interactable = false;
+        }
+    }
+
+    void EnableButtons()
+    {
+        foreach (var button in answerButtons)
+        {
+            button.interactable = true;
+        }
+    }
 }

@@ -22,7 +22,6 @@ public class InActivityTeacherParticipationsController : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh");
         //loadingCanvas.SetActive(true);
         StartCoroutine(GetInActivityTeacherParticipationsWithActivityAndChallenge());
     }
@@ -35,9 +34,6 @@ public class InActivityTeacherParticipationsController : MonoBehaviour
         }
 
         yield return inActivityTeacherParticipationService.GetAllWithActivityAndChallenge(MainManager.GetUser().id);
-
-        Debug.Log("reponseCode");
-        Debug.Log(inActivityTeacherParticipationService.responseCode);
 
         if (inActivityTeacherParticipationService.responseCode != 200)
         {

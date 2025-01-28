@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4179447436024587099, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4257447556974277867, guid: 2b6dab709dc28bd4c98b9d7d53793dc6,
         type: 3}
       propertyPath: m_IsActive

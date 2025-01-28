@@ -35,9 +35,6 @@ public class AuthController : MonoBehaviour
 
         yield return authService.Login(user);
 
-        Debug.Log("reponseCode in AuthController");
-        Debug.Log(authService.responseCode);
-
         if (authService.responseCode != 200)
         {
             loadingCanvas.SetActive(false);
