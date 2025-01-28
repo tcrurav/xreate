@@ -30,7 +30,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToCorridorToRoomModuleB()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorDScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorDScene");
         ChangePosition(OffsetCorridorToRoomModuleB);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToRoomModuleB);
     }
@@ -38,7 +38,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToRoomModuleB()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleBScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleBScene");
         ChangePosition(OffsetRoomModuleB);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetRoomModuleB);
     }
@@ -46,7 +46,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToCorridorToLeisureModule()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorFScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorFScene");
         ChangePosition(OffsetCorridorToLeisureModule);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToLeisureModule);
     }
@@ -54,7 +54,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToLeisureModule()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "LeisureModuleScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "LeisureModuleScene");
         ChangePosition(OffsetLeisureModule);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetLeisureModule);
     }
@@ -62,7 +62,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToBuildingA()
     {
         //MainNetworkManager.ShowAllStudents();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
         ChangePosition(OffsetBuildingA);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
     }
