@@ -18,9 +18,10 @@ public class PlayerIdSync : NetworkBehaviour
             DebugManager.Log($"New Network Spawn. PlayerId.Value: {PlayerId.Value}");
         }
 
-        
 
-        PlayerId.OnValueChanged += (oldValue, newValue) => {
+
+        PlayerId.OnValueChanged += (oldValue, newValue) =>
+        {
             DebugManager.Log($"Player ID changed: {newValue}");
         };
     }

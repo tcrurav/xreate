@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
@@ -23,7 +23,16 @@ public class QuizManager : MonoBehaviour
     public List<TMP_Text> timerTexts;       // Lista de textos de cronómetros
     public List<TMP_Text> playerScoreTexts; // Lista de textos de puntajes por jugador
     public List<TMP_Text> teamScoreTexts;   // Lista de textos de puntajes del equipo
+
     public List<Button> answerButtons;     // Lista de botones de respuestas
+
+    public Sprite defaultSprite; // Sprite por defecto
+
+    public Sprite correctSprite; // Sprite para respuesta correcta
+    public Sprite incorrectSprite; // Sprite para respuesta incorrecta
+    public AudioClip correctSound; // Sonido para respuesta correcta
+    public AudioClip incorrectSound; // Sonido para respuesta incorrecta
+    private AudioSource audioSource; // Componente AudioSource para reproducir sonidos
 
     private List<Question> questions = new List<Question>();         // Lista de preguntas
     private List<Question> selectedQuestions = new List<Question>(); // Lista de preguntas seleccionadas aleatoriamente
@@ -31,7 +40,7 @@ public class QuizManager : MonoBehaviour
     private int currentQuestionIndex = 0;
 
     private int playersReady = 0;       // Contador de jugadores listos
-    private int totalPlayers = 2;       // Número total de jugadores (configurable)
+    private int totalPlayers = 5;       // Número total de jugadores (configurable)
 
     private int teamScore = 0;          // Puntaje del equipo
     private List<int> playerScores = new List<int>(); // Puntajes de los jugadores
@@ -41,6 +50,9 @@ public class QuizManager : MonoBehaviour
 
     void Start()
     {
+        // Inicio mi componente AudioSource
+        audioSource = GetComponent<AudioSource>();
+
         // Inicializar puntajes para todos los jugadores
         for (int i = 0; i < totalPlayers; i++)
         {
@@ -100,7 +112,6 @@ public class QuizManager : MonoBehaviour
         InitializeQuestions();
         SelectRandomQuestions(); // Selecciona 10 preguntas aleatorias
         LoadQuestion();
-        AssignButtonListeners();
     }
 
     // Inicializa preguntas y respuestas
@@ -364,6 +375,11 @@ public class QuizManager : MonoBehaviour
             return;
         }
 
+        foreach (var button in answerButtons)
+        {
+            button.image.sprite = defaultSprite; // Establecer mi sprite por defecto.
+        }
+
         currentQuestion = selectedQuestions[currentQuestionIndex];
 
         foreach (var feedback in feedbackTexts)
@@ -378,8 +394,7 @@ public class QuizManager : MonoBehaviour
         {
             text.text = currentQuestion.questionText;
         }
-        
-        // AQUÍ NO FUNCIONA!!!!!!!!!!!!!!!!!!!!!!
+
         // Mezclar las respuestas y asignarlas a los paneles
         List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
         System.Random random = new System.Random(); // Generador de números aleatorios
@@ -410,29 +425,33 @@ public class QuizManager : MonoBehaviour
         {
             feedbackTexts[i].text = currentQuestion.answers[answers[i]];
         }
-        /////////////////////////////////////////////////////////////////////////
 
         timer = 5.0f; // Reiniciar el cronómetro
         isTimerRunning = true;
-    }
 
-
-    // Asignar eventos a los botones
-    void AssignButtonListeners()
-    {
+        // Limpiar y agregar listeners a los botones
         for (int i = 0; i < totalPlayers; i++)
         {
             int index = i;
-            answerButtons[i].onClick.AddListener(() => CheckAnswer(index));
+            // Limpiar cualquier listener anterior
+            answerButtons[i].onClick.RemoveAllListeners();
+            // Agregar el listener actual
+            answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
         }
+
     }
 
     // Verificar si la respuesta es correcta
-    public void CheckAnswer(int selectedIndex)
+    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
     {
-        if (selectedIndex == currentQuestion.correctAnswerIndex)
+
+        if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
             DisableButtons();
+
+            answerButtons[selectedIndex].image.sprite = correctSprite; // Cambiar a verde
+            audioSource.PlayOneShot(correctSound); // Reproducir sonido correcto
+            answerButtons[selectedIndex].interactable = false;
 
             foreach (var feedback in feedbackTexts)
             {
@@ -455,11 +474,15 @@ public class QuizManager : MonoBehaviour
             }
 
             currentQuestionIndex++;
-            Invoke("LoadQuestion", 1.5f);
+            Debug.Log("Current Question Index: " + currentQuestionIndex);
+            Invoke("LoadQuestion", 2.0f);
         }
         else
         {
+            answerButtons[selectedIndex].image.sprite = incorrectSprite; // Cambiar a rojo
+            audioSource.PlayOneShot(incorrectSound); // Reproducir sonido incorrecto
             feedbackTexts[selectedIndex].text = "Respuesta Incorrecta. Intenta de nuevo.";
+            answerButtons[selectedIndex].interactable = false;
         }
     }
 

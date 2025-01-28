@@ -1,5 +1,4 @@
 using Unity.XR.CoreUtils.Bindings;
-using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.State;
 using UnityEngine.XR.Interaction.Toolkit.Filtering;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Utilities.Tweenables.Primitives;

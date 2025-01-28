@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FindObject
@@ -17,7 +15,7 @@ public class FindObject
         }
         return null;
     }
-    
+
 }
 
 // From: https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521
