@@ -104,7 +104,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.learn.iet-framework": {
-      "version": "4.0.3",
+      "version": "4.0.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {

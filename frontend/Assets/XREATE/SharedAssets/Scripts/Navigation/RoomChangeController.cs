@@ -14,7 +14,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToRoomModuleA()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleAScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleAScene");
         ChangePosition(OffsetRoomModuleA);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
     }
@@ -22,7 +22,7 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToCorridorToRoomModuleA()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorCScene");
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorCScene");
         ChangePosition(OffsetCorridorToRoomModuleA);
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToRoomModuleA);
     }
