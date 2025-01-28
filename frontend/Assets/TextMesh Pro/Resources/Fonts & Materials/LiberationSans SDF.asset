@@ -30,7 +30,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
+<<<<<<< HEAD
     - _CullMode: 2
+=======
+    - _CullMode: 0
+>>>>>>> 5b8d972aaef84718ef541935bddc9eb3644d9d22
     - _FaceDilate: 0
     - _GradientScale: 10
     - _MaskSoftnessX: 0
@@ -62,7 +66,7 @@ Material:
     - _WeightNormal: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FaceColor: {r: 0.032306872, g: 0.6226415, b: 0.31964177, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
