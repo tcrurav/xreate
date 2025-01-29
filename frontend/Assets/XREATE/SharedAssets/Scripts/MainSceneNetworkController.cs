@@ -12,26 +12,26 @@ public class MainSceneNetworkController : MonoBehaviour
         MainNetworkManager.GetAllPlayers();
     }
 
-    public void HideAllStudentsOfOtherTeams()
-    {
-        MainNetworkManager.HideAllStudentsOfOtherTeams();
-    }
+    //public void HideAllStudentsOfOtherTeams()
+    //{
+    //    MainNetworkManager.HideAllStudentsOfOtherTeams();
+    //}
 
-    public void ShowAllStudents()
-    {
-        MainNetworkManager.ShowAllStudents();
-    }
+    //public void ShowAllStudents()
+    //{
+    //    MainNetworkManager.ShowAllStudents();
+    //}
 
-    public void HideAndGetAll()
-    {
-        HideAllStudentsOfOtherTeams();
-        GetAllPlayers();
-    }
+    //public void HideAndGetAll()
+    //{
+    //    HideAllStudentsOfOtherTeams();
+    //    GetAllPlayers();
+    //}
 
-    public void ShowAndGetAll()
-    {
-        ShowAllStudents();
-        GetAllPlayers();
-    }
+    //public void ShowAndGetAll()
+    //{
+    //    ShowAllStudents();
+    //    GetAllPlayers();
+    //}
 
 }

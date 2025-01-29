@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-
-using UnityEngine;
 using UnityEditor;
 using UnityEditor.XR.Management;
 using UnityEditor.XR.Management.Metadata;
+using UnityEngine;
 
 namespace Samples
 {
@@ -24,12 +23,13 @@ namespace Samples
             public List<IXRLoaderMetadata> loaderMetadata { get; set; }
         }
 
-        static IXRPackageMetadata s_Metadata = new SamplePackageMetadata() {
-                packageName = "Sample Package <SAMPLE ONLY YOU MUST REIMPLEMENT>",
-                packageId = "com.unity.xr.samplespackage",
-                settingsType = typeof(SampleSettings).FullName,
+        static IXRPackageMetadata s_Metadata = new SamplePackageMetadata()
+        {
+            packageName = "Sample Package <SAMPLE ONLY YOU MUST REIMPLEMENT>",
+            packageId = "com.unity.xr.samplespackage",
+            settingsType = typeof(SampleSettings).FullName,
 
-                loaderMetadata = new List<IXRLoaderMetadata>() {
+            loaderMetadata = new List<IXRLoaderMetadata>() {
                     new SampleLoaderMetadata() {
                         loaderName = "Sample Loader One  <SAMPLE ONLY YOU MUST REIMPLEMENT>",
                         loaderType = typeof(SampleLoader).FullName,

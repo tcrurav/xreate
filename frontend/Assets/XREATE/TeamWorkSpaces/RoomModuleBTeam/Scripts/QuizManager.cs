@@ -1,290 +1,523 @@
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Para TextMeshPro
-using System.Collections.Generic;
 
 public class QuizManager : MonoBehaviour
 {
-
     [System.Serializable]
     public class Question
     {
-        public string questionText;            // Texto de la pregunta
-        public List<string> answers;           // Opciones de respuestas
-        public int correctAnswerIndex;         // Õndice de la respuesta correcta
+        public string questionText;      // Texto de la pregunta
+        public List<string> answers;     // Opciones de respuestas
+        public int correctAnswerIndex;   // √çndice de la respuesta correcta
     }
 
-    public TMP_Text questionTextPanelA; // Pregunta en el panel A
-    public TMP_Text questionTextPanelB; // Pregunta en el panel B
-    public TMP_Text questionTextPanelC; // Pregunta en el panel C
+    public List<GameObject> welcomePanels;  // Lista de paneles de bienvenida
+    public List<Button> startButtons;       // Lista de botones de inicio
 
-    public Button buttonPanelA;         // BotÛn del panel A
-    public Button buttonPanelB;         // BotÛn del panel B
-    public Button buttonPanelC;         // BotÛn del panel C
+    public List<GameObject> quizPanels;     // Lista de paneles de quiz
+    public List<TMP_Text> questionTexts;    // Lista de textos de preguntas
+    public List<TMP_Text> feedbackTexts;    // Lista de textos de retroalimentaci√≥n
+    public List<TMP_Text> timerTexts;       // Lista de textos de cron√≥metros
+    public List<TMP_Text> playerScoreTexts; // Lista de textos de puntajes por jugador
+    public List<TMP_Text> teamScoreTexts;   // Lista de textos de puntajes del equipo
 
-    public TMP_Text feedbackTextA;       // Texto de retroalimentaciÛn: Correcto/Incorrecto
-    public TMP_Text feedbackTextB;       // Texto de retroalimentaciÛn: Correcto/Incorrecto
-    public TMP_Text feedbackTextC;       // Texto de retroalimentaciÛn: Correcto/Incorrecto
+    public List<Button> answerButtons;     // Lista de botones de respuestas
 
-    private List<Question> questions = new List<Question>(); // Lista de preguntas
-    private Question currentQuestion;   // Pregunta actual
+    public Sprite defaultSprite; // Sprite por defecto
+
+    public Sprite correctSprite; // Sprite para respuesta correcta
+    public Sprite incorrectSprite; // Sprite para respuesta incorrecta
+    public AudioClip correctSound; // Sonido para respuesta correcta
+    public AudioClip incorrectSound; // Sonido para respuesta incorrecta
+    private AudioSource audioSource; // Componente AudioSource para reproducir sonidos
+
+    private List<Question> questions = new List<Question>();         // Lista de preguntas
+    private List<Question> selectedQuestions = new List<Question>(); // Lista de preguntas seleccionadas aleatoriamente
+    private Question currentQuestion;                                // Pregunta actual
     private int currentQuestionIndex = 0;
+
+    private int playersReady = 0;       // Contador de jugadores listos
+    private int totalPlayers = 5;       // N√∫mero total de jugadores (configurable)
+
+    private int teamScore = 0;          // Puntaje del equipo
+    private List<int> playerScores = new List<int>(); // Puntajes de los jugadores
+
+    private float timer = 5.0f;         // Tiempo para responder cada pregunta
+    private bool isTimerRunning = false; // Indicador de si el cron√≥metro est√° activo
 
     void Start()
     {
-        InitializeQuestions();
-        LoadQuestion();
-        AssignButtonListeners();
+        // Inicio mi componente AudioSource
+        audioSource = GetComponent<AudioSource>();
+
+        // Inicializar puntajes para todos los jugadores
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            playerScores.Add(0);
+        }
+
+        // Ocultar todos los paneles de quiz y bienvenida al inicio
+        foreach (var panel in quizPanels)
+        {
+            panel.SetActive(false);
+        }
+
+        foreach (var panel in welcomePanels)
+        {
+            panel.SetActive(false);
+        }
+
+        // Configurar el n√∫mero de jugadores
+        if (totalPlayers < 2)
+        {
+            Debug.LogError("El n√∫mero de jugadores debe ser al menos 2.");
+            return;
+        }
+
+        // Mostrar los paneles y asignar eventos a los botones de inicio
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            welcomePanels[i].SetActive(true);
+            startButtons[i].onClick.AddListener(OnPlayerReady);
+        }
     }
 
-    // Inicializar las preguntas y respuestas
+    // M√©todo llamado cuando un jugador presiona el bot√≥n start
+    void OnPlayerReady()
+    {
+        playersReady++;
+        if (playersReady == totalPlayers)
+        {
+            Invoke("StartQuiz", 1.5f);
+        }
+    }
+
+    // Inicia el juego de preguntas y respuestas
+    void StartQuiz()
+    {
+        // Ocultar los paneles de bienvenida y mostrar los paneles del quiz
+        foreach (var panel in welcomePanels)
+        {
+            panel.SetActive(false);
+        }
+
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            quizPanels[i].SetActive(true);
+        }
+
+        InitializeQuestions();
+        SelectRandomQuestions(); // Selecciona 10 preguntas aleatorias
+        LoadQuestion();
+    }
+
+    // Inicializa preguntas y respuestas
     void InitializeQuestions()
     {
         questions.Add(new Question
         {
-            questionText = "øQuÈ es Phishing?",
+            questionText = "¬øQu√© es Phishing?",
             answers = new List<string>
         {
-            "A: Un mÈtodo de ataque que busca obtener informaciÛn personal mediante engaÒos.",
+            "A: Un m√©todo de ataque que busca obtener informaci√≥n personal mediante enga√±os.",
             "B: Un tipo de malware que infecta sistemas operativos.",
-            "C: Un ataque para bloquear el acceso a una red."
+            "C: Un ataque para bloquear el acceso a una red.",
+            "D: Un m√©todo para interceptar comunicaciones cifradas.",
+            "E: Un sistema para mejorar la seguridad de contrase√±as."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ hace un Ransomware?",
+            questionText = "¬øQu√© hace un Ransomware?",
             answers = new List<string>
         {
             "A: Roba credenciales de acceso.",
             "B: Cifra datos del usuario y pide un rescate para devolverlos.",
-            "C: Infecta el hardware del equipo."
+            "C: Infecta el hardware del equipo.",
+            "D: Monitorea la actividad en el navegador web.",
+            "E: Cambia las configuraciones del sistema sin permiso."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Troyano?",
+            questionText = "¬øQu√© es un Troyano?",
             answers = new List<string>
         {
-            "A: Un tipo de virus diseÒado para replicarse.",
-            "B: Una herramienta de protecciÛn contra malware.",
-            "C: Un programa malicioso disfrazado de software legÌtimo."
+            "A: Un tipo de virus dise√±ado para replicarse.",
+            "B: Una herramienta de protecci√≥n contra malware.",
+            "C: Un programa malicioso disfrazado de software leg√≠timo.",
+            "D: Un ataque dise√±ado para saturar una red.",
+            "E: Un sistema para detectar actividad sospechosa."
         },
             correctAnswerIndex = 2
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque de fuerza bruta?",
+            questionText = "¬øQu√© es un ataque de fuerza bruta?",
             answers = new List<string>
         {
-            "A: Un ataque que prueba todas las combinaciones posibles para descifrar contraseÒas.",
-            "B: Una estrategia para engaÒar a un usuario mediante ingenierÌa social.",
-            "C: Un virus que borra datos autom·ticamente."
+            "A: Un ataque que prueba todas las combinaciones posibles para descifrar contrase√±as.",
+            "B: Una estrategia para enga√±ar a un usuario mediante ingenier√≠a social.",
+            "C: Un virus que borra datos autom√°ticamente.",
+            "D: Un m√©todo para obtener acceso f√≠sico a servidores.",
+            "E: Una t√©cnica para manipular bases de datos."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Botnet?",
+            questionText = "¬øQu√© es un Botnet?",
             answers = new List<string>
         {
             "A: Un programa antivirus avanzado.",
             "B: Una red de dispositivos infectados controlados de forma remota.",
-            "C: Una tÈcnica para realizar phishing."
+            "C: Una t√©cnica para realizar phishing.",
+            "D: Un m√©todo para proteger la privacidad en l√≠nea.",
+            "E: Un sistema para evitar ataques DoS."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque DoS (Denial of Service)?",
+            questionText = "¬øQu√© es un ataque DoS (Denial of Service)?",
             answers = new List<string>
         {
-            "A: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
+            "A: Un intento de explotar vulnerabilidades de hardware.",
             "B: Un ataque que roba credenciales de usuarios.",
-            "C: Un malware diseÒado para cifrar datos personales."
+            "C: Un malware dise√±ado para cifrar datos personales.",
+            "D: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
+            "E: Un m√©todo de redirecci√≥n maliciosa en navegadores."
         },
-            correctAnswerIndex = 0
+            correctAnswerIndex = 3
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Rootkit?",
+            questionText = "¬øQu√© es un Rootkit?",
             answers = new List<string>
         {
-            "A: Un software que permite acceso oculto a un sistema y evita su detecciÛn.",
+            "A: Un software que permite acceso oculto a un sistema y evita su detecci√≥n.",
             "B: Una herramienta de monitoreo de red.",
-            "C: Un ataque DoS avanzado."
+            "C: Un ataque DoS avanzado.",
+            "D: Un programa para cifrar datos personales.",
+            "E: Un sistema de control remoto para servidores."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un certificado SSL?",
+            questionText = "¬øQu√© es un certificado SSL?",
             answers = new List<string>
         {
             "A: Un ataque para descifrar datos cifrados.",
-            "B: Un sistema de autenticaciÛn para comunicaciones cifradas.",
-            "C: Un sistema para realizar ingenierÌa social avanzada."
+            "B: Un sistema de autenticaci√≥n para comunicaciones cifradas.",
+            "C: Un sistema para realizar ingenier√≠a social avanzada.",
+            "D: Un est√°ndar de seguridad para redes locales.",
+            "E: Un tipo de malware dise√±ado para servidores."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque SQL Injection?",
+            questionText = "¬øQu√© es un ataque SQL Injection?",
             answers = new List<string>
         {
-            "A: Un ataque que inyecta cÛdigo malicioso en bases de datos a travÈs de consultas.",
-            "B: Una tÈcnica para realizar ataques de phishing.",
-            "C: Un mÈtodo para prevenir el uso de contraseÒas dÈbiles."
+            "A: Un m√©todo para prevenir el uso de contrase√±as d√©biles.",
+            "B: Una t√©cnica para realizar ataques de phishing.",
+            "C: Un ataque que inyecta c√≥digo malicioso en bases de datos a trav√©s de consultas.",
+            "D: Una vulnerabilidad que permite acceso remoto no autorizado.",
+            "E: Una t√©cnica para deshabilitar configuraciones de seguridad."
         },
-            correctAnswerIndex = 0
+            correctAnswerIndex = 2
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ significa el tÈrmino Spoofing?",
+            questionText = "¬øQu√© significa el t√©rmino Spoofing?",
             answers = new List<string>
         {
-            "A: Una tÈcnica para falsificar la identidad o direcciÛn de origen.",
-            "B: Un ataque diseÒado para robar datos personales mediante redes sociales.",
-            "C: Un tipo de malware que infecta dispositivos mÛviles."
+            "A: Un ataque dise√±ado para robar datos personales mediante redes sociales.",
+            "B: Un tipo de malware que infecta dispositivos m√≥viles.",
+            "C: Un m√©todo para cifrar datos sensibles.",
+            "D: Un software para controlar dispositivos remotamente.",
+            "E: Una t√©cnica para falsificar la identidad o direcci√≥n de origen."
         },
-            correctAnswerIndex = 0
+            correctAnswerIndex = 4
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque de IngenierÌa Social?",
+            questionText = "¬øQu√© es un ataque de Ingenier√≠a Social?",
             answers = new List<string>
         {
-            "A: Un ataque tÈcnico dirigido a sistemas operativos.",
-            "B: Una estrategia para manipular a las personas y obtener informaciÛn confidencial.",
-            "C: Una tÈcnica para proteger informaciÛn personal."
+            "A: Un ataque t√©cnico dirigido a sistemas operativos.",
+            "B: Una estrategia para manipular a las personas y obtener informaci√≥n confidencial.",
+            "C: Una t√©cnica para proteger informaci√≥n personal.",
+            "D: Un tipo de malware dise√±ado para redes sociales.",
+            "E: Un sistema de detecci√≥n de intrusos."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque Man-in-the-Middle (MITM)?",
+            questionText = "¬øQu√© es un ataque Man-in-the-Middle (MITM)?",
             answers = new List<string>
         {
-            "A: Un ataque donde un tercero intercepta y manipula la comunicaciÛn entre dos partes.",
-            "B: Un malware que se propaga autom·ticamente en una red.",
-            "C: Un software que permite descifrar contraseÒas."
+            "A: Un ataque donde un tercero intercepta y manipula la comunicaci√≥n entre dos partes.",
+            "B: Un malware que se propaga autom√°ticamente en una red.",
+            "C: Un software que permite descifrar contrase√±as.",
+            "D: Un m√©todo para evitar conexiones seguras.",
+            "E: Un sistema para enga√±ar a usuarios mediante ingenier√≠a social."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es el Criptojacking?",
+            questionText = "¬øQu√© es el Criptojacking?",
             answers = new List<string>
         {
             "A: Un ataque que roba criptomonedas directamente de carteras digitales.",
             "B: Un ataque que utiliza recursos de dispositivos infectados para minar criptomonedas.",
-            "C: Una tÈcnica de protecciÛn contra ransomware."
+            "C: Una t√©cnica de protecci√≥n contra ransomware.",
+            "D: Un software para realizar pagos seguros.",
+            "E: Un ataque para deshabilitar la red de miner√≠a."
         },
             correctAnswerIndex = 1
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Zero-Day?",
+            questionText = "¬øQu√© es un Zero-Day?",
             answers = new List<string>
         {
             "A: Una vulnerabilidad desconocida explotada antes de que el desarrollador lance un parche.",
-            "B: Un malware diseÒado para desactivar software antivirus.",
-            "C: Un sistema de monitoreo de tr·fico de red."
+            "B: Un malware dise√±ado para desactivar software antivirus.",
+            "C: Un sistema de monitoreo de tr√°fico de red.",
+            "D: Un m√©todo para proteger contrase√±as d√©biles.",
+            "E: Un ataque dirigido a hardware obsoleto."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un Keylogger?",
+            questionText = "¬øQu√© es un Keylogger?",
             answers = new List<string>
         {
             "A: Un malware que registra las pulsaciones del teclado.",
             "B: Un ataque para bloquear redes sociales.",
-            "C: Una tÈcnica de recuperaciÛn de datos."
+            "C: Una t√©cnica de recuperaci√≥n de datos.",
+            "D: Un sistema para encriptar contrase√±as autom√°ticamente.",
+            "E: Un ataque dise√±ado para desactivar firewalls."
         },
             correctAnswerIndex = 0
         });
 
         questions.Add(new Question
         {
-            questionText = "øQuÈ es un ataque de Spear Phishing?",
+            questionText = "¬øQu√© es un ataque de Spear Phishing?",
             answers = new List<string>
         {
-            "A: Una versiÛn m·s especÌfica y dirigida de un ataque de phishing.",
-            "B: Un ataque para deshabilitar contraseÒas cifradas.",
-            "C: Un software de monitoreo avanzado."
+            "A: Una versi√≥n m√°s espec√≠fica y dirigida de un ataque de phishing.",
+            "B: Un ataque para deshabilitar contrase√±as cifradas.",
+            "C: Un software de monitoreo avanzado.",
+            "D: Una t√©cnica para infectar bases de datos.",
+            "E: Un sistema para rastrear correos electr√≥nicos falsificados."
         },
             correctAnswerIndex = 0
         });
+
+    }
+
+
+    // Selecciona 10 preguntas aleatorias
+    void SelectRandomQuestions()
+    {
+        List<Question> tempQuestions = new List<Question>(questions);
+        for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, tempQuestions.Count);
+            selectedQuestions.Add(tempQuestions[randomIndex]);
+            tempQuestions.RemoveAt(randomIndex);
+        }
     }
 
     // Cargar una pregunta y respuestas en los paneles
     void LoadQuestion()
     {
-        if (currentQuestionIndex >= questions.Count)
+        if (currentQuestionIndex >= selectedQuestions.Count)
         {
-            feedbackTextA.text = "°Has completado todas las preguntas!";
-            feedbackTextB.text = "°Has completado todas las preguntas!";
-            feedbackTextC.text = "°Has completado todas las preguntas!";
+            foreach (var text in questionTexts)
+            {
+                text.text = "Juego terminado. Puntuaci√≥n del equipo: " + teamScore;
+            }
+
+            foreach (var feedback in feedbackTexts)
+            {
+                feedback.text = ""; // Limpio los textos de retroalimentaci√≥n
+            }
+
+            DisableButtons();
             return;
         }
 
-        currentQuestion = questions[currentQuestionIndex];
-        feedbackTextA.text = ""; // Limpiar mensajes de retroalimentaciÛn
-        feedbackTextB.text = ""; // Limpiar mensajes de retroalimentaciÛn
-        feedbackTextC.text = ""; // Limpiar mensajes de retroalimentaciÛn
+        foreach (var button in answerButtons)
+        {
+            button.image.sprite = defaultSprite; // Establecer mi sprite por defecto.
+        }
 
-        // Mostrar la pregunta y respuestas
-        questionTextPanelA.text = currentQuestion.questionText;
-        questionTextPanelB.text = currentQuestion.questionText;
-        questionTextPanelC.text = currentQuestion.questionText;
+        currentQuestion = selectedQuestions[currentQuestionIndex];
 
-        feedbackTextA.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[0];
-        feedbackTextB.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[1];
-        feedbackTextC.GetComponentInChildren<TMP_Text>().text = currentQuestion.answers[2];
-    }
+        foreach (var feedback in feedbackTexts)
+        {
+            feedback.text = ""; // Limpiar mensajes de retroalimentaci√≥n
+        }
 
-    // Asignar eventos a los botones
-    void AssignButtonListeners()
-    {
-        buttonPanelA.onClick.AddListener(() => CheckAnswer(0));
-        buttonPanelB.onClick.AddListener(() => CheckAnswer(1));
-        buttonPanelC.onClick.AddListener(() => CheckAnswer(2));
+        EnableButtons();
+
+        // Mostrar la pregunta
+        foreach (var text in questionTexts)
+        {
+            text.text = currentQuestion.questionText;
+        }
+
+        // Mezclar las respuestas y asignarlas a los paneles
+        List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
+        System.Random random = new System.Random(); // Generador de n√∫meros aleatorios
+
+        // Remover el √≠ndice de la respuesta correcta
+        numbers.Remove(currentQuestion.correctAnswerIndex);
+
+        // Crear la lista de respuestas mezcladas
+        List<int> answers = new List<int>();
+
+        // Mezclar los √≠ndices de respuestas incorrectas
+        numbers = numbers.OrderBy(x => random.Next()).ToList();
+
+        // Agregar respuestas incorrectas
+        for (int i = 0; i < totalPlayers - 1; i++)
+        {
+            answers.Add(numbers[i]);
+        }
+
+        // Agregar la respuesta correcta
+        answers.Add(currentQuestion.correctAnswerIndex);
+
+        // Mezclar las respuestas finales
+        answers = answers.OrderBy(x => random.Next()).ToList();
+
+        // Asignar las respuestas a los paneles de texto
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            feedbackTexts[i].text = currentQuestion.answers[answers[i]];
+        }
+
+        timer = 5.0f; // Reiniciar el cron√≥metro
+        isTimerRunning = true;
+
+        // Limpiar y agregar listeners a los botones
+        for (int i = 0; i < totalPlayers; i++)
+        {
+            int index = i;
+            // Limpiar cualquier listener anterior
+            answerButtons[i].onClick.RemoveAllListeners();
+            // Agregar el listener actual
+            answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
+        }
+
     }
 
     // Verificar si la respuesta es correcta
-    void CheckAnswer(int selectedIndex)
+    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
     {
-        if (selectedIndex == currentQuestion.correctAnswerIndex)
+
+        if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
-            feedbackTextA.text = "°Respuesta Correcta!";
-            feedbackTextB.text = "°Respuesta Correcta!";
-            feedbackTextC.text = "°Respuesta Correcta!";
+            DisableButtons();
+
+            answerButtons[selectedIndex].image.sprite = correctSprite; // Cambiar a verde
+            audioSource.PlayOneShot(correctSound); // Reproducir sonido correcto
+            answerButtons[selectedIndex].interactable = false;
+
+            foreach (var feedback in feedbackTexts)
+            {
+                feedback.text = "¬°Respuesta Correcta!";
+            }
+
+            isTimerRunning = false; // Detener el cron√≥metro
+            int points = timer > 0 ? 5 : 3; // 5 puntos si respondi√≥ a tiempo, 3 si no
+            teamScore += points; // Sumar puntos al equipo
+
+            foreach (var text in teamScoreTexts)
+            {
+                text.text = "Team Score: " + teamScore;
+            }
+
+            if (timer > 0) // Puntos adicionales para el jugador
+            {
+                playerScores[selectedIndex] += 2;
+                playerScoreTexts[selectedIndex].text = "Player Score: " + playerScores[selectedIndex];
+            }
+
             currentQuestionIndex++;
-            Invoke("LoadQuestion", 1.5f); // Cargar la siguiente pregunta despuÈs de 1.5 segundos
+            Debug.Log("Current Question Index: " + currentQuestionIndex);
+            Invoke("LoadQuestion", 2.0f);
         }
         else
         {
-            feedbackTextA.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            feedbackTextB.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            feedbackTextC.text = "Respuesta Incorrecta. Intenta de nuevo.";
-            Invoke("LoadQuestion", 1.5f); // Cargar la siguiente pregunta despuÈs de 1.5 segundos
+            answerButtons[selectedIndex].image.sprite = incorrectSprite; // Cambiar a rojo
+            audioSource.PlayOneShot(incorrectSound); // Reproducir sonido incorrecto
+            feedbackTexts[selectedIndex].text = "Respuesta Incorrecta. Intenta de nuevo.";
+            answerButtons[selectedIndex].interactable = false;
         }
     }
 
+    // Actualizar el cron√≥metro
+    void Update()
+    {
+        if (isTimerRunning)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                timer = 0;
+                isTimerRunning = false; // Detener el cron√≥metro
+            }
+
+            for (int i = 0; i < totalPlayers; i++)
+            {
+                timerTexts[i].text = "Tiempo: " + Mathf.Ceil(timer);
+            }
+        }
+    }
+
+    void DisableButtons()
+    {
+        foreach (var button in answerButtons)
+        {
+            button.interactable = false;
+        }
+    }
+
+    void EnableButtons()
+    {
+        foreach (var button in answerButtons)
+        {
+            button.interactable = true;
+        }
+    }
 }

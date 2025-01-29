@@ -30,7 +30,7 @@ namespace Samples
         /// <summary>Override of <see cref="IPreprocessBuildWithReport"/> and <see cref="IPostprocessBuildWithReport"/></summary>
         public int callbackOrder
         {
-            get { return 0;  }
+            get { return 0; }
         }
 
         void CleanOldSettings()
@@ -40,8 +40,8 @@ namespace Samples
                 return;
 
             var oldSettings = from s in preloadedAssets
-                where s != null && s.GetType() == typeof(SampleSettings)
-                select s;
+                              where s != null && s.GetType() == typeof(SampleSettings)
+                              select s;
 
             if (oldSettings != null && oldSettings.Any())
             {

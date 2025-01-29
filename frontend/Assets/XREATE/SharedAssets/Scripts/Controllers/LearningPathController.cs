@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +22,6 @@ public class LearningPathController : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh");
         //loadingCanvas.SetActive(true);
         StartCoroutine(GetInActivityStudentParticipationsWithActivityAndPoints());
     }
@@ -36,9 +34,6 @@ public class LearningPathController : MonoBehaviour
         }
 
         yield return inActivityStudentParticipationService.GetAllWithActivityAndPoints(MainManager.GetUser().id);
-
-        Debug.Log("reponseCode");
-        Debug.Log(inActivityStudentParticipationService.responseCode);
 
         if (inActivityStudentParticipationService.responseCode != 200)
         {

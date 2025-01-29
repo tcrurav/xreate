@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class AuthController : MonoBehaviour
 {
@@ -36,9 +34,6 @@ public class AuthController : MonoBehaviour
         };
 
         yield return authService.Login(user);
-
-        Debug.Log("reponseCode in AuthController");
-        Debug.Log(authService.responseCode);
 
         if (authService.responseCode != 200)
         {

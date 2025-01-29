@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainNavigationManager : MonoBehaviour
@@ -28,11 +26,10 @@ public class MainNavigationManager : MonoBehaviour
 
     public static void DisableSceneContainer(string container)
     {
-        Debug.Log($"Disable Scene Container: {container}");
         GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
         containerGameObject.SetActive(false);
     }
-    
+
 }
 
 // Data persistence between scenes has been done using a singleton class
