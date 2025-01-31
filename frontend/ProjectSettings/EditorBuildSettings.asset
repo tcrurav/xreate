@@ -27,11 +27,14 @@ EditorBuildSettings:
     path: Assets/XREATE/Scenes/Corridors/TunnelConnectorCScene.unity
     guid: bc0188c2cb53623419221c826535eb91
   - enabled: 1
-    path: Assets/XREATE/Scenes/ScapeRooms/LeisureModuleScene.unity
+    path: Assets/XREATE/Scenes/ScapeRooms/ViejoLeisureModuleScene.unity
     guid: 82be57eff36da3b4a89db86b4cf27d6a
   - enabled: 1
     path: Assets/XREATE/Scenes/Corridors/TunnelConnectorFScene.unity
     guid: 07007c45e81db4b40be6f380d9be68e8
+  - enabled: 1
+    path: Assets/XREATE/Scenes/ScapeRooms/LeisureModuleScene.unity
+    guid: 8177b1a4e319c1f41bd152fb53eb822d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f794e9f00a8ffba47ad00affb57a2120,
       type: 2}
