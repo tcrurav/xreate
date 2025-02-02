@@ -76,7 +76,7 @@ npm start
 
 * In the frontend (Unity):
 
-Download the 3 folders in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and place them into frontend/Assets as indicated below:
+Download the 2 folders and a file in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and place them into frontend/Assets as indicated below:
 
 ````
 Assets/
@@ -101,6 +101,8 @@ Assets/
     │   └── Scripts/
     └── TeamWorkspaces/
         ├── LeisureModuleTeam/
+        │   └── KB3D_MTM_BldgMdFamilyHousing_A_LeisureModule   
+        │         └── KB3D_MTM_BldgMdFamilyHousing_A_LeisureModule.asset [Download from shared folder]
         ├── RoomModuleATeam/
         └── RoomModuleBTeam/
 ````

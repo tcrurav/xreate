@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 
 public class MainNavigationManager : MonoBehaviour
 {
     public static MainNavigationManager Instance;
+    public GameObject XRInteractionSetupMPVariant;
+    private TeleportationProvider m_TeleportationProvider;
 
     private void Awake()
     {
@@ -14,6 +17,27 @@ public class MainNavigationManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Start()
+    {
+        Instance.m_TeleportationProvider = m_TeleportationProvider;
+        Instance.XRInteractionSetupMPVariant = XRInteractionSetupMPVariant;
+        m_TeleportationProvider = Instance.XRInteractionSetupMPVariant.GetComponentInChildren<TeleportationProvider>();
+    }
+
+    public static void ChangePosition(Vector3 position)
+    {
+        TeleportRequest teleportRequest = new()
+        {
+            destinationPosition = position,
+            destinationRotation = Quaternion.identity
+        };
+
+        if (!Instance.m_TeleportationProvider.QueueTeleportRequest(teleportRequest))
+        {
+            Debug.LogWarning("Failed to queue teleport request");
+        }
     }
 
     public static void EnableSceneContainer(string container)
