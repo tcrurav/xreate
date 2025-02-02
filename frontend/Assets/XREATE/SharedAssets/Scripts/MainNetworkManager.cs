@@ -231,7 +231,8 @@ public class MainNetworkManager : MonoBehaviour
     {
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
-            Debug.Log("ChangePlayerPosition - MainNetworkManager 2");
+            Debug.Log($"ChangePlayerPosition - client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
+            Debug.Log($"ChangePlayerPosition - playerId: {playerId}");
             if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
             {
                 Debug.Log($"ChangePlayerPosition - MainNetworkManager 3 - PlayerId: {playerId}, newPosition: {newPosition}");

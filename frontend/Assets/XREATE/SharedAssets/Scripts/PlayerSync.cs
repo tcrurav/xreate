@@ -101,6 +101,9 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using Unity.Services.Lobbies.Models;
+using XRMultiplayer;
+using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
+using Unity.Services.Matchmaker.Models;
 
 public class PlayerSync : NetworkBehaviour
 {
@@ -126,16 +129,29 @@ public class PlayerSync : NetworkBehaviour
             PlayerId.Value = MainManager.GetUser().id;
             DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
             Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+
+            MovePlayerServerRpc(new Vector3(20, 20, 20)); // Set target position here
+
         }
 
-        if (IsServer)
-        {
-            Debug.Log($"OnNetworkSpawn. IsServer on Spawining");
-            PlayerIds.OnListChanged += OnPlayerIdsChanged; // Subscribe to list changes
-            Debug.Log($"OnNetworkSpawn. IsServer on Spawining 1");
-            UpdatePlayerSceneServerRpc(PlayerId.Value, "LoginScene");
-            Debug.Log($"OnNetworkSpawn. IsServer on Spawining 2");
-        }
+        //if (IsServer)
+        //{
+        //    Debug.Log($"OnNetworkSpawn. IsServer on Spawining");
+        //    PlayerIds.OnListChanged += OnPlayerIdsChanged; // Subscribe to list changes
+        //    Debug.Log($"OnNetworkSpawn. IsServer on Spawining 1");
+        //    UpdatePlayerSceneServerRpc(PlayerId.Value, "LoginScene");
+        //    Debug.Log($"OnNetworkSpawn. IsServer on Spawining 2");
+        //}
+    }
+
+    [ServerRpc]
+    void MovePlayerServerRpc(Vector3 newPosition)
+    {
+        Debug.Log($"MovePlayerServerRpc");
+        CharacterController controller = GetComponent<CharacterController>();
+        controller.enabled = false;
+        transform.position = new Vector3(20,20,20);
+        controller.enabled = true;
     }
 
     // Update a player's scene (Server only)
@@ -223,10 +239,13 @@ public class PlayerSync : NetworkBehaviour
     [ServerRpc]
     public void ChangePositionServerRpc(Vector3 newPosition)
     {
+        Debug.Log($"ChangePositionServerRpc. newPosition: {newPosition}");
         if (IsOwner)
         {
             Debug.Log($"ChangePosition, newPosition: x: {newPosition.x}, y: {newPosition.y}, z: {newPosition.z}, ");
-            transform.position = newPosition;
+            //transform.position = newPosition;
+            //XRINetworkPlayer.LocalPlayer.transform.position = newPosition;
+            MovePlayerServerRpc(newPosition); // Set target position here
             Debug.Log($"Después, ChangePosition, transform.position: x: {transform.position.x}, y: {transform.position.y}, z: {transform.position.z}, ");
         }
     }
