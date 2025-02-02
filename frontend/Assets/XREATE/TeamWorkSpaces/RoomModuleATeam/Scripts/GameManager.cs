@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using System.Linq;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject cardPrefab; // Prefab de la carta
-    public Transform board;       // Contenedor del tablero (GameBoard)
-    public int rows = 4;          // Número de filas
-    public int columns = 4;       // Número de columnas
-    public TextMeshPro timerText; // Texto 3D del temporizador
-    public float gameTime = 600f;  // Tiempo total del juego
+    public GameObject cardPrefab;
+    public Transform board;
+    public int rows = 4;
+    public int columns = 4;
+    public TextMeshPro timerText;
+    public float gameTime = 600f;
+    public ParticleSystem victoryParticles; // Referencia al sistema de partículas
+    private bool isGameOver = false; // Variable para que el temporizador no continue
 
     private Dictionary<string, string> securityTerms = new Dictionary<string, string>
     {
@@ -22,27 +25,53 @@ public class GameManager : MonoBehaviour
         { "RAT", "Remote Access Trojan" },
         { "DDoS", "Distributed Denial of Service" },
         { "Spoofing", "The act of disguising" },
-        { "Encryption", "The process of converting data" }
+        { "Encryption", "The process of converting data" },
+        { "Brute Force", "A trial-and-error attack" },
+        { "Botnet", "A network of infected computers" },
+        { "Zero-Day", "A vulnerability unknown to vendors" },
+        { "SQL Injection", "A code injection technique" },
+        { "Keylogger", "A software that records keystrokes" },
+        { "Ransomware", "A malware that locks files for ransom" },
+        { "Trojan", "A deceptive malware" },
+        { "Spyware", "A malware that spies on user data" },
+        { "Adware", "A software that displays unwanted ads" },
+        { "Backdoor", "An undocumented way to access a system" },
+        { "Social Engineering", "Manipulating people to divulge secrets" },
+        { "Man-in-the-Middle", "Intercepting communication between parties" },
+        { "Penetration Testing", "Assessing security by simulating attacks" },
+        { "Dark Web", "A hidden part of the internet" },
+        { "Ethical Hacking", "Hacking for security improvement" },
+        { "Rootkit", "A software that enables unauthorized access" },
+        { "Session Hijacking", "Taking control of an active session" },
+        { "Two-Factor Authentication", "A security measure requiring two forms of verification" },
+        { "Cryptojacking", "Unauthorized use of a device to mine cryptocurrency" },
+        { "Digital Forensics", "Investigating cybercrimes" },
+        { "Patch Management", "Keeping software updated to fix vulnerabilities" },
+        { "IDS", "Intrusion Detection System" }
     };
 
-    private List<string> keys = new List<string>();   // Claves para las cartas
-    private List<string> values = new List<string>(); // Valores para las cartas
-    private VRCardFlip firstCard;                     // Primera carta seleccionada
-    private VRCardFlip secondCard;                    // Segunda carta seleccionada
-    private bool canFlip = true;                      // Controla si se pueden voltear cartas
-    private int pairsFound = 0;                       // Contador de parejas encontradas
-    private float remainingTime;                      // Tiempo restante del juego
-    private bool isTimerStarted = false;              // Para controlar si el temporizador ya ha comenzado
-    private Coroutine timerCoroutine;                  // Para almacenar la referencia del temporizador
-    private float playerTime;                         // Variable para guardar el tiempo que el jugador tarda en el juego
-
-    public static List<float> allPlayersTime = new List<float>(); // Lista para guardar el tiempo de todos los jugadores
+    private List<string> allCards = new List<string>();
+    private VRCardFlip firstCard;
+    private VRCardFlip secondCard;
+    private bool canFlip = true;
+    private int pairsFound = 0;
+    private float remainingTime;
+    private bool isTimerStarted = false;
+    private Coroutine timerCoroutine;
+    public AudioClip wrongPairSound; // sonido equivocacion
+    private AudioSource audioSource;
+    public AudioClip correctPairSound; // Sonido cuando se acierta una pareja
+    private float playerTime;
+    public static List<float> allPlayersTime = new List<float>();
+    private float penaltyTime = 0f; // Variable para acumular el tiempo de penalización
 
     private void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+
         if (board == null)
         {
-            Debug.LogError("GameBoard no asignado en el GameManager");
+            Debug.LogError("GameBoard not assigned in GameManager");
             return;
         }
 
@@ -53,19 +82,20 @@ public class GameManager : MonoBehaviour
 
     private void GenerateBoard()
     {
-        // Dividir claves y valores en listas separadas
-        foreach (var pair in securityTerms)
+        allCards.Clear();
+
+        // Seleccionar 8 términos completos (clave + valor)
+        var selectedPairs = securityTerms.OrderBy(x => Random.value).Take(8).ToList();
+
+        foreach (var pair in selectedPairs)
         {
-            keys.Add(pair.Key);   // Agregar la clave
-            values.Add(pair.Value); // Agregar el valor
+            allCards.Add(pair.Key);   // Añadir la clave
+            allCards.Add(pair.Value); // Añadir el valor
         }
 
-        // Crear una lista de cartas y mezclarlas
-        List<string> allCards = new List<string>(keys);
-        allCards.AddRange(values);
-        Shuffle(allCards); // Mezclar las cartas para la distribución aleatoria
+        Shuffle(allCards);
 
-        // Generar cartas en el tablero
+        // Colocación de cartas en una cuadrícula uniforme
         int index = 0;
         float cardSpacing = 0.5f; // Separación uniforme entre cartas (horizontal y vertical)
         float fixedX = 0f;        // Mantener constante el eje X
@@ -99,9 +129,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             int randomIndex = Random.Range(i, list.Count);
-            string temp = list[i];
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
 
@@ -109,12 +137,17 @@ public class GameManager : MonoBehaviour
     {
         while (remainingTime > 0)
         {
+            if (isGameOver) yield break;  // Si el juego terminó, detener el temporizador
+
             yield return new WaitForSeconds(1f);
             remainingTime--;
             UpdateTimerText();
         }
 
-        GameOver(false);
+        if (!isGameOver)  // Evita que se active GameOver si ya se ganó
+        {
+            GameOver(false);
+        }
     }
 
     private void UpdateTimerText()
@@ -124,115 +157,143 @@ public class GameManager : MonoBehaviour
 
     public void CardFlipped(VRCardFlip card)
     {
-        if (!canFlip || card.IsLocked) return; // Si no se puede voltear la carta o ya está bloqueada, no hace nada
+        if (!canFlip || card.IsLocked) return;
 
-        // Iniciar el temporizador al tocar la primera carta
         if (!isTimerStarted)
         {
             isTimerStarted = true;
-            timerCoroutine = StartCoroutine(GameTimer()); // Iniciar el temporizador solo cuando se toque la primera carta
+            timerCoroutine = StartCoroutine(GameTimer());
         }
 
         if (firstCard == null)
         {
-            firstCard = card; // Asignar la primera carta
+            firstCard = card;
         }
-        else if (secondCard == null)
+        else
         {
-            secondCard = card; // Asignar la segunda carta
+            secondCard = card;
             StartCoroutine(CheckMatch());
         }
     }
 
     private IEnumerator CheckMatch()
     {
-        canFlip = false; // Evitar que se giren más cartas mientras comprobamos la pareja
+        canFlip = false;  // Bloquear interacciones mientras se verifica
+        yield return new WaitForSeconds(1f);  // Esperar para que el jugador vea las cartas
 
-        yield return new WaitForSeconds(1f); // Esperar un segundo para mostrar las cartas giradas
-
-        if (IsMatch(firstCard, secondCard)) // Comprobamos si es una pareja
+        if (IsMatch(firstCard, secondCard))
         {
-            firstCard.LockCard(); // Bloquear las cartas emparejadas
+            firstCard.LockCard();
             secondCard.LockCard();
             pairsFound++;
+            audioSource.PlayOneShot(correctPairSound);
 
-            if (pairsFound >= securityTerms.Count) // Si ya encontramos todas las parejas
+            if (pairsFound >= 8)
             {
-                GameOver(true); // Terminar el juego con victoria
-                yield break; // Salir del método
+                playerTime += penaltyTime;  // Sumar penalización solo si gana
+                GameOver(true);
+                yield break;  // Detener la función
             }
         }
         else
         {
-            firstCard.ResetCard(); // Volver a girar las cartas si no son iguales
-            secondCard.ResetCard();
+            // Asegurar que ambas cartas se volteen si no coinciden
+            firstCard?.ResetCard();
+            secondCard?.ResetCard();
+            remainingTime = Mathf.Max(0, remainingTime - 10f);  // Penalización de tiempo
+            UpdateTimerText();
+
+            if (wrongPairSound != null) // Reproduce sonido error
+            {
+                audioSource.PlayOneShot(wrongPairSound);
+            }
         }
 
-        // Reiniciar el estado de las cartas
+        // Restablecer variables para la siguiente ronda
         firstCard = null;
         secondCard = null;
-        canFlip = true; // Ahora se pueden voltear nuevas cartas
+        canFlip = true;  // Permitir giros nuevamente
     }
+
 
     private bool IsMatch(VRCardFlip card1, VRCardFlip card2)
     {
-        // Verificamos si el texto de las dos cartas coinciden
-        return (securityTerms.ContainsKey(card1.cardText) && securityTerms[card1.cardText] == card2.cardText) ||
-               (securityTerms.ContainsValue(card1.cardText) && GetKeyByValue(card1.cardText) == card2.cardText);
-    }
-
-    private string GetKeyByValue(string value)
-    {
-        foreach (var pair in securityTerms)
-        {
-            if (pair.Value == value) return pair.Key;
-        }
-        return null;
+        return securityTerms.ContainsKey(card1.cardText) && securityTerms[card1.cardText] == card2.cardText ||
+               securityTerms.ContainsKey(card2.cardText) && securityTerms[card2.cardText] == card1.cardText;
     }
 
     private void GameOver(bool won)
     {
-        canFlip = false; // Ya no se pueden voltear cartas
+        isGameOver = true;  //Marcar que el juego ha terminado para evitar reinicios
 
-        // Guardamos el tiempo del jugador al finalizar
-        playerTime = gameTime - remainingTime;  // Calculamos el tiempo que el jugador ha tardado
-        allPlayersTime.Add(playerTime);         // Guardamos el tiempo en la lista
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);  // Detener completamente el temporizador
+            timerCoroutine = null;
+        }
 
-        // Si ganaste, detener el temporizador
         if (won)
         {
-            StopCoroutine(timerCoroutine);
-            timerText.text = "You Win!!!";
+            playerTime += (gameTime - remainingTime);
+            allPlayersTime.Add(playerTime);
+
+            Debug.Log($" Congratulations! You have won in {playerTime:F2} seconds.");
+            timerText.text = $"YOU WIN! Time: {playerTime:F2} seconds";
+
+            if (victoryParticles != null)
+            {
+                victoryParticles.Play();
+            }
         }
         else
         {
-            // Si perdiste (tiempo agotado), reiniciar el juego
-            RestartGame();
+            penaltyTime += 10f;
+            Debug.Log("Time’s up. Game Over.");
+            timerText.text = "YOU HAVE LOST! Time out.";
+            StartCoroutine(RestartGameWithPenalty());  //Se ejecuta solo en caso de derrota
         }
-
-        // Mostrar el tiempo del jugador (opcional)
-        Debug.Log($"Player's Time: {playerTime:F2}s");
     }
 
-    private void RestartGame()
+    private IEnumerator RestartGameWithPenalty()
     {
-        // Reiniciar los valores del juego
-        pairsFound = 0;
-        remainingTime = gameTime;
-        isTimerStarted = false;
-        firstCard = null;
-        secondCard = null;
-        canFlip = true;
+        yield return new WaitForSeconds(3f);  //Espera antes de reiniciar
 
-        // Limpiar el tablero (eliminar las cartas actuales)
-        foreach (Transform child in board)
+        //  Destruir cartas antiguas
+        foreach (Transform card in board)
         {
-            Destroy(child.gameObject);
+            Destroy(card.gameObject);
         }
 
-        // Generar un nuevo tablero
-        GenerateBoard();
-        UpdateTimerText();
+        GenerateBoard();  // Generar nuevo tablero
+
+        // Reiniciar valores del juego
+        pairsFound = 0;
+        canFlip = true;
+        firstCard = null;
+        secondCard = null;
+
+        remainingTime = gameTime;  // Reiniciar solo si ha perdido
+        isTimerStarted = false;
+
+        UpdateTimerText();  //Mostrar tiempo actualizado
+        timerText.gameObject.SetActive(true);
+
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);  //Detener cualquier temporizador previo
+        }
+        timerCoroutine = StartCoroutine(GameTimer());  //Iniciar de nuevo el temporizador
+    }
+
+    public TextMeshPro displayedCardTextVR;  // Texto 3D en la "pantalla VR"
+
+    public void UpdateDisplayedTextVR(string text)
+    {
+        if (displayedCardTextVR != null)
+        {
+            displayedCardTextVR.text = text;  //  Mostrar el texto de la carta girada
+            displayedCardTextVR.gameObject.SetActive(!string.IsNullOrEmpty(text)); // Mostrar solo si hay texto
+        }
     }
 
 }
