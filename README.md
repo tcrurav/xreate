@@ -76,7 +76,7 @@ npm start
 
 * In the frontend (Unity):
 
-Download the 2 folders and a file in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and place them into frontend/Assets as indicated below:
+Download the 4 folders in this Google drive folder (https://drive.google.com/drive/u/0/folders/1cQXp--uMSGzDGwSNyM7TaGHgkyqevYjI) and place them into frontend/Assets as indicated below:
 
 ````
 Assets/
