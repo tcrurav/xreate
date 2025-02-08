@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 1679011705}
   - component: {fileID: 1679011704}
   m_Layer: 0
-  m_Name: ToBuildingA
+  m_Name: ToLeisureModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +721,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 166195487}
         m_TargetAssemblyTypeName: RoomChangeController, Assembly-CSharp
-        m_MethodName: ChangeToBuildingA
+        m_MethodName: ChangeToLeisureModule
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -751,7 +751,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 166195487}
         m_TargetAssemblyTypeName: RoomChangeController, Assembly-CSharp
-        m_MethodName: ChangeToBuildingA
+        m_MethodName: ChangeToLeisureModule
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -811,7 +811,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eaf581b823315204a9e7a3a504f7f441, type: 2}
+  - {fileID: 2100000, guid: 8722307f909409e4896d7703b11f5148, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
