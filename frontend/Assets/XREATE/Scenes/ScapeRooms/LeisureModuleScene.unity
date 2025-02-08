@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &187509787
 Transform:
   m_ObjectHideFlags: 0
@@ -681,6 +681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ComponentsSceneLeisureModule
+      objectReference: {fileID: 0}
+    - target: {fileID: 922047077469316155, guid: c64afd2201971bd45b3cb947424608c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3768325129104670838, guid: c64afd2201971bd45b3cb947424608c9,
         type: 3}
