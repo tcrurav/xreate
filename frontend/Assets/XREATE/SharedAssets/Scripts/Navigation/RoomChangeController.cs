@@ -10,6 +10,7 @@ public class RoomChangeController : MonoBehaviour
     private readonly Vector3 OffsetCorridorToLeisureModule = new(99f, 6.75f, 11.5f);
     private readonly Vector3 OffsetLeisureModule = new(104f, 6.5f, 16f);
     private readonly Vector3 OffsetBuildingA = new(0, 0, -12);
+    private readonly Vector3 OffsetBuildingATopStairs = new(9, 5f, -20);
 
     public void ChangeToRoomModuleA()
     {
@@ -66,6 +67,14 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
         MainNavigationManager.ChangePosition(OffsetBuildingA);
+    }
+
+    public void ChangeToBuildingATopStairs()
+    {
+        //MainNetworkManager.ShowAllStudents();
+        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
+        //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
+        MainNavigationManager.ChangePosition(OffsetBuildingATopStairs);
     }
 
     private void ChangePlayerPosition(int playerId, Vector3 newPosition)

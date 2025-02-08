@@ -682,7 +682,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ComponentsSceneLeisureModule
       objectReference: {fileID: 0}
-    - target: {fileID: 922047077469316155, guid: c64afd2201971bd45b3cb947424608c9,
+    - target: {fileID: 1281947817298830354, guid: c64afd2201971bd45b3cb947424608c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231058374301376908, guid: c64afd2201971bd45b3cb947424608c9,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -742,10 +747,30 @@ PrefabInstance:
       propertyPath: m_CameraTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7802093965838115365, guid: c64afd2201971bd45b3cb947424608c9,
+        type: 3}
+      propertyPath: defaultColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003589554490279979, guid: c64afd2201971bd45b3cb947424608c9,
+        type: 3}
+      propertyPath: defaultColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521175385892724543, guid: c64afd2201971bd45b3cb947424608c9,
+        type: 3}
+      propertyPath: particles3
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8795866059643958413, guid: c64afd2201971bd45b3cb947424608c9,
         type: 3}
       propertyPath: m_CameraTransform
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202826537671836575, guid: c64afd2201971bd45b3cb947424608c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -772,7 +797,7 @@ GameObject:
   - component: {fileID: 2067522213}
   - component: {fileID: 2067522212}
   m_Layer: 0
-  m_Name: ToBuildingA
+  m_Name: ToBuildingATopStairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,7 +869,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 924076773}
         m_TargetAssemblyTypeName: RoomChangeController, Assembly-CSharp
-        m_MethodName: ChangeToBuildingA
+        m_MethodName: ChangeToBuildingATopStairs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -872,9 +897,9 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 924076773}
         m_TargetAssemblyTypeName: RoomChangeController, Assembly-CSharp
-        m_MethodName: ChangeToBuildingA
+        m_MethodName: ChangeToBuildingATopStairs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -934,7 +959,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eaf581b823315204a9e7a3a504f7f441, type: 2}
+  - {fileID: 2100000, guid: fc0535a17f23d9246852570e73d203a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
