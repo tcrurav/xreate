@@ -257,22 +257,22 @@ public class HologramLightManager : MonoBehaviour
 
         yield return new WaitForSeconds(delayBetweenGroups); // Espera entre el grupo de A y B
 
-        // Iterar por cada "foco B" (segundo foco de cada conjunto)
-        //for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
-        //{
-        //    Debug.Log($"Seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet: {setIndex} de {lightSets.Length}");
-        //    lightSets[setIndex].SetLightProperties(1, color, intensity); // Enciende el foco B
-        //    yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
-        //}
+        //Iterar por cada "foco B"(segundo foco de cada conjunto)
+        for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
+        {
+            Debug.Log($"Seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet: {setIndex} de {lightSets.Length}");
+            lightSets[setIndex].SetLightProperties(1, color, intensity); // Enciende el foco B
+            yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
+        }
 
-        //yield return new WaitForSeconds(delayBetweenGroups); // Espera entre el grupo de B y C
+        yield return new WaitForSeconds(delayBetweenGroups); // Espera entre el grupo de B y C
 
-        //// Iterar por cada "foco C" (tercer foco de cada conjunto)
-        //for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
-        //{
-        //    lightSets[setIndex].SetLightProperties(2, color, intensity); // Enciende el foco C
-        //    yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
-        //}
+        // Iterar por cada "foco C" (tercer foco de cada conjunto)
+        for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
+        {
+            lightSets[setIndex].SetLightProperties(2, color, intensity); // Enciende el foco C
+            yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
+        }
     }
 
 

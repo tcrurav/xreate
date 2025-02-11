@@ -28,6 +28,9 @@ public class ConnectedUsersController : MonoBehaviour
             int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
             Debug.Log("studentId:");
             Debug.Log(studentId);
+            string studentName = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
+            Debug.Log("studentName:");
+            Debug.Log(studentName);
             int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
             Debug.Log("clientTeamId:");
             Debug.Log(clientTeamId);
@@ -41,6 +44,7 @@ public class ConnectedUsersController : MonoBehaviour
             GameObject textObject = FindObject.FindInsideParentByName(newButton, "Text (TMP)");
             textObject.GetComponent<TMP_Text>().SetText(
                 "StudentId: " + studentId.ToString() + "<br>" +
+                "StudentName: " + studentName + "<br>" +
                 "TeamId: " + clientTeamId.ToString() +
                 " - " + rejoin);
 

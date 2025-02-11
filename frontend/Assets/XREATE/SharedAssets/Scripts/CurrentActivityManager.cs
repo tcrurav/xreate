@@ -33,6 +33,11 @@ public class CurrentActivityManager : MonoBehaviour
         Instance.currentActivityId = activityId;
     }
 
+    public static int GetCurrentActivityId()
+    {
+        return Instance.currentActivityId;
+    }
+
     public static IEnumerator Refresh()
     {
         yield return Instance.GetInActivityStudentParticipationsByActivityId();
