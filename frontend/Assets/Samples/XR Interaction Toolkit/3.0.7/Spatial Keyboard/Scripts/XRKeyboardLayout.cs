@@ -34,7 +34,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.SpatialKeyboard
             }
         }
 
-        XRKeyboardKey[] m_Keys;
+        XRKeyboardKey [] m_Keys;
 
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.

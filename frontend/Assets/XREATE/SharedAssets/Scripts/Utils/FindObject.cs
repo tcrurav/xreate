@@ -1,3 +1,5 @@
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 public class FindObject
@@ -7,6 +9,19 @@ public class FindObject
     {
         Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
         foreach (Transform t in trs)
+        {
+            if (t.name == name)
+            {
+                return t.gameObject;
+            }
+        }
+        return null;
+    }
+
+    public static GameObject FindInsideNetworkObjectParentByName(NetworkObject parent, string name)
+    {
+        TMP_Text[] trs = parent.GetComponentsInChildren<TMP_Text>(true);
+        foreach (TMP_Text t in trs)
         {
             if (t.name == name)
             {

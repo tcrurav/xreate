@@ -15,10 +15,10 @@ public class LoadScenesAdditivelyManager : MonoBehaviour
         SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("RoomModuleAScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
-        //SceneManager.LoadSceneAsync("LeisureModuleScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("LeisureModuleScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("TunnelConnectorCScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("TunnelConnectorFScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("TunnelConnectorDScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("TunnelConnectorDScene", LoadSceneMode.Additive); // This corridor will not be used but has to be visible
     }
 
 }

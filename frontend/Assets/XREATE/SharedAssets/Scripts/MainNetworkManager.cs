@@ -227,20 +227,20 @@ public class MainNetworkManager : MonoBehaviour
         }
     }
 
-    public static void ChangePlayerPosition(int playerId, Vector3 newPosition)
-    {
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            Debug.Log($"ChangePlayerPosition - client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
-            Debug.Log($"ChangePlayerPosition - playerId: {playerId}");
-            if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
-            {
-                Debug.Log($"ChangePlayerPosition - MainNetworkManager 3 - PlayerId: {playerId}, newPosition: {newPosition}");
-                client.PlayerObject.GetComponent<PlayerSync>().ChangePositionServerRpc(newPosition);
-                return;
-            }
-        }
-    }
+    //public static void ChangePlayerPosition(int playerId, Vector3 newPosition)
+    //{
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        Debug.Log($"ChangePlayerPosition - client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
+    //        Debug.Log($"ChangePlayerPosition - playerId: {playerId}");
+    //        if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
+    //        {
+    //            Debug.Log($"ChangePlayerPosition - MainNetworkManager 3 - PlayerId: {playerId}, newPosition: {newPosition}");
+    //            client.PlayerObject.GetComponent<PlayerSync>().ChangePositionServerRpc(newPosition);
+    //            return;
+    //        }
+    //    }
+    //}
 
     //public static void HideAllStudentsOfOtherTeams()
     //{

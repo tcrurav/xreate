@@ -2351,7 +2351,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1197830601}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -5411,7 +5411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Localhost
+  m_text: Gran Canaria
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9374,6 +9374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890d351bcb11f5245838066b83e72d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1197830601 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8383550645295993585, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+    type: 3}
+  m_PrefabInstance: {fileID: 1824528581}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1199207607
 GameObject:
   m_ObjectHideFlags: 0
@@ -9590,7 +9596,7 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 1120439256}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 1
   m_MultiSelect: 0
   m_Options:
     m_Options:
@@ -12564,6 +12570,11 @@ PrefabInstance:
       propertyPath: offlinePosition.z
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 3342439012857835787, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3650905337081058800, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
       propertyPath: m_Value
@@ -12637,6 +12648,11 @@ PrefabInstance:
     - target: {fileID: 4293411706908256769, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994869976592028576, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5187516752444087277, guid: 77ac6b10722bcca4a8baf70e44d89e78,
@@ -12713,6 +12729,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777068131698123240, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265246439780017293, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1197830601}
+    - target: {fileID: 6265246439780017293, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+        type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6841791697267637247, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
@@ -12842,7 +12873,7 @@ PrefabInstance:
     - target: {fileID: 7206800025304517162, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
       propertyPath: m_RequestedTrackingOriginMode
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7413506793532227578, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
@@ -12942,7 +12973,7 @@ PrefabInstance:
     - target: {fileID: 7808827173378831257, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19152728
+      value: -21493746
       objectReference: {fileID: 0}
     - target: {fileID: 7931734656219179021, guid: 77ac6b10722bcca4a8baf70e44d89e78,
         type: 3}
@@ -14202,7 +14233,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_NetworkConfig.PlayerPrefab
       value: 
-      objectReference: {fileID: 429027209719567556, guid: 54321ed9eac2d0b42b35fd0eb9cf2500,
+      objectReference: {fileID: 5358844088564582620, guid: 2ff802f736d11b44897349902315d336,
         type: 3}
     - target: {fileID: 4145292139985048678, guid: 3967f87296c892e40b57e37bc8601550,
         type: 3}

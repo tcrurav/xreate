@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class RoomChangeController : MonoBehaviour
 {
-    private readonly Vector3 OffsetRoomModuleA = new(87f, 6.75f, -25.75f);
+    private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, -25.75f);
     private readonly Vector3 OffsetCorridorToRoomModuleA = new(87f, 6.75f, -15.75f);
     private readonly Vector3 OffsetCorridorToRoomModuleB = new(87f, 6.75f, 19f);
-    private readonly Vector3 OffsetRoomModuleB = new(87f, 6.75f, 28f);
-    private readonly Vector3 OffsetCorridorToLeisureModule = new(99f, 6.75f, 11.5f);
-    private readonly Vector3 OffsetLeisureModule = new(104f, 6.5f, 16f);
+    private readonly Vector3 OffsetRoomModuleB = new(87f, 6.39f, 28f);
+    //private readonly Vector3 OffsetCorridorToLeisureModule = new(99f, 6.75f, 11.5f);
+    private readonly Vector3 OffsetLeisureModule = new(104f, 5.75f, 16f);
     private readonly Vector3 OffsetBuildingA = new(0, 0, -12);
-    private readonly Vector3 OffsetBuildingATopStairs = new(9, 5f, -20);
+    private readonly Vector3 OffsetBuildingATopStairs = new(9, 4.02f, 0);
 
     public void ChangeToRoomModuleA()
     {
@@ -45,13 +45,13 @@ public class RoomChangeController : MonoBehaviour
         MainNavigationManager.ChangePosition(OffsetRoomModuleB);
     }
 
-    public void ChangeToCorridorToLeisureModule()
-    {
-        //MainNetworkManager.HideAllStudentsOfOtherTeams();
-        //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorFScene");
-        //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToLeisureModule);
-        MainNavigationManager.ChangePosition(OffsetCorridorToLeisureModule);
-    }
+    //public void ChangeToCorridorToLeisureModule()
+    //{
+    //    //MainNetworkManager.HideAllStudentsOfOtherTeams();
+    //    //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorFScene");
+    //    //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToLeisureModule);
+    //    MainNavigationManager.ChangePosition(OffsetCorridorToLeisureModule);
+    //}
 
     public void ChangeToLeisureModule()
     {
@@ -77,8 +77,8 @@ public class RoomChangeController : MonoBehaviour
         MainNavigationManager.ChangePosition(OffsetBuildingATopStairs);
     }
 
-    private void ChangePlayerPosition(int playerId, Vector3 newPosition)
-    {
-        MainNetworkManager.ChangePlayerPosition(playerId, newPosition);
-    }
+    //private void ChangePlayerPosition(int playerId, Vector3 newPosition)
+    //{
+    //    MainNetworkManager.ChangePlayerPosition(playerId, newPosition);
+    //}
 }

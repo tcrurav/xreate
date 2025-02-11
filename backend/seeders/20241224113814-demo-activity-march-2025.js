@@ -359,8 +359,8 @@ module.exports = {
       endDate: tomorrow,
       state: "NOT_STARTED",
       type: "TRAINING_LAB",
-      name: "Digital security scape room",
-      description: "A digital scaperoom activity to develop your digital security skills",
+      name: "Digital security escape room",
+      description: "A digital escape room activity to develop your digital security skills",
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -389,7 +389,7 @@ module.exports = {
       updatedAt: new Date()
     }], {});
 
-    // Challenge - 4 challenges because there are 3 scaperooms and 1 corridor with asking alien
+    // Challenge - 4 challenges because there are 3 escape rooms and 1 corridor with asking alien
 
     await queryInterface.bulkInsert('challenges', [{
       id: 1,
@@ -882,12 +882,12 @@ module.exports = {
       updatedAt: new Date()
     }], {});
 
-    // ChallengeItem - 10 challenge_items because each room challenge has 3 items, and the corridor challenge has just 1.
+    // ChallengeItem - 4 challenge_items because each challenge has 1 item. There 4 challenges: 3 room challenges and 1 corridor challenge.
 
     await queryInterface.bulkInsert('challenge_items', [{
       id: 11,
       challengeId: '1',
-      item: 'item question and answer',
+      item: 'total points of a student in this challenge',
       points: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -896,7 +896,7 @@ module.exports = {
     await queryInterface.bulkInsert('challenge_items', [{
       id: 21,
       challengeId: '2',
-      item: 'item question and answer',
+      item: 'total points of a student in this challenge',
       points: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -905,61 +905,7 @@ module.exports = {
     await queryInterface.bulkInsert('challenge_items', [{
       id: 31,
       challengeId: '3',
-      item: 'item question and answer',
-      points: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('challenge_items', [{
-      id: 12,
-      challengeId: '1',
-      item: 'item question and answer',
-      points: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('challenge_items', [{
-      id: 22,
-      challengeId: '2',
-      item: 'item question and answer',
-      points: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('challenge_items', [{
-      id: 32,
-      challengeId: '3',
-      item: 'item question and answer',
-      points: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('challenge_items', [{
-      id: 13,
-      challengeId: '1',
-      item: 'item question and answer',
-      points: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('challenge_items', [{
-      id: 23,
-      challengeId: '2',
-      item: 'item question and answer',
-      points: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('challenge_items', [{
-      id: 33,
-      challengeId: '3',
-      item: 'item question and answer',
+      item: 'total points of a student in this challenge',
       points: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -968,7 +914,7 @@ module.exports = {
     await queryInterface.bulkInsert('challenge_items', [{
       id: 41,
       challengeId: '4',
-      item: 'item question and answer',
+      item: 'total points of a student in this challenge',
       points: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1296,30 +1242,14 @@ module.exports = {
       updatedAt: new Date()
     }], {});
 
-    // AchievementItem - 100 achievementItems because there are 10 students. 
+    // AchievementItem - 40 achievementItems because there are 10 students. 
     // Each student does 4 challenges (3 room challenges and 1 corridor challenge).
-    // Each room challenge has 3 items, and each corridor challenge has 1 item.
+    // Each room challenge has 1 item, and each corridor challenge has 1 item.
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11110,
       points: 1,
       challengeItemId: 11,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11110,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11110,
-      points: 1,
-      challengeItemId: 13,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1333,41 +1263,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21110,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21110,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31110,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31110,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31110,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1389,22 +1287,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11120,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11120,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21120,
       points: 1,
       challengeItemId: 21,
@@ -1413,41 +1295,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21120,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21120,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31120,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31120,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31120,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1469,22 +1319,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11130,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11130,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21130,
       points: 1,
       challengeItemId: 21,
@@ -1493,41 +1327,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21130,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21130,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31130,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31130,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31130,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1549,22 +1351,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11140,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11140,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21140,
       points: 1,
       challengeItemId: 21,
@@ -1573,41 +1359,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21140,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21140,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31140,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31140,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31140,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1629,22 +1383,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11150,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11150,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21150,
       points: 1,
       challengeItemId: 21,
@@ -1653,41 +1391,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21150,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21150,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31150,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31150,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31150,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1709,22 +1415,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11211,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11211,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21211,
       points: 1,
       challengeItemId: 21,
@@ -1733,41 +1423,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21211,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21211,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31211,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31211,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31211,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1789,22 +1447,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11221,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11221,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21221,
       points: 1,
       challengeItemId: 21,
@@ -1813,41 +1455,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21221,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21221,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31221,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31221,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31221,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1869,22 +1479,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11231,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11231,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21231,
       points: 1,
       challengeItemId: 21,
@@ -1893,41 +1487,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21231,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21231,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31231,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31231,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31231,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1949,22 +1511,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11241,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11241,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21241,
       points: 1,
       challengeItemId: 21,
@@ -1973,41 +1519,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21241,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21241,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31241,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31241,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31241,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -2029,22 +1543,6 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11251,
-      points: 1,
-      challengeItemId: 12,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 11251,
-      points: 1,
-      challengeItemId: 13,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21251,
       points: 1,
       challengeItemId: 21,
@@ -2053,41 +1551,9 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21251,
-      points: 1,
-      challengeItemId: 22,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 21251,
-      points: 1,
-      challengeItemId: 23,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31251,
       points: 1,
       challengeItemId: 31,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31251,
-      points: 1,
-      challengeItemId: 32,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }], {});
-
-    await queryInterface.bulkInsert('achievement_items', [{
-      achievementId: 31251,
-      points: 1,
-      challengeItemId: 33,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

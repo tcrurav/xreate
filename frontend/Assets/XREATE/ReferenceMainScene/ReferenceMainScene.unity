@@ -3445,7 +3445,7 @@ PrefabInstance:
     - target: {fileID: 6231746954606305057, guid: fd0989dc6fb54dc42806a0c874515a87,
         type: 3}
       propertyPath: m_text
-      value: "In this panel we will put all the informati\xF3n about our scape room\n\n- 
+      value: "In this panel we will put all the informati\xF3n about our escape room\n\n- 
         Current Room Name\n-  Room Code\n-  Participant Count\n-  Scrollable list
         of active participants\n"
       objectReference: {fileID: 0}
@@ -5156,7 +5156,7 @@ PrefabInstance:
     - target: {fileID: 6231746954606305057, guid: fd0989dc6fb54dc42806a0c874515a87,
         type: 3}
       propertyPath: m_text
-      value: "In this panel we will put all the informati\xF3n about our scape room\n\n- 
+      value: "In this panel we will put all the informati\xF3n about our escape room\n\n- 
         Current Room Name\n-  Room Code\n-  Participant Count\n-  Scrollable list
         of active participants\n"
       objectReference: {fileID: 0}
@@ -8879,7 +8879,7 @@ PrefabInstance:
     - target: {fileID: 6231746954606305057, guid: fd0989dc6fb54dc42806a0c874515a87,
         type: 3}
       propertyPath: m_text
-      value: "In this panel we will put all the informati\xF3n about our scape room\n\n- 
+      value: "In this panel we will put all the informati\xF3n about our escape room\n\n- 
         Current Room Name\n-  Room Code\n-  Participant Count\n-  Scrollable list
         of active participants\n"
       objectReference: {fileID: 0}

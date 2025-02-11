@@ -1,5 +1,10 @@
+const { where } = require("sequelize");
 const db = require("../models");
 const AchievementItem = db.achievementItem;
+const Achievement = db.achievement;
+const InActivityStudentParticipation = db.inActivityStudentParticipation;
+const Challenge = db.challenge;
+const ChallengeItem = db.challengeItem;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new AchievementItem
@@ -59,13 +64,63 @@ exports.findOne = (req, res) => {
         });
 };
 
+// get an AchievementItem with challengeName and challenge item and studentId and activityId
+exports.getByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId = (req, res) => {
+    const challengeName = req.params.challengeName;
+    const challengeItemItem = req.params.challengeItemItem;
+    const studentId = req.params.studentId;
+    const activityId = req.params.activityId;
+
+    AchievementItem.findAll({
+        include: [{
+            model: Achievement, attributes: [],
+            required: true,
+            include: [{
+                model: InActivityStudentParticipation, attributes: [],
+                where: {
+                    activityId: activityId,
+                    studentId: studentId
+                }
+            }, {
+                model: Challenge, attributes: [],
+                where: {
+                    name: challengeName
+                }
+            }]
+        }, {
+            model: ChallengeItem, attributes: [],
+            required: true,
+            where: {
+                item: challengeItemItem
+            }
+        }],
+        attributes: [
+            'id',
+            'achievementId',
+            'challengeItemId',
+            'points',
+            'ChallengeItem.item',
+            'Achievement.Challenge.name',
+            'Achievement.InActivityStudentParticipation.activityId',
+            'Achievement.InActivityStudentParticipation.studentId',
+        ],
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message
+        });
+    });
+};
+
 // Update a AchievementItem by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
 
     AchievementItem.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -84,13 +139,94 @@ exports.update = (req, res) => {
         });
 };
 
+// update an AchievementItem with challengeName and challenge item and studentId and activityId
+exports.updateByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId = (req, res) => {
+    const challengeName = req.params.challengeName;
+    const challengeItemItem = req.params.challengeItemItem;
+    const studentId = req.params.studentId;
+    const activityId = req.params.activityId;
+
+    // First look for the AchievementItem whose points we want to update
+    AchievementItem.findAll({
+        include: [{
+            model: Achievement, attributes: [],
+            required: true,
+            include: [{
+                model: InActivityStudentParticipation, attributes: [],
+                where: {
+                    activityId: activityId,
+                    studentId: studentId
+                }
+            }, {
+                model: Challenge, attributes: [],
+                where: {
+                    name: challengeName
+                }
+            }]
+        }, {
+            model: ChallengeItem, attributes: [],
+            required: true,
+            where: {
+                item: challengeItemItem
+            }
+        }],
+        attributes: [
+            'id',
+            'achievementId',
+            'challengeItemId',
+            'points',
+            'ChallengeItem.item',
+            'Achievement.Challenge.name',
+            'Achievement.InActivityStudentParticipation.activityId',
+            'Achievement.InActivityStudentParticipation.studentId',
+        ],
+        raw: true
+    }).then(data => {
+        // It will return an array but by the logic of the business (game) is just one (the first one)
+        console.log("los puntossssssssssssssssssssssssssssssssssssssssssssss")
+        console.log(req.body);
+
+        const updatedChallengeItem = {
+            id: req.body.id ? req.body.id : data.id,
+            achievementId: req.body.achievementId ? req.body.achievementId : data.achievementId,
+            challengeItemId: req.body.challengeItemId ? req.body.challengeItemId : data.challengeItemId,
+            points: req.body.points ? req.body.points : data.points,
+        }
+
+        console.log("los puntossssssssssssssssssssssssssssssssssssssssssssss 2")
+        console.log(updatedChallengeItem);
+
+        AchievementItem.update(updatedChallengeItem, {
+            where: { id: data[0].id } // as mention above it's just one AchievementItem
+        }).then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "AchievementItem points was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update AchievementItem with id=${data[0].id}. Maybe AchievementItem was not found or req.body is empty!`
+                });
+            }
+        }).catch(err => {
+            res.status(500).send({
+                message: "Error updating AchievementItem with id=" + data[0].id
+            });
+        });
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message
+        });
+    });
+};
+
 // Delete a AchievementItem with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
 
     AchievementItem.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({

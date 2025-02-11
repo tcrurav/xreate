@@ -1123,6 +1123,56 @@
 					"response": []
 				},
 				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"achievementId\":\"{{achievementId}}\",\r\n    \"points\": \"{{points}}\",\r\n    \"item\": \"{{item}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievementItems",
+								"challenge",
+								"{{challengeName}}",
+								"challengeItem",
+								"{{challengeItemItem}}",
+								"student",
+								"{{studentId}}",
+								"activity",
+								"{{activityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/{{achievementItemId}}",
 					"request": {
 						"auth": {
@@ -1157,6 +1207,59 @@
 								"api",
 								"achievementItems",
 								"{{achievementItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"points\": \"{{points}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}?points=10",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievementItems",
+								"challenge",
+								"{{challengeName}}",
+								"challengeItem",
+								"{{challengeItemItem}}",
+								"student",
+								"{{studentId}}",
+								"activity",
+								"{{activityId}}"
+							],
+							"query": [
+								{
+									"key": "points",
+									"value": "10"
+								}
 							]
 						}
 					},

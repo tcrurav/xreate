@@ -13,8 +13,20 @@ module.exports = app => {
     // Retrieve a single AchievementItems with id
     router.get("/:id", auth.isAuthenticated, achievementItems.findOne);
 
+    // get an AchievementItem by challengeName and challenge item and studentId and activityId
+    router.get("/challenge/:challengeName/challengeItem/:challengeItemItem/student/:studentId/activity/:activityId",
+        auth.isAuthenticated,
+        // auth.isUserId(studentId), // TODO - Restrict to just the user involved
+        achievementItems.getByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId);
+
     // Update a AchievementItems with id
     router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), achievementItems.update);
+
+    // update an AchievementItem with challengeName and challenge item and studentId and activityId
+    router.put("/challenge/:challengeName/challengeItem/:challengeItemItem/student/:studentId/activity/:activityId",
+        auth.isAuthenticated,
+        // auth.isUserId(studentId), // TODO - Restrict to just the user involved
+        achievementItems.updateByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId);
 
     // Delete a AchievementItems with id
     router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), achievementItems.delete);
