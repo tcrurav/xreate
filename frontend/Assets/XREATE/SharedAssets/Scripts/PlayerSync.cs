@@ -1,109 +1,8 @@
-//using System.Collections.Generic;
-//using Unity.Netcode;
-//using UnityEngine;
-
-//public class PlayerSync : NetworkBehaviour
-//{
-//public NetworkVariable<int> PlayerId = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-//public Dictionary<int, NetworkVariable<string>> PlayerScenes = new Dictionary<int, NetworkVariable<string>>();
-
-//public override void OnNetworkSpawn()
-//{
-//    base.OnNetworkSpawn();
-
-//    DebugManager.Log($"New Network Spawn:");
-
-//    // Set the player ID when the object is spawned on the network
-//    if (IsOwner)
-//    {
-//        PlayerId.Value = MainManager.GetUser().id;
-//        DebugManager.Log($"PlayerId.Value: {PlayerId.Value}");
-//    }
-
-//    if (IsServer)
-//    {
-//        UpdatePlayerSceneServerRpc(PlayerId.Value, "LoginScene");
-//    }
-//}
-
-//// Update a player's scene (Server only)
-//[ServerRpc(RequireOwnership = false)]
-//public void UpdatePlayerSceneServerRpc(int playerId, string scene)
-//{
-//    Debug.Log($"UpdatePlayerSceneServerRpc, playerId: {playerId}, scene: {scene}");
-//    if (IsServer)
-//    {
-//        if (!PlayerScenes.ContainsKey(playerId))
-//        {
-//            Debug.Log($"UpdatePlayerSceneServerRpc 2, scene: {scene}");
-//            // The playerId is new
-//            //PlayerScenes[playerId] = new NetworkVariable<string>(scene, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
-//            NetworkVariable<string> aa = new NetworkVariable<string>(scene,
-//                NetworkVariableReadPermission.Everyone,
-//                NetworkVariableWritePermission.Server
-//            );
-
-//            PlayerScenes[playerId] = aa;
-
-//            Debug.Log($"UpdatePlayerSceneServerRpc 2 y medio, scene: {scene},  PlayerScenes[playerId]: {PlayerScenes[playerId].Value}");
-
-//            //PlayerScenes[playerId].OnValueChanged += (oldValue, newValue) =>
-//            //{
-//            //    Debug.Log($"Server: Player {playerId}'s scene changed from {oldValue} to {newValue}");
-//            //    foreach (var client in NetworkManager.Singleton.ConnectedClients)
-//            //    {
-//            //        Debug.Log("UpdatePlayerSceneServerRpc 3");
-//            //        var player = client.Value.PlayerObject.GetComponent<PlayerSync>();
-
-//            //        UpdatePlayerSceneClientRpc(playerId, oldValue, newValue, new ClientRpcParams
-//            //        {
-//            //            Send = new ClientRpcSendParams
-//            //            {
-//            //                TargetClientIds = new List<ulong> { client.Key }
-//            //            }
-//            //        });
-
-//            //    }
-//            //};
-//            return;
-//        }
-
-//        if (PlayerScenes.TryGetValue(playerId, out var networkVariable))
-//        {
-//            networkVariable.Value = scene;
-//        }
-//        else
-//        {
-//            Debug.LogError($"Player ID {playerId} not found in PlayerScenes.");
-//        }
-//        Debug.Log($"UpdatePlayerSceneServerRpc 4, scene: {scene},  PlayerScenes[playerId]: {PlayerScenes[playerId].Value}, IsSpawned: {IsSpawned}, IsServer: {IsServer}");
-//        // the playerId already existed
-//        //PlayerScenes[playerId].Value = scene;
-//        Debug.Log($"UpdatePlayerSceneServerRpc 5, scene: {scene},  PlayerScenes[playerId]: {PlayerScenes[playerId].Value}, IsSpawned: {IsSpawned}");
-//    }
-//}
-
-//[ClientRpc]
-//private void UpdatePlayerSceneClientRpc(int playerId, string oldScene, string newScene, ClientRpcParams rpcParams = default)
-//{
-//    Debug.Log("UpdatePlayerSceneClientRpc");
-//    if (IsClient)
-//    {
-//        Debug.Log("UpdatePlayerSceneClientRpc dentro");
-//        MainNetworkManager.SetVisibilityOnSceneChange(playerId, oldScene, newScene);
-//    }
-
-//}
-
 using Unity.Netcode;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
-using Unity.Services.Lobbies.Models;
-using XRMultiplayer;
-using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
-using Unity.Services.Matchmaker.Models;
+using TMPro;
 
 public class PlayerSync : NetworkBehaviour
 {
@@ -113,11 +12,18 @@ public class PlayerSync : NetworkBehaviour
     // Server-side only: Dictionary to map PlayerId to Scene
     private readonly Dictionary<int, string> PlayerScenes = new();
 
+    [SerializeField] private TMP_Text XreateFrontPlayerName;
+    [SerializeField] private TMP_Text XreateBackPlayerName;
+
     public NetworkVariable<int> PlayerId = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<FixedString128Bytes> PlayerName = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public override void OnNetworkSpawn()
     {
-        base.OnNetworkSpawn();
+        //base.OnNetworkSpawn();
+
+        PlayerName.OnValueChanged += UpdatePlayerName; // Sync across all clients
+        UpdatePlayerName(string.Empty, PlayerName.Value);
 
         DebugManager.Log("OnNetworkSpawn. New Network Spawn:");
         Debug.Log("OnNetworkSpawn. New Network Spawn:");
@@ -126,12 +32,27 @@ public class PlayerSync : NetworkBehaviour
         if (IsOwner)
         {
             Debug.Log($"OnNetworkSpawn. IsOwner");
+
             PlayerId.Value = MainManager.GetUser().id;
+            PlayerName.Value = MainManager.GetUser().username;
+
             DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+            DebugManager.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
             Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+            Debug.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
 
-            MovePlayerServerRpc(new Vector3(20, 20, 20)); // Set target position here
+            if (XreateBackPlayerName == null)
+            {
+                DebugManager.Log("El valor del TMP es nulo");
+            }
 
+            XreateFrontPlayerName.text = MainManager.GetUser().username;
+            XreateBackPlayerName.text = MainManager.GetUser().username;
+
+            DebugManager.Log($" DESPUES OnNetworkSpawn. PlayerId.Value: {XreateFrontPlayerName.text}");
+            DebugManager.Log($" DESPUES OnNetworkSpawn. PlayerName.Value: {XreateBackPlayerName.text}");
+
+            //SetNameToPlayerServerRpc(MainManager.GetUser().username);
         }
 
         //if (IsServer)
@@ -144,14 +65,42 @@ public class PlayerSync : NetworkBehaviour
         //}
     }
 
-    [ServerRpc]
-    void MovePlayerServerRpc(Vector3 newPosition)
+    private void UpdatePlayerName(FixedString128Bytes oldValue, FixedString128Bytes newValue)
     {
-        Debug.Log($"MovePlayerServerRpc");
-        CharacterController controller = GetComponent<CharacterController>();
-        controller.enabled = false;
-        transform.position = new Vector3(20,20,20);
-        controller.enabled = true;
+        if (XreateFrontPlayerName != null)
+        {
+            XreateFrontPlayerName.text = newValue.ToString();
+        }
+
+        if (XreateBackPlayerName != null)
+        {
+            XreateBackPlayerName.text = newValue.ToString();
+        }
+    }
+
+    [ServerRpc]
+    public void SetNameToPlayerServerRpc(string name)
+    {
+        //Debug.Log($"SetNameToPlayerServerRpc");
+        //CharacterController controller = GetComponent<CharacterController>();
+        //controller.enabled = false;
+        //transform.position = new Vector3(20, 20, 20);
+        //controller.enabled = true;
+
+        Debug.Log("SetNameToPlayerServerRpc 1");
+        DebugManager.Log($"SetNameToPlayerServerRpc 1 {name}");
+
+        foreach (var client in NetworkManager.Singleton.ConnectedClients)
+        {
+            Debug.Log("SetNameToPlayerServerRpc 2");
+            DebugManager.Log("SetNameToPlayerServerRpc 2");
+            var player = client.Value.PlayerObject;
+
+
+
+            GameObject textObject = FindObject.FindInsideNetworkObjectParentByName(player, "XreatePlayerName");
+            textObject.GetComponent<TMP_Text>().SetText(name);
+        }
     }
 
     // Update a player's scene (Server only)
@@ -236,19 +185,279 @@ public class PlayerSync : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
-    public void ChangePositionServerRpc(Vector3 newPosition)
-    {
-        Debug.Log($"ChangePositionServerRpc. newPosition: {newPosition}");
-        if (IsOwner)
-        {
-            Debug.Log($"ChangePosition, newPosition: x: {newPosition.x}, y: {newPosition.y}, z: {newPosition.z}, ");
-            //transform.position = newPosition;
-            //XRINetworkPlayer.LocalPlayer.transform.position = newPosition;
-            MovePlayerServerRpc(newPosition); // Set target position here
-            Debug.Log($"Después, ChangePosition, transform.position: x: {transform.position.x}, y: {transform.position.y}, z: {transform.position.z}, ");
-        }
-    }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//using Unity.Netcode;
+//using System.Collections.Generic;
+//using Unity.Collections;
+//using UnityEngine;
+//using Unity.Services.Lobbies.Models;
+//using XRMultiplayer;
+//using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
+//using Unity.Services.Matchmaker.Models;
+
+//public class PlayerSync : NetworkBehaviour
+//{
+//    // NetworkList to store Player IDs
+//    public NetworkList<int> PlayerIds = new();
+
+//    // Server-side only: Dictionary to map PlayerId to Scene
+//    private readonly Dictionary<int, string> PlayerScenes = new();
+
+//    public NetworkVariable<int> PlayerId = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+//    public override void OnNetworkSpawn()
+//    {
+//        base.OnNetworkSpawn();
+
+//        DebugManager.Log("OnNetworkSpawn. New Network Spawn:");
+//        Debug.Log("OnNetworkSpawn. New Network Spawn:");
+
+//        // Set the player ID when the object is spawned on the network
+//        if (IsOwner)
+//        {
+//            Debug.Log($"OnNetworkSpawn. IsOwner");
+//            PlayerId.Value = MainManager.GetUser().id;
+//            DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+//            Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+
+//            MovePlayerServerRpc(new Vector3(20, 20, 20)); // Set target position here
+
+//        }
+
+//        //if (IsServer)
+//        //{
+//        //    Debug.Log($"OnNetworkSpawn. IsServer on Spawining");
+//        //    PlayerIds.OnListChanged += OnPlayerIdsChanged; // Subscribe to list changes
+//        //    Debug.Log($"OnNetworkSpawn. IsServer on Spawining 1");
+//        //    UpdatePlayerSceneServerRpc(PlayerId.Value, "LoginScene");
+//        //    Debug.Log($"OnNetworkSpawn. IsServer on Spawining 2");
+//        //}
+//    }
+
+//    [ServerRpc]
+//    void SetNameToPlayerServerRpc(string name)
+//    {
+//        Debug.Log($"SetNameToPlayerServerRpc");
+//        CharacterController controller = GetComponent<CharacterController>();
+//        controller.enabled = false;
+//        transform.position = new Vector3(20, 20, 20);
+//        controller.enabled = true;
+//    }
+
+//    [ServerRpc]
+//    void MovePlayerServerRpc(Vector3 newPosition)
+//    {
+//        Debug.Log($"MovePlayerServerRpc");
+//        CharacterController controller = GetComponent<CharacterController>();
+//        controller.enabled = false;
+//        transform.position = new Vector3(20,20,20);
+//        controller.enabled = true;
+//    }
+
+//    // Update a player's scene (Server only)
+//    [ServerRpc(RequireOwnership = false)]
+//    public void UpdatePlayerSceneServerRpc(int playerId, string scene)
+//    {
+//        Debug.Log($"UpdatePlayerSceneServerRpc called. PlayerId: {playerId}, Scene: {scene}");
+
+//        if (!IsServer)
+//        {
+//            Debug.LogError("UpdatePlayerSceneServerRpc called on a non-server instance.");
+//            return;
+//        }
+
+//        // Check if the player already exists in the dictionary
+//        if (!PlayerScenes.ContainsKey(playerId))
+//        {
+//            Debug.Log($"UpdatePlayerSceneServerRpc. Adding new playerId {playerId} with scene {scene}.");
+//            PlayerScenes[playerId] = scene;
+//            PlayerIds.Add(playerId); // Add playerId to the NetworkList
+//        }
+//        else
+//        {
+//            Debug.Log($"UpdatePlayerSceneServerRpc. Updating existing playerId {playerId} to scene {scene}.");
+//            PlayerScenes[playerId] = scene;
+//        }
+
+//        // Notify clients of the scene update
+//        UpdatePlayerSceneClientRpc(playerId, scene);
+//    }
+
+//    // Callback for NetworkList changes
+//    private void OnPlayerIdsChanged(NetworkListEvent<int> changeEvent)
+//    {
+//        switch (changeEvent.Type)
+//        {
+//            case NetworkListEvent<int>.EventType.Add:
+//                Debug.Log($"OnPlayerIdsChanged. Player {changeEvent.Value} added.");
+//                break;
+
+//            case NetworkListEvent<int>.EventType.Remove:
+//                Debug.Log($"OnPlayerIdsChanged. Player {changeEvent.Value} removed.");
+//                break;
+
+//            default:
+//                Debug.Log("OnPlayerIdsChanged. Unhandled NetworkList event.");
+//                break;
+//        }
+//    }
+
+//    // ClientRpc to synchronize scene changes
+//    [ClientRpc]
+//    public void UpdatePlayerSceneClientRpc(int playerId, string scene)
+//    {
+//        Debug.Log("UpdatePlayerSceneClientRpc - FUERA");
+//        if (!IsServer)
+//        {
+//            Debug.Log($"UpdatePlayerSceneClientRpc. Client: Player {playerId}'s scene updated to {scene}");
+//            DebugManager.Log($"UpdatePlayerSceneClientRpc. Client: Player {playerId}'s scene updated to {scene}");
+//            MainNetworkManager.SetVisibilityOnSceneChange(playerId, "", scene);
+//        }
+//    }
+
+
+
+//    //public void UpdatePlayerScene(int playerId, string scene)
+//    //{
+//    //    Debug.Log("UpdatePlayerScene");
+//    //    UpdatePlayerSceneServerRpc(playerId, scene);
+//    //}
+
+//    public void SetVisibility(bool isVisible)
+//    {
+//        if (IsClient) // changes are made in clients only.
+//        {
+//            Debug.Log($"SetVisibility - Fuera");
+//            foreach (var renderer in GetComponentsInChildren<Renderer>())
+//            {
+//                Debug.Log($"SetVisibility - Dentro");
+//                renderer.enabled = isVisible;
+//            }
+//        }
+//    }
+
+//    [ServerRpc]
+//    public void ChangePositionServerRpc(Vector3 newPosition)
+//    {
+//        Debug.Log($"ChangePositionServerRpc. newPosition: {newPosition}");
+//        if (IsOwner)
+//        {
+//            Debug.Log($"ChangePosition, newPosition: x: {newPosition.x}, y: {newPosition.y}, z: {newPosition.z}, ");
+//            //transform.position = newPosition;
+//            //XRINetworkPlayer.LocalPlayer.transform.position = newPosition;
+//            MovePlayerServerRpc(newPosition); // Set target position here
+//            Debug.Log($"Después, ChangePosition, transform.position: x: {transform.position.x}, y: {transform.position.y}, z: {transform.position.z}, ");
+//        }
+//    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //using System.Collections.Generic;
+    //using Unity.Netcode;
+    //using UnityEngine;
+
+    //public class PlayerSync : NetworkBehaviour
+    //{
+    //public NetworkVariable<int> PlayerId = new(default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    //public Dictionary<int, NetworkVariable<string>> PlayerScenes = new Dictionary<int, NetworkVariable<string>>();
+
+    //public override void OnNetworkSpawn()
+    //{
+    //    base.OnNetworkSpawn();
+
+    //    DebugManager.Log($"New Network Spawn:");
+
+    //    // Set the player ID when the object is spawned on the network
+    //    if (IsOwner)
+    //    {
+    //        PlayerId.Value = MainManager.GetUser().id;
+    //        DebugManager.Log($"PlayerId.Value: {PlayerId.Value}");
+    //    }
+
+    //    if (IsServer)
+    //    {
+    //        UpdatePlayerSceneServerRpc(PlayerId.Value, "LoginScene");
+    //    }
+    //}
+
+    //// Update a player's scene (Server only)
+    //[ServerRpc(RequireOwnership = false)]
+    //public void UpdatePlayerSceneServerRpc(int playerId, string scene)
+    //{
+    //    Debug.Log($"UpdatePlayerSceneServerRpc, playerId: {playerId}, scene: {scene}");
+    //    if (IsServer)
+    //    {
+    //        if (!PlayerScenes.ContainsKey(playerId))
+    //        {
+    //            Debug.Log($"UpdatePlayerSceneServerRpc 2, scene: {scene}");
+    //            // The playerId is new
+    //            //PlayerScenes[playerId] = new NetworkVariable<string>(scene, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+    //            NetworkVariable<string> aa = new NetworkVariable<string>(scene,
+    //                NetworkVariableReadPermission.Everyone,
+    //                NetworkVariableWritePermission.Server
+    //            );
+
+    //            PlayerScenes[playerId] = aa;
+
+    //            Debug.Log($"UpdatePlayerSceneServerRpc 2 y medio, scene: {scene},  PlayerScenes[playerId]: {PlayerScenes[playerId].Value}");
+
+    //            //PlayerScenes[playerId].OnValueChanged += (oldValue, newValue) =>
+    //            //{
+    //            //    Debug.Log($"Server: Player {playerId}'s scene changed from {oldValue} to {newValue}");
+    //            //    foreach (var client in NetworkManager.Singleton.ConnectedClients)
+    //            //    {
+    //            //        Debug.Log("UpdatePlayerSceneServerRpc 3");
+    //            //        var player = client.Value.PlayerObject.GetComponent<PlayerSync>();
+
+    //            //        UpdatePlayerSceneClientRpc(playerId, oldValue, newValue, new ClientRpcParams
+    //            //        {
+    //            //            Send = new ClientRpcSendParams
+    //            //            {
+    //            //                TargetClientIds = new List<ulong> { client.Key }
+    //            //            }
+    //            //        });
+
+    //            //    }
+    //            //};
+    //            return;
+    //        }
+
+    //        if (PlayerScenes.TryGetValue(playerId, out var networkVariable))
+    //        {
+    //            networkVariable.Value = scene;
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError($"Player ID {playerId} not found in PlayerScenes.");
+    //        }
+    //        Debug.Log($"UpdatePlayerSceneServerRpc 4, scene: {scene},  PlayerScenes[playerId]: {PlayerScenes[playerId].Value}, IsSpawned: {IsSpawned}, IsServer: {IsServer}");
+    //        // the playerId already existed
+    //        //PlayerScenes[playerId].Value = scene;
+    //        Debug.Log($"UpdatePlayerSceneServerRpc 5, scene: {scene},  PlayerScenes[playerId]: {PlayerScenes[playerId].Value}, IsSpawned: {IsSpawned}");
+    //    }
+    //}
+
+    //[ClientRpc]
+    //private void UpdatePlayerSceneClientRpc(int playerId, string oldScene, string newScene, ClientRpcParams rpcParams = default)
+    //{
+    //    Debug.Log("UpdatePlayerSceneClientRpc");
+    //    if (IsClient)
+    //    {
+    //        Debug.Log("UpdatePlayerSceneClientRpc dentro");
+    //        MainNetworkManager.SetVisibilityOnSceneChange(playerId, oldScene, newScene);
+    //    }
+
+    //}
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///
+
 
     //// Use a dictionary-like structure to track player scores by ClientID
     //private Dictionary<ulong, NetworkVariable<int>> XreatePlayerIds = new Dictionary<ulong, NetworkVariable<int>>();
