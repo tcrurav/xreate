@@ -3,6 +3,8 @@ const InActivityStudentParticipation = db.inActivityStudentParticipation;
 const Achievement = db.achievement;
 const AchievementItem = db.achievementItem;
 const Activity = db.activity;
+const Team = db.team;
+const User = db.user;
 const Op = db.Sequelize.Op;
 const Sequelize = db.Sequelize;
 
@@ -71,6 +73,7 @@ exports.findAllByActivityIdWithPoints = (req, res) => {
     const activityId = req.params.activityId;
 
     InActivityStudentParticipation.findAll({
+        order: ['points'],
         group: ['studentId', 'teamId', 'activityId'],
         include: [{
             model: Achievement, attributes: [],
@@ -87,6 +90,76 @@ exports.findAllByActivityIdWithPoints = (req, res) => {
         attributes: [
             'studentId',
             'teamId',
+            'activityId',
+            [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']],
+        where: {
+            activityId: activityId
+        },
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+        });
+    });
+};
+
+// Retrieve all InActivityStudentParticipation with points in an Activity (points for each student in an activity)
+// TODO - It should give only the student of each team with the highest points
+exports.findAllTopPlayersByTeamAndActivityIdWithPoints = (req, res) => {
+    const activityId = req.params.activityId;
+
+    InActivityStudentParticipation.findAll({
+        order: ['teamId', 'points'],
+        group: ['studentId', 'teamId', 'activityId'],
+        include: [{
+            model: Achievement, attributes: [],
+            include: [{ model: AchievementItem, attributes: [] }]
+        }, { 
+            model: User,
+            attributes: []
+        }, {
+            model: Team,
+            attributes: []
+        }
+        ],
+        attributes: [
+            'studentId',
+            [Sequelize.col('User.username'), 'userName'],
+            'teamId',
+            [Sequelize.col('Team.name'), 'teamName'],
+            'activityId',
+            [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']],
+        where: {
+            activityId: activityId
+        },
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving inActivityStudentParticipations."
+        });
+    });
+};
+
+// Retrieve all InActivityStudentParticipation with points in an Activity grouped by team (points for each team in an activity)
+exports.findAllPointsByTeamAndActivityId = (req, res) => {
+    const activityId = req.params.activityId;
+
+    InActivityStudentParticipation.findAll({
+        order: ['points'],
+        group: ['teamId', 'activityId'],
+        include: [{
+            model: Achievement, attributes: [],
+            include: [{ model: AchievementItem, attributes: [] }]
+        }, {
+            model: Team, attributes: []
+        }],
+        attributes: [
+            'teamId',
+            [Sequelize.col('Team.name'), 'teamName'],
             'activityId',
             [Sequelize.fn('SUM', Sequelize.col('Achievements.AchievementItems.points')), 'points']],
         where: {
