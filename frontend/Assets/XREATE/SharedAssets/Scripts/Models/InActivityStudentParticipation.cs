@@ -1,9 +1,8 @@
 [System.Serializable]
-public class InActivityStudentParticipation
+public class InActivityStudentParticipationWithPointsGroupedByTeams
 {
     public int teamId;
+    public string teamName;
     public int activityId;
-    public int studentId;
-    public string state;
-    public int order;
+    public int points;
 }

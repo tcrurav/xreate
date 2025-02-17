@@ -13,6 +13,8 @@ public class InActivityStudentParticipationService : MonoBehaviour
     // TODO - Result data should be returned other way than through this public members
     public InActivityStudentParticipation[] inActivityStudentParticipations;
     public InActivityStudentParticipationWithActivityAndPoints[] inActivityStudentParticipationsWithActivityAndPoints;
+    public InActivityStudentParticipationWithPointsGroupedByTeams[] inActivityStudentParticipationWithPointsGroupedByTeams;
+    public InActivityStudentParticipationTopPlayersWithPoints[] inActivityStudentParticipationTopPlayersWithPoints;
 
     private void UpdateURL()
     {
@@ -29,6 +31,18 @@ public class InActivityStudentParticipationService : MonoBehaviour
     {
         UpdateURL();
         yield return StartCoroutine(RestGetAllWithActivityAndPoints(studentId));
+    }
+
+    public IEnumerator GetAllWithPointsGroupedByTeams(int activityId)
+    {
+        UpdateURL();
+        yield return StartCoroutine(RestGetAllWithPointsGroupedByTeams(activityId));
+    }
+
+    public IEnumerator GetAllTopPlayersWithPoints(int activityId)
+    {
+        UpdateURL();
+        yield return StartCoroutine(RestGetAllTopPlayersWithPoints(activityId));
     }
 
     public IEnumerator GetAllByActivityId(int activityId)
@@ -133,6 +147,86 @@ public class InActivityStudentParticipationService : MonoBehaviour
         request.Dispose();
     }
 
+    private IEnumerator RestGetAllTopPlayersWithPoints(int activityId)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(URL + "/points/teams/topPlayers/activities/" + activityId.ToString());
+
+        Debug.Log(MainManager.GetAccessToken());
+
+        request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
+        request.SetRequestHeader("Content-Type", "application/json");
+
+
+        yield return request.SendWebRequest();
+
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.Log(request.error);
+            request.Dispose();
+            yield break;
+        }
+
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        Debug.Log("InActivityStudentParticipations with Activity and points Top players data returned successfully!");
+
+        inActivityStudentParticipationTopPlayersWithPoints =
+            JsonHelper.getJsonArray<InActivityStudentParticipationTopPlayersWithPoints>(result);
+
+        request.Dispose();
+    }
+
+    private IEnumerator RestGetAllWithPointsGroupedByTeams(int activityId)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(URL + "/points/teams/activities/" + activityId.ToString());
+
+        Debug.Log(MainManager.GetAccessToken());
+
+        request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
+        request.SetRequestHeader("Content-Type", "application/json");
+
+
+        yield return request.SendWebRequest();
+
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.Log(request.error);
+            request.Dispose();
+            yield break;
+        }
+
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        Debug.Log("InActivityStudentParticipations with Activity and points grouped by teams data returned successfully!");
+
+        inActivityStudentParticipationWithPointsGroupedByTeams =
+            JsonHelper.getJsonArray<InActivityStudentParticipationWithPointsGroupedByTeams>(result);
+
+        request.Dispose();
+    }
+
     private IEnumerator RestGetAllByActivityId(int activityId)
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/activities/" + activityId.ToString());
@@ -215,21 +309,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
             yield break;
         }
 
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(request.error);
-        //    request.Dispose();
-        //    yield break;
-        //}
-        //else
-        //{
-        //    Debug.Log("Team upload complete!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
-
         request.Dispose();
     }
 
@@ -268,19 +347,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
             yield break;
         }
 
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(request.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Team upload complete!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
-
         request.Dispose();
     }
 
@@ -313,19 +379,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
             request.Dispose();
             yield break;
         }
-
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result == UnityWebRequest.Result.ConnectionError)
-        //{
-        //    Debug.Log(request.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Team Deleted successfully!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }

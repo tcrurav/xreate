@@ -11,8 +11,8 @@ var Sequelize = require('sequelize');
  * createTable "teams", deps: [challenges]
  * createTable "in_activity_student_participations", deps: [teams, activities, users]
  * createTable "challenge_items", deps: [challenges]
- * createTable "in_activity_challenge_configs", deps: [activities, challenges]
- * createTable "in_activity_challenge_config_items", deps: [in_activity_challenge_configs]
+ * createTable "activity_challenge_configs", deps: [activities, challenges]
+ * createTable "activity_challenge_config_items", deps: [activity_challenge_configs]
  * createTable "achievements", deps: [challenges, in_activity_student_participations]
  * createTable "in_activity_teacher_participations", deps: [challenges, activities, users]
  * createTable "achievement_items", deps: [achievements, challenge_items]
@@ -345,7 +345,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "in_activity_challenge_configs",
+                "activity_challenge_configs",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -397,7 +397,7 @@ var migrationCommands = function(transaction) {
         {
             fn: "createTable",
             params: [
-                "in_activity_challenge_config_items",
+                "activity_challenge_config_items",
                 {
                     "id": {
                         "type": Sequelize.INTEGER,
@@ -432,7 +432,7 @@ var migrationCommands = function(transaction) {
                         "onUpdate": "CASCADE",
                         "onDelete": "SET NULL",
                         "references": {
-                            "model": "in_activity_challenge_configs",
+                            "model": "activity_challenge_configs",
                             "key": "id"
                         },
                         "allowNull": true
@@ -663,13 +663,13 @@ var rollbackCommands = function(transaction) {
         },
         {
             fn: "dropTable",
-            params: ["in_activity_challenge_config_items", {
+            params: ["activity_challenge_config_items", {
                 transaction: transaction
             }]
         },
         {
             fn: "dropTable",
-            params: ["in_activity_challenge_configs", {
+            params: ["activity_challenge_configs", {
                 transaction: transaction
             }]
         },

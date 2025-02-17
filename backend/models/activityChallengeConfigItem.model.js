@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
     }
   },
   {
-    tableName: 'in_activity_challenge_config_items',
+    tableName: 'activity_challenge_config_items',
   });
 
   return ActivityChallengeConfigItem;

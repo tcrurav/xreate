@@ -3,6 +3,7 @@ const Team = db.team;
 const InActivityStudentParticipation = db.inActivityStudentParticipation;
 const Achievement = db.achievement;
 const AchievementItem = db.achievementItem;
+const Challenge = db.challenge;
 const ChallengeItem = db.challengeItem;
 const Sequelize = db.Sequelize;
 const Op = db.Sequelize.Op;
@@ -71,6 +72,53 @@ exports.findAllWithPoints = (req, res) => {
         attributes: [
             'id',
             'name',
+            [Sequelize.fn(
+                'SUM',
+                Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.points')),
+                'points'],
+            [Sequelize.fn(
+                'SUM',
+                Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.ChallengeItem.points')),
+                'maxPoints']
+        ],
+        raw: true
+    }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving teams."
+        });
+    });
+};
+
+// Retrieve all Teams with Challenges with Points from the database.
+exports.findAllWithChallengesAndPoints = (req, res) => {
+    Team.findAll({
+        group: ['id', 'inActivityStudentParticipations.Achievements.Challenge.id'],
+        include: [{
+            model: InActivityStudentParticipation,
+            attributes: [],
+            include: [{
+                model: Achievement,
+                attributes: [],
+                include: [{
+                    model: AchievementItem,
+                    attributes: [],
+                    include: [{
+                        model: ChallengeItem,
+                        attributes: []
+                    }]
+                }, {
+                    model: Challenge,
+                    attributes: []
+                }]
+            }]
+        }],
+        attributes: [
+            'id',
+            'name',
+            [Sequelize.col("InActivityStudentParticipations.Achievements.Challenge.name"), "challengeName"],
+            [Sequelize.col("InActivityStudentParticipations.Achievements.Challenge.id"), "challengeId"],
             [Sequelize.fn(
                 'SUM',
                 Sequelize.col('InActivityStudentParticipations.Achievements.AchievementItems.points')),

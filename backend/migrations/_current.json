@@ -313,8 +313,8 @@
             },
             "indexes": []
         },
-        "in_activity_challenge_config_items": {
-            "tableName": "in_activity_challenge_config_items",
+        "activity_challenge_config_items": {
+            "tableName": "activity_challenge_config_items",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -352,7 +352,7 @@
                 "activityChallengeConfigId": {
                     "allowNull": true,
                     "references": {
-                        "model": "in_activity_challenge_configs",
+                        "model": "activity_challenge_configs",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",
@@ -363,8 +363,8 @@
             },
             "indexes": []
         },
-        "in_activity_challenge_configs": {
-            "tableName": "in_activity_challenge_configs",
+        "activity_challenge_configs": {
+            "tableName": "activity_challenge_configs",
             "schema": {
                 "id": {
                     "allowNull": false,

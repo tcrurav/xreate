@@ -10,6 +10,9 @@ module.exports = app => {
     // Retrieve all ActivityChallengeConfigs
     router.get("/", auth.isAuthenticated, activityChallengeConfigs.findAll);
 
+    // Retrieve all ActivityChallengeConfig by activityId
+    router.get("/activity/:activityId", auth.isAuthenticated, activityChallengeConfigs.findAllByActivityId);
+
     // Retrieve a single ActivityChallengeConfigs with id
     router.get("/:id", auth.isAuthenticated, activityChallengeConfigs.findOne);
 
