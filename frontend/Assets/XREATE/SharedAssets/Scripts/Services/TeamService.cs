@@ -13,6 +13,7 @@ public class TeamService : MonoBehaviour
     // TODO - Result data should be returned other way than through this public members
     public Team[] teams;
     public TeamWithPoints[] teamsWithPoints;
+    public TeamWithChallengesAndPoints[] teamsWithChallengesAndPoints;
 
     private void UpdateURL()
     {
@@ -29,6 +30,12 @@ public class TeamService : MonoBehaviour
     {
         UpdateURL();
         yield return StartCoroutine(RestGetAllWithPoints());
+    }
+
+    public IEnumerator GetAllWithChallengesAndPoints()
+    {
+        UpdateURL();
+        yield return StartCoroutine(RestGetAllWithChallengesAndPoints());
     }
 
     public IEnumerator Create(Team team)
@@ -125,6 +132,45 @@ public class TeamService : MonoBehaviour
         request.Dispose();
     }
 
+    private IEnumerator RestGetAllWithChallengesAndPoints()
+    {
+        UnityWebRequest request = UnityWebRequest.Get(URL + "/challenges/points");
+
+        Debug.Log(MainManager.GetAccessToken());
+
+        request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
+        request.SetRequestHeader("Content-Type", "application/json");
+
+
+        yield return request.SendWebRequest();
+
+        requestError = request.error;
+        responseCode = request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.Log(request.error);
+            request.Dispose();
+            yield break;
+        }
+
+        string result = request.downloadHandler.text;
+        Debug.Log(result);
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        Debug.Log("Teams with challenges and points data returned successfully!");
+
+        teamsWithChallengesAndPoints = JsonHelper.getJsonArray<TeamWithChallengesAndPoints>(result);
+
+        request.Dispose();
+    }
+
     private IEnumerator RestCreate(Team team)
     {
         var request = new UnityWebRequest(URL, "POST");
@@ -159,21 +205,6 @@ public class TeamService : MonoBehaviour
             request.Dispose();
             yield break;
         }
-
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(request.error);
-        //    request.Dispose();
-        //    yield break;
-        //}
-        //else
-        //{
-        //    Debug.Log("Team upload complete!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }
@@ -213,19 +244,6 @@ public class TeamService : MonoBehaviour
             yield break;
         }
 
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(request.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Team upload complete!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
-
         request.Dispose();
     }
 
@@ -258,19 +276,6 @@ public class TeamService : MonoBehaviour
             request.Dispose();
             yield break;
         }
-
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result == UnityWebRequest.Result.ConnectionError)
-        //{
-        //    Debug.Log(request.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Team Deleted successfully!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }

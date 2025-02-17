@@ -155,77 +155,77 @@ public class MainNetworkManager : MonoBehaviour
         Instance.CloseMenuButton.onClick.Invoke();
     }
 
-    public static void ChangeSceneTo(int playerId, string sceneName)
-    {
-        MainManager.SetScene(sceneName);
-        DebugManager.Log($"ChangeSceneTo, playerId: {playerId}, sceneName: {sceneName}");
-        Debug.Log($"ChangeSceneTo. playerId: {playerId}, sceneName: {sceneName}");
+    //public static void ChangeSceneTo(int playerId, string sceneName)
+    //{
+    //    MainManager.SetScene(sceneName);
+    //    DebugManager.Log($"ChangeSceneTo, playerId: {playerId}, sceneName: {sceneName}");
+    //    Debug.Log($"ChangeSceneTo. playerId: {playerId}, sceneName: {sceneName}");
 
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            Debug.Log($"ChangeSceneTo. playerId: {playerId}");
-            Debug.Log($"ChangeSceneTo. client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
-            DebugManager.Log($"ChangeSceneTo. client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
-            if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
-            {
-                Debug.Log($"ChangeSceneTo. Going to serverRpc: playerId: {playerId}, sceneName: {sceneName}");
-                //client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerScene(playerId, sceneName);
-                client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerSceneServerRpc(playerId, sceneName);
-                return;
-            }
-        }
-    }
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        Debug.Log($"ChangeSceneTo. playerId: {playerId}");
+    //        Debug.Log($"ChangeSceneTo. client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
+    //        DebugManager.Log($"ChangeSceneTo. client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value: {client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value}");
+    //        if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
+    //        {
+    //            Debug.Log($"ChangeSceneTo. Going to serverRpc: playerId: {playerId}, sceneName: {sceneName}");
+    //            //client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerScene(playerId, sceneName);
+    //            client.PlayerObject.GetComponent<PlayerSync>().UpdatePlayerSceneServerRpc(playerId, sceneName);
+    //            return;
+    //        }
+    //    }
+    //}
 
-    public static void SetVisibilityOnSceneChange(int playerId, string oldScene, string newScene)
-    {
-        Debug.Log("SetVisibilityOnSceneChange");
-        Debug.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
-        DebugManager.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
-        if (MainManager.GetScene() == "LoginScene" ||  MainManager.GetScene() == "MenuScene")
-        {
-            SetVisibility(playerId, false);
-            return;
-        }
+    //public static void SetVisibilityOnSceneChange(int playerId, string oldScene, string newScene)
+    //{
+    //    Debug.Log("SetVisibilityOnSceneChange");
+    //    Debug.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
+    //    DebugManager.Log($"playerId: {playerId}, oldScene: {oldScene}, newScene: {newScene}");
+    //    if (MainManager.GetScene() == "LoginScene" ||  MainManager.GetScene() == "MenuScene")
+    //    {
+    //        SetVisibility(playerId, false);
+    //        return;
+    //    }
 
-        if(newScene != MainManager.GetScene())
-        {
-            SetVisibility(playerId, false);
-            return;
-        }
+    //    if(newScene != MainManager.GetScene())
+    //    {
+    //        SetVisibility(playerId, false);
+    //        return;
+    //    }
 
-        if (newScene == "MainScene")
-        {
-            SetVisibility(playerId, true);
-            return;
-        }
+    //    if (newScene == "MainScene")
+    //    {
+    //        SetVisibility(playerId, true);
+    //        return;
+    //    }
 
-        int thisUserTeamId = CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id);
-        int playerWhoChangeSceneTeamId = CurrentActivityManager.GetTeamIdByStudentId(playerId);
+    //    int thisUserTeamId = CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id);
+    //    int playerWhoChangeSceneTeamId = CurrentActivityManager.GetTeamIdByStudentId(playerId);
 
-        if(thisUserTeamId != playerWhoChangeSceneTeamId)
-        {
-            SetVisibility(playerId, false);
-            return;
-        }
+    //    if(thisUserTeamId != playerWhoChangeSceneTeamId)
+    //    {
+    //        SetVisibility(playerId, false);
+    //        return;
+    //    }
 
-        SetVisibility(playerId, true);
-        return;
-    }
+    //    SetVisibility(playerId, true);
+    //    return;
+    //}
 
-    private static void SetVisibility(int playerId, bool visibility)
-    {
-        Debug.Log("SetVisibility - MainNetworkManager 1");
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            Debug.Log("SetVisibility - MainNetworkManager 2");
-            if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
-            {
-                Debug.Log("SetVisibility - MainNetworkManager 3");
-                client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(visibility);
-                return;
-            }
-        }
-    }
+    //private static void SetVisibility(int playerId, bool visibility)
+    //{
+    //    Debug.Log("SetVisibility - MainNetworkManager 1");
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        Debug.Log("SetVisibility - MainNetworkManager 2");
+    //        if (client.PlayerObject.GetComponent<PlayerSync>().PlayerId.Value == playerId)
+    //        {
+    //            Debug.Log("SetVisibility - MainNetworkManager 3");
+    //            client.PlayerObject.GetComponent<PlayerSync>().SetVisibility(visibility);
+    //            return;
+    //        }
+    //    }
+    //}
 
     //public static void ChangePlayerPosition(int playerId, Vector3 newPosition)
     //{
