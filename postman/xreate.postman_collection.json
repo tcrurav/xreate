@@ -4,7 +4,7 @@
 		"name": "xreate",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "3446841",
-		"_collection_link": "https://winter-moon-623013.postman.co/workspace/dcf43378-b9b5-4f54-b4b7-0584707bd428/collection/3446841-e606dc90-58ee-4a37-92e2-ad93d54adbc8?action=share&source=collection_link&creator=3446841"
+		"_collection_link": "https://winter-moon-623013.postman.co/workspace/pruebita~dcf43378-b9b5-4f54-b4b7-0584707bd428/collection/3446841-e606dc90-58ee-4a37-92e2-ad93d54adbc8?action=share&source=collection_link&creator=3446841"
 	},
 	"item": [
 		{
@@ -557,6 +557,38 @@
 							"path": [
 								"api",
 								"teams",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/teams/challenges/points",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/teams/challenges/points",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"teams",
+								"challenges",
 								"points"
 							]
 						}
@@ -1229,7 +1261,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"points\": \"{{points}}\"\r\n}",
+							"raw": "{\r\n    \"points\": {{points}}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1237,7 +1269,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}?points=10",
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}",
 							"protocol": "{{protocol}}",
 							"host": [
 								"{{host}}"
@@ -1254,12 +1286,6 @@
 								"{{studentId}}",
 								"activity",
 								"{{activityId}}"
-							],
-							"query": [
-								{
-									"key": "points",
-									"value": "10"
-								}
 							]
 						}
 					},
@@ -1572,6 +1598,38 @@
 								"api",
 								"activityChallengeConfigs",
 								"{{activityChallengeConfigId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/activityChallengeConfigs/activity/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/activityChallengeConfigs/activity/{{activityId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"activityChallengeConfigs",
+								"activity",
+								"{{activityId}}"
 							]
 						}
 					},
@@ -2195,6 +2253,75 @@
 								"api",
 								"inActivityStudentParticipations",
 								"points",
+								"activities",
+								"{{activityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/inActivityStudentParticipations/points/teams/topPlayers/activities/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/inActivityStudentParticipations/points/teams/topPlayers/activities/{{activityId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityStudentParticipations",
+								"points",
+								"teams",
+								"topPlayers",
+								"activities",
+								"{{activityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/inActivityStudentParticipations/points/teams/activities/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/inActivityStudentParticipations/points/teams/activities/{{activityId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inActivityStudentParticipations",
+								"points",
+								"teams",
 								"activities",
 								"{{activityId}}"
 							]

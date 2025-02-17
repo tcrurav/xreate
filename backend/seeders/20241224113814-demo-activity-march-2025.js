@@ -423,6 +423,40 @@ module.exports = {
       updatedAt: new Date()
     }], {});
 
+    // Challenge - 4 ActivityChallengeConfig because there are 4 challenges in the activity 2 (digital security escape room)
+
+    await queryInterface.bulkInsert('activity_challenge_configs', [{
+      id: 1,
+      activityId: 2,
+      challengeId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('activity_challenge_configs', [{
+      id: 2,
+      activityId: 2,
+      challengeId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('activity_challenge_configs', [{
+      id: 3,
+      activityId: 2,
+      challengeId: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('activity_challenge_configs', [{
+      id: 4,
+      activityId: 2,
+      challengeId: 4,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
     // Teams - 2 teams in Activity 2 (digital security training lab) - Each team with 5 students
 
     await queryInterface.bulkInsert('teams', [{

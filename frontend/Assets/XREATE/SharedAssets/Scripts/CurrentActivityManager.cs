@@ -1,4 +1,6 @@
 using System.Collections;
+using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class CurrentActivityManager : MonoBehaviour
@@ -6,6 +8,13 @@ public class CurrentActivityManager : MonoBehaviour
     public static CurrentActivityManager Instance;
 
     private int currentActivityId;
+
+    //TODO : ATTENTION!!! This should be changed because in an activity and a challenge there could be more than 1 ActivityChallengeConfig 
+    private ActivityChallengeConfigService activityChallengeConfigService;
+    private ActivityChallengeConfig[] inCurrentActivityChallengeConfigs;
+
+    private int NumberOfChallengesInActivity;
+
     private InActivityStudentParticipationService inActivityStudentParticipationService;
     private InActivityStudentParticipation[] inCurrentActivityStudentParticipations;
 
@@ -23,9 +32,8 @@ public class CurrentActivityManager : MonoBehaviour
 
     private void Start()
     {
-        //Instance.currentActivityId = currentActivityId;
-        //Instance.inCurrentActivityStudentParticipations = inCurrentActivityStudentParticipations;
         Instance.inActivityStudentParticipationService = gameObject.AddComponent<InActivityStudentParticipationService>();
+        Instance.activityChallengeConfigService = gameObject.AddComponent<ActivityChallengeConfigService>();
     }
 
     public static void SetCurrentActivityId(int activityId)
@@ -38,9 +46,25 @@ public class CurrentActivityManager : MonoBehaviour
         return Instance.currentActivityId;
     }
 
+    public static int GetNumberOfChallengesInActivity()
+    {
+        return Instance.NumberOfChallengesInActivity;
+    }
+
+    public static void SetNumberOfChallengesInActivity(int n)
+    {
+        Instance.NumberOfChallengesInActivity = n;
+    }
+
     public static IEnumerator Refresh()
     {
         yield return Instance.GetInActivityStudentParticipationsByActivityId();
+
+        yield return Instance.GetActivityChallengeConfigsByActivityId();
+
+        Debug.Log($"Refresh - Instance.inCurrentActivityChallengeConfigs[0].id: {Instance.inCurrentActivityChallengeConfigs[0].id}");
+
+        SetNumberOfChallengesInActivity(Instance.inCurrentActivityChallengeConfigs.Length);
     }
 
     private IEnumerator GetInActivityStudentParticipationsByActivityId()
@@ -55,6 +79,57 @@ public class CurrentActivityManager : MonoBehaviour
         }
 
         Instance.inCurrentActivityStudentParticipations = Instance.inActivityStudentParticipationService.inActivityStudentParticipations;
+
+        StartCoroutine(WaitForPlayerObject());
+    }
+
+    private IEnumerator WaitForPlayerObject()
+    {
+        while (NetworkManager.Singleton.LocalClient == null || NetworkManager.Singleton.LocalClient.PlayerObject == null)
+        {
+            yield return null;
+        }
+
+        //var playerSync = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
+        //Debug.Log($"PlayerSync encontrado: {playerSync}");
+
+        ChangeTeamIdInPlayerSync();
+    }
+
+    public static void ChangeTeamIdInPlayerSync()
+    {
+        int teamId = GetTeamIdByStudentId(MainManager.GetUser().id);
+
+        if (NetworkManager.Singleton.LocalClient != null)
+        {
+            ulong clientId = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<NetworkObject>().OwnerClientId;
+            Debug.Log($"ChangeTeamIdInPlayerSync - clientId: {clientId}");
+            PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
+            Debug.Log($"ChangeTeamIdInPlayerSync - DESPUÉS clientId: {clientId}");
+
+            if (player != null)
+            {
+                Debug.Log($"ChangeTeamIdInPlayerSync - DESPUÉS 2 clientId: {clientId}");
+                player.SetPlayerTeamIdServerRpc(clientId, teamId);
+                Debug.Log($"ChangeTeamIdInPlayerSync - DESPUÉS 3 clientId: {clientId}");
+            }
+        }
+    }
+
+    private IEnumerator GetActivityChallengeConfigsByActivityId()
+    {
+        yield return Instance.activityChallengeConfigService.GetAllByActivityId(Instance.currentActivityId);
+
+        if (Instance.activityChallengeConfigService.responseCode != 200)
+        {
+            //loadingCanvas.SetActive(false);
+            //errorCanvas.SetActive(true);
+            yield break;
+        }
+
+        Debug.Log($"GetActivityChallengeConfigsByActivityId - Instance.activityChallengeConfigService.activityChallengeConfigsByActivityId[0].id: {Instance.activityChallengeConfigService.activityChallengeConfigsByActivityId[0].id}");
+
+        Instance.inCurrentActivityChallengeConfigs = Instance.activityChallengeConfigService.activityChallengeConfigsByActivityId;
     }
 
     public static int GetTeamIdByStudentId(int studentId)

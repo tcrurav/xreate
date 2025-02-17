@@ -43,6 +43,23 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all ActivityChallengeConfigs by activityId from the database.
+exports.findAllByActivityId = (req, res) => {
+    const activityId = req.params.activityId;
+
+    ActivityChallengeConfig.findAll({
+        where: { activityId: activityId }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving activityChallengeConfigChallengeConfigs."
+            });
+        });
+};
+
 // Find a single ActivityChallengeConfig with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
@@ -63,8 +80,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     ActivityChallengeConfig.update(req.body, {
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -88,8 +105,8 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     ActivityChallengeConfig.destroy({
-            where: { id: id }
-        })
+        where: { id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({

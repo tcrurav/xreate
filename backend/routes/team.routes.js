@@ -13,7 +13,10 @@ module.exports = app => {
     // Retrieve all Teams with points
     router.get("/points", auth.isAuthenticated, teams.findAllWithPoints);
 
-    // Retrieve a single Teams with id
+    // Retrieve all Teams with points
+    router.get("/challenges/points", auth.isAuthenticated, teams.findAllWithChallengesAndPoints);
+
+    // Retrieve a single Team with id
     router.get("/:id", auth.isAuthenticated, teams.findOne);
 
     // Update a Teams with id

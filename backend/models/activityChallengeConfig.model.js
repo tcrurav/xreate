@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
     }
   },
   {
-    tableName: 'in_activity_challenge_configs',
+    tableName: 'activity_challenge_configs',
   });
 
   return ActivityChallengeConfig;

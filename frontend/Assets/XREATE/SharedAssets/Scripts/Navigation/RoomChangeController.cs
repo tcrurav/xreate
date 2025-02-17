@@ -1,8 +1,15 @@
+using TMPro;
+using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomChangeController : MonoBehaviour
 {
+    public Button ClickToGoButton;
+    public TMP_Text RedText;
+    public TMP_Text GreenText;
+
     private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, -25.75f);
     private readonly Vector3 OffsetCorridorToRoomModuleA = new(87f, 6.75f, -15.75f);
     private readonly Vector3 OffsetCorridorToRoomModuleB = new(87f, 6.75f, 19f);
@@ -12,12 +19,27 @@ public class RoomChangeController : MonoBehaviour
     private readonly Vector3 OffsetBuildingA = new(0, 0, -12);
     private readonly Vector3 OffsetBuildingATopStairs = new(9, 4.02f, 0);
 
+    public void EnableNextRoom()
+    {
+        ClickToGoButton.gameObject.SetActive(true);
+        RedText.gameObject.SetActive(false);
+        GreenText.gameObject.SetActive(true);
+    }
+
+    public void DisableNextRoom()
+    {
+        ClickToGoButton.gameObject.SetActive(false);
+        RedText.gameObject.SetActive(true);
+        GreenText.gameObject.SetActive(false);
+    }
+
     public void ChangeToRoomModuleA()
     {
         //MainNetworkManager.HideAllStudentsOfOtherTeams();
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "RoomModuleAScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
         MainNavigationManager.ChangePosition(OffsetRoomModuleA);
+        SetVisibility("ONLY_MEMBERS_OF_SAME_TEAM_SEE_EACH_OTHER");
     }
 
     public void ChangeToCorridorToRoomModuleA()
@@ -26,6 +48,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorCScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToRoomModuleA);
         MainNavigationManager.ChangePosition(OffsetCorridorToRoomModuleA);
+        SetVisibility("ONLY_MEMBERS_OF_SAME_TEAM_SEE_EACH_OTHER");
     }
 
     public void ChangeToCorridorToRoomModuleB()
@@ -34,6 +57,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "TunnelConnectorDScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetCorridorToRoomModuleB);
         MainNavigationManager.ChangePosition(OffsetCorridorToRoomModuleB);
+        SetVisibility("ONLY_MEMBERS_OF_SAME_TEAM_SEE_EACH_OTHER");
     }
 
     public void ChangeToRoomModuleB()
@@ -43,6 +67,7 @@ public class RoomChangeController : MonoBehaviour
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetRoomModuleB);
         //ChangePlayerPosition(MainManager.GetUser().id, new Vector3(100, 100, 100));
         MainNavigationManager.ChangePosition(OffsetRoomModuleB);
+        SetVisibility("ONLY_MEMBERS_OF_SAME_TEAM_SEE_EACH_OTHER");
     }
 
     //public void ChangeToCorridorToLeisureModule()
@@ -59,6 +84,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "LeisureModuleScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetLeisureModule);
         MainNavigationManager.ChangePosition(OffsetLeisureModule);
+        SetVisibility("ONLY_MEMBERS_OF_SAME_TEAM_SEE_EACH_OTHER");
     }
 
     public void ChangeToBuildingA()
@@ -67,6 +93,7 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
         MainNavigationManager.ChangePosition(OffsetBuildingA);
+        SetVisibility("EVERYONE_SEE_EVERYONE");
     }
 
     public void ChangeToBuildingATopStairs()
@@ -75,10 +102,32 @@ public class RoomChangeController : MonoBehaviour
         //MainNetworkManager.ChangeSceneTo(MainManager.GetUser().id, "MainScene");
         //ChangePlayerPosition(MainManager.GetUser().id, OffsetBuildingA);
         MainNavigationManager.ChangePosition(OffsetBuildingATopStairs);
+        SetVisibility("EVERYONE_SEE_EVERYONE");
     }
 
     //private void ChangePlayerPosition(int playerId, Vector3 newPosition)
     //{
     //    MainNetworkManager.ChangePlayerPosition(playerId, newPosition);
     //}
+
+    public void SetVisibility(string typeOfRoom) // EVERYONE_SEE_EVERYONE, NOBODY_SEE_NOBODY, ONLY_MEMBERS_OF_SAME_TEAM_SEE_EACH_OTHER
+    {
+        Debug.Log($"SetVisibility Principio - typeOfRoom: {typeOfRoom}");
+
+        CurrentActivityManager.ChangeTeamIdInPlayerSync();
+
+        Debug.Log($"SetVisibility - typeOfRoom: {typeOfRoom}");
+        if (NetworkManager.Singleton.LocalClient != null)
+        {
+            Debug.Log($"después - SetVisibility - typeOfRoom: {typeOfRoom}");
+            PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
+            Debug.Log($"después 2 - SetVisibility - typeOfRoom: {typeOfRoom}");
+            if (player != null)
+            {
+                Debug.Log($"después 3 - SetVisibility - typeOfRoom: {typeOfRoom}");
+                player.RequestVisibilityUpdateServerRpc(typeOfRoom);
+                Debug.Log($"después 4 - SetVisibility - typeOfRoom: {typeOfRoom}");
+            }
+        }
+    }
 }
