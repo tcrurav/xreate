@@ -15,7 +15,6 @@ public class SlideShowNetworkManager : NetworkBehaviour
     {
         currentSlide.OnValueChanged += (oldValue, newValue) =>
         {
-            Debug.Log($"currentSlide: {newValue}");
             GetComponent<SlideController>().HideOldSlideAndShowNewSlide(oldValue, newValue);
         };
     }

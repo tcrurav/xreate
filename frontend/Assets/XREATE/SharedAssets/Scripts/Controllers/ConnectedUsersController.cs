@@ -22,18 +22,12 @@ public class ConnectedUsersController : MonoBehaviour
 
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
-            Debug.Log("ADIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOSSSS");
-
             NetworkObject playerObject = client.PlayerObject;
             int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
-            Debug.Log("studentId:");
-            Debug.Log(studentId);
+
             string studentName = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
-            Debug.Log("studentName:");
-            Debug.Log(studentName);
+
             int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
-            Debug.Log("clientTeamId:");
-            Debug.Log(clientTeamId);
 
             GameObject newButton = Instantiate(buttonPrefab);
             newButton.transform.SetParent(buttonContainer.transform, false);

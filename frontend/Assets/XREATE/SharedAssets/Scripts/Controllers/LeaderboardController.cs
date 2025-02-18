@@ -27,7 +27,6 @@ public class LeaderboardController : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh");
         //loadingCanvas.SetActive(true);
 
         StartCoroutine(GetTeamsWithChallengesAndPoints());
@@ -38,9 +37,6 @@ public class LeaderboardController : MonoBehaviour
     IEnumerator GetTeamsWithChallengesAndPoints()
     {
         yield return teamService.GetAllWithChallengesAndPoints();
-
-        Debug.Log("reponseCode");
-        Debug.Log(teamService.responseCode);
 
         if (teamService.responseCode != 200)
         {
@@ -76,9 +72,6 @@ public class LeaderboardController : MonoBehaviour
     {
         yield return inActivityStudentParticipationService.GetAllWithPointsGroupedByTeams(activityId);
 
-        Debug.Log("reponseCode");
-        Debug.Log(teamService.responseCode);
-
         if (inActivityStudentParticipationService.responseCode != 200)
         {
             //loadingCanvas.SetActive(false);
@@ -102,9 +95,6 @@ public class LeaderboardController : MonoBehaviour
     IEnumerator GetAllTopPlayersWithPoints(int activityId)
     {
         yield return inActivityStudentParticipationService.GetAllTopPlayersWithPoints(activityId);
-
-        Debug.Log("reponseCode");
-        Debug.Log(teamService.responseCode);
 
         if (inActivityStudentParticipationService.responseCode != 200)
         {
