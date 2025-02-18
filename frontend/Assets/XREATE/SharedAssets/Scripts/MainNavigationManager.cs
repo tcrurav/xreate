@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
@@ -53,6 +54,26 @@ public class MainNavigationManager : MonoBehaviour
     {
         GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
         containerGameObject.SetActive(false);
+    }
+
+    public static IEnumerator WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(Scene scene)
+    {
+        // TODO - Maybe this should be for a certain number of seconds only
+        while (NetworkManager.Singleton.LocalClient == null || NetworkManager.Singleton.LocalClient.PlayerObject == null)
+        {
+            yield return null;
+        }
+
+        ChangeSceneForLocalNetworkPlayer(scene);
+    }
+
+    private static void ChangeSceneForLocalNetworkPlayer(Scene scene)
+    {
+        PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
+        if (player != null)
+        {
+            player.SetPlayerSceneServerRpc(scene);
+        }
     }
 
 }

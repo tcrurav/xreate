@@ -47,7 +47,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
     public IEnumerator GetAllByActivityId(int activityId)
     {
-        Debug.Log("InActivityStudentParticipationService, GetAllByActivityId");
         UpdateURL();
         yield return StartCoroutine(RestGetAllByActivityId(activityId));
     }
@@ -82,25 +81,21 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("InActivityStudentParticipations data returned successfully!");
 
         inActivityStudentParticipations = JsonHelper.getJsonArray<InActivityStudentParticipation>(result);
 
@@ -111,8 +106,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/learningPath/students/" + studentId.ToString());
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -121,25 +114,21 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("InActivityStudentParticipations with Activity and points data returned successfully!");
 
         inActivityStudentParticipationsWithActivityAndPoints =
             JsonHelper.getJsonArray<InActivityStudentParticipationWithActivityAndPoints>(result);
@@ -151,8 +140,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/points/teams/topPlayers/activities/" + activityId.ToString());
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -161,25 +148,21 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("InActivityStudentParticipations with Activity and points Top players data returned successfully!");
 
         inActivityStudentParticipationTopPlayersWithPoints =
             JsonHelper.getJsonArray<InActivityStudentParticipationTopPlayersWithPoints>(result);
@@ -191,8 +174,6 @@ public class InActivityStudentParticipationService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/points/teams/activities/" + activityId.ToString());
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -201,25 +182,21 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("InActivityStudentParticipations with Activity and points grouped by teams data returned successfully!");
 
         inActivityStudentParticipationWithPointsGroupedByTeams =
             JsonHelper.getJsonArray<InActivityStudentParticipationWithPointsGroupedByTeams>(result);
@@ -231,27 +208,22 @@ public class InActivityStudentParticipationService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/activities/" + activityId.ToString());
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
-        Debug.Log("InActivityStudentParticipationService, RestGetAllByActivityId");
         yield return request.SendWebRequest();
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("InActivityStudentParticipationService, Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -259,17 +231,8 @@ public class InActivityStudentParticipationService : MonoBehaviour
             yield break;
         }
 
-        Debug.Log("InActivityStudentParticipations data by ActivityId returned successfully!");
-
         inActivityStudentParticipations =
             JsonHelper.getJsonArray<InActivityStudentParticipation>(result);
-
-        foreach (InActivityStudentParticipation i in inActivityStudentParticipations)
-        {
-            Debug.Log(i.studentId);
-        }
-
-        Debug.Log("InActivityStudentParticipations data by ActivityId returned all successfully!");
 
         request.Dispose();
     }
@@ -291,17 +254,15 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -329,17 +290,15 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -362,17 +321,15 @@ public class InActivityStudentParticipationService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {

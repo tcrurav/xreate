@@ -68,25 +68,21 @@ public class TeamService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("Teams data returned successfully!");
 
         teams = JsonHelper.getJsonArray<Team>(result);
 
@@ -97,8 +93,6 @@ public class TeamService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/points");
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -107,25 +101,21 @@ public class TeamService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("Teams with points data returned successfully!");
 
         teamsWithPoints = JsonHelper.getJsonArray<TeamWithPoints>(result);
 
@@ -136,8 +126,6 @@ public class TeamService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/challenges/points");
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -146,25 +134,21 @@ public class TeamService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("Teams with challenges and points data returned successfully!");
 
         teamsWithChallengesAndPoints = JsonHelper.getJsonArray<TeamWithChallengesAndPoints>(result);
 
@@ -188,17 +172,15 @@ public class TeamService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -226,17 +208,15 @@ public class TeamService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -259,17 +239,15 @@ public class TeamService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {

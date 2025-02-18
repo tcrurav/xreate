@@ -183,8 +183,6 @@ exports.updateByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId = (re
         raw: true
     }).then(data => {
         // It will return an array but by the logic of the business (game) is just one (the first one)
-        console.log("los puntossssssssssssssssssssssssssssssssssssssssssssss")
-        console.log(req.body);
 
         const updatedChallengeItem = {
             id: req.body.id ? req.body.id : data.id,
@@ -192,9 +190,6 @@ exports.updateByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId = (re
             challengeItemId: req.body.challengeItemId ? req.body.challengeItemId : data.challengeItemId,
             points: req.body.points ? req.body.points : data.points,
         }
-
-        console.log("los puntossssssssssssssssssssssssssssssssssssssssssssss 2")
-        console.log(updatedChallengeItem);
 
         AchievementItem.update(updatedChallengeItem, {
             where: { id: data[0].id } // as mention above it's just one AchievementItem

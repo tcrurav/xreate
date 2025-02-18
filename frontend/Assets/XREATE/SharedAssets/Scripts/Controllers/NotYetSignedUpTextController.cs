@@ -8,7 +8,6 @@ public class NotYetSignedUpTextController : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.pointerId == -1)
         {
-            Debug.Log("Text clicked on canvas");
             SceneManager.LoadScene("Signup");
         }
     }

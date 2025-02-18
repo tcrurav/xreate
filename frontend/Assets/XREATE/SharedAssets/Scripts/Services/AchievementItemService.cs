@@ -76,25 +76,21 @@ public class AchievementItemService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("AchievementItems data returned successfully!");
 
         achievementItems = JsonHelper.getJsonArray<AchievementItem>(result);
 
@@ -118,17 +114,15 @@ public class AchievementItemService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -156,17 +150,15 @@ public class AchievementItemService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -180,8 +172,6 @@ public class AchievementItemService : MonoBehaviour
     private IEnumerator RestUpdateByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
         string challengeName, string challengeItemItem, int studentId, int activityId, AchievementItem achievementItem)
     {
-        Debug.Log(URL + $"/challenge/{challengeName}/challengeItem/{challengeItemItem}/student/{studentId}/activity/{activityId}");
-
         var request = new UnityWebRequest(URL + $"/challenge/{challengeName}/challengeItem/{challengeItemItem}/student/{studentId}/activity/{activityId}", "PUT");
 
         var bodyJsonString = JsonUtility.ToJson(achievementItem);
@@ -197,17 +187,15 @@ public class AchievementItemService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -230,17 +218,15 @@ public class AchievementItemService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {

@@ -75,7 +75,6 @@ public class AllActivitiesController : MonoBehaviour
         {
             case "TRAINING_LAB":
                 // TODO - Only 1 training lab at the moment (There will be many "activityName" in the future)
-                Debug.Log("Only 1 activityName at the moment: " + activityName);
                 MainNavigationManager.EnableSceneContainer("MainSceneContainer");
                 break;
             case "VIRTUAL_CLASSROOM":

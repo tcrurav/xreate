@@ -1,8 +1,8 @@
-# XREATE digital security training lab
+# XCreate digital security training lab
 [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
 <!-- [![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md) -->
 
-This project is a first draft for a training lab in the XREATE project.
+This project is a first draft for a training lab in the XCreate project.
 
 At this moment: 
   - Backend is working.
@@ -16,7 +16,7 @@ At this moment:
       * After a teacher explains the activity he can enable, by clicking on a button, the visit to 2 rooms and 3 corridors. There will soon be a 3rd room.
       * In the corridors and rooms only students in the same team can see each other.
 
-[Read more about XREATE](docs/xreate-project-description.en.md)
+[Read more about XCreate](docs/xreate-project-description.en.md)
 
 ## Getting Started (development)
 

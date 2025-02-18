@@ -1,6 +1,5 @@
 using System.Collections;
 using Unity.Netcode;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class CurrentActivityManager : MonoBehaviour
@@ -62,8 +61,6 @@ public class CurrentActivityManager : MonoBehaviour
 
         yield return Instance.GetActivityChallengeConfigsByActivityId();
 
-        Debug.Log($"Refresh - Instance.inCurrentActivityChallengeConfigs[0].id: {Instance.inCurrentActivityChallengeConfigs[0].id}");
-
         SetNumberOfChallengesInActivity(Instance.inCurrentActivityChallengeConfigs.Length);
     }
 
@@ -80,23 +77,20 @@ public class CurrentActivityManager : MonoBehaviour
 
         Instance.inCurrentActivityStudentParticipations = Instance.inActivityStudentParticipationService.inActivityStudentParticipations;
 
-        StartCoroutine(WaitForPlayerObject());
+        StartCoroutine(WaitForPlayerObjectAndThenChangeTeamId());
     }
 
-    private IEnumerator WaitForPlayerObject()
+    public static IEnumerator WaitForPlayerObjectAndThenChangeTeamId()
     {
         while (NetworkManager.Singleton.LocalClient == null || NetworkManager.Singleton.LocalClient.PlayerObject == null)
         {
             yield return null;
         }
 
-        //var playerSync = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
-        //Debug.Log($"PlayerSync encontrado: {playerSync}");
-
         ChangeTeamIdInPlayerSync();
     }
 
-    public static void ChangeTeamIdInPlayerSync()
+    private static void ChangeTeamIdInPlayerSync()
     {
         int teamId = GetTeamIdByStudentId(MainManager.GetUser().id);
 
