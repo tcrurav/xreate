@@ -19,5 +19,8 @@ module.exports = app => {
     // Delete a ActivityChallengeConfigItems with id
     router.delete("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), activityChallengeConfigItems.delete);
 
+    // Retrieve all ActivityChallengeConfigItems by activityChallengeConfigId
+    router.get("/config/:configId", auth.isAuthenticated, activityChallengeConfigItems.findAllByConfigId);
+
     app.use('/api/activityChallengeConfigItems', router);
 };
