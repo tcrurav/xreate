@@ -5,7 +5,7 @@ public class EnableScenesController : MonoBehaviour
     public string[] sceneContainers;
     void OnEnable()
     {
-        MainManager.SetScene("MainScene");
+        MainManager.SetScene(Scene.Main);
 
         for (var i = 0; i < sceneContainers.Length; i++)
         {

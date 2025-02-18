@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const ActivityChallengeConfigItem = sequelize.define("ActivityChallengeConfigItem", {
     value: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT // Changed from STRING to TEXT
     },
     item: {
       type: Sequelize.STRING

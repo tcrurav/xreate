@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: xreate
-  productName: xreate
+  companyName: XCreate
+  productName: XCreate
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -143,10 +143,8 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.0.3
-  preloadedAssets:
-  - {fileID: 5269706996647393442, guid: e3aee76b9372917449aef639e2f74814, type: 2}
-  - {fileID: 3233996788981779080, guid: 87b413c5a910b15498a98200731b1754, type: 2}
+  bundleVersion: 0.0.1
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -966,7 +964,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 1
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: bee8f8c8-1c6d-4c5b-a03b-06b19adbfa0c
   framebufferDepthMemorylessMode: 0

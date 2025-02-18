@@ -3238,6 +3238,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 515047586}
+    - targetCorrespondingSourceObject: {fileID: 2730387738703875143, guid: f69b21717a29726409a98704670c6887,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2086512971}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -1196002667065358480, guid: f69b21717a29726409a98704670c6887,
         type: 3}
@@ -3937,6 +3941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825950f4cd0e47b438de948b9d222dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickToGoButton: {fileID: 0}
+  RedText: {fileID: 0}
+  GreenText: {fileID: 0}
 --- !u!114 &2086315353 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6196823219296487275, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
@@ -3949,6 +3956,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2086512970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2086512971}
+  - component: {fileID: 2086512973}
+  - component: {fileID: 2086512972}
+  m_Layer: 0
+  m_Name: TestActivityChallengeConfigItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2086512971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086512970}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1932320066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2086512972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086512970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf0779ae79227f54582cbcd1272a5bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requestError: 
+  responseCode: 0
+  activityChallengeConfigItems: []
+--- !u!114 &2086512973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086512970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea4eba5ccc16794fb7b96ae16822d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  service: {fileID: 2086512972}
 --- !u!1 &2087925918
 GameObject:
   m_ObjectHideFlags: 0

@@ -108,3 +108,16 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+// Find all items by activityChallengeConfigId
+exports.findAllByConfigId = async (req, res) => {
+    try {
+        const configId = req.params.configId;
+        const items = await ActivityChallengeConfigItem.findAll({
+            where: { activityChallengeConfigId: configId }
+        });
+        res.status(200).json(items);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.XR;
 
 public class MainNetworkManager : MonoBehaviour
@@ -134,19 +132,6 @@ public class MainNetworkManager : MonoBehaviour
         }
     }
 
-    public static void GetAllPlayers()
-    {
-        DebugManager.Log("GetAllPlayers");
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-        {
-            // Access each player's client and identity information
-            var playerObject = client.PlayerObject;
-            // You can then check the playerObject or get components from it
-
-            DebugManager.Log(playerObject.name);
-        }
-    }
-
     public static void NetworkQuickJoinLoginUsingUnity6TemplateMenus()
     {
         XRMultiplayer.XRINetworkGameManager.LocalPlayerName.Value = MainManager.GetUser().username;
@@ -154,6 +139,21 @@ public class MainNetworkManager : MonoBehaviour
         Instance.QuickJoinButton.onClick.Invoke();
         Instance.CloseMenuButton.onClick.Invoke();
     }
+
+    //public static void GetAllPlayers()
+    //{
+    //    DebugManager.Log("GetAllPlayers");
+    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+    //    {
+    //        // Access each player's client and identity information
+    //        var playerObject = client.PlayerObject;
+    //        // You can then check the playerObject or get components from it
+
+    //        DebugManager.Log(playerObject.name);
+    //    }
+    //}
+
+
 
     //public static void ChangeSceneTo(int playerId, string sceneName)
     //{

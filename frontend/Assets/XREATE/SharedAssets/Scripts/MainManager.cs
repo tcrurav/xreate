@@ -5,7 +5,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     private User user;
-    private string scene = "LoginScene";
+    private Scene scene = Scene.Login;
     private string accessToken;
     private string currentUrl = "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es";
     private readonly string[] URL = new string[] {
@@ -37,9 +37,11 @@ public class MainManager : MonoBehaviour
         Instance.user = user;
     }
 
-    public static void SetScene(string scene)
+    public static void SetScene(Scene scene)
     {
         Instance.scene = scene;
+
+        MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(scene);
     }
 
     public static string GetAccessToken()
@@ -51,7 +53,7 @@ public class MainManager : MonoBehaviour
     {
         return Instance.user;
     }
-    public static string GetScene()
+    public static Scene GetScene()
     {
         return Instance.scene;
     }

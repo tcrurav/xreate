@@ -54,25 +54,21 @@ public class ChallengeService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("Teams data returned successfully!");
 
         challenges = JsonHelper.getJsonArray<Challenge>(result);
 
@@ -96,17 +92,15 @@ public class ChallengeService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -134,17 +128,15 @@ public class ChallengeService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
@@ -167,17 +159,15 @@ public class ChallengeService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {

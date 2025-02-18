@@ -55,22 +55,18 @@ public class AuthService : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("User registered successfully!");
 
         UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
 
@@ -97,25 +93,21 @@ public class AuthService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("User logged in successfully!");
 
         UserWithAccessToken userWithAccessToken = JsonUtility.FromJson<UserWithAccessToken>(result);
 
@@ -125,21 +117,4 @@ public class AuthService : MonoBehaviour
         request.Dispose();
     }
 
-
-    // Calling to future Tibu's Me - Maybe helpfull for Image upload - To be done USING Unity documentation
-    //List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-    //formData.Add(new MultipartFormDataSection("field1=foo&field2=bar"));
-    //formData.Add(new MultipartFormFileSection("my file data", "myfile.txt"));
-
-    //UnityWebRequest www = UnityWebRequest.Post("https://www.my-server.com/myform", formData);
-    //yield return www.SendWebRequest();
-
-    //if (www.result != UnityWebRequest.Result.Success)
-    //{
-    //    Debug.Log(www.error);
-    //}
-    //else
-    //{
-    //    Debug.Log("Form upload complete!");
-    //}
 }

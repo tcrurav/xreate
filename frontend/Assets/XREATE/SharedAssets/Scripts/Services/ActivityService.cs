@@ -61,25 +61,21 @@ public class ActivityService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("Activities data returned successfully!");
 
         activities = JsonHelper.getJsonArray<Activity>(result);
 
@@ -90,8 +86,6 @@ public class ActivityService : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(URL + "/nonExpired");
 
-        Debug.Log(MainManager.GetAccessToken());
-
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -100,25 +94,21 @@ public class ActivityService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        Debug.Log("Teams with points data returned successfully!");
 
         activitiesNonExpired = JsonHelper.getJsonArray<Activity>(result);
 
@@ -142,38 +132,21 @@ public class ActivityService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(request.error);
-        //    request.Dispose();
-        //    yield break;
-        //}
-        //else
-        //{
-        //    Debug.Log("Team upload complete!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }
@@ -195,36 +168,21 @@ public class ActivityService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.Log(request.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Team upload complete!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }
@@ -241,36 +199,21 @@ public class ActivityService : MonoBehaviour
 
         requestError = request.error;
         responseCode = request.responseCode;
-        Debug.Log("Status Code: " + request.responseCode);
 
         if (request.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.Log(request.error);
+            Debug.LogError(request.error);
             request.Dispose();
             yield break;
         }
 
         string result = request.downloadHandler.text;
-        Debug.Log(result);
 
         if (request.responseCode != 200)
         {
             request.Dispose();
             yield break;
         }
-
-        // TODO - It has to be tested. If Ok then delete following comments bellow
-
-        //if (request.result == UnityWebRequest.Result.ConnectionError)
-        //{
-        //    Debug.Log(request.error);
-        //}
-        //else
-        //{
-        //    Debug.Log("Team Deleted successfully!");
-        //}
-
-        //Debug.Log("Status Code: " + request.responseCode);
 
         request.Dispose();
     }

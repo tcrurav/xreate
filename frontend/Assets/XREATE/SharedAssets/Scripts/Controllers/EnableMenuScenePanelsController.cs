@@ -4,7 +4,7 @@ public class EnableMenuScenePanelsController : MonoBehaviour
 {
     private void OnEnable()
     {
-        MainManager.SetScene("MenuScene");
+        MainManager.SetScene(Scene.Menu);
         EnableAccordingToRole();
     }
     public void EnableAccordingToRole()
