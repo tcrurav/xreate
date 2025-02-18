@@ -325,7 +325,7 @@
                 },
                 "value": {
                     "field": "value",
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "item": {
                     "field": "item",

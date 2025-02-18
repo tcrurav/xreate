@@ -407,7 +407,7 @@ var migrationCommands = function(transaction) {
                         "allowNull": false
                     },
                     "value": {
-                        "type": Sequelize.STRING,
+                        "type": Sequelize.TEXT, // Changed from STRING to TEXT
                         "field": "value"
                     },
                     "item": {
