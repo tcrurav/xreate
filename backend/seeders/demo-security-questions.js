@@ -11,7 +11,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 1,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is Phishing?",
             value: JSON.stringify({
                 answers: [
@@ -29,7 +29,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 2,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What does Ransomware do?",
             value: JSON.stringify({
                 answers: [
@@ -47,7 +47,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 3,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Trojan?",
             value: JSON.stringify({
                 answers: [
@@ -65,7 +65,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 4,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a brute force attack?",
             value: JSON.stringify({
                 answers: [
@@ -83,7 +83,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 5,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Botnet?",
             value: JSON.stringify({
                 answers: [
@@ -101,7 +101,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 6,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a DoS (Denial of Service) attack?",
             value: JSON.stringify({
                 answers: [
@@ -119,7 +119,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 7,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Rootkit?",
             value: JSON.stringify({
                 answers: [
@@ -137,7 +137,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 8,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is an SSL certificate?",
             value: JSON.stringify({
                 answers: [
@@ -155,7 +155,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 9,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is an SQL Injection attack?",
             value: JSON.stringify({
                 answers: [
@@ -173,7 +173,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 10,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What does the term Spoofing mean?",
             value: JSON.stringify({
                 answers: [
@@ -191,7 +191,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 11,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Social Engineering attack?",
             value: JSON.stringify({
                 answers: [
@@ -209,7 +209,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 12,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Man-in-the-Middle (MITM) attack?",
             value: JSON.stringify({
                 answers: [
@@ -227,7 +227,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 13,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is Cryptojacking?",
             value: JSON.stringify({
                 answers: [
@@ -245,7 +245,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 14,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Zero-Day?",
             value: JSON.stringify({
                 answers: [
@@ -263,7 +263,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 15,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Keylogger?",
             value: JSON.stringify({
                 answers: [
@@ -281,7 +281,7 @@ module.exports = {
 
         await queryInterface.bulkInsert('activity_challenge_config_items', [{
             id: 16,
-            activityChallengeConfigId: 3,
+            activityChallengeConfigId: 2,
             item: "What is a Spear Phishing attack?",
             value: JSON.stringify({
                 answers: [
