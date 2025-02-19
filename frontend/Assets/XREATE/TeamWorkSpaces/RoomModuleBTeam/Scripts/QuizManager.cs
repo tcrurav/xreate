@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,11 +55,13 @@ public class QuizManager : MonoBehaviour
     public string challengeItemItem; // Challenge item name
 
     private AchievementItemService achievementItemService; // Service to submit points
+    public ActivityChallengeConfigItemService activityChallengeConfigItemService;
 
     void Start()
     {
         // Initialize the points service
         achievementItemService = gameObject.AddComponent<AchievementItemService>();
+        activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
 
         // Initialize my AudioSource component
         audioSource = GetComponent<AudioSource>();
@@ -140,238 +143,47 @@ public class QuizManager : MonoBehaviour
             quizPanels[i].SetActive(true);
         }
 
-        InitializeQuestions();
+        StartCoroutine(InitializeQuestionsSelectRandomQuestionsAndLoadQuestion());
+    }
+
+    // Initialize questions and answers
+    private IEnumerator InitializeQuestionsSelectRandomQuestionsAndLoadQuestion()
+    {
+        yield return StartCoroutine(GetAllById());
         SelectRandomQuestions(); // Select 10 random questions
         LoadQuestion();
     }
 
-    // Initialize questions and answers
-    void InitializeQuestions()
+    private IEnumerator GetAllById()
     {
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es Phishing?",
-            answers = new List<string>
-        {
-            "A: Un método de ataque que busca obtener información personal mediante engaños.",
-            "B: Un tipo de malware que infecta sistemas operativos.",
-            "C: Un ataque para bloquear el acceso a una red.",
-            "D: Un método para interceptar comunicaciones cifradas.",
-            "E: Un sistema para mejorar la seguridad de contraseñas."
-        },
-            correctAnswerIndex = 0
-        });
+        yield return activityChallengeConfigItemService.GetAllById(CurrentActivityManager.GetCurrentActivityId());
 
-        questions.Add(new Question
+        if (activityChallengeConfigItemService.activityChallengeConfigItems != null && activityChallengeConfigItemService.activityChallengeConfigItems.Length > 0)
         {
-            questionText = "¿Qué hace un Ransomware?",
-            answers = new List<string>
-        {
-            "A: Roba credenciales de acceso.",
-            "B: Cifra datos del usuario y pide un rescate para devolverlos.",
-            "C: Infecta el hardware del equipo.",
-            "D: Monitorea la actividad en el navegador web.",
-            "E: Cambia las configuraciones del sistema sin permiso."
-        },
-            correctAnswerIndex = 1
-        });
+            foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
+            {
+                ActivityChallengeConfigItemValue value = JsonUtility.FromJson<ActivityChallengeConfigItemValue>(item.value);
 
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un Troyano?",
-            answers = new List<string>
-        {
-            "A: Un tipo de virus diseñado para replicarse.",
-            "B: Una herramienta de protección contra malware.",
-            "C: Un programa malicioso disfrazado de software legítimo.",
-            "D: Un ataque diseñado para saturar una red.",
-            "E: Un sistema para detectar actividad sospechosa."
-        },
-            correctAnswerIndex = 2
-        });
+                List<string> answers = new();
 
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un ataque de fuerza bruta?",
-            answers = new List<string>
-        {
-            "A: Un ataque que prueba todas las combinaciones posibles para descifrar contraseñas.",
-            "B: Una estrategia para engañar a un usuario mediante ingeniería social.",
-            "C: Un virus que borra datos automáticamente.",
-            "D: Un método para obtener acceso físico a servidores.",
-            "E: Una técnica para manipular bases de datos."
-        },
-            correctAnswerIndex = 0
-        });
+                for (int i = 0; i < value.answers.Length; i++)
+                {
+                    answers.Add(value.answers[i]);
+                }
 
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un Botnet?",
-            answers = new List<string>
-        {
-            "A: Un programa antivirus avanzado.",
-            "B: Una red de dispositivos infectados controlados de forma remota.",
-            "C: Una técnica para realizar phishing.",
-            "D: Un método para proteger la privacidad en línea.",
-            "E: Un sistema para evitar ataques DoS."
-        },
-            correctAnswerIndex = 1
-        });
+                questions.Add(new Question
+                {
+                    questionText = item.item,
+                    answers = answers,
+                    correctAnswerIndex = value.correctAnswerIndex
+                });
 
-        questions.Add(new Question
+            }
+        }
+        else
         {
-            questionText = "¿Qué es un ataque DoS (Denial of Service)?",
-            answers = new List<string>
-        {
-            "A: Un intento de explotar vulnerabilidades de hardware.",
-            "B: Un ataque que roba credenciales de usuarios.",
-            "C: Un malware diseñado para cifrar datos personales.",
-            "D: Un ataque que bloquea un servicio al saturarlo con solicitudes.",
-            "E: Un método de redirección maliciosa en navegadores."
-        },
-            correctAnswerIndex = 3
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un Rootkit?",
-            answers = new List<string>
-        {
-            "A: Un software que permite acceso oculto a un sistema y evita su detección.",
-            "B: Una herramienta de monitoreo de red.",
-            "C: Un ataque DoS avanzado.",
-            "D: Un programa para cifrar datos personales.",
-            "E: Un sistema de control remoto para servidores."
-        },
-            correctAnswerIndex = 0
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un certificado SSL?",
-            answers = new List<string>
-        {
-            "A: Un ataque para descifrar datos cifrados.",
-            "B: Un sistema de autenticación para comunicaciones cifradas.",
-            "C: Un sistema para realizar ingeniería social avanzada.",
-            "D: Un estándar de seguridad para redes locales.",
-            "E: Un tipo de malware diseñado para servidores."
-        },
-            correctAnswerIndex = 1
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un ataque SQL Injection?",
-            answers = new List<string>
-        {
-            "A: Un método para prevenir el uso de contraseñas débiles.",
-            "B: Una técnica para realizar ataques de phishing.",
-            "C: Un ataque que inyecta código malicioso en bases de datos a través de consultas.",
-            "D: Una vulnerabilidad que permite acceso remoto no autorizado.",
-            "E: Una técnica para deshabilitar configuraciones de seguridad."
-        },
-            correctAnswerIndex = 2
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué significa el término Spoofing?",
-            answers = new List<string>
-        {
-            "A: Un ataque diseñado para robar datos personales mediante redes sociales.",
-            "B: Un tipo de malware que infecta dispositivos móviles.",
-            "C: Un método para cifrar datos sensibles.",
-            "D: Un software para controlar dispositivos remotamente.",
-            "E: Una técnica para falsificar la identidad o dirección de origen."
-        },
-            correctAnswerIndex = 4
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un ataque de Ingeniería Social?",
-            answers = new List<string>
-        {
-            "A: Un ataque técnico dirigido a sistemas operativos.",
-            "B: Una estrategia para manipular a las personas y obtener información confidencial.",
-            "C: Una técnica para proteger información personal.",
-            "D: Un tipo de malware diseñado para redes sociales.",
-            "E: Un sistema de detección de intrusos."
-        },
-            correctAnswerIndex = 1
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un ataque Man-in-the-Middle (MITM)?",
-            answers = new List<string>
-        {
-            "A: Un ataque donde un tercero intercepta y manipula la comunicación entre dos partes.",
-            "B: Un malware que se propaga automáticamente en una red.",
-            "C: Un software que permite descifrar contraseñas.",
-            "D: Un método para evitar conexiones seguras.",
-            "E: Un sistema para engañar a usuarios mediante ingeniería social."
-        },
-            correctAnswerIndex = 0
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es el Criptojacking?",
-            answers = new List<string>
-        {
-            "A: Un ataque que roba criptomonedas directamente de carteras digitales.",
-            "B: Un ataque que utiliza recursos de dispositivos infectados para minar criptomonedas.",
-            "C: Una técnica de protección contra ransomware.",
-            "D: Un software para realizar pagos seguros.",
-            "E: Un ataque para deshabilitar la red de minería."
-        },
-            correctAnswerIndex = 1
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un Zero-Day?",
-            answers = new List<string>
-        {
-            "A: Una vulnerabilidad desconocida explotada antes de que el desarrollador lance un parche.",
-            "B: Un malware diseñado para desactivar software antivirus.",
-            "C: Un sistema de monitoreo de tráfico de red.",
-            "D: Un método para proteger contraseñas débiles.",
-            "E: Un ataque dirigido a hardware obsoleto."
-        },
-            correctAnswerIndex = 0
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un Keylogger?",
-            answers = new List<string>
-        {
-            "A: Un malware que registra las pulsaciones del teclado.",
-            "B: Un ataque para bloquear redes sociales.",
-            "C: Una técnica de recuperación de datos.",
-            "D: Un sistema para encriptar contraseñas automáticamente.",
-            "E: Un ataque diseñado para desactivar firewalls."
-        },
-            correctAnswerIndex = 0
-        });
-
-        questions.Add(new Question
-        {
-            questionText = "¿Qué es un ataque de Spear Phishing?",
-            answers = new List<string>
-        {
-            "A: Una versión más específica y dirigida de un ataque de phishing.",
-            "B: Un ataque para deshabilitar contraseñas cifradas.",
-            "C: Un software de monitoreo avanzado.",
-            "D: Una técnica para infectar bases de datos.",
-            "E: Un sistema para rastrear correos electrónicos falsificados."
-        },
-            correctAnswerIndex = 0
-        });
-
+            Debug.LogError("No se recibieron datos o el array está vacío.");
+        }
     }
 
 

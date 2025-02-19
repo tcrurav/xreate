@@ -1189,6 +1189,7 @@ MonoBehaviour:
   incorrectSound: {fileID: 8300000, guid: 57ede49cb32093849b423cddb82a6f51, type: 3}
   challengeName: security concepts
   challengeItemItem: total points of a student in this challenge
+  activityChallengeConfigItemService: {fileID: 0}
 --- !u!82 &515047588
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3942,6 +3943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClickToGoButton: {fileID: 0}
+  EnableNextRoomButton: {fileID: 0}
   RedText: {fileID: 0}
   GreenText: {fileID: 0}
 --- !u!114 &2086315353 stripped
@@ -3973,7 +3975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2086512971
 Transform:
   m_ObjectHideFlags: 0
