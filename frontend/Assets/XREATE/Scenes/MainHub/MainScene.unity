@@ -5546,7 +5546,7 @@ Transform:
   m_GameObject: {fileID: 1047381638}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00059605215, y: 0.73041636, z: 0.00063743093, w: 0.68300164}
-  m_LocalPosition: {x: -9.942215, y: 6.386486, z: -19.414253}
+  m_LocalPosition: {x: -98.131, y: 0.077, z: 1.256}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5601,9 +5601,9 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 924076775}
         m_TargetAssemblyTypeName: RoomChangeController, Assembly-CSharp
-        m_MethodName: ChangeToCorridorToRoomModuleA
+        m_MethodName: ChangeToRoomModuleB
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5693,7 +5693,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5bec0de3c839a9d4d92e3bd5706b3ee8, type: 2}
+  - {fileID: 2100000, guid: 1d79d324fde5f11469b1a31840bd17c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
