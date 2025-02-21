@@ -43,15 +43,23 @@ public class CyberSecurityPanel : MonoBehaviour
         { "IDS", "Intrusion Detection System" }
     };
 
+    private List<KeyValuePair<string, string>> orderedSecurityTerms;
     private int currentIndex = 0;
 
     void Start()
     {
+        // Ordena el diccionario por clave
+        orderedSecurityTerms = securityTerms.OrderBy(term => term.Key).ToList();
+
         lblIntro.text = "Welcome to Find the Pairs!!!\n" +
-                        "Next, you will learn new concepts related to Cybersecurity.\n" +
-                        "Read them carefully, discuss with your classmates and teachers.\n" +
-                        "Then, you will dive into the challenge of finding the pairs.\n" +
-                        "Stay alert, discover the pairs and earn points before time runs out.";
+                        "Next, you will learn new concepts\n" +
+                        " related to Cybersecurity.\n" +
+                        "Read them carefully, discuss with\n" +
+                        "your classmates and teachers.\n" +
+                        "Then, you will dive into the challenge\n" +
+                        "of finding the pairs.\n" +
+                        "Stay alert, discover the pairs and \n" +
+                        "earn points before time runs out.";
 
         // Mostrar el primer término al inicio
         ShowSecurityTerm();
@@ -59,15 +67,21 @@ public class CyberSecurityPanel : MonoBehaviour
 
     private void ShowSecurityTerm()
     {
-        // Obtener el par clave-valor directamente desde el diccionario usando ElementAt
-        var term = securityTerms.ElementAt(currentIndex);
-        lblTerm.text = term.Key;
-        lblDefinition.text = term.Value;
+        // Asegurarnos de que los TextMeshPro se actualicen correctamente
+        lblTerm.text = "";  // Limpiar antes de actualizar
+        lblDefinition.text = "";  // Limpiar antes de actualizar
+
+        if (orderedSecurityTerms.Count > 0 && currentIndex >= 0 && currentIndex < orderedSecurityTerms.Count)
+        {
+            var term = orderedSecurityTerms[currentIndex];
+            lblTerm.text = term.Key;
+            lblDefinition.text = term.Value;
+        }
     }
 
     public void OnNextButtonPressed()
     {
-        if (currentIndex < securityTerms.Count - 1)
+        if (currentIndex < orderedSecurityTerms.Count - 1)
         {
             currentIndex++;
             ShowSecurityTerm();
