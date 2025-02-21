@@ -9,21 +9,31 @@ public class VRButton : MonoBehaviour
 
     private void Start()
     {
-        // Obtener el componente XR Interactable
+        // Verifica que el XRBaseInteractable está bien configurado en el cubo (botón)
         XRBaseInteractable interactable = GetComponent<XRBaseInteractable>();
 
-        // Agregar la función al evento de selección
-        interactable.selectEntered.AddListener(OnButtonPressed);
+        if (interactable != null)
+        {
+            interactable.selectEntered.AddListener(OnButtonPressed);
+        }
+        else
+        {
+            Debug.LogError("XRBaseInteractable no encontrado en el cubo!");
+        }
     }
 
     // Método que se ejecuta cuando se selecciona el botón en VR
     private void OnButtonPressed(SelectEnterEventArgs args)
     {
-        // Si es el botón siguiente, avanza al siguiente término
+        Debug.Log("Botón pulsado: " + gameObject.name);
         if (isNextButton)
+        {
             panel.OnNextButtonPressed();
-        // Si es el botón anterior, retrocede al término anterior
+        }
         else
+        {
             panel.OnPreviousButtonPressed();
+        }
+
     }
 }
