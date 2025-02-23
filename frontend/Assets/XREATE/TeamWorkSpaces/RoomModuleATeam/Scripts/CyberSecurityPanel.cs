@@ -46,30 +46,52 @@ public class CyberSecurityPanel : MonoBehaviour
     private IEnumerator LoadSecurityTerms()
     {
         yield return activityChallengeConfigItemService.GetAllById(CurrentActivityManager.GetCurrentActivityId());
-        Debug.Log($"Datos recibidos: {activityChallengeConfigItemService.activityChallengeConfigItems.Length} elementos");
+
+        Debug.Log($"Datos recibidos: {activityChallengeConfigItemService.activityChallengeConfigItems?.Length ?? 0} elementos");
 
         if (activityChallengeConfigItemService.activityChallengeConfigItems != null && activityChallengeConfigItemService.activityChallengeConfigItems.Length > 0)
         {
+            // Crear una instancia de InActivityChallengeConfigItemValueDictionary
+            var termsDictionary = new InActivityChallengeConfigItemValueDictionary();
+
             foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
             {
-                ActivityChallengeConfigItemValue value = JsonUtility.FromJson<ActivityChallengeConfigItemValue>(item.value);
-
-                for (int i = 0; i < value.answers.Length; i += 2)
+                // Filtrar solo los términos dentro del rango 100 - 150
+                if (item.id < 100 || item.id > 150)
                 {
-                    securityTerms.Add(value.answers[i],value.answers[i+1]);
+                    continue; // Ignorar elementos fuera del rango
                 }
 
+                // Verificación de datos válidos
+                if (string.IsNullOrEmpty(item.item) || string.IsNullOrEmpty(item.value))
+                {
+                    Debug.LogWarning($"Elemento inválido o con valores vacíos: {item.item} - {item.value}");
+                    continue;
+                }
+
+                Debug.Log($"Procesando término: {item.item} - Definición: {item.value}");
+
+                // Agregar a las listas de InActivityChallengeConfigItemValueDictionary
+                termsDictionary.keys.Add(item.item);
+                termsDictionary.values.Add(item.value);
             }
 
-            // Ahora ordenamos los términos
+            // Convertir a un diccionario estándar
+            var securityTerms = termsDictionary.ToDictionary();
+
+            // Ordenar los términos
             orderedSecurityTerms = securityTerms.OrderBy(term => term.Key).ToList();
 
-            Debug.Log($"Términos cargados: {orderedSecurityTerms.Count}");
+            Debug.Log($"Términos cargados y ordenados: {orderedSecurityTerms.Count}");
 
-            // Mostramos el primer término
+            // Mostrar el primer término
             if (orderedSecurityTerms.Count > 0)
             {
-                ShowSecurityTerm();
+                ShowSecurityTerm(); // Aquí puedes definir cómo mostrar el término
+            }
+            else
+            {
+                Debug.LogError("No se cargaron términos válidos.");
             }
         }
         else
