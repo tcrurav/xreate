@@ -82,6 +82,7 @@ public class CurrentActivityManager : MonoBehaviour
 
     public static IEnumerator WaitForPlayerObjectAndThenChangeTeamId()
     {
+        // TODO - Maybe this should be for a certain number of seconds only
         while (NetworkManager.Singleton.LocalClient == null || NetworkManager.Singleton.LocalClient.PlayerObject == null)
         {
             yield return null;
@@ -94,18 +95,19 @@ public class CurrentActivityManager : MonoBehaviour
     {
         int teamId = GetTeamIdByStudentId(MainManager.GetUser().id);
 
+        Debug.Log($"ChangeTeamIdInPlayerSync ANTES - teamId: {teamId}");
+        DebugManager.Log($"ChangeTeamIdInPlayerSync ANTES - teamId: {teamId}");
+
         if (NetworkManager.Singleton.LocalClient != null)
         {
-            ulong clientId = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<NetworkObject>().OwnerClientId;
-            Debug.Log($"ChangeTeamIdInPlayerSync - clientId: {clientId}");
+            Debug.Log($"ChangeTeamIdInPlayerSync DESPUES - teamId: {teamId}");
+            DebugManager.Log($"ChangeTeamIdInPlayerSync DESPUES - teamId: {teamId}");
+
             PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
-            Debug.Log($"ChangeTeamIdInPlayerSync - DESPUÉS clientId: {clientId}");
 
             if (player != null)
             {
-                Debug.Log($"ChangeTeamIdInPlayerSync - DESPUÉS 2 clientId: {clientId}");
-                player.SetPlayerTeamIdServerRpc(clientId, teamId);
-                Debug.Log($"ChangeTeamIdInPlayerSync - DESPUÉS 3 clientId: {clientId}");
+                player.SetPlayerTeamId(teamId);
             }
         }
     }

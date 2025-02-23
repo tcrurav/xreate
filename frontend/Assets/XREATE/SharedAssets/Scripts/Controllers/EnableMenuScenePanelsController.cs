@@ -4,6 +4,7 @@ public class EnableMenuScenePanelsController : MonoBehaviour
 {
     private void OnEnable()
     {
+        StartCoroutine(MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(Scene.Menu));
         MainManager.SetScene(Scene.Menu);
         EnableAccordingToRole();
     }
