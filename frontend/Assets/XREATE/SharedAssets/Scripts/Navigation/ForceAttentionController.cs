@@ -13,6 +13,13 @@ public class ForceAttentionController : MonoBehaviour
     private void Start()
     {
         teleportationArea = Ground.GetComponent<TeleportationArea>();
+
+        if (MainManager.GetUser().role != "TEACHER")
+        {
+            //Only teachers can force attention
+            Debug.Log("ForceAttentionController - Only a Teacher can enable next Room");
+            ForceAttentionToggle.gameObject.GetComponent<Toggle>().enabled = false;
+        }
     }
     public void OnToggleValueChanged()
     {
