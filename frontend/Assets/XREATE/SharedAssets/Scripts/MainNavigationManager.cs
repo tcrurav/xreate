@@ -58,21 +58,41 @@ public class MainNavigationManager : MonoBehaviour
 
     public static IEnumerator WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(Scene scene)
     {
+        Debug.Log($"WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer ANTES - scene: {scene}");
+        DebugManager.Log($"WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer ANTES - scene: {scene}");
         // TODO - Maybe this should be for a certain number of seconds only
         while (NetworkManager.Singleton.LocalClient == null || NetworkManager.Singleton.LocalClient.PlayerObject == null)
         {
             yield return null;
         }
 
+        Debug.Log($"WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer DESPUES - scene: {scene}");
+        DebugManager.Log($"WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer DESPUES - scene: {scene}");
+
         ChangeSceneForLocalNetworkPlayer(scene);
     }
 
     private static void ChangeSceneForLocalNetworkPlayer(Scene scene)
     {
-        PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
-        if (player != null)
+        Debug.Log($"ChangeSceneForLocalNetworkPlayer ANTES - scene: {scene}");
+        DebugManager.Log($"ChangeSceneForLocalNetworkPlayer ANTES - scene: {scene}");
+
+        if (NetworkManager.Singleton.LocalClient != null)
         {
-            player.SetPlayerSceneServerRpc(scene);
+            PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
+            if (player != null)
+            {
+                Debug.Log($"ChangeSceneForLocalNetworkPlayer DESPUES - scene: {scene}");
+                DebugManager.Log($"ChangeSceneForLocalNetworkPlayer DESPUES - scene: {scene}");
+
+                if (!player.IsSpawned)
+                {
+                    Debug.Log($"ChangeSceneForLocalNetworkPlayer !IsSpawned - scene: {scene}");
+                    DebugManager.Log($"ChangeSceneForLocalNetworkPlayer !IsSpawned - scene: {scene}");
+                }
+
+                player.SetPlayerScene(scene);
+            }
         }
     }
 

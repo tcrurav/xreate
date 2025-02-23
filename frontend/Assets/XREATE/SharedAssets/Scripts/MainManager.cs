@@ -40,8 +40,6 @@ public class MainManager : MonoBehaviour
     public static void SetScene(Scene scene)
     {
         Instance.scene = scene;
-
-        MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(scene);
     }
 
     public static string GetAccessToken()
