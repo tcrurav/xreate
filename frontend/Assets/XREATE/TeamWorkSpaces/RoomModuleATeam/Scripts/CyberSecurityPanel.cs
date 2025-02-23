@@ -1,77 +1,92 @@
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using System.Linq;
+using TMPro;
+using UnityEngine;
 
 public class CyberSecurityPanel : MonoBehaviour
 {
     public TextMeshPro lblIntro;
     public TextMeshPro lblTerm;
     public TextMeshPro lblDefinition;
+    public AudioClip pickSound; // Sonido del botón
+    private AudioSource audioSource;
 
-    private Dictionary<string, string> securityTerms = new Dictionary<string, string>
-    {
-        { "VPN", "Virtual Private Network" },
-        { "Phishing", "A type of cyber attack" },
-        { "Malware", "Software designed to disrupt" },
-        { "Firewall", "A network security system" },
-        { "RAT", "Remote Access Trojan" },
-        { "DDoS", "Distributed Denial of Service" },
-        { "Spoofing", "The act of disguising" },
-        { "Encryption", "The process of converting data" },
-        { "Brute Force", "A trial-and-error attack" },
-        { "Botnet", "A network of infected computers" },
-        { "Zero-Day", "A vulnerability unknown to vendors" },
-        { "SQL Injection", "A code injection technique" },
-        { "Keylogger", "A software that records keystrokes" },
-        { "Ransomware", "A malware that locks files for ransom" },
-        { "Trojan", "A deceptive malware" },
-        { "Spyware", "A malware that spies on user data" },
-        { "Adware", "A software that displays unwanted ads" },
-        { "Backdoor", "An undocumented way to access a system" },
-        { "Social Engineering", "Manipulating people to divulge secrets" },
-        { "Man-in-the-Middle", "Intercepting communication between parties" },
-        { "Penetration Testing", "Assessing security by simulating attacks" },
-        { "Dark Web", "A hidden part of the internet" },
-        { "Ethical Hacking", "Hacking for security improvement" },
-        { "Rootkit", "A software that enables unauthorized access" },
-        { "Session Hijacking", "Taking control of an active session" },
-        { "Two-Factor Authentication", "A security measure requiring two forms of verification" },
-        { "Cryptojacking", "Unauthorized use of a device to mine cryptocurrency" },
-        { "Digital Forensics", "Investigating cybercrimes" },
-        { "Patch Management", "Keeping software updated to fix vulnerabilities" },
-        { "IDS", "Intrusion Detection System" }
-    };
-
+    private Dictionary<string, string> securityTerms = new Dictionary<string, string>();
     private List<KeyValuePair<string, string>> orderedSecurityTerms;
     private int currentIndex = 0;
 
+    // Hacer privado el servicio y asignarlo dentro del código
+    private ActivityChallengeConfigItemService activityChallengeConfigItemService;
+
     void Start()
     {
-        // Ordena el diccionario por clave
-        orderedSecurityTerms = securityTerms.OrderBy(term => term.Key).ToList();
+        // Crear la instancia del servicio en el código, sin necesidad del Inspector
+        activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
+
+        // Llamar al servicio para cargar los términos de seguridad (usando el id dinámico)
+        StartCoroutine(LoadSecurityTerms());
 
         lblIntro.text = "Welcome to Find the Pairs!!!\n" +
-                        "Next, you will learn new concepts\n" +
+                        "Next, you will learn new concepts" +
                         " related to Cybersecurity.\n" +
-                        "Read them carefully, discuss with\n" +
-                        "your classmates and teachers.\n" +
-                        "Then, you will dive into the challenge\n" +
-                        "of finding the pairs.\n" +
-                        "Stay alert, discover the pairs and \n" +
+                        "Read them carefully, discuss with" +
+                        " your classmates\n and teachers.\n" +
+                        "Then, you will dive into the challenge" +
+                        " of finding the pairs.\n" +
+                        "Stay alert, discover the pairs and\n" +
                         "earn points before time runs out.";
 
-        // Mostrar el primer término al inicio
-        ShowSecurityTerm();
+        // Agregar un AudioSource si no existe
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
+
+
+    private IEnumerator LoadSecurityTerms()
+    {
+        yield return activityChallengeConfigItemService.GetAllById(CurrentActivityManager.GetCurrentActivityId());
+        Debug.Log($"Datos recibidos: {activityChallengeConfigItemService.activityChallengeConfigItems.Length} elementos");
+
+        if (activityChallengeConfigItemService.activityChallengeConfigItems != null && activityChallengeConfigItemService.activityChallengeConfigItems.Length > 0)
+        {
+            foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
+            {
+                ActivityChallengeConfigItemValue value = JsonUtility.FromJson<ActivityChallengeConfigItemValue>(item.value);
+
+                for (int i = 0; i < value.answers.Length; i += 2)
+                {
+                    securityTerms.Add(value.answers[i],value.answers[i+1]);
+                }
+
+            }
+
+            // Ahora ordenamos los términos
+            orderedSecurityTerms = securityTerms.OrderBy(term => term.Key).ToList();
+
+            Debug.Log($"Términos cargados: {orderedSecurityTerms.Count}");
+
+            // Mostramos el primer término
+            if (orderedSecurityTerms.Count > 0)
+            {
+                ShowSecurityTerm();
+            }
+        }
+        else
+        {
+            Debug.LogError("No se recibieron datos o el array está vacío.");
+        }
+    }
+
+
 
     private void ShowSecurityTerm()
     {
         // Asegurarnos de que los TextMeshPro se actualicen correctamente
-        lblTerm.text = "";  // Limpiar antes de actualizar
-        lblDefinition.text = "";  // Limpiar antes de actualizar
+        lblTerm.text = "";
+        lblDefinition.text = "";
 
-        if (orderedSecurityTerms.Count > 0 && currentIndex >= 0 && currentIndex < orderedSecurityTerms.Count)
+        if (orderedSecurityTerms.Count > 0 && currentIndex < orderedSecurityTerms.Count)
         {
             var term = orderedSecurityTerms[currentIndex];
             lblTerm.text = term.Key;
@@ -81,10 +96,17 @@ public class CyberSecurityPanel : MonoBehaviour
 
     public void OnNextButtonPressed()
     {
+        if (orderedSecurityTerms == null || orderedSecurityTerms.Count == 0)
+        {
+            Debug.LogError("Aún no se han cargado los términos. Por favor, espere.");
+            return;
+        }
+
         if (currentIndex < orderedSecurityTerms.Count - 1)
         {
             currentIndex++;
             ShowSecurityTerm();
+            PlaySound();
         }
     }
 
@@ -92,8 +114,17 @@ public class CyberSecurityPanel : MonoBehaviour
     {
         if (currentIndex > 0)
         {
-            currentIndex--;
+            currentIndex--; // Primero retrocede al término anterior
             ShowSecurityTerm();
+            PlaySound(); // Reproducir sonido
+        }
+    }
+
+    private void PlaySound()
+    {
+        if (pickSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(pickSound);
         }
     }
 }

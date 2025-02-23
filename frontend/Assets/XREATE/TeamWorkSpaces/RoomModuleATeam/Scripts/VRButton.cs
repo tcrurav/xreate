@@ -7,6 +7,7 @@ public class VRButton : MonoBehaviour
     public CyberSecurityPanel panel; // Referencia al panel que muestra los términos
     public bool isNextButton; // Si es true, avanza; si es false, retrocede
 
+
     private void Start()
     {
         // Verifica que el XRBaseInteractable está bien configurado en el cubo (botón)

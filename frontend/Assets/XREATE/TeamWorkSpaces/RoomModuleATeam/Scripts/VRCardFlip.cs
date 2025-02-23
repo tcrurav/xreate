@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
-using System.Data;
 
 public class VRCardFlip : MonoBehaviour
 {
@@ -46,7 +45,7 @@ public class VRCardFlip : MonoBehaviour
         isFlipping = true;
         StartCoroutine(FlipAnimation());
 
-       // gameManager.UpdateDisplayedTextVR(cardText);
+        gameManager.UpdateDisplayedTextVR(cardText);
     }
 
     public void ResetCard()
@@ -59,7 +58,7 @@ public class VRCardFlip : MonoBehaviour
         FrontSide.SetActive(true);
         BackSide.SetActive(false);
 
-        //gameManager.UpdateDisplayedTextVR("");
+        gameManager.UpdateDisplayedTextVR("");
     }
 
     public void LockCard()
