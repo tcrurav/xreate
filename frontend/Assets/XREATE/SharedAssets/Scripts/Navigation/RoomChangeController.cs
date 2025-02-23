@@ -82,11 +82,12 @@ public class RoomChangeController : MonoBehaviour
         SetScene(Scene.Main);
     }
 
-    public void SetScene(Scene scene) 
+    private void SetScene(Scene scene) 
     {
         // TODO - This has to be tested - May be put it in MainNavigationMAnager.ChangeSceneForLocalNetworkPlayer Or just don't do this call
         StartCoroutine(CurrentActivityManager.WaitForPlayerObjectAndThenChangeTeamId());
 
+        StartCoroutine(MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(scene));
         MainManager.SetScene(scene);
     }
 }
