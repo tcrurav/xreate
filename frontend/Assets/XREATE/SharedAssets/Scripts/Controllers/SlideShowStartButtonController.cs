@@ -1,19 +1,24 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SlideShowStartButtonController : MonoBehaviour
 {
-    public Button startButton;
+    public Button EnableNextRoomButton;
+    public Button[] ClickToGoButton;
+    public TMP_Text[] RedText;
+    public TMP_Text[] GreenText;
 
-    void Start()
+    public void EnableNextRooms()
     {
-        // TODO - DESCOMMENT ALL LATER
-        //if(MainManager.GetUser().role == "TEACHER")
-        //{
-        //    startButton.gameObject.SetActive(true); //Only teachers can start the activity
-        //    return;
-        //}
-        //startButton.gameObject.SetActive(false);
+        EnableNextRoomButton.gameObject.SetActive(false);
+
+        for (int i = 0; i < ClickToGoButton.Length; i++)
+        {
+            ClickToGoButton[i].gameObject.SetActive(true);
+            RedText[i].gameObject.SetActive(false);
+            GreenText[i].gameObject.SetActive(true);
+        }
 
     }
 }

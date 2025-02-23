@@ -1,36 +1,32 @@
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 
 public class SlideShowManager : NetworkBehaviour
 {
-    //public static SlideShowManager Instance;
     public NetworkVariable<int> currentSlide = new(0);
     public NetworkVariable<bool> forceAttention = new(false);
-
-    //private void Awake()
-    //{
-    //    Instance = this;
-    //}
+    public NetworkVariable<bool> startReady = new(false);
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
 
-        //if (!IsServer)
-        //{
-            Debug.Log($"SlideShowManager - OnNetworkSpawn - IsServer: {IsServer}");
+        Debug.Log($"SlideShowManager - OnNetworkSpawn - IsServer: {IsServer}");
 
-            currentSlide.OnValueChanged += (oldValue, newValue) =>
-            {
-                ChangeCurrentSlideClientRpc(oldValue, newValue);
-            };
+        currentSlide.OnValueChanged += (oldValue, newValue) =>
+        {
+            ChangeCurrentSlideClientRpc(oldValue, newValue);
+        };
 
-            forceAttention.OnValueChanged += (oldValue, newValue) =>
-            {
-                ChangeForceAttentionClientRpc(oldValue, newValue);
-            };
-        //}
+        forceAttention.OnValueChanged += (oldValue, newValue) =>
+        {
+            ChangeForceAttentionClientRpc(oldValue, newValue);
+        };
+
+        startReady.OnValueChanged += (oldValue, newValue) =>
+        {
+            ChangeStartReadyClientRpc(oldValue, newValue);
+        };
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -48,25 +44,28 @@ public class SlideShowManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeForceAttentionServerRpc(bool newForceAttention)
     {
-        Debug.Log($"ChangeForceAttentionServerRpc - newValue: {newForceAttention}");
+        //Debug.Log($"ChangeForceAttentionServerRpc - newValue: {newForceAttention}");
         forceAttention.Value = newForceAttention;
     }
 
     [ClientRpc]
     public void ChangeForceAttentionClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log($"ChangeForceAttentionClientRpc - newValue: {newValue}");
+        //Debug.Log($"ChangeForceAttentionClientRpc - newValue: {newValue}");
         GetComponent<ForceAttentionController>().SetToggleValue(newValue);
     }
 
-    // Método para cambiar el índice de la diapositiva desde el cliente
-    //public void ChangeSlide(int newIndex)
-    //{
-    //    if (IsOwner) // Asegúrate de que el propietario puede cambiar el índice
-    //    {
-    //        ChangeCurrentSlideServerRpc(newIndex);
-    //    }
-    //}
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeStartReadyServerRpc(bool newStartReady)
+    {
+        //Debug.Log($"ChangeStartReadyServerRpc - newValue: {newStartReady}");
+        startReady.Value = newStartReady;
+    }
 
-
+    [ClientRpc]
+    public void ChangeStartReadyClientRpc(bool oldValue, bool newValue)
+    {
+        //Debug.Log($"ChangeStartReadyClientRpc - newValue: {newValue}");
+        GetComponent<SlideShowStartButtonController>().EnableNextRooms();
+    }
 }

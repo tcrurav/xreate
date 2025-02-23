@@ -15,13 +15,13 @@ public class PlayerSync : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        //base.OnNetworkSpawn();
+        base.OnNetworkSpawn();
 
         PlayerName.OnValueChanged += UpdatePlayerName; // Sync across all clients
         UpdatePlayerName(string.Empty, PlayerName.Value);
 
-        DebugManager.Log("OnNetworkSpawn. New Network Spawn:");
-        Debug.Log("OnNetworkSpawn. New Network Spawn:");
+        //DebugManager.Log("OnNetworkSpawn. New Network Spawn:");
+        //Debug.Log("OnNetworkSpawn. New Network Spawn:");
 
         // Set the player ID when the object is spawned on the network
         if (IsOwner)
@@ -30,13 +30,12 @@ public class PlayerSync : NetworkBehaviour
 
             PlayerId.Value = MainManager.GetUser().id;
             PlayerName.Value = MainManager.GetUser().username;
-            //PlayerScene.Value = (int)MainManager.GetScene();
 
-            DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
-            Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+            //DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
+            //Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
 
-            Debug.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
-            DebugManager.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
+            //Debug.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
+            //DebugManager.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
 
             //Debug.Log($"OnNetworkSpawn.  PlayerScene.Value: {PlayerScene.Value}");
             //DebugManager.Log($"OnNetworkSpawn.  PlayerScene.Value: {PlayerScene.Value}");
@@ -51,23 +50,22 @@ public class PlayerSync : NetworkBehaviour
             XreateBackPlayerName.text = MainManager.GetUser().username;
         }
 
-        //if (IsServer) // Only the server controls the visitiblity
-        //{
-        //    SetVisibilityDependingOnScene((Scene)PlayerScene.Value);
-        //}
-
+        if (IsServer) // Only the server controls the visitiblity
+        {
+            SetVisibilityDependingOnScene((Scene)PlayerScene.Value);
+        }
     }
 
     [ServerRpc]
     public void SetPlayerSceneServerRpc(Scene scene)
     {
-        Debug.Log($"SetPlayerSceneServerRpc ANTES - scene: {scene}");
-        DebugManager.Log($"SetPlayerSceneServerRpc ANTES - scene: {scene}");
+        //Debug.Log($"SetPlayerSceneServerRpc ANTES - scene: {scene}");
+        //DebugManager.Log($"SetPlayerSceneServerRpc ANTES - scene: {scene}");
 
         if (IsServer)
         {
-            Debug.Log($"SetPlayerSceneServerRpc DESPUES - scene: {scene}");
-            DebugManager.Log($"SetPlayerSceneServerRpc DESPUES - scene: {scene}");
+            //Debug.Log($"SetPlayerSceneServerRpc DESPUES - scene: {scene}");
+            //DebugManager.Log($"SetPlayerSceneServerRpc DESPUES - scene: {scene}");
 
             PlayerScene.Value = (int)scene;
             SetVisibilityDependingOnScene(scene);
@@ -76,10 +74,10 @@ public class PlayerSync : NetworkBehaviour
 
     public void SetPlayerScene(Scene scene)
     {
-        Debug.Log($"SetPlayerScene ANTES - {scene}");
+        //Debug.Log($"SetPlayerScene ANTES - {scene}");
         if (IsOwner)
         {
-            Debug.Log($"SetPlayerScene DESPUES - {scene}");
+            //Debug.Log($"SetPlayerScene DESPUES - {scene}");
             SetPlayerSceneServerRpc(scene);
         }
     }
@@ -89,8 +87,8 @@ public class PlayerSync : NetworkBehaviour
     {
         if (IsServer)
         {
-            Debug.Log($"SetPlayerTeamIdServerRpc - teamId: {teamId}");
-            DebugManager.Log($"SetPlayerTeamIdServerRpc - teamId: {teamId}");
+            //Debug.Log($"SetPlayerTeamIdServerRpc - teamId: {teamId}");
+            //DebugManager.Log($"SetPlayerTeamIdServerRpc - teamId: {teamId}");
 
             PlayerTeamId.Value = teamId;
         }
@@ -109,10 +107,10 @@ public class PlayerSync : NetworkBehaviour
         switch (scene)
         {
             case Scene.Login:
-                //UpdateVisibility(RoomVisibility.NobodySeeNobody); // TODO - In the future should be decommented - Now the time is knapp
+                UpdateVisibility(RoomVisibility.NobodySeeNobody);
                 break;
             case Scene.Menu:
-                //UpdateVisibility(RoomVisibility.NobodySeeNobody); // TODO - In the future should be decommented - Now the time is knapp
+                UpdateVisibility(RoomVisibility.NobodySeeNobody);
                 break;
             case Scene.Main:
                 UpdateVisibility(RoomVisibility.EveryoneSeeEveryone);
@@ -139,40 +137,26 @@ public class PlayerSync : NetworkBehaviour
 
     }
 
-    //private void SetVisibilityToEveryoneSeesToEveryone()
-    //{
-
-    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-    //    {
-    //        GetComponent<NetworkObject>().SpawnWithOwnership(client.ClientId);
-    //    }
-    //}
-
-    //private void SetVisibilityToNobodySeesNobody()
-    //{
-    //    foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
-    //    {
-    //        GetComponent<NetworkObject>().Despawn(false);
-    //    }
-    //}
-
     public void ShowPlayerForClient(PlayerSync player, ulong clientId, bool isVisible)
     {
         Debug.Log($"ShowPlayerForClient clientId: {clientId}, isVisible: {isVisible}");
         DebugManager.Log($"ShowPlayerForClient clientId: {clientId}, isVisible: {isVisible}");
 
-        if (isVisible)
-        {
-            if (player.GetComponent<NetworkObject>().IsSpawned) return;
+        return;
 
-            player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
-        }
-        else
-        {
-            if (!player.GetComponent<NetworkObject>().IsSpawned) return;
+        // TODO - This should work some day - But now time is knapp
+        //if (isVisible)
+        //{
+        //    if (player.GetComponent<NetworkObject>().IsSpawned) return;
 
-            player.GetComponent<NetworkObject>().Despawn(false); // Keeps the object in the server but hides it in the client
-        }
+        //    player.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+        //}
+        //else
+        //{
+        //    if (!player.GetComponent<NetworkObject>().IsSpawned) return;
+
+        //    player.GetComponent<NetworkObject>().Despawn(false); // Keeps the object in the server but hides it in the client
+        //}
     }
 
     private void UpdatePlayerName(FixedString128Bytes oldValue, FixedString128Bytes newValue)
@@ -187,35 +171,6 @@ public class PlayerSync : NetworkBehaviour
             XreateBackPlayerName.text = newValue.ToString();
         }
     }
-
-    
-
-        //[ServerRpc]
-        //public void SetPlayerTeamIdServerRpc(ulong clientId, int teamId)
-        //{
-            //Debug.Log($"SetPlayerTeamIdServerRpc (1) teamId: {teamId} - clientId: {clientId}");
-            //DebugManager.Log($"SetPlayerTeamIdServerRpc (1) teamId: {teamId} - clientId: {clientId}");
-
-            //foreach (var client in NetworkManager.Singleton.ConnectedClients)
-            //{
-            //    Debug.Log($"SetPlayerTeamIdServerRpc (2) teamId: {teamId} - clientId: {clientId}");
-            //    DebugManager.Log($"SetPlayerTeamIdServerRpc (2) teamId: {teamId} - clientId: {clientId}");
-
-            //    var player = client.Value.PlayerObject;
-
-            //    if (client.Value.ClientId == clientId)
-            //    {
-            //        player.GetComponent<PlayerSync>().PlayerTeamId.Value = teamId;
-            //    }
-
-            //}
-        //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //void RequestVisibilityUpdateServerRpc(RoomVisibility typeOfRoom)
-    //{
-    //    UpdateVisibility(typeOfRoom);
-    //}
 
     void UpdateVisibility(RoomVisibility typeOfRoom)
     {

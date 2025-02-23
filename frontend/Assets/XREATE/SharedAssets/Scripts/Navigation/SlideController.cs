@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlideController : MonoBehaviour
 {
@@ -9,11 +9,16 @@ public class SlideController : MonoBehaviour
 
     private SlideShowManager slideShowManager;
 
-    //private int currentSlide = 0;
     private void Start()
     {
-        //SlideShowManager.Instance.ChangeCurrentSlideServerRpc(0);
         slideShowManager = GetComponent<SlideShowManager>();
+
+        if (MainManager.GetUser().role != "TEACHER")
+        {
+            // Only teachers can show the slide show
+            Debug.Log("SlideController - Only a Teacher can enable next Room");
+            GotoNextSlideButton.gameObject.GetComponent<Button>().enabled = false;
+        }
     }
 
     public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
@@ -43,50 +48,70 @@ public class SlideController : MonoBehaviour
     {
         if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) return;
 
-        HideCurrentSlide();
         slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value + 1);
-        ShowCurrentSlide();
-        ShowGotoPreviousSlideButton();
-        if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) HideGotoNextSlideButton();
     }
 
     public void GotoPreviousSlide()
     {
         if (slideShowManager.currentSlide.Value <= 0) return;
 
-        HideCurrentSlide();
         slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value - 1);
-        ShowCurrentSlide();
-        ShowGotoNextSlideButton();
-        if (slideShowManager.currentSlide.Value <= 0) HideGotoPreviousSlideButton();
     }
 
-    private void ShowCurrentSlide()
-    {
-        Slides[slideShowManager.currentSlide.Value].gameObject.SetActive(true);
-    }
+    // TODO - ALL the code below can be removed if network working
 
-    private void HideCurrentSlide()
-    {
-        Slides[slideShowManager.currentSlide.Value].gameObject.SetActive(false);
-    }
+    //public void GotoNextSlide()
+    //{
+    //    if (MainManager.GetUser().role != "TEACHER") return; // Only teachers can show the slide show
 
-    private void HideGotoNextSlideButton()
-    {
-        GotoNextSlideButton.SetActive(false);
-    }
-    private void HideGotoPreviousSlideButton()
-    {
-        GotoPreviousSlideButton.SetActive(false);
-    }
+    //    if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) return;
 
-    private void ShowGotoPreviousSlideButton()
-    {
-        GotoPreviousSlideButton.SetActive(true);
-    }
+    //    HideCurrentSlide();
+    //    slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value + 1);
+    //    ShowCurrentSlide();
+    //    ShowGotoPreviousSlideButton();
+    //    if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) HideGotoNextSlideButton();
+    //}
 
-    private void ShowGotoNextSlideButton()
-    {
-        GotoNextSlideButton.gameObject.SetActive(true);
-    }
+    //public void GotoPreviousSlide()
+    //{
+    //    if (MainManager.GetUser().role != "TEACHER") return; // Only teachers can show the slide show
+
+    //    if (slideShowManager.currentSlide.Value <= 0) return;
+
+    //    HideCurrentSlide();
+    //    slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value - 1);
+    //    ShowCurrentSlide();
+    //    ShowGotoNextSlideButton();
+    //    if (slideShowManager.currentSlide.Value <= 0) HideGotoPreviousSlideButton();
+    //}
+
+    //private void ShowCurrentSlide()
+    //{
+    //    Slides[slideShowManager.currentSlide.Value].gameObject.SetActive(true);
+    //}
+
+    //private void HideCurrentSlide()
+    //{
+    //    Slides[slideShowManager.currentSlide.Value].gameObject.SetActive(false);
+    //}
+
+    //private void HideGotoNextSlideButton()
+    //{
+    //    GotoNextSlideButton.SetActive(false);
+    //}
+    //private void HideGotoPreviousSlideButton()
+    //{
+    //    GotoPreviousSlideButton.SetActive(false);
+    //}
+
+    //private void ShowGotoPreviousSlideButton()
+    //{
+    //    GotoPreviousSlideButton.SetActive(true);
+    //}
+
+    //private void ShowGotoNextSlideButton()
+    //{
+    //    GotoNextSlideButton.gameObject.SetActive(true);
+    //}
 }
