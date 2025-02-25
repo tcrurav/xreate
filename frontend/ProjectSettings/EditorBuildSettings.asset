@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/XREATE/Scenes/Corridors/TunnelConnectorDScene.unity
     guid: facd6927db5d5f44b97f9811b1780597
+  - enabled: 1
+    path: Assets/XREATE/Scenes/Auditorium/AuditoriumScene.unity
+    guid: 1d2eba29a2d69a84bb9d410dba8847cb
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f794e9f00a8ffba47ad00affb57a2120,
       type: 2}

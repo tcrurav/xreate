@@ -217,6 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825950f4cd0e47b438de948b9d222dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickToGoButton: {fileID: 0}
+  EnableNextRoomButton: {fileID: 0}
+  RedText: {fileID: 0}
+  GreenText: {fileID: 0}
+  teamId: 0
 --- !u!4 &924076774
 Transform:
   m_ObjectHideFlags: 0
