@@ -37,6 +37,8 @@ TagManager:
   - LeisureModuleSceneContainerParent
   - LeisureModuleSceneContainer
   - XreatePortLeisureModule
+  - AuditoriumSceneContainerParent
+  - AuditoriumSceneContainer
   layers:
   - Default
   - TransparentFX

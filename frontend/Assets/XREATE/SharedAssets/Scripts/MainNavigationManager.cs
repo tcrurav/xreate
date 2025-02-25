@@ -53,7 +53,7 @@ public class MainNavigationManager : MonoBehaviour
     public static void DisableSceneContainer(string container)
     {
         GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
-        containerGameObject.SetActive(false);
+        if(containerGameObject) containerGameObject.SetActive(false);
     }
 
     public static IEnumerator WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(Scene scene)

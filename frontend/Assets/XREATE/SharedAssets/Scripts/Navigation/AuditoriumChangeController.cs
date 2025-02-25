@@ -2,15 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomChangeController : MonoBehaviour
+public class AuditoriumChangeController : MonoBehaviour
 {
     public Button ClickToGoButton;
     public Button EnableNextRoomButton;
     public TMP_Text RedText;
     public TMP_Text GreenText;
     public int teamId;
-
-    private readonly Vector3 OffsetMenu = new(0, 0, -12); // Maybe should have own controller
 
     private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, -25.75f);
     private readonly Vector3 OffsetCorridorToRoomModuleA = new(87f, 6.75f, -15.75f);
@@ -26,6 +24,7 @@ public class RoomChangeController : MonoBehaviour
         if(MainManager.GetUser().role != "TEACHER")
         {
             // Only a Teacher can enable next Room
+            Debug.Log("RoomChangeController - Only a Teacher can enable next Room");
             EnableNextRoomButton.gameObject.GetComponent<Button>().enabled = false;
         }
     }
@@ -44,12 +43,6 @@ public class RoomChangeController : MonoBehaviour
         ClickToGoButton.gameObject.SetActive(false);
         RedText.gameObject.SetActive(true);
         GreenText.gameObject.SetActive(false);
-    }
-
-    public void ChangeToMenuScene()
-    {
-        MainNavigationManager.ChangePosition(OffsetMenu);
-        SetScene(Scene.Menu);
     }
 
     public void ChangeToRoomModuleA()
@@ -128,7 +121,5 @@ public class RoomChangeController : MonoBehaviour
 
         StartCoroutine(MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(scene));
         MainManager.SetScene(scene);
-
-        MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
     }
 }

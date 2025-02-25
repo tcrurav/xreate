@@ -78,8 +78,8 @@ public class InActivityTeacherParticipationsController : MonoBehaviour
                 MainNavigationManager.EnableSceneContainer("MainSceneContainer");
                 break;
             case "VIRTUAL_CLASSROOM":
-                // TODO - No VIRTUAL_CLASSROOM yet
-                MainNavigationManager.EnableSceneContainer("TODO - No VIRTUAL_CLASSROOM yet");
+                // TODO - Only 1 virtual classroom at the moment (There will be many "activityName" in the future)
+                MainNavigationManager.EnableSceneContainer("AuditoriumSceneContainer");
                 break;
             case "ASSET_LAB":
                 // TODO - No VIRTUAL_CLASSROOM yet
