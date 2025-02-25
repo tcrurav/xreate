@@ -46,11 +46,11 @@ public class RoomChangeController : MonoBehaviour
         GreenText.gameObject.SetActive(false);
     }
 
-    public void ChangeToMenuScene()
-    {
-        MainNavigationManager.ChangePosition(OffsetMenu);
-        SetScene(Scene.Menu);
-    }
+    //public void ChangeToMenuScene()
+    //{
+    //    MainNavigationManager.ChangePosition(OffsetMenu);
+    //    SetScene(Scene.Menu);
+    //}
 
     public void ChangeToRoomModuleA()
     {
@@ -129,6 +129,6 @@ public class RoomChangeController : MonoBehaviour
         StartCoroutine(MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(scene));
         MainManager.SetScene(scene);
 
-        MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
+        //MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
     }
 }
