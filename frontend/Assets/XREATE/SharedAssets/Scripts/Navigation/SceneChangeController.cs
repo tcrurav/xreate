@@ -50,6 +50,8 @@ public class SceneChangeController : MonoBehaviour
         StartCoroutine(MainNavigationManager.WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(scene));
         MainManager.SetScene(scene);
 
+
+
         MainNavigationManager.EnableSceneContainer("MenuSceneContainer");
     }
 }

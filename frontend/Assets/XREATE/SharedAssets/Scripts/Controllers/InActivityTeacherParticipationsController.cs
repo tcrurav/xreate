@@ -76,10 +76,12 @@ public class InActivityTeacherParticipationsController : MonoBehaviour
             case "TRAINING_LAB":
                 // TODO - Only 1 training lab at the moment (There will be many "activityName" in the future)
                 MainNavigationManager.EnableSceneContainer("MainSceneContainer");
+                MainManager.SetScene(Scene.Main);
                 break;
             case "VIRTUAL_CLASSROOM":
                 // TODO - Only 1 virtual classroom at the moment (There will be many "activityName" in the future)
                 MainNavigationManager.EnableSceneContainer("AuditoriumSceneContainer");
+                MainManager.SetScene(Scene.Auditorium);
                 break;
             case "ASSET_LAB":
                 // TODO - No VIRTUAL_CLASSROOM yet

@@ -7,6 +7,17 @@ public class SlideShowManager : NetworkBehaviour
     public NetworkVariable<bool> forceAttention = new(false);
     public NetworkVariable<bool> startReady = new(false);
 
+    private void Start()
+    {
+        if (NetworkManager.Singleton.IsServer) // Ensure only the server spawns it
+        {
+            // TODO - Remove commented lines below
+            //GameObject obj = Instantiate(slideShowPrefab);
+            //obj.GetComponent<NetworkObject>().Spawn();
+            GetComponent<NetworkObject>().Spawn();
+        }
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();

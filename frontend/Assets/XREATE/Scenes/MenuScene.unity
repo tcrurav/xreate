@@ -201,6 +201,7 @@ MonoBehaviour:
   sceneContainers:
   - LoginSceneContainer
   - AuditoriumSceneContainer
+  - MainSceneContainer
 --- !u!1001 &572762276
 PrefabInstance:
   m_ObjectHideFlags: 0
