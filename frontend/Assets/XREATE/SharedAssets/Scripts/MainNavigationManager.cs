@@ -45,6 +45,7 @@ public class MainNavigationManager : MonoBehaviour
     public static void EnableSceneContainer(string container)
     {
         string containerParent = container + "Parent";
+        Debug.Log($"container: {container}");
         GameObject containerParentGameObject = GameObject.FindGameObjectWithTag(containerParent);
         GameObject containerGameObject = FindObject.FindInsideParentByName(containerParentGameObject, container);
         containerGameObject.SetActive(true);
@@ -52,8 +53,17 @@ public class MainNavigationManager : MonoBehaviour
 
     public static void DisableSceneContainer(string container)
     {
-        GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
-        containerGameObject.SetActive(false);
+        try
+        {
+            GameObject containerGameObject = GameObject.FindGameObjectWithTag(container);
+            containerGameObject.SetActive(false);
+        }
+        catch
+        {
+            Debug.Log($"Scene {container} not found");
+        }
+
+
     }
 
     public static IEnumerator WaitForPlayerObjectAndThenChangeSceneForLocalNetworkPlayer(Scene scene)

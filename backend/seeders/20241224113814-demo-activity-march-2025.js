@@ -1621,9 +1621,29 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 101,
+      state: "",
+      order: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
       challengeId: 4,
       activityId: 2,
       teacherId: 101,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 102,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1635,6 +1655,16 @@ module.exports = {
       activityId: 2,
       teacherId: 102,
       state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 200,
+      state: "",
       order: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1644,6 +1674,16 @@ module.exports = {
       challengeId: 4,
       activityId: 2,
       teacherId: 200,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 201,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1655,6 +1695,16 @@ module.exports = {
       activityId: 2,
       teacherId: 201,
       state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 202,
+      state: "",
       order: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1664,6 +1714,16 @@ module.exports = {
       challengeId: 4,
       activityId: 2,
       teacherId: 202,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 203,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1675,6 +1735,16 @@ module.exports = {
       activityId: 2,
       teacherId: 203,
       state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 204,
+      state: "",
       order: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1684,6 +1754,16 @@ module.exports = {
       challengeId: 4,
       activityId: 2,
       teacherId: 204,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 300,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1695,6 +1775,16 @@ module.exports = {
       activityId: 2,
       teacherId: 300,
       state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 301,
+      state: "",
       order: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1705,7 +1795,7 @@ module.exports = {
       activityId: 2,
       teacherId: 301,
       state: "",
-      order: 1,
+      order: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1731,9 +1821,29 @@ module.exports = {
     }], {});
 
     await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 401,
+      state: "",
+      order: 1,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
       challengeId: 3,
       activityId: 2,
       teacherId: 401,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 402,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1745,6 +1855,16 @@ module.exports = {
       activityId: 2,
       teacherId: 402,
       state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 500,
+      state: "",
       order: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1754,6 +1874,16 @@ module.exports = {
       challengeId: 3,
       activityId: 2,
       teacherId: 500,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 501,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1765,6 +1895,16 @@ module.exports = {
       activityId: 2,
       teacherId: 501,
       state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 502,
+      state: "",
       order: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1774,6 +1914,16 @@ module.exports = {
       challengeId: 3,
       activityId: 2,
       teacherId: 502,
+      state: "",
+      order: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }], {});
+
+    await queryInterface.bulkInsert('in_activity_teacher_participations', [{
+      //challengeId: null, // NOT done yet in CLASSROOM_ACTIVITY
+      activityId: 1,
+      teacherId: 503,
       state: "",
       order: 1,
       createdAt: new Date(),
@@ -1785,7 +1935,7 @@ module.exports = {
       activityId: 2,
       teacherId: 503,
       state: "",
-      order: 1,
+      order: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
