@@ -13,10 +13,12 @@ public class LoadScenesAdditivelyManager : MonoBehaviour
 
     private void LoadAllScenesAdditively()
     {
+        SceneManagerLoadSceneAsyncAdditively();
+
         StartCoroutine(WaitForNetworkStartAndThenNetworkManagerLoadSceneAsyncAdditively());
     }
 
-    private void networkManagerLoadSceneAsyncAdditively()
+    private void NetworkManagerLoadSceneAsyncAdditively()
     {
         NetworkManager.Singleton.SceneManager.LoadScene("MenuScene", LoadSceneMode.Additive);
         NetworkManager.Singleton.SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
@@ -37,10 +39,10 @@ public class LoadScenesAdditivelyManager : MonoBehaviour
         }
 
         Debug.Log("NetworkManager is now running!");
-        networkManagerLoadSceneAsyncAdditively();
+        NetworkManagerLoadSceneAsyncAdditively();
     }
 
-    private void sceneManagerLoadSceneAsyncAdditively()
+    private void SceneManagerLoadSceneAsyncAdditively()
     {
         SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
