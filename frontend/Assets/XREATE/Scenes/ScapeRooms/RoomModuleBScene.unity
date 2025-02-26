@@ -1185,8 +1185,9 @@ MonoBehaviour:
   defaultSprite: {fileID: 21300000, guid: 6d057768d2a39e848a5edaf8435ea275, type: 3}
   correctSprite: {fileID: 21300000, guid: 8b268ea90ec75c24fac46515865954bf, type: 3}
   incorrectSprite: {fileID: 21300000, guid: 27372f8260cfe094c839c087b224dea8, type: 3}
-  correctSound: {fileID: 8300000, guid: e5e88e22a2e4bc946bcecb9cb1737035, type: 3}
+  correctSound: {fileID: 8300000, guid: 08a4822ec0172864485d7df7353a1301, type: 3}
   incorrectSound: {fileID: 8300000, guid: 57ede49cb32093849b423cddb82a6f51, type: 3}
+  victorySound: {fileID: 8300000, guid: 1ae2630949c20204a97b2ec6b906fda0, type: 3}
   challengeName: security concepts
   challengeItemItem: total points of a student in this challenge
   activityChallengeConfigItemService: {fileID: 0}
@@ -1452,6 +1453,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartButtonD
       objectReference: {fileID: 0}
+    - target: {fileID: 9133946884440338589, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 90da7d6f05cb5e944a423a991ce15b69, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1993,6 +1999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartButtonE
       objectReference: {fileID: 0}
+    - target: {fileID: 9133946884440338589, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 90da7d6f05cb5e944a423a991ce15b69, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2675,6 +2686,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartButtonB
       objectReference: {fileID: 0}
+    - target: {fileID: 9133946884440338589, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 90da7d6f05cb5e944a423a991ce15b69, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3506,6 +3522,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartButtonC
       objectReference: {fileID: 0}
+    - target: {fileID: 9133946884440338589, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 90da7d6f05cb5e944a423a991ce15b69, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3883,6 +3904,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartButtonA
       objectReference: {fileID: 0}
+    - target: {fileID: 9133946884440338589, guid: 68a3f37f92bcf0440b2dbd1d79a1c092,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 90da7d6f05cb5e944a423a991ce15b69, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
