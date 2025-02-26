@@ -6,241 +6,184 @@ using UnityEngine;
 
 public class GeneralManager : MonoBehaviour
 {
-    public List<TMP_Text> playerScoreTexts; // List of player score texts
-    public List<TMP_Text> teamScoreTexts;   // List of team score texts
+    public GameManager gameManager;
+    public GameObject[] playerBoards; // Referencias a los tableros de los jugadores
+    private int numberOfPlayers = 0;
 
-    private int playersReady = 0; // Counter of ready players
-    private int totalPlayers = 5; // Total number of players (configurable)
+    private Dictionary<string, string> securityTerms = new Dictionary<string, string>();
+    private ActivityChallengeConfigItemService activityChallengeConfigItemService;
 
-    private int teamScore = 0; // Team score
-    private List<int> playerScores = new List<int>(); // Player scores
-
+    public CyberSecurityPanel cyberSecurityPanel;
+    private AchievementItemService achievementItemService; // Service to submit points
+    
     // Variables to submit points to the API
     public string challengeName; // Challenge name
     public string challengeItemItem; // Challenge item name
+    private bool isPlayerInRoom = false; // Variable para saber si hay jugadores
 
-    private AchievementItemService achievementItemService; // Service to submit points
-    public ActivityChallengeConfigItemService activityChallengeConfigItemService;
-
-    void Start()
+    private void Start()
     {
+        numberOfPlayers = GetNumberOfPlayersInRoom(); // Método que obtiene el número de jugadores 
 
-        achievementItemService = gameObject.AddComponent<AchievementItemService>();
+        // Activar los tableros correspondientes según la cantidad de jugadores
+        ActivatePlayerBoards(numberOfPlayers);
+
         activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
-
-        // Initialize scores for all players
-        for (int i = 0; i < totalPlayers; i++)
-        {
-            playerScores.Add(0);
-        }
-
-        // Set up the number of players
-        if (totalPlayers < 1)
-        {
-            Debug.LogError("The number of players must be at least 1.");
-            return;
-        }
-
-        for (int i = 0; i < totalPlayers; i++)
-        {
-            //startButtons[i].onClick.AddListener(OnPlayerReady);
-        }
+        StartCoroutine(LoadSecurityTerms());
     }
 
-    // Method to submit points to the API
-    private IEnumerator OnQuizCompletedUpdatePoints(int points)
+    private int GetNumberOfPlayersInRoom()
     {
-        if (MainManager.GetUser().role != "STUDENT")
-        {
-            throw new System.Exception("Error: Only students get points");
-        }
-
-        int studentId = MainManager.GetUser().id;
-        int activityId = CurrentActivityManager.GetCurrentActivityId();
-
-        yield return achievementItemService.UpdatePointsByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
-             challengeName, challengeItemItem, studentId, activityId, points);
-
-        if (achievementItemService.responseCode != 200)
-        {
-            yield break;
-        }
-
+        // Este método debería obtener el número de jugadores en la sala desde la base de datos o servicio
+        return 4; // Ejemplo: suponiendo que hay 4 jugadores
     }
 
-    // Method called when a player presses the start button
-    void OnPlayerReady()
+    private void ActivatePlayerBoards(int numPlayers)
     {
-        playersReady++;
-        if (playersReady == totalPlayers)
+        for (int i = 0; i < playerBoards.Length; i++)
         {
-           // Invoke("StartQuiz", 1.5f);
+            if (i < numPlayers)
+            {
+                playerBoards[i].SetActive(true); // Activar los tableros para los jugadores activos
+            }
+            else
+            {
+                playerBoards[i].SetActive(false); // Desactivar los tableros para los jugadores no activos
+            }
         }
     }
-    // Starts the quiz game
-    void StartQuiz()
+
+    private List<PlayerScore> playerScores = new List<PlayerScore>();
+    private bool isGameFinished = false;
+
+    private void UpdateGameEnd()
     {
-        //// Hide welcome panels and show quiz panels
-        //foreach (var panel in welcomePanels)
-        //{
-        //    panel.SetActive(false);
-        //}
-
-        //for (int i = 0; i < totalPlayers; i++)
-        //{
-        //    quizPanels[i].SetActive(true);
-        //}
-
-        //StartCoroutine(InitializeQuestionsSelectRandomQuestionsAndLoadQuestion());
+        if (isGameFinished)
+        {
+            DisplayScores();
+         //   UploadPointsToAPI();
+        }
     }
 
-    // Initialize questions and answers
-    //private IEnumerator InitializeQuestionsSelectRandomQuestionsAndLoadQuestion()
-    //{
-    //    //yield return StartCoroutine(GetAllById());
-    //    //SelectRandomQuestions(); // Select 10 random questions
-    //    //LoadQuestion();
-    //}
-    private IEnumerator GetAllById()
+    private void DisplayScores()
+    {
+        float totalPoints = 0;
+        foreach (var score in playerScores)
+        {
+            Debug.Log($"{score.playerName}: {score.points} points");
+            totalPoints += score.points;
+        }
+
+        Debug.Log($"Total points: {totalPoints} points");
+    }
+
+    // Método para subir los puntos de cada jugador a la API
+    private void UploadPointsToAPIPlayer()
+    {
+        // Subir los puntos de cada jugador a la API
+        foreach (var score in playerScores)
+        {
+            StartCoroutine(OnQuizCompletedUpdatePoints(score.points, score.playerName));
+        }
+    }
+
+    // Método para agregar los puntajes al finalizar el juego (lo llamamos desde el GameManager cuando cada jugador termine)
+    public void AddPlayerScore(string playerName, float points)
+    {
+        playerScores.Add(new PlayerScore(playerName, points));
+
+        if (playerScores.Count == numberOfPlayers) // Todos los jugadores han terminado
+        {
+            isGameFinished = true;
+            UpdateGameEnd(); // Procedemos con la visualización y subida de puntos
+        }
+    }
+
+    // Método para cargar todos los términos de seguridad desde la base de datos
+    private IEnumerator LoadSecurityTerms()
     {
         yield return activityChallengeConfigItemService.GetAllById(CurrentActivityManager.GetCurrentActivityId());
 
         if (activityChallengeConfigItemService.activityChallengeConfigItems != null && activityChallengeConfigItemService.activityChallengeConfigItems.Length > 0)
         {
-            //foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
-            //{
-            //    ActivityChallengeConfigItemValue value = JsonUtility.FromJson<ActivityChallengeConfigItemValue>(item.value);
+            var termsDictionary = new InActivityChallengeConfigItemValueDictionary();
 
-            //    List<string> answers = new();
+            foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
+            {
+                if (item.id < 100 || item.id > 150) // Filtrar solo los términos relevantes
+                    continue;
 
-            //    for (int i = 0; i < value.answers.Length; i++)
-            //    {
-            //        answers.Add(value.answers[i]);
-            //    }
+                if (!string.IsNullOrEmpty(item.item) && !string.IsNullOrEmpty(item.value))
+                {
+                    termsDictionary.keys.Add(item.item);
+                    termsDictionary.values.Add(item.value);
+                }
+            }
 
-            //    questions.Add(new Question
-            //    {
-            //        questionText = item.item,
-            //        answers = answers,
-            //        correctAnswerIndex = value.correctAnswerIndex
-            //    });
+            // Convertir a un diccionario real
+            securityTerms = termsDictionary.ToDictionary();
 
-            //}
-        }
-        else
-        {
-            //Debug.LogError("No se recibieron datos o el array está vacío.");
+            // Llamar al método ReceiveSecurityTerms para pasarlos al CyberSecurityPanel
+            cyberSecurityPanel.ReceiveSecurityTerms(securityTerms);  // Pasar los términos completos al panel de ciberseguridad
+
+            // Ahora puedes obtener 8 parejas aleatorias para el GameManager
+            var elementsGame = GetRandomPairs(8);  // Obtener las 8 parejas aleatorias
+            gameManager.SetSecurityTerms(elementsGame);  // Pasar estas 8 parejas al GameManager
         }
     }
 
-    // Select 10 random questions
-    void SelectRandomQuestions()
+    // Método para seleccionar 8 parejas al azar del diccionario de términos
+    private Dictionary<string, string> GetRandomPairs(int pairCount)
     {
-        //List<Question> tempQuestions = new List<Question>(questions);
-        //for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
-        //{
-        //    int randomIndex = Random.Range(0, tempQuestions.Count);
-        //    selectedQuestions.Add(tempQuestions[randomIndex]);
-        //    tempQuestions.RemoveAt(randomIndex);
+        // Seleccionamos términos al azar (sin repetición)
+        var selectedPairs = securityTerms.OrderBy(x => Random.value).Take(pairCount).ToList();
+        var elementsGame = new Dictionary<string, string>();
+
+        foreach (var pair in selectedPairs)
+        {
+            elementsGame.Add(pair.Key, pair.Value); // Añadir las 8 parejas al diccionario
         }
+
+        return elementsGame;
     }
-//void LoadQuestion()
-//{
-//    //if (currentQuestionIndex >= selectedQuestions.Count)
-//    //{
-//    //    foreach (var text in questionTexts)
-//    //    {
-//    //        text.text = "Game over. Team score: " + teamScore;
-//    //    }
 
-//    //    // Find the player with the highest score
-//    //    int maxScore = playerScores.Max();
-//    //    int bestPlayerIndex = playerScores.ToList().IndexOf(maxScore);
+// Método para subir puntos a la API cuando se completa el quiz
+private IEnumerator OnQuizCompletedUpdatePoints(float points, string playerName)
+{
+    if (MainManager.GetUser().role != "STUDENT")
+    {
+        throw new System.Exception("Error: Only students get points");
+    }
 
-//    //    for (int i = 0; i < feedbackTexts.Count; i++)
-//    //    {
-//    //        if (i == bestPlayerIndex)
-//    //        {
-//    //            feedbackTexts[i].text = $"Congratulations! You’ve been the MVP, leading your team with the highest score.";
-//    //        }
-//    //        else
-//    //        {
-//    //            feedbackTexts[i].text = ""; // Leave empty so only the mvp can see the message.
-//    //        }
-//    //    }
+    int studentId = MainManager.GetUser().id;
+    int activityId = CurrentActivityManager.GetCurrentActivityId();
 
-//    //    // Call the method to introduce points to the API
-//    //    StartCoroutine(OnQuizCompletedUpdatePoints(teamScore));
+    yield return achievementItemService.UpdatePointsByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
+        challengeName, challengeItemItem, studentId, activityId, (int)points); // Convertir puntos a int si es necesario
 
-//    //    DisableButtons();
-//    //    return;
-//    //}
+    if (achievementItemService.responseCode != 200)
+    {
+       // Debug.LogError($"Error uploading points for {playerName}: {achievementItemService.responseMessage}");
+        yield break;
+    }
 
-//    //foreach (var button in answerButtons)
-//    //{
-//    //    button.image.sprite = defaultSprite; // Set my default sprite.
-//    //}
-
-//    //currentQuestion = selectedQuestions[currentQuestionIndex];
-
-//    //foreach (var feedback in feedbackTexts)
-//    //{
-//    //    feedback.text = ""; // Clear feedback messages
-//    //}
-
-//    //EnableButtons();
-
-//    //// Show the question
-//    //foreach (var text in questionTexts)
-//    //{
-//    //    text.text = currentQuestion.questionText;
-//    //}
-
-//    //// Mix up the answers and assign them to the panels
-//    //List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
-//    //System.Random random = new System.Random(); // Random Number Generator
-
-//    //// Remove the index of the correct answer
-//    //numbers.Remove(currentQuestion.correctAnswerIndex);
-
-//    //// Create the mixed response list
-//    //List<int> answers = new List<int>();
-
-//    //// Mixing the rates of incorrect answers
-//    //numbers = numbers.OrderBy(x => random.Next()).ToList();
-
-//    //// Add incorrect answers
-//    //for (int i = 0; i < totalPlayers - 1; i++)
-//    //{
-//    //    answers.Add(numbers[i]);
-//    //}
-
-//    //// Add the correct answer
-//    //answers.Add(currentQuestion.correctAnswerIndex);
-
-//    //// Shuffle the final answers again
-//    //answers = answers.OrderBy(x => random.Next()).ToList();
-
-//    //// Assign responses to text panels
-//    //for (int i = 0; i < totalPlayers; i++)
-//    //{
-//    //    feedbackTexts[i].text = currentQuestion.answers[answers[i]];
-//    //}
-
-//    //timer = 5.0f; // Reset the stopwatch
-//    //isTimerRunning = true;
-
-//    //// Clean and add listeners to buttons
-//    //for (int i = 0; i < totalPlayers; i++)
-//    //{
-//    //    int index = i;
-//    //    // Clear any old listeners
-//    //    answerButtons[i].onClick.RemoveAllListeners();
-//    //    // Add the current listener
-//    //    answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
-//    //}
-
-//    //}
+    Debug.Log($"Points for {playerName} uploaded successfully.");
+}
 
 
-//}
+
+    public class PlayerScore
+    {
+        public string playerName;
+        public float points;
+
+        public PlayerScore(string playerName, float points)
+        {
+            this.playerName = playerName;
+            this.points = points;
+        }
+
+
+    }
+
+}

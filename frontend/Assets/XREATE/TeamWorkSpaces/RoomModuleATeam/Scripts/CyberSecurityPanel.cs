@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -12,52 +11,12 @@ public class CyberSecurityPanel : MonoBehaviour
     public AudioClip pickSound; // Sonido del botón
     private AudioSource audioSource;
 
-    private Dictionary<string, string> securityTerms = new Dictionary<string, string>
-    {
-        { "VPN", "Virtual Private Network" },
-        { "Phishing", "A type of cyber attack" },
-        { "Malware", "Software designed to disrupt" },
-        { "Firewall", "A network security system" },
-        { "RAT", "Remote Access Trojan" },
-        { "DDoS", "Distributed Denial of Service" },
-        { "Spoofing", "The act of disguising" },
-        { "Encryption", "The process of converting data" },
-        { "Brute Force", "A trial-and-error attack" },
-        { "Botnet", "A network of infected computers" },
-        { "Zero-Day", "A vulnerability unknown to vendors" },
-        { "SQL Injection", "A code injection technique" },
-        { "Keylogger", "A software that records keystrokes" },
-        { "Ransomware", "A malware that locks files for ransom" },
-        { "Trojan", "A deceptive malware" },
-        { "Spyware", "A malware that spies on user data" },
-        { "Adware", "A software that displays unwanted ads" },
-        { "Backdoor", "An undocumented way to access a system" },
-        { "Social Engineering", "Manipulating people to divulge secrets" },
-        { "Man-in-the-Middle", "Intercepting communication between parties" },
-        { "Penetration Testing", "Assessing security by simulating attacks" },
-        { "Dark Web", "A hidden part of the internet" },
-        { "Ethical Hacking", "Hacking for security improvement" },
-        { "Rootkit", "A software that enables unauthorized access" },
-        { "Session Hijacking", "Taking control of an active session" },
-        { "Two-Factor Authentication", "A security measure requiring two forms of verification" },
-        { "Cryptojacking", "Unauthorized use of a device to mine cryptocurrency" },
-        { "Digital Forensics", "Investigating cybercrimes" },
-        { "Patch Management", "Keeping software updated to fix vulnerabilities" },
-        { "IDS", "Intrusion Detection System" }
-    };
-
+    private Dictionary<string, string> securityTerms;
     private List<KeyValuePair<string, string>> orderedSecurityTerms;
     private int currentIndex = 0;
 
     void Start()
     {
-        // Inicializamos el texto de los términos y definiciones a vacío
-        lblTerm.text = "";
-        lblDefinition.text = "";
-
-        // Llamar al método que carga los términos de seguridad (sin necesidad del servicio)
-        LoadSecurityTerms();
-
         lblIntro.text = "Welcome to Find the Pairs!!!\n" +
                         "Next, you will learn new concepts" +
                         " related to Cybersecurity.\n" +
@@ -73,25 +32,27 @@ public class CyberSecurityPanel : MonoBehaviour
         audioSource.playOnAwake = false;
     }
 
-    private void LoadSecurityTerms()
+    // Este método ahora recibe el diccionario de términos (completos)
+    public void ReceiveSecurityTerms(Dictionary<string, string> terms)
     {
-        // Ordenar los términos del diccionario
-        orderedSecurityTerms = securityTerms.OrderBy(term => term.Key).ToList();
+        securityTerms = terms;
+        orderedSecurityTerms = new List<KeyValuePair<string, string>>(securityTerms);
+        orderedSecurityTerms.Sort((term1, term2) => term1.Key.CompareTo(term2.Key)); // Ordenar términos
 
-        Debug.Log($"Términos cargados y ordenados: {orderedSecurityTerms.Count}");
+        if (orderedSecurityTerms.Count > 0)
+        {
+            ShowSecurityTerm();  // Mostrar el primer término si existe
+        }
     }
 
+    // Método para mostrar el primer término de la lista ordenada
     private void ShowSecurityTerm()
     {
-        // Asegurarnos de que los TextMeshPro se actualicen correctamente
-        lblTerm.text = "";
-        lblDefinition.text = "";
-
-        if (orderedSecurityTerms.Count > 0 && currentIndex < orderedSecurityTerms.Count)
+        if (orderedSecurityTerms.Count > 0 && currentIndex >= 0 && currentIndex < orderedSecurityTerms.Count)
         {
-            var term = orderedSecurityTerms[currentIndex];
-            lblTerm.text = term.Key;
-            lblDefinition.text = term.Value;
+            var firstTerm = orderedSecurityTerms[currentIndex];  // Primer término de la lista
+            lblTerm.text = firstTerm.Key;
+            lblDefinition.text = firstTerm.Value;
         }
     }
 
@@ -109,19 +70,15 @@ public class CyberSecurityPanel : MonoBehaviour
             ShowSecurityTerm();
             PlaySound();
         }
-        else
-        {
-            Debug.Log("Ya has llegado al último término.");
-        }
     }
 
     public void OnPreviousButtonPressed()
     {
         if (currentIndex > 0)
         {
-            currentIndex--; // Primero retrocede al término anterior
+            currentIndex--;
             ShowSecurityTerm();
-            PlaySound(); // Reproducir sonido
+            PlaySound();
         }
     }
 

@@ -16,39 +16,8 @@ public class GameManager : MonoBehaviour
     public ParticleSystem victoryParticles; // Referencia al sistema de partículas
     private bool isGameOver = false; // Variable para que el temporizador no continue
 
-    private Dictionary<string, string> securityTerms = new Dictionary<string, string>
-    {
-        { "VPN", "Virtual Private Network" },
-        { "Phishing", "A type of cyber attack" },
-        { "Malware", "Software designed to disrupt" },
-        { "Firewall", "A network security system" },
-        { "RAT", "Remote Access Trojan" },
-        { "DDoS", "Distributed Denial of Service" },
-        { "Spoofing", "The act of disguising" },
-        { "Encryption", "The process of converting data" },
-        { "Brute Force", "A trial-and-error attack" },
-        { "Botnet", "A network of infected computers" },
-        { "Zero-Day", "A vulnerability unknown to vendors" },
-        { "SQL Injection", "A code injection technique" },
-        { "Keylogger", "A software that records keystrokes" },
-        { "Ransomware", "A malware that locks files for ransom" },
-        { "Trojan", "A deceptive malware" },
-        { "Spyware", "A malware that spies on user data" },
-        { "Adware", "A software that displays unwanted ads" },
-        { "Backdoor", "An undocumented way to access a system" },
-        { "Social Engineering", "Manipulating people to divulge secrets" },
-        { "Man-in-the-Middle", "Intercepting communication between parties" },
-        { "Penetration Testing", "Assessing security by simulating attacks" },
-        { "Dark Web", "A hidden part of the internet" },
-        { "Ethical Hacking", "Hacking for security improvement" },
-        { "Rootkit", "A software that enables unauthorized access" },
-        { "Session Hijacking", "Taking control of an active session" },
-        { "Two-Factor Authentication", "A security measure requiring two forms of verification" },
-        { "Cryptojacking", "Unauthorized use of a device to mine cryptocurrency" },
-        { "Digital Forensics", "Investigating cybercrimes" },
-        { "Patch Management", "Keeping software updated to fix vulnerabilities" },
-        { "IDS", "Intrusion Detection System" }
-    };
+    private Dictionary<string, string> securityTerms = new Dictionary<string, string>();
+   
 
     private List<string> allCards = new List<string>();
     private VRCardFlip firstCard;
@@ -79,6 +48,14 @@ public class GameManager : MonoBehaviour
         GenerateBoard();
         UpdateTimerText();
     }
+    public void SetSecurityTerms(Dictionary<string, string> elementsGame)
+    {
+        securityTerms = elementsGame;
+
+        // Ahora se pueden usar estos términos en el juego, por ejemplo, generando las cartas
+        GenerateBoard();
+    }
+
 
     private void GenerateBoard()
     {
@@ -214,12 +191,21 @@ public class GameManager : MonoBehaviour
         secondCard = null;
         canFlip = true;  // Permitir giros nuevamente
     }
-
-
     private bool IsMatch(VRCardFlip card1, VRCardFlip card2)
     {
-        return securityTerms.ContainsKey(card1.cardText) && securityTerms[card1.cardText] == card2.cardText ||
-               securityTerms.ContainsKey(card2.cardText) && securityTerms[card2.cardText] == card1.cardText;
+        // Verificar si card1 es una clave y card2 su valor correspondiente
+        if (securityTerms.ContainsKey(card1.cardText) && securityTerms[card1.cardText] == card2.cardText)
+        {
+            return true;
+        }
+
+        // Verificar si card2 es una clave y card1 su valor correspondiente
+        if (securityTerms.ContainsKey(card2.cardText) && securityTerms[card2.cardText] == card1.cardText)
+        {
+            return true;
+        }
+
+        return false; // Si no cumplen ninguna de las condiciones, no es un match
     }
 
     private void GameOver(bool won)
