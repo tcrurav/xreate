@@ -33,6 +33,7 @@ public class QuizManager : MonoBehaviour
     public Sprite incorrectSprite;   // Sprite for incorrect answer
     public AudioClip correctSound;   // Sound for correct answer
     public AudioClip incorrectSound; // Sound for incorrect answer
+    public AudioClip victorySound; // Sound for game over
     private AudioSource audioSource; // AudioSource component to play sounds
 
     private List<Question> questions = new List<Question>();         // List of questions
@@ -224,6 +225,8 @@ public class QuizManager : MonoBehaviour
                 }
             }
 
+            audioSource.PlayOneShot(victorySound); // Play victory sound
+
             // Call the method to introduce points to the API
             StartCoroutine(OnQuizCompletedUpdatePoints(teamScore));
 
@@ -339,6 +342,10 @@ public class QuizManager : MonoBehaviour
             audioSource.PlayOneShot(incorrectSound); // Play wrong sound
             feedbackTexts[selectedIndex].text = "Incorrect Answer. Please try again.";
             answerButtons[selectedIndex].interactable = false;
+            if (teamScore > 0)
+            {
+                teamScore--; // Subtract points from the team if the answer is wrong
+            }
         }
     }
 
