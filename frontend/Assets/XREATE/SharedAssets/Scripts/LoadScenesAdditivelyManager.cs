@@ -1,10 +1,113 @@
 using System.Collections;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Management;
 
-public class LoadScenesAdditivelyManager : MonoBehaviour
+public class LoadScenesAdditivelyManager : NetworkBehaviour
 {
+    public string[] m_SceneName;
+
+    public override void OnNetworkSpawn()
+    {
+        Debug.Log("LoadScenesAdditivelyManager - Se ejecutó fuera");
+        if (IsServer)
+        {
+            Debug.Log("LoadScenesAdditivelyManager - Se ejecutó dentro");
+            for (int i = 0; i < m_SceneName.Length; i++)
+            {
+                var status = NetworkManager.SceneManager.LoadScene(m_SceneName[i], LoadSceneMode.Additive);
+                if (status != SceneEventProgressStatus.Started)
+                {
+                    Debug.LogWarning($"LoadScenesAdditivelyManager - Failed to load {m_SceneName} " +
+                          $"with a {nameof(SceneEventProgressStatus)}: {status}");
+                }
+            }
+
+        }
+    }
+    //}
+
+    //using UnityEngine;
+    //using Unity.Netcode;
+    //using UnityEngine.SceneManagement;
+    //using UnityEngine.XR.Management;
+
+    //public class MultiplayerManager : NetworkBehaviour
+    //{
+    //    public static MultiplayerManager Instance;
+    //    public string[] sceneNames;
+
+    //    private void Awake()
+    //    {
+    //        if (Instance == null)
+    //            Instance = this;
+    //        else
+    //            Destroy(gameObject);
+    //    }
+
+    //    void Start()
+    //    {
+    //        XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+    //        if (XRGeneralSettings.Instance.Manager.activeLoader != null)
+    //        {
+    //            XRGeneralSettings.Instance.Manager.StartSubsystems();
+    //        }
+    //    }
+
+    //    public void StartHost()
+    //    {
+    //        NetworkManager.Singleton.StartHost();
+    //        NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+    //        LoadAdditiveScenes();
+    //    }
+
+    //    public void StartClient()
+    //    {
+    //        NetworkManager.Singleton.StartClient();
+    //        NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+    //    }
+
+    //    public void LoadAdditiveScenes()
+    //    {
+    //        if (IsServer && sceneNames != null)
+    //        {
+    //            foreach (var sceneName in sceneNames)
+    //            {
+    //                var status = NetworkManager.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+    //                if (status != SceneEventProgressStatus.Started)
+    //                {
+    //                    Debug.LogWarning($"Failed to load {sceneName} " +
+    //                          $"with a {nameof(SceneEventProgressStatus)}: {status}");
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    private void OnSceneLoaded(string sceneName, LoadSceneMode mode, SceneEventProgressStatus status)
+    //    {
+    //        if (status == SceneEventProgressStatus.Started)
+    //        {
+    //            Debug.Log($"Scene {sceneName} loaded successfully.");
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning($"Scene {sceneName} failed to load with status: {status}");
+    //        }
+    //    }
+
+    //    public override void OnDestroy()
+    //    {
+    //        base.OnDestroy();
+    //        if (NetworkManager.Singleton != null)
+    //        {
+    //            NetworkManager.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
+    //        }
+    //    }
+    //}
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,3 +159,87 @@ public class LoadScenesAdditivelyManager : MonoBehaviour
     }
 
 }
+
+//using UnityEngine;
+//using Unity.Netcode;
+//using UnityEngine.SceneManagement;
+//using UnityEngine.XR.Management;
+
+//public class MultiplayerManager : NetworkBehaviour
+//{
+//    public static MultiplayerManager Instance;
+//    public string[] sceneNames;
+
+//    private void Awake()
+//    {
+//        if (Instance == null)
+//            Instance = this;
+//        else
+//            Destroy(gameObject);
+//    }
+
+//    void Start()
+//    {
+//        XRGeneralSettings.Instance.Manager.InitializeLoaderSync();
+//        if (XRGeneralSettings.Instance.Manager.activeLoader != null)
+//        {
+//            XRGeneralSettings.Instance.Manager.StartSubsystems();
+//        }
+
+//        // Si no hay un host, el primer headset que se conecte será el host
+//        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
+//        {
+//            StartHost();
+//        }
+//    }
+
+//    public void StartHost()
+//    {
+//        NetworkManager.Singleton.StartHost();
+//        NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+//        LoadAdditiveScenes();
+//    }
+
+//    public void StartClient()
+//    {
+//        NetworkManager.Singleton.StartClient();
+//        NetworkManager.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
+//    }
+
+//    public void LoadAdditiveScenes()
+//    {
+//        if (IsServer && sceneNames != null)
+//        {
+//            foreach (var sceneName in sceneNames)
+//            {
+//                var status = NetworkManager.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+//                if (status != SceneEventProgressStatus.Started)
+//                {
+//                    Debug.LogWarning($"Failed to load {sceneName} " +
+//                          $"with a {nameof(SceneEventProgressStatus)}: {status}");
+//                }
+//            }
+//        }
+//    }
+
+//    private void OnSceneLoaded(string sceneName, LoadSceneMode mode, SceneEventProgressStatus status)
+//    {
+//        if (status == SceneEventProgressStatus.Started)
+//        {
+//            Debug.Log($"Scene {sceneName} loaded successfully.");
+//        }
+//        else
+//        {
+//            Debug.LogWarning($"Scene {sceneName} failed to load with status: {status}");
+//        }
+//    }
+
+//    public override void OnDestroy()
+//    {
+//        base.OnDestroy();
+//        if (NetworkManager.Singleton != null)
+//        {
+//            NetworkManager.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
+//        }
+//    }
+//}
