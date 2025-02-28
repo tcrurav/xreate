@@ -12,14 +12,14 @@ public class RoomChangeController : MonoBehaviour
 
     private readonly Vector3 OffsetMenu = new(0, 0, -12); // Maybe should have own controller
 
-    private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, -25.75f);
-    private readonly Vector3 OffsetCorridorToRoomModuleA = new(87f, 6.75f, -15.75f);
-    private readonly Vector3 OffsetCorridorToRoomModuleB = new(87f, 6.75f, 19f);
-    private readonly Vector3 OffsetRoomModuleB = new(87f, 6.39f, 28f);
+    private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, 25.75f);
+    private readonly Vector3 OffsetCorridorToRoomModuleA = new(87f, 6.75f, 35.75f);
+    private readonly Vector3 OffsetCorridorToRoomModuleB = new(87f, 6.75f, 69f);
+    private readonly Vector3 OffsetRoomModuleB = new(87f, 6.39f, 78f);
     //private readonly Vector3 OffsetCorridorToLeisureModule = new(99f, 6.75f, 11.5f);
-    private readonly Vector3 OffsetLeisureModule = new(104f, 5.75f, 16f);
-    private readonly Vector3 OffsetBuildingA = new(0, 0, -12);
-    private readonly Vector3 OffsetBuildingATopStairs = new(9, 4.02f, 0);
+    private readonly Vector3 OffsetLeisureModule = new(104f, 5.75f, 66f);
+    private readonly Vector3 OffsetBuildingA = new(0, 0, 38);
+    private readonly Vector3 OffsetBuildingATopStairs = new(9, 4.02f, 50);
 
     private void Start()
     {

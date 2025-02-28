@@ -948,7 +948,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3872496561046861342}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SlideController, Assembly-CSharp
         m_MethodName: GotoPreviousSlide
         m_Mode: 1
@@ -6876,7 +6876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3872496561046861342}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SlideController, Assembly-CSharp
         m_MethodName: GotoNextSlide
         m_Mode: 1
@@ -9068,7 +9068,6 @@ GameObject:
   - component: {fileID: 505723025821462777}
   - component: {fileID: 807618400754641332}
   - component: {fileID: 3542595973554876320}
-  - component: {fileID: 1766840672158109591}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -9181,18 +9180,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &1766840672158109591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7791779243531858680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f1f989737db4d4b9a2bc5c760e9f67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8019242534808231594
 GameObject:
   m_ObjectHideFlags: 0
@@ -9458,7 +9445,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5025321761624923080}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SlideShowManager, Assembly-CSharp
         m_MethodName: ChangeStartReadyServerRpc
         m_Mode: 6
@@ -9847,11 +9834,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5631229663592950417}
-  - component: {fileID: 6228239861527654821}
-  - component: {fileID: 3872496561046861342}
-  - component: {fileID: 8387923818071303925}
-  - component: {fileID: 2356477192800772043}
-  - component: {fileID: 5025321761624923080}
   m_Layer: 0
   m_Name: XCreate PanelSlide Main
   m_TagString: Untagged
@@ -9876,112 +9858,6 @@ Transform:
   - {fileID: 7809385576342358315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 201.561, z: 0}
---- !u!114 &6228239861527654821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120196475425417064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1945720539
-  InScenePlacedSourceGlobalObjectIdHash: 1346943515
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &3872496561046861342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120196475425417064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 855f5aff218a7734ba7f47eaa02b60c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slides:
-  - {fileID: 6127332772090955068}
-  - {fileID: 3022236711053351515}
-  - {fileID: 8567396933228628215}
-  - {fileID: 2076096756891903612}
-  - {fileID: 4811176082374819912}
-  - {fileID: 8152511596147924241}
-  - {fileID: 1269198263346642251}
-  - {fileID: 5470415761277857907}
-  - {fileID: 8126178058464471941}
-  - {fileID: 1542858672730803605}
-  GotoNextSlideButton: {fileID: 6205586883055644315}
-  GotoPreviousSlideButton: {fileID: 1280761657526291142}
---- !u!114 &8387923818071303925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120196475425417064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 745be90c73c3cdb4f8162d1e8899a4e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ForceAttentionToggle: {fileID: 6038265390739110580}
-  Jail: {fileID: 6230729926271134010}
-  Ground: {fileID: 0}
---- !u!114 &2356477192800772043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120196475425417064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba4e010b19124a4ba475cbf1e04b48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnableNextRoomButton: {fileID: 1117913211065249324}
-  ClickToGoButton:
-  - {fileID: 0}
-  - {fileID: 0}
-  RedText:
-  - {fileID: 0}
-  - {fileID: 0}
-  GreenText:
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &5025321761624923080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120196475425417064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d234889ea5559824b89f09b6e14c19f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  currentSlide:
-    m_InternalValue: 0
-  forceAttention:
-    m_InternalValue: 0
-  startReady:
-    m_InternalValue: 0
 --- !u!1 &9121293429408607689
 GameObject:
   m_ObjectHideFlags: 0
@@ -10067,7 +9943,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8387923818071303925}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ForceAttentionController, Assembly-CSharp
         m_MethodName: OnToggleValueChanged
         m_Mode: 1

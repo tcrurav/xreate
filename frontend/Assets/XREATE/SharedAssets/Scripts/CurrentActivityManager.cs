@@ -95,14 +95,8 @@ public class CurrentActivityManager : MonoBehaviour
     {
         int teamId = GetTeamIdByStudentId(MainManager.GetUser().id);
 
-        Debug.Log($"ChangeTeamIdInPlayerSync ANTES - teamId: {teamId}");
-        DebugManager.Log($"ChangeTeamIdInPlayerSync ANTES - teamId: {teamId}");
-
         if (NetworkManager.Singleton.LocalClient != null)
         {
-            Debug.Log($"ChangeTeamIdInPlayerSync DESPUES - teamId: {teamId}");
-            DebugManager.Log($"ChangeTeamIdInPlayerSync DESPUES - teamId: {teamId}");
-
             PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
 
             if (player != null)

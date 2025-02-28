@@ -13,16 +13,18 @@ public class SlideController : MonoBehaviour
     {
         slideShowManager = GetComponent<SlideShowManager>();
 
-        if (MainManager.GetUser().role != "TEACHER")
-        {
-            // Only teachers can show the slide show
-            Debug.Log("SlideController - Only a Teacher can enable next Room");
-            GotoNextSlideButton.gameObject.GetComponent<Button>().enabled = false;
-        }
+        //if (MainManager.GetUser().role != "TEACHER")
+        //{
+        //    // Only teachers can show the slide show
+        //    Debug.Log("SlideController - Only a Teacher can enable next Room");
+        //    GotoNextSlideButton.gameObject.GetComponent<Button>().enabled = false;
+        //}
     }
 
     public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
     {
+        DebugManager.Log($"SlideController - HideOldSlideAndShowNewSlide");
+
         Slides[oldValue].gameObject.SetActive(false);
         Slides[newValue].gameObject.SetActive(true);
 

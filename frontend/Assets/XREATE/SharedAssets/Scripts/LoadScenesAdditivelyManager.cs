@@ -9,24 +9,24 @@ public class LoadScenesAdditivelyManager : NetworkBehaviour
 {
     public string[] m_SceneName;
 
-    public override void OnNetworkSpawn()
-    {
-        Debug.Log("LoadScenesAdditivelyManager - Se ejecutó fuera");
-        if (IsServer)
-        {
-            Debug.Log("LoadScenesAdditivelyManager - Se ejecutó dentro");
-            for (int i = 0; i < m_SceneName.Length; i++)
-            {
-                var status = NetworkManager.SceneManager.LoadScene(m_SceneName[i], LoadSceneMode.Additive);
-                if (status != SceneEventProgressStatus.Started)
-                {
-                    Debug.LogWarning($"LoadScenesAdditivelyManager - Failed to load {m_SceneName} " +
-                          $"with a {nameof(SceneEventProgressStatus)}: {status}");
-                }
-            }
+    //public override void OnNetworkSpawn()
+    //{
+    //    DebugManager.Log("LoadScenesAdditivelyManager - Se ejecutó fuera");
+    //    if (IsServer)
+    //    {
+    //        DebugManager.Log("LoadScenesAdditivelyManager - Se ejecutó dentro");
+    //        for (int i = 0; i < m_SceneName.Length; i++)
+    //        {
+    //            var status = NetworkManager.SceneManager.LoadScene(m_SceneName[i], LoadSceneMode.Additive);
+    //            if (status != SceneEventProgressStatus.Started)
+    //            {
+    //                DebugManager.Log($"LoadScenesAdditivelyManager - Failed to load {m_SceneName[i]} " +
+    //                      $"with a {nameof(SceneEventProgressStatus)}: {status}");
+    //            }
+    //        }
 
-        }
-    }
+    //    }
+    //}
     //}
 
     //using UnityEngine;
@@ -109,54 +109,54 @@ public class LoadScenesAdditivelyManager : NetworkBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        LoadAllScenesAdditively();
-    }
+    //void Start()
+    //{
+    //    LoadAllScenesAdditively();
+    //}
 
-    private void LoadAllScenesAdditively()
-    {
-        SceneManagerLoadSceneAsyncAdditively();
+    //private void LoadAllScenesAdditively()
+    //{
+    //    SceneManagerLoadSceneAsyncAdditively();
 
-        StartCoroutine(WaitForNetworkStartAndThenNetworkManagerLoadSceneAsyncAdditively());
-    }
+    //    //StartCoroutine(WaitForNetworkStartAndThenNetworkManagerLoadSceneAsyncAdditively());
+    //}
 
-    private void NetworkManagerLoadSceneAsyncAdditively()
-    {
-        NetworkManager.Singleton.SceneManager.LoadScene("MenuScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("RoomModuleAScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("RoomModuleBScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("LeisureModuleScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("TunnelConnectorCScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("TunnelConnectorFScene", LoadSceneMode.Additive);
-        NetworkManager.Singleton.SceneManager.LoadScene("TunnelConnectorDScene", LoadSceneMode.Additive); // This corridor will not be used but has to be visible
-        NetworkManager.Singleton.SceneManager.LoadScene("AuditoriumScene", LoadSceneMode.Additive);
-    }
+    //private void NetworkManagerLoadSceneAsyncAdditively()
+    //{
+    //    NetworkManager.Singleton.SceneManager.LoadScene("MenuScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("MainScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("RoomModuleAScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("RoomModuleBScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("LeisureModuleScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("TunnelConnectorCScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("TunnelConnectorFScene", LoadSceneMode.Additive);
+    //    NetworkManager.Singleton.SceneManager.LoadScene("TunnelConnectorDScene", LoadSceneMode.Additive); // This corridor will not be used but has to be visible
+    //    NetworkManager.Singleton.SceneManager.LoadScene("AuditoriumScene", LoadSceneMode.Additive);
+    //}
 
-    private IEnumerator WaitForNetworkStartAndThenNetworkManagerLoadSceneAsyncAdditively()
-    {
-        while (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening)
-        {
-            yield return null; // Wait until NetworkManager is initialized
-        }
+    //private IEnumerator WaitForNetworkStartAndThenNetworkManagerLoadSceneAsyncAdditively()
+    //{
+    //    while (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening)
+    //    {
+    //        yield return null; // Wait until NetworkManager is initialized
+    //    }
 
-        Debug.Log("NetworkManager is now running!");
-        NetworkManagerLoadSceneAsyncAdditively();
-    }
+    //    DebugManager.Log("NetworkManager is now running!");
+    //    NetworkManagerLoadSceneAsyncAdditively();
+    //}
 
-    private void SceneManagerLoadSceneAsyncAdditively()
-    {
-        SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("RoomModuleAScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("LeisureModuleScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("TunnelConnectorCScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("TunnelConnectorFScene", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("TunnelConnectorDScene", LoadSceneMode.Additive); // This corridor will not be used but has to be visible
-        SceneManager.LoadSceneAsync("AuditoriumScene", LoadSceneMode.Additive);
-    }
+    //private void SceneManagerLoadSceneAsyncAdditively()
+    //{
+    //    SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("MainScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("RoomModuleAScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("RoomModuleBScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("LeisureModuleScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("TunnelConnectorCScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("TunnelConnectorFScene", LoadSceneMode.Additive);
+    //    SceneManager.LoadSceneAsync("TunnelConnectorDScene", LoadSceneMode.Additive); // This corridor will not be used but has to be visible
+    //    SceneManager.LoadSceneAsync("AuditoriumScene", LoadSceneMode.Additive);
+    //}
 
 }
 
