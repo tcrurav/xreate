@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CyberSecurityPanel : MonoBehaviour
 {
     public TextMeshPro lblIntro;
     public TextMeshPro lblTerm;
     public TextMeshPro lblDefinition;
-    public AudioClip pickSound; // Sonido del botón
+    public AudioClip pickSound;
     private AudioSource audioSource;
 
     private Dictionary<string, string> securityTerms = new Dictionary<string, string>
@@ -51,11 +52,11 @@ public class CyberSecurityPanel : MonoBehaviour
 
     void Start()
     {
-        // Inicializamos el texto de los términos y definiciones a vacío
+        // We initialize the text of the terms and definitions to empty
         lblTerm.text = "";
         lblDefinition.text = "";
 
-        // Llamar al método que carga los términos de seguridad (sin necesidad del servicio)
+        // Call the method that loads the security terms (without needing the service) LoadSecurityTerms();
         LoadSecurityTerms();
 
         lblIntro.text = "Welcome to Find the Pairs!!!\n" +
@@ -68,24 +69,36 @@ public class CyberSecurityPanel : MonoBehaviour
                         "Stay alert, discover the pairs and\n" +
                         "earn points before time runs out.";
 
-        // Agregar un AudioSource si no existe
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
     }
 
     private void LoadSecurityTerms()
     {
-        // Ordenar los términos del diccionario
+        // Sort the dictionary terms
         orderedSecurityTerms = securityTerms.OrderBy(term => term.Key).ToList();
-
-        Debug.Log($"Términos cargados y ordenados: {orderedSecurityTerms.Count}");
     }
+
+    // Este método ahora recibe el diccionario de términos (completos)
+    public void ReceiveSecurityTerms(Dictionary<string, string> terms)
+    {
+        securityTerms = terms;
+        orderedSecurityTerms = new List<KeyValuePair<string, string>>(securityTerms);
+        orderedSecurityTerms.Sort((term1, term2) => term1.Key.CompareTo(term2.Key)); // Ordenar términos
+
+        if (orderedSecurityTerms.Count > 0)
+        {
+            ShowSecurityTerm();  // Mostrar el primer término si existe
+        }
+    }
+
+
 
     private void ShowSecurityTerm()
     {
-        // Asegurarnos de que los TextMeshPro se actualicen correctamente
-        lblTerm.text = "";
-        lblDefinition.text = "";
+        // Make sure the TextMeshPro's are updated correctly
+        lblTerm.text = "Terms";
+        lblDefinition.text = "Definitions. Push the button green to start";
 
         if (orderedSecurityTerms.Count > 0 && currentIndex < orderedSecurityTerms.Count)
         {
@@ -99,7 +112,7 @@ public class CyberSecurityPanel : MonoBehaviour
     {
         if (orderedSecurityTerms == null || orderedSecurityTerms.Count == 0)
         {
-            Debug.LogError("Aún no se han cargado los términos. Por favor, espere.");
+            Debug.LogError("Terms have not been uploaded yet. Please wait.");
             return;
         }
 
@@ -111,7 +124,7 @@ public class CyberSecurityPanel : MonoBehaviour
         }
         else
         {
-            Debug.Log("Ya has llegado al último término.");
+            Debug.Log("You have already reached the last term.");
         }
     }
 
@@ -119,9 +132,11 @@ public class CyberSecurityPanel : MonoBehaviour
     {
         if (currentIndex > 0)
         {
-            currentIndex--; // Primero retrocede al término anterior
+            // First go back to the previous term
+            currentIndex--;
             ShowSecurityTerm();
-            PlaySound(); // Reproducir sonido
+            // Play sound
+            PlaySound();
         }
     }
 
