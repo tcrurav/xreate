@@ -9,7 +9,7 @@ public class SlideShowManager : NetworkBehaviour
 
     private SlideController slideController;
     private ForceAttentionController forceAttentionController;
-    private SlideShowStartButtonController startButtonController;
+    private StartButtonController startButtonController;
 
     private bool isSubscribed = false;
 
@@ -17,7 +17,7 @@ public class SlideShowManager : NetworkBehaviour
     {
         slideController = GetComponent<SlideController>();
         forceAttentionController = GetComponent<ForceAttentionController>();
-        startButtonController = GetComponent<SlideShowStartButtonController>();
+        startButtonController = GetComponent<StartButtonController>();
 
         if (slideController == null || forceAttentionController == null || startButtonController == null)
         {
@@ -61,6 +61,13 @@ public class SlideShowManager : NetworkBehaviour
         //    ChangeForceAttentionClientRpc(forceAttention.Value, forceAttention.Value);
         //    ChangeStartReadyClientRpc(startReady.Value, startReady.Value);
         //}
+    }
+
+    public override void OnDestroy()
+    {
+        currentSlide?.Dispose();
+        forceAttention?.Dispose();
+        startReady?.Dispose();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -134,7 +141,7 @@ public class SlideShowManager : NetworkBehaviour
     {
         if (startButtonController != null)
         {
-            GetComponent<SlideShowStartButtonController>().EnableNextRooms();
+            GetComponent<StartButtonController>().EnableNextRooms();
         }
         else
         {

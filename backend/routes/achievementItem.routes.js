@@ -22,6 +22,16 @@ module.exports = app => {
     // Update a AchievementItems with id
     router.put("/:id", auth.isAuthenticated, auth.hasRole(["ADMIN"]), achievementItems.update);
 
+    // Reset all points in all activities
+    router.put("/resetPoints", 
+        auth.isAuthenticated, auth.hasRole(["ADMIN"]), 
+        achievementItems.resetPoints);
+        
+    // Reset points in an activity
+    router.put("/resetPoints/activity/:activityId", 
+        // auth.isAuthenticated, auth.hasRole(["TEACHER"]), // TODO - It should be ONLY a Teacher who clicks Start activity button
+        achievementItems.resetPointsByActivityId);
+
     // update an AchievementItem with challengeName and challenge item and studentId and activityId
     router.put("/challenge/:challengeName/challengeItem/:challengeItemItem/student/:studentId/activity/:activityId",
         auth.isAuthenticated,

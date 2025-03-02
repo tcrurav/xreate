@@ -9,6 +9,8 @@ public class LeaderboardController : MonoBehaviour
     public TMP_Text[] teamPoints;
     public TMP_Text[] topPlayerNames;
 
+    public TeamMapManager teamMapManager;
+
     private TeamService teamService;
     private InActivityStudentParticipationService inActivityStudentParticipationService;
 
@@ -28,10 +30,13 @@ public class LeaderboardController : MonoBehaviour
     public void Refresh()
     {
         //loadingCanvas.SetActive(true);
-
         StartCoroutine(GetTeamsWithChallengesAndPoints());
         StartCoroutine(GetAllWithPointsGroupedByTeams(CurrentActivityManager.GetCurrentActivityId()));
         StartCoroutine(GetAllTopPlayersWithPoints(CurrentActivityManager.GetCurrentActivityId()));
+
+        // TODO - It should be refactored
+        teamMapManager.GetComponent<TeamMapController>().RefreshTeamPositionsInMap(0);
+        //teamMapManager.GetComponent<TeamMapController>().RefreshTeamPositionsInAllMaps();
     }
 
     IEnumerator GetTeamsWithChallengesAndPoints()
@@ -52,20 +57,20 @@ public class LeaderboardController : MonoBehaviour
     {
         for (int i = 0; i < teamService.teamsWithChallengesAndPoints.Length; i++)
         {
-            float newX = startLinePositionX[i % CurrentActivityManager.GetNumberOfChallengesInActivity()] +
-                teamService.teamsWithChallengesAndPoints[i].points / teamService.teamsWithChallengesAndPoints[i].maxPoints * taskLineLength;
+            float newX = startLinePositionX[i % 4];
+            if (CurrentActivityManager.GetNumberOfChallengesInActivity() > 0) newX = startLinePositionX[i % CurrentActivityManager.GetNumberOfChallengesInActivity()];
+            
+            int maxPoints = teamService.teamsWithChallengesAndPoints[i].maxPoints;
+            if (maxPoints > 0)
+            {
+                newX = maxPoints + teamService.teamsWithChallengesAndPoints[i].points / teamService.teamsWithChallengesAndPoints[i].maxPoints * taskLineLength;
+            }
 
             teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D = new Vector3(
                 newX,
                 teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D.y,
                 teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D.z);
         }
-
-        // Hide Leaderboard Rings not playing. Leaderboard shows 4 Teams even when maybe less teams are playing.
-        //for (int i = teamService.teamsWithPoints.Length; i < 4; i++)
-        //{
-        //    teamRawImageRings[i].SetActive(false);
-        //}
     }
 
     IEnumerator GetAllWithPointsGroupedByTeams(int activityId)
@@ -115,7 +120,13 @@ public class LeaderboardController : MonoBehaviour
             if (actualTeamId != inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].teamId)
             {
                 actualTeamId = inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].teamId;
-                topPlayerNames[teamIndex].text = inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].userName;
+                if (inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].points > 0)
+                {
+                    topPlayerNames[teamIndex].text = inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].userName;
+                } else
+                {
+                    topPlayerNames[teamIndex].text = "_________";
+                }
                 teamIndex++;
             }
 

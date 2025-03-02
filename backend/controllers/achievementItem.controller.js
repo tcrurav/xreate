@@ -139,6 +139,72 @@ exports.update = (req, res) => {
         });
 };
 
+// Reset all points in all activities
+exports.resetPoints = (req, res) => {
+
+    AchievementItem.update({ points: 0 })
+        .then(num => {
+            if (num > 0) {
+                res.send({
+                    message: `{num} AchievementItems have been successfully reset.`
+                });
+            } else {
+                res.send({
+                    message: "No AchievementItem found"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error resetting points"
+            });
+        });
+};
+
+// Reset all points by activityId
+exports.resetPointsByActivityId = async (req, res) => {
+    const activityId = req.params.activityId;
+
+    try {
+        // find first AchievementItem of ActivityId
+        const achivementItemsToReset = await AchievementItem.findAll({
+            include: [{
+                model: Achievement, attributes: [],
+                required: true,
+                include: [{
+                    model: InActivityStudentParticipation, attributes: [],
+                    where: {
+                        activityId: activityId
+                    }
+                }]
+            }],
+            attributes: [
+                'id',
+                'achievementId',
+                'challengeItemId',
+                'points',
+                'Achievement.InActivityStudentParticipation.activityId',
+            ],
+            raw: true
+        });
+
+        achivementItemsToReset.map(async (a) => {
+            await AchievementItem.update({ points: 0 }, {
+                where: { id: a.id }
+            });
+        });
+
+        res.send({
+            message: "AchievementItem updating finished with no errors."
+        });
+
+    } catch (e) {
+        res.status(500).send({
+            message: err.message
+        });
+    }
+};
+
 // update an AchievementItem with challengeName and challenge item and studentId and activityId
 exports.updateByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId = (req, res) => {
     const challengeName = req.params.challengeName;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlideController : MonoBehaviour
+public class LeisureModuleGameController : MonoBehaviour
 {
     public GameObject[] Slides;
     public GameObject GotoNextSlideButton;
@@ -16,7 +16,7 @@ public class SlideController : MonoBehaviour
 
     public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
     {
-        DebugManager.Log($"SlideController - HideOldSlideAndShowNewSlide");
+        DebugManager.Log($"LeisureModuleGameController - HideOldSlideAndShowNewSlide");
 
         Slides[oldValue].gameObject.SetActive(false);
         Slides[newValue].gameObject.SetActive(true);

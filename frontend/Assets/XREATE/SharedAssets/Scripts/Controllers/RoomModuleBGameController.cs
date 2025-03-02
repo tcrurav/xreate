@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SlideController : MonoBehaviour
+public class RoomModuleBGameController : MonoBehaviour
 {
     public GameObject[] Slides;
     public GameObject GotoNextSlideButton;

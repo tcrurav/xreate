@@ -1245,6 +1245,88 @@
 					"response": []
 				},
 				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/resetPoints",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"achievementId\":\"{{achievementId}}\",\r\n    \"points\": \"{{points}}\",\r\n    \"item\": \"{{item}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/resetPoints",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievementItems",
+								"resetPoints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/resetPoints/activity/{{activityId}}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"achievementId\":\"{{achievementId}}\",\r\n    \"points\": \"{{points}}\",\r\n    \"item\": \"{{item}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/resetPoints/activity/{{activityId}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"achievementItems",
+								"resetPoints",
+								"activity",
+								"{{activityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "{{protocol}}://{{host}}:{{port}}/api/achievementItems/challenge/{{challengeName}}/challengeItem/{{challengeItemItem}}/student/{{studentId}}/activity/{{activityId}}",
 					"request": {
 						"auth": {

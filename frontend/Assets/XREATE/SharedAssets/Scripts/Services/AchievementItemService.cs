@@ -36,6 +36,17 @@ public class AchievementItemService : MonoBehaviour
         UpdateURL();
         yield return StartCoroutine(RestUpdateById(id, achievementItem));
     }
+    public IEnumerator ResetPoints()
+    {
+        UpdateURL();
+        yield return StartCoroutine(RestResetPoints());
+    }
+
+    public IEnumerator ResetPointsByActivityId(int id)
+    {
+        UpdateURL();
+        yield return StartCoroutine(RestResetPointsByActivityId(id));
+    }
 
     public IEnumerator UpdatePointsByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
         string challengeName, string challengeItemItem, int studentId, int activityId, int points)
@@ -141,6 +152,70 @@ public class AchievementItemService : MonoBehaviour
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(bodyJsonString);
 
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+
+        request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        requestError = request.error;
+        responseCode = request.responseCode;
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.LogError(request.error);
+            request.Dispose();
+            yield break;
+        }
+
+        string result = request.downloadHandler.text;
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        request.Dispose();
+    }
+
+    private IEnumerator RestResetPoints()
+    {
+        var request = new UnityWebRequest(URL + "/resetPoints", "PUT");
+
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+
+        request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        requestError = request.error;
+        responseCode = request.responseCode;
+
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.LogError(request.error);
+            request.Dispose();
+            yield break;
+        }
+
+        string result = request.downloadHandler.text;
+
+        if (request.responseCode != 200)
+        {
+            request.Dispose();
+            yield break;
+        }
+
+        request.Dispose();
+    }
+
+    private IEnumerator RestResetPointsByActivityId(int id)
+    {
+        var request = new UnityWebRequest(URL + "/resetPoints/activity/" + id, "PUT");
+
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
 
         request.SetRequestHeader("Authorization", "Bearer " + MainManager.GetAccessToken());
