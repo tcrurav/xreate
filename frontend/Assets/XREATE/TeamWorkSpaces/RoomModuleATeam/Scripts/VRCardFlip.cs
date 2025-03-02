@@ -40,9 +40,11 @@ public class VRCardFlip : MonoBehaviour
 
     public void FlipCard()
     {
-        if (isLocked || isFlipping || isFlipped) return;
+        if (isLocked || isFlipping || isFlipped || !gameManager.CanFlip()) return;
 
         isFlipping = true;
+        // Notify that an animation is occurring
+        gameManager.SetFlippingState(true);
         StartCoroutine(FlipAnimation());
 
         gameManager.UpdateDisplayedTextVR(cardText);
@@ -80,12 +82,16 @@ public class VRCardFlip : MonoBehaviour
         float duration = 1f / flipSpeed;
 
         Quaternion startRotation = transform.rotation;
-        Quaternion midRotation = initialRotation * Quaternion.Euler(0, 0, 90);  //  Levanta la carta 90° sobre Z
-        Quaternion endRotation = initialRotation * Quaternion.Euler(0, 0, 180); //  Voltea completamente 180° sobre Z
+
+        //  Raise the card 90° above Z
+        Quaternion midRotation = initialRotation * Quaternion.Euler(0, 0, 90);
+
+        //  Flips completely 180° about Z
+        Quaternion endRotation = initialRotation * Quaternion.Euler(0, 0, 180); 
 
         PlayFlipSound();
 
-        // Primera mitad del giro (levantando la carta)
+        // First half of the turn (raising the card)
         while (elapsedTime < duration / 2)
         {
             transform.rotation = Quaternion.Lerp(startRotation, midRotation, elapsedTime / (duration / 2));
@@ -93,14 +99,14 @@ public class VRCardFlip : MonoBehaviour
             yield return null;
         }
 
-        //  Asegurar que la carta esté en 90° y cambiar la cara visible
+        // Make sure the card is at 90° and change the visible side
         transform.rotation = midRotation;
         FrontSide.SetActive(false);
         BackSide.SetActive(true);
 
         elapsedTime = 0f;
 
-        // Segunda mitad del giro (termina de voltear)
+        // Second half of the turn (finish turning)
         while (elapsedTime < duration / 2)
         {
             transform.rotation = Quaternion.Lerp(midRotation, endRotation, elapsedTime / (duration / 2));
@@ -108,12 +114,16 @@ public class VRCardFlip : MonoBehaviour
             yield return null;
         }
 
-        //  Asegurar que la rotación termine exactamente en 180° sobre Z
+        // Ensure that the rotation ends at exactly 180° about Z
+
+
         transform.rotation = endRotation;
 
         isFlipped = true;
         isFlipping = false;
 
+        // Animation finished
+        gameManager.SetFlippingState(false); 
         gameManager.CardFlipped(this);
     }
 }
