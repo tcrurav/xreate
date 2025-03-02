@@ -1,311 +1,324 @@
-using System.Collections;
+ï»¿using System.Collections;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
-public class LightEffectPreset
+public class LightSettings
 {
-    public string name;               // Nombre del preset para identificarlo
-    public Color color1 = Color.red;  // Primer color
-    public Color color2 = Color.green; // Segundo color
-    public float intensity1 = 1f;     // Intensidad del primer color
-    public float intensity2 = 1f;     // Intensidad del segundo color
-    public float interval = 1f;       // Tiempo de cambio entre estados
+    public bool isActive = true;                // Activar o desactivar el nivel completo
+    public Color colorOn = Color.white;         // Color cuando la luz estÃ¡ encendida
+    public Color colorOff = Color.black;        // Color cuando la luz estÃ¡ apagada
+    public float intensity = 1f;                // Intensidad de la luz
+    public float sequentialDelay = 0.1f;        // Tiempo de espera para la activaciÃ³n secuencial
+    public bool enableBlink = false;            // Habilitar/deshabilitar parpadeo
+    public Color blinkColor1 = Color.yellow;       // Primer color para el parpadeo
+    public Color blinkColor2 = Color.white;      // Segundo color para el parpadeo
+    public float blinkInterval = 0.5f;          // Intervalo de parpadeo
 }
 
 public class HologramLightManager : MonoBehaviour
 {
-    [Header("Light Sets")]
     [SerializeField] private HologramLightSetController[] lightSets;
 
-    [Header("Effect Presets")]
-    [SerializeField] private LightEffectPreset[] effectPresets; // Configuraciones predefinidas
+    [SerializeField] private HologramLightSetController hologramLightSetController;
 
-    private Coroutine currentEffectCoroutine; // Para detener efectos actuales
 
-    /// <summary>
-    /// Cambia las propiedades de TODOS los focos (de todos los conjuntos).
-    /// </summary>
-    public void SetAllLights(Color color, float intensity)
+    [Header("Light Settings")]
+    public LightSettings level1Settings;
+    public LightSettings level3Settings;
+
+    private Coroutine blinkCoroutine;
+
+    private void SetLight(int level, Color color, float intensity, bool enable = true)
     {
+        if (!GetSettingsForLevel(level).isActive)
+        {
+            Debug.Log($"Level {level} is deactivated.");
+            return;
+        }
+
+        Debug.Log($"SetLight called - Level: {level}, Color: {color}, Intensity: {intensity}, Enable: {enable}");
+
         foreach (var set in lightSets)
         {
-            for (int i = 0; i < 3; i++) // 3 focos por conjunto
-            {
-                set.SetLightProperties(i, color, intensity);
-            }
+            Debug.Log($"Applying settings to LightSet: {set.name}, Light Index: {level - 1}");
+            set.SetLightProperties(level - 1, color, intensity);
+            set.TogglePointLight(level - 1, enable);
         }
     }
 
-
-
-    /// <summary>
-    /// Cambia las propiedades de un tipo de foco específico (todos los HoloLight_1, HoloLight_2, HoloLight_3).
-    /// </summary>
-    public void SetSpecificLightType(int lightIndex, Color color, float intensity)
+    public void ToggleLevel(int level, bool isOn)
     {
+        Debug.Log($"ToggleLevel called - Level: {level}, IsOn: {isOn}");
+        LightSettings settings = GetSettingsForLevel(level);
+        SetLight(level, isOn ? settings.colorOn : settings.colorOff, isOn ? settings.intensity : 0f, isOn);
+
+        if (isOn && settings.enableBlink)
+        {
+            ToggleBlinkLevel(level, true, settings.blinkInterval);
+        }
+    }
+
+    public void ToggleAllLights(bool isOn)
+    {
+        Debug.Log($"ToggleAllLights called - IsOn: {isOn}");
+        ToggleLevel(1, isOn);
+        ToggleLevel(3, isOn);
+    }
+
+    public void ToggleSequentialLevel(int level, bool isOn)
+    {
+        Debug.Log($"ToggleSequentialLevel called - Level: {level}, IsOn: {isOn}");
+        LightSettings settings = GetSettingsForLevel(level);
+        if (isOn)
+            StartCoroutine(SequentialTurnOnCoroutine(level, settings.sequentialDelay, settings.colorOn, settings.intensity));
+        else
+            SetLight(level, settings.colorOff, 0f, false);
+    }
+
+    private IEnumerator SequentialTurnOnCoroutine(int level, float delay, Color color, float intensity)
+    {
+        Debug.Log($"SequentialTurnOnCoroutine started - Level: {level}, Delay: {delay}, Color: {color}, Intensity: {intensity}");
+
         foreach (var set in lightSets)
         {
-            set.SetLightProperties(lightIndex, color, intensity);
+            Debug.Log($"Sequentially turning on LightSet: {set.name}, Light Index: {level - 1}");
+            set.SetLightProperties(level - 1, color, intensity);
+            set.TogglePointLight(level - 1, true);
+            yield return new WaitForSeconds(delay);
         }
     }
 
-    /// <summary>
-    /// Cambia las propiedades de un foco individual dentro de un conjunto.
-    /// </summary>
-    public void SetIndividualLight(int setIndex, int lightIndex, Color color, float intensity)
+    public void ToggleBlinkLevel(int level, bool isOn, float interval)
     {
-        if (setIndex < 0 || setIndex >= lightSets.Length) return;
-        lightSets[setIndex].SetLightProperties(lightIndex, color, intensity);
-    }
-
-    /// <summary>
-    /// Activa/desactiva las partículas de TODOS los focos.
-    /// </summary>
-    public void ToggleAllParticles(bool enable)
-    {
-        foreach (var set in lightSets)
+        Debug.Log($"ToggleBlinkLevel called - Level: {level}, IsOn: {isOn}, Interval: {interval}");
+        LightSettings settings = GetSettingsForLevel(level);
+        if (isOn)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                set.ToggleParticles(i, enable);
-            }
+            StopBlinking();
+            blinkCoroutine = StartCoroutine(BlinkLights(level, settings.blinkColor1, settings.blinkColor2, interval, settings.intensity));
         }
-    }
-
-    /// <summary>
-    /// Activa/desactiva las partículas de un tipo de foco específico.
-    /// </summary>
-    public void ToggleSpecificParticles(int lightIndex, bool enable)
-    {
-        foreach (var set in lightSets)
+        else
         {
-            set.ToggleParticles(lightIndex, enable);
+            StopBlinking();
+            SetLight(level, settings.colorOff, 0f, false);
         }
     }
 
-    /// <summary>
-    /// Activa/desactiva las partículas de un foco individual dentro de un conjunto.
-    /// </summary>
-    public void ToggleIndividualParticles(int setIndex, int lightIndex, bool enable)
+    private IEnumerator BlinkLights(int level, Color color1, Color color2, float interval, float intensity)
     {
-        if (setIndex < 0 || setIndex >= lightSets.Length) return;
-        lightSets[setIndex].ToggleParticles(lightIndex, enable);
-    }
+        Debug.Log($"BlinkLights started - Level: {level}, Color1: {color1}, Color2: {color2}, Interval: {interval}, Intensity: {intensity}");
 
-    /// <summary>
-    /// Inicia una secuencia de luces en TODOS los conjuntos.
-    /// </summary>
-    public void StartAllLightSequences()
-    {
-        foreach (var set in lightSets)
-        {
-            set.StartLightSequence();
-        }
-    }
-
-    /// <summary>
-    /// Inicia una secuencia de luces en un conjunto específico.
-    /// </summary>
-    public void StartSequenceForSet(int setIndex)
-    {
-        if (setIndex < 0 || setIndex >= lightSets.Length) return;
-        lightSets[setIndex].StartLightSequence();
-    }
-
-    /// <summary>
-    /// Reinicia todas las luces al estado predeterminado.
-    /// </summary>
-    public void ResetAllLights()
-    {
-        foreach (var set in lightSets)
-        {
-            set.ResetLights();
-        }
-    }
-
-    /// <summary>
-    /// Reinicia las luces de un conjunto específico.
-    /// </summary>
-    public void ResetLightsForSet(int setIndex)
-    {
-        if (setIndex < 0 || setIndex >= lightSets.Length) return;
-        lightSets[setIndex].ResetLights();
-    }
-
-    /// <summary>
-    /// Inicia un efecto de parpadeo usando un preset.
-    /// </summary>
-    public void StartEffectWithPreset(int presetIndex)
-    {
-        if (presetIndex < 0 || presetIndex >= effectPresets.Length) return;
-
-        LightEffectPreset preset = effectPresets[presetIndex];
-        StartBlinkingAllLights(preset.color1, preset.color2, preset.intensity1, preset.intensity2, preset.interval);
-    }
-
-    /// <summary>
-    /// Inicia un efecto de parpadeo global alternando entre dos colores.
-    /// </summary>
-    public void StartBlinkingAllLights(Color color1, Color color2, float intensity1, float intensity2, float interval)
-    {
-        if (currentEffectCoroutine != null)
-        {
-            StopCoroutine(currentEffectCoroutine); // Detiene el efecto anterior si existe
-        }
-
-        currentEffectCoroutine = StartCoroutine(BlinkAllLights(color1, color2, intensity1, intensity2, interval));
-    }
-
-    /// <summary>
-    /// Coroutine para hacer parpadear todas las luces con alternancia de colores e intensidad.
-    /// </summary>
-    private IEnumerator BlinkAllLights(Color color1, Color color2, float intensity1, float intensity2, float interval)
-    {
-        bool useFirstColor = true;
+        bool toggle = false;
 
         while (true)
         {
-            foreach (var set in lightSets)
-            {
-                for (int i = 0; i < 3; i++) // Afecta a los 3 focos de cada conjunto
-                {
-                    if (useFirstColor)
-                        set.SetLightProperties(i, color1, intensity1);
-                    else
-                        set.SetLightProperties(i, color2, intensity2);
-                }
-            }
-
-            useFirstColor = !useFirstColor; // Cambia el estado de color/intensidad
-            yield return new WaitForSeconds(interval); // Aquí se usa el intervalo correctamente
+            Debug.Log($"Blinking - Level: {level}, CurrentColor: {(toggle ? color1 : color2)}");
+            SetLight(level, toggle ? color1 : color2, intensity);
+            toggle = !toggle;
+            yield return new WaitForSeconds(interval);
         }
     }
 
-    /// <summary>
-    /// Detiene todos los efectos en ejecución.
-    /// </summary>
-    public void StopAllEffects()
+    public void StopBlinking()
     {
-        if (currentEffectCoroutine != null)
+        Debug.Log("StopBlinking called");
+
+        if (blinkCoroutine != null)
         {
-            StopCoroutine(currentEffectCoroutine);
-            currentEffectCoroutine = null;
+            StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
         }
-
-        ResetAllLights(); // Restaura las luces al estado inicial
     }
 
-
-
-    /// <summary>
-    /// Enciende los focos uno por uno, en secuencia del 1 al 25.
-    /// </summary>
-    public void StartSequentialLightSequence(float delayBetweenLights, Color color, float intensity)
+    public void DisablePointLight(int level)
     {
-        StopAllCoroutines(); // Detenemos cualquier otra coroutine en ejecución
-        StartCoroutine(SequentialLightSequence(delayBetweenLights, color, intensity));
-    }
+        Debug.Log($"DisablePointLight called - Level: {level}");
 
-    /// <summary>
-    /// Coroutine para encender los focos uno por uno.
-    /// </summary>
-    private IEnumerator SequentialLightSequence(float delayBetweenLights, Color color, float intensity)
-    {
-        // Asegúrate de que todos los focos estén apagados al inicio
-        SetAllLights(Color.black, 0f);
-
-        // Recorre cada conjunto de focos
-        for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
+        foreach (var set in lightSets)
         {
-            // Enciende los focos del conjunto actual
-            for (int lightIndex = 0; lightIndex < 3; lightIndex++)
-            {
-                lightSets[setIndex].SetLightProperties(lightIndex, color, intensity);
-            }
-
-            // Espera el tiempo especificado antes de pasar al siguiente conjunto
-            yield return new WaitForSeconds(delayBetweenLights);
-
-            // Opcional: Apagar el conjunto anterior después de encender el siguiente
-            lightSets[setIndex].ResetLights();
+            set.TogglePointLight(level - 1, false);
         }
     }
 
-    /// <summary>
-    /// Efecto fluido y secuencial tipo LED: primero enciende los focos A, luego B, y luego C.
-    /// </summary>
-    public void StartLEDStripEffect(float delayBetweenLights, float delayBetweenGroups, Color color, float intensity)
+    public void EffectLightBeforeLoadWords()
     {
-        StopAllCoroutines(); // Detenemos cualquier otra coroutine activa
-        StartCoroutine(LEDStripEffect(delayBetweenLights, delayBetweenGroups, color, intensity));
+        
+        StartCoroutine(RunDemoSequence_LoadWords());
+        StartCoroutine(DelayedRunDemoSequence());
+
     }
 
-    /// <summary>
-    /// Coroutine para el efecto LED secuencial.
-    /// </summary>
-    private IEnumerator LEDStripEffect(float delayBetweenLights, float delayBetweenGroups, Color color, float intensity)
+    private IEnumerator DelayedRunDemoSequence()
     {
-        // Asegúrate de que todos los focos estén apagados al inicio
-        SetAllLights(Color.black, 0f);
-
-        // Iterar por cada "foco A" (primer foco de cada conjunto)
-        for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
-        {
-            lightSets[setIndex].SetLightProperties(0, color, intensity); // Enciende el foco A
-            yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
-        }
-
-        yield return new WaitForSeconds(delayBetweenGroups); // Espera entre el grupo de A y B
-
-        //Iterar por cada "foco B"(segundo foco de cada conjunto)
-        for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
-        {
-            Debug.Log($"Seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet: {setIndex} de {lightSets.Length}");
-            lightSets[setIndex].SetLightProperties(1, color, intensity); // Enciende el foco B
-            yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
-        }
-
-        yield return new WaitForSeconds(delayBetweenGroups); // Espera entre el grupo de B y C
-
-        // Iterar por cada "foco C" (tercer foco de cada conjunto)
-        for (int setIndex = 0; setIndex < lightSets.Length; setIndex++)
-        {
-            lightSets[setIndex].SetLightProperties(2, color, intensity); // Enciende el foco C
-            yield return new WaitForSeconds(delayBetweenLights); // Espera entre focos
-        }
+        yield return new WaitForSeconds(3f); // Espera 3 segundos antes de llamar a la secuencia
+        StartCoroutine(RunDemoSequence_LoadWords());
     }
 
-
-
-    public void StartEffectFromButton()
+    public void EnablePointLight(int level)
     {
-        StartLEDStripEffect(0.05f, 0.1f, Color.green, 1f); 
+        Debug.Log($"EnablePointLight called - Level: {level}");
+
+        foreach (var set in lightSets)
+        {
+            set.TogglePointLight(level - 1, true);
+        }
     }
 
+    private LightSettings GetSettingsForLevel(int level)
+    {
+        Debug.Log($"GetSettingsForLevel called - Level: {level}");
 
-
+        return level switch
+        {
+            1 => level1Settings,
+            3 => level3Settings,
+            _ => new LightSettings(),
+        };
+    }
 
     private void Start()
     {
-        // Configurar todas las luces como transparentes al inicio
-        SetAllLights(Color.clear, 0f);
+        Debug.Log("HologramLightManager started");
+        // AsegÃºrate de que las luces estÃ©n completamente apagadas al inicio
+        ToggleLevel(1, false); // Apaga Level 1
+        ToggleLevel(3, false); // Apaga Level 3
 
-        // Iniciar la corrutina para añadir un retraso antes de cambiar a la secuencia
-        //StartCoroutine(DelayedStartLEDStripEffect());
+        // Desactiva fÃ­sicamente los Point Lights para asegurarse
+        DisablePointLight(1);
+        DisablePointLight(3);
+
+        // Inicia la demo despuÃ©s de apagar todo
+        //StartCoroutine(RunDemoSequence());
     }
 
-    /// <summary>
-    /// Corrutina para retrasar la ejecución del efecto LED Strip.
-    /// </summary>
-    private IEnumerator DelayedStartLEDStripEffect()
+    private IEnumerator RunDemoSequence()
     {
-        // Esperar 3 segundos antes de iniciar el efecto
-        yield return new WaitForSeconds(3f);
+        Debug.Log("âš¡ Iniciando Demo de Luces...");
 
-        // Cambiar el color a verde y empezar la secuencia
-        // StartLEDStripEffect(0.1f, 0.2f, Color.green, 1f);
-        StartLEDStripEffect(0.05f, 0.1f, Color.green, 1f); // Velocidades más rápidas
+        // ðŸ”¹ Obtener todos los `HologramLightSetController` en la escena
+        HologramLightSetController[] allLightSets = FindObjectsByType<HologramLightSetController>(FindObjectsSortMode.None);
+
+
+        // ðŸ”¹ Iniciar el efecto de carga en todos los objetos con luces
+        foreach (var lightSet in allLightSets)
+        {
+            lightSet.StartChargingEffect(Color.green, Color.red, 1f, 8f, 3f);
+        }
+        yield return new WaitForSeconds(3f); // Dejar el efecto de carga por 3 segundos
+
+        // ðŸ”¹ Detener el efecto de carga en todos los objetos
+        foreach (var lightSet in allLightSets)
+        {
+            lightSet.StopChargingEffect();
+        }
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("ðŸ”† Efecto de carga finalizado");
+
+        // ðŸ”¹ Encender y apagar Level 3
+        //ToggleLevel(3, true);
+        //yield return new WaitForSeconds(2f);
+        //ToggleLevel(3, false);
+        //yield return new WaitForSeconds(1f);
+
+        //Debug.Log("ðŸ”† Nivel 3 Encendido y Apagado");
+
+        // ðŸ”¹ Secuencia de encendido en Level 3
+        ToggleSequentialLevel(3, true);
+        yield return new WaitForSeconds(3f);
+        ToggleSequentialLevel(3, false);
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("ðŸš€ Secuencia de Encendido en Level 3");
+
+        // ðŸ”¹ Secuencia invertida (25 a 1)
+        StartCoroutine(SequentialTurnOnCoroutine(3, 0.1f, Color.blue, 1f, true));
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(SequentialTurnOnCoroutine(3, 0.1f, Color.black, 0f, true));
+
+        // ðŸ”¹ Parpadeo final para simular carga completa
+        ToggleBlinkLevel(3, true, 0.3f);
+        yield return new WaitForSeconds(2f);
+        ToggleBlinkLevel(3, false, 0.3f);
+
+        Debug.Log("ðŸŽ‰ Demo de Luces Completada.");
     }
+
+    private IEnumerator RunDemoSequence_LoadWords()
+    {
+        Debug.Log("âš¡ Iniciando Efecto de Luces...");
+
+        // ðŸ”¹ Parpadeo final para simular carga completa
+        ToggleBlinkLevel(3, true, 0.3f);
+        yield return new WaitForSeconds(6f);
+        ToggleBlinkLevel(3, false, 0.3f);
+
+        Debug.Log("ðŸŽ‰ Luces Completada parpadeo.");
+
+        ToggleLevel(3, true);
+        yield return new WaitForSeconds(2f);
+        
+        Debug.Log("ðŸŽ‰ Dejamos Luces encendidas.");
+    }
+
+    private IEnumerator RunDemoSequence_LoadWords1()
+    {
+        Debug.Log("âš¡ Iniciando Efecto de Luces...");
+
+        // Activar el efecto de carga con ControlPanelManager
+        ControlPanelManager controlPanel = FindFirstObjectByType<ControlPanelManager>(); 
+
+        if (controlPanel == null)
+        {
+            Debug.LogError("âš  No se encontrÃ³ ControlPanelManager en la escena.");
+            yield break;
+        }
+
+        controlPanel.ToggleChargingEffectLevel3(true); // Iniciar carga
+        yield return new WaitForSeconds(4f); // Dejar el efecto de carga por 4 segundos
+
+        controlPanel.ToggleChargingEffectLevel3(false); // Detener carga
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("ðŸ”† Efecto de carga finalizado");
+    }
+
+    private IEnumerator SequentialTurnOnCoroutine(int level, float delay, Color color, float intensity, bool reverse = false)
+    {
+        Debug.Log($"SequentialTurnOnCoroutine started - Level: {level}, Delay: {delay}, Color: {color}, Intensity: {intensity}, Reverse: {reverse}");
+
+        // ðŸ”¹ Recorre las luces en orden inverso si reverse == true
+        var lightSetList = reverse ? lightSets.Reverse() : lightSets;
+
+        foreach (var set in lightSetList)
+        {
+            Debug.Log($"Sequentially turning on LightSet: {set.name}, Light Index: {level - 1}");
+            set.SetLightProperties(level - 1, color, intensity);
+            set.TogglePointLight(level - 1, true);
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    public void ToggleChargingEffect(int level, bool isOn, Color color1, Color color2, float minIntensity, float maxIntensity, float duration)
+    {
+        Debug.Log($"ToggleChargingEffect called - Level: {level}, IsOn: {isOn}");
+
+        foreach (var set in lightSets)
+        {
+            if (isOn)
+            {
+                set.StartChargingEffect(color1, color2, minIntensity, maxIntensity, duration);
+            }
+            else
+            {
+                set.StopChargingEffect();
+            }
+        }
+    }
+
+
 
 
 }

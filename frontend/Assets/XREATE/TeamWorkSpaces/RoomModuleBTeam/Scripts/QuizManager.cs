@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class QuizManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class QuizManager : MonoBehaviour
         public List<string> answers;     // Answer options
         public int correctAnswerIndex;   // Index of the correct answer
     }
+
+    public RoomModuleBGameManager roomModuleBGameManager;
 
     public List<GameObject> welcomePanels;  // List of welcome panels
     public List<Button> startButtons;       // List of start buttons
@@ -57,6 +60,8 @@ public class QuizManager : MonoBehaviour
     private AchievementItemService achievementItemService; // Service to submit points
     public ActivityChallengeConfigItemService activityChallengeConfigItemService;
 
+    public string GameMode;
+
     void Start()
     {
         // Initialize the points service
@@ -94,7 +99,7 @@ public class QuizManager : MonoBehaviour
         for (int i = 0; i < totalPlayers; i++)
         {
             welcomePanels[i].SetActive(true);
-            startButtons[i].onClick.AddListener(OnPlayerReady);
+            startButtons[i].onClick.AddListener(() => OnPlayerReady(i));
         }
     }
 
@@ -120,8 +125,10 @@ public class QuizManager : MonoBehaviour
     }
 
     // Method called when a player presses the start button
-    void OnPlayerReady()
+    public void OnPlayerReady(int playerIndex)
     {
+        roomModuleBGameManager.ChangeStartedPanelsServerRpc(playerIndex, true);
+
         playersReady++;
         if (playersReady == totalPlayers)
         {
@@ -193,7 +200,12 @@ public class QuizManager : MonoBehaviour
         List<Question> tempQuestions = new List<Question>(questions);
         for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
         {
-            int randomIndex = Random.Range(0, tempQuestions.Count);
+            int randomIndex = i;
+            if (GameMode == "RANDOM")
+            {
+                randomIndex = Random.Range(0, tempQuestions.Count);
+            }
+
             selectedQuestions.Add(tempQuestions[randomIndex]);
             tempQuestions.RemoveAt(randomIndex);
         }
@@ -295,14 +307,15 @@ public class QuizManager : MonoBehaviour
             // Clear any old listeners
             answerButtons[i].onClick.RemoveAllListeners();
             // Add the current listener
-            answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
+            answerButtons[i].onClick.AddListener(() => CheckAnswer(i, index, answers[index]));
         }
 
     }
 
     // Method to check if the answer is correct
-    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
+    public void CheckAnswer(int playerIndex, int selectedIndex, int selectedAnswerIndex)
     {
+        roomModuleBGameManager.ChangePanelsAnsweredServerRpc(selectedIndex, playerIndex);
 
         if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
@@ -383,4 +396,10 @@ public class QuizManager : MonoBehaviour
             button.interactable = true;
         }
     }
+
+    public void SetTotalPlayers(int value)
+    {
+        totalPlayers = value;
+    }
+
 }

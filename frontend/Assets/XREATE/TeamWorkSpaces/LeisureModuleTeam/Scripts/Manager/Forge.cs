@@ -1,35 +1,86 @@
-// Manager/Forge.cs
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TeamWorkSpaces.LeisureModule;
+using System.Linq;
 
-
+namespace TeamWorkSpaces.LeisureModule
+{
     public class Forge : MonoBehaviour
     {
-        public QuestionManager questionManager;
+        [Header("Forge Word Storage")]
+        public List<string> storedWords = new List<string>(); // Stores words added to the forge
 
-        public void ValidateResponse(List<string> selectedWords)
+        [Header("Question Manager Reference")]
+        public QuestionManager questionManager; // Reference to access correct answers
+
+        /// <summary>
+        /// Handles incoming words and stores them if they are not duplicates.
+        /// </summary>
+        /// <param name="wordText">The word being added to the forge.</param>
+        public void HandleWordEntry(string wordText)
         {
-            if (questionManager.CurrentQuestion == null)
+            if (string.IsNullOrEmpty(wordText))
             {
-                Debug.LogError("No hay una pregunta cargada actualmente.");
+                Debug.LogWarning("[Forge] ⚠️ Empty word detected, skipping.");
                 return;
             }
 
-            string response = string.Join(" ", selectedWords);
+            Debug.Log($"[Forge] 🔥 Received word: {wordText}");
 
-            // Verificar si la respuesta coincide con alguna correcta
-            foreach (var answer in questionManager.CurrentQuestion.correct_answers)
+            // ✅ Prevent duplicate words
+            if (storedWords.Contains(wordText))
             {
-                if (response.Equals(answer.answer, System.StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.Log("�Respuesta correcta!");
-                    // Añadir efectos o lógica adicional aqu�
-                    return;
-                }
+                Debug.Log($"[Forge] ⚠️ Word '{wordText}' is already in the forge.");
+                return;
             }
 
-            Debug.Log("Respuesta incorrecta.");
-            // Añadir efectos o lógica adicional aqu�
+            storedWords.Add(wordText);
+            Debug.Log($"[Forge] 📜 Updated word list: {string.Join(", ", storedWords)}");
+        }
+
+        /// <summary>
+        /// Evaluates the stored words and calculates a score based on correct answers.
+        /// </summary>
+        public void EvaluateForge()
+        {
+            if (questionManager == null || questionManager.CurrentQuestion == null)
+            {
+                Debug.LogError("[Forge] ❌ No valid question found for evaluation.");
+                return;
+            }
+
+            List<string> correctWords = GetCorrectWordsFromQuestion(questionManager.CurrentQuestion);
+
+            int totalWords = storedWords.Count;
+            int correctMatches = storedWords.Count(word => correctWords.Contains(word));
+
+            Debug.Log($"[Forge] ✅ Evaluation Complete: {correctMatches}/{totalWords} correct words.");
+
+            // You can trigger UI updates or scoring logic here
+        }
+
+        /// <summary>
+        /// Extracts all correct words from the current question.
+        /// </summary>
+        private List<string> GetCorrectWordsFromQuestion(Question question)
+        {
+            HashSet<string> correctWords = new HashSet<string>();
+
+            foreach (var answer in question.correct_answers)
+            {
+                correctWords.UnionWith(answer.words);
+            }
+
+            return correctWords.ToList();
+        }
+
+        /// <summary>
+        /// Clears the stored words, resetting the forge.
+        /// </summary>
+        public void ResetForge()
+        {
+            storedWords.Clear();
+            Debug.Log("[Forge] 🔄 Forge has been reset.");
         }
     }
+}

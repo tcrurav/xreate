@@ -692,7 +692,7 @@ Shader "Knife/Hologram Shader Unlit"
 		}
 		
 	}
-	CustomEditor "Knife.HologramEffect.HologramShaderEditor"
+	//CustomEditor "Knife.HologramEffect.HologramShaderEditor"
 	
 	
 }
