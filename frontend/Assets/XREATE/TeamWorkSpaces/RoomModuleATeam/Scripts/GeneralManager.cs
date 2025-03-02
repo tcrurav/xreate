@@ -1,246 +1,181 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using UnityEngine;
+//using System;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Linq;
+//using TMPro;
+//using UnityEngine;
 
-public class GeneralManager : MonoBehaviour
-{
-    public List<TMP_Text> playerScoreTexts; // List of player score texts
-    public List<TMP_Text> teamScoreTexts;   // List of team score texts
-
-    private int playersReady = 0; // Counter of ready players
-    private int totalPlayers = 5; // Total number of players (configurable)
-
-    private int teamScore = 0; // Team score
-    private List<int> playerScores = new List<int>(); // Player scores
-
-    // Variables to submit points to the API
-    public string challengeName; // Challenge name
-    public string challengeItemItem; // Challenge item name
-
-    private AchievementItemService achievementItemService; // Service to submit points
-    public ActivityChallengeConfigItemService activityChallengeConfigItemService;
-
-    void Start()
-    {
-
-        achievementItemService = gameObject.AddComponent<AchievementItemService>();
-        activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
-
-        // Initialize scores for all players
-        for (int i = 0; i < totalPlayers; i++)
-        {
-            playerScores.Add(0);
-        }
-
-        // Set up the number of players
-        if (totalPlayers < 1)
-        {
-            Debug.LogError("The number of players must be at least 1.");
-            return;
-        }
-
-        for (int i = 0; i < totalPlayers; i++)
-        {
-            //startButtons[i].onClick.AddListener(OnPlayerReady);
-        }
-    }
-
-    // Method to submit points to the API
-    private IEnumerator OnQuizCompletedUpdatePoints(int points)
-    {
-        if (MainManager.GetUser().role != "STUDENT")
-        {
-            throw new System.Exception("Error: Only students get points");
-        }
-
-        int studentId = MainManager.GetUser().id;
-        int activityId = CurrentActivityManager.GetCurrentActivityId();
-
-        yield return achievementItemService.UpdatePointsByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
-             challengeName, challengeItemItem, studentId, activityId, points);
-
-        if (achievementItemService.responseCode != 200)
-        {
-            yield break;
-        }
-
-    }
-
-    // Method called when a player presses the start button
-    void OnPlayerReady()
-    {
-        playersReady++;
-        if (playersReady == totalPlayers)
-        {
-           // Invoke("StartQuiz", 1.5f);
-        }
-    }
-    // Starts the quiz game
-    void StartQuiz()
-    {
-        //// Hide welcome panels and show quiz panels
-        //foreach (var panel in welcomePanels)
-        //{
-        //    panel.SetActive(false);
-        //}
-
-        //for (int i = 0; i < totalPlayers; i++)
-        //{
-        //    quizPanels[i].SetActive(true);
-        //}
-
-        //StartCoroutine(InitializeQuestionsSelectRandomQuestionsAndLoadQuestion());
-    }
-
-    // Initialize questions and answers
-    //private IEnumerator InitializeQuestionsSelectRandomQuestionsAndLoadQuestion()
-    //{
-    //    //yield return StartCoroutine(GetAllById());
-    //    //SelectRandomQuestions(); // Select 10 random questions
-    //    //LoadQuestion();
-    //}
-    private IEnumerator GetAllById()
-    {
-        yield return activityChallengeConfigItemService.GetAllById(CurrentActivityManager.GetCurrentActivityId());
-
-        if (activityChallengeConfigItemService.activityChallengeConfigItems != null && activityChallengeConfigItemService.activityChallengeConfigItems.Length > 0)
-        {
-            //foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
-            //{
-            //    ActivityChallengeConfigItemValue value = JsonUtility.FromJson<ActivityChallengeConfigItemValue>(item.value);
-
-            //    List<string> answers = new();
-
-            //    for (int i = 0; i < value.answers.Length; i++)
-            //    {
-            //        answers.Add(value.answers[i]);
-            //    }
-
-            //    questions.Add(new Question
-            //    {
-            //        questionText = item.item,
-            //        answers = answers,
-            //        correctAnswerIndex = value.correctAnswerIndex
-            //    });
-
-            //}
-        }
-        else
-        {
-            //Debug.LogError("No se recibieron datos o el array está vacío.");
-        }
-    }
-
-    // Select 10 random questions
-    void SelectRandomQuestions()
-    {
-        //List<Question> tempQuestions = new List<Question>(questions);
-        //for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
-        //{
-        //    int randomIndex = Random.Range(0, tempQuestions.Count);
-        //    selectedQuestions.Add(tempQuestions[randomIndex]);
-        //    tempQuestions.RemoveAt(randomIndex);
-        }
-    }
-//void LoadQuestion()
+//public class GeneralManager : MonoBehaviour
 //{
-//    //if (currentQuestionIndex >= selectedQuestions.Count)
-//    //{
-//    //    foreach (var text in questionTexts)
-//    //    {
-//    //        text.text = "Game over. Team score: " + teamScore;
-//    //    }
+//    public GameManager gameManager;
+//    public GameObject[] playerBoards; // Referencias a los tableros de los jugadores
+//    private int numberOfPlayers = 5;
 
-//    //    // Find the player with the highest score
-//    //    int maxScore = playerScores.Max();
-//    //    int bestPlayerIndex = playerScores.ToList().IndexOf(maxScore);
+//    private Dictionary<string, string> securityTerms = new Dictionary<string, string>();
+//    private ActivityChallengeConfigItemService activityChallengeConfigItemService;
 
-//    //    for (int i = 0; i < feedbackTexts.Count; i++)
-//    //    {
-//    //        if (i == bestPlayerIndex)
-//    //        {
-//    //            feedbackTexts[i].text = $"Congratulations! You’ve been the MVP, leading your team with the highest score.";
-//    //        }
-//    //        else
-//    //        {
-//    //            feedbackTexts[i].text = ""; // Leave empty so only the mvp can see the message.
-//    //        }
-//    //    }
+//    public CyberSecurityPanel cyberSecurityPanel;
+//    private AchievementItemService achievementItemService; // Service to submit points
 
-//    //    // Call the method to introduce points to the API
-//    //    StartCoroutine(OnQuizCompletedUpdatePoints(teamScore));
 
-//    //    DisableButtons();
-//    //    return;
-//    //}
+//    // Variables to submit points to the API
+//    public string challengeName = "match-the-pairs";
+//    public string challengeItemItem = "total points of a student in this challenge";
+//    private bool isPlayerInRoom = false; // Variable para saber si hay jugadores
 
-//    //foreach (var button in answerButtons)
-//    //{
-//    //    button.image.sprite = defaultSprite; // Set my default sprite.
-//    //}
 
-//    //currentQuestion = selectedQuestions[currentQuestionIndex];
+//    private void Start()
+//    {
+//        numberOfPlayers = GetNumberOfPlayersInRoom(); // Método que obtiene el número de jugadores 
 
-//    //foreach (var feedback in feedbackTexts)
-//    //{
-//    //    feedback.text = ""; // Clear feedback messages
-//    //}
+//        // Activar los tableros correspondientes según la cantidad de jugadores
+//        ActivatePlayerBoards(numberOfPlayers);
 
-//    //EnableButtons();
+//        activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
 
-//    //// Show the question
-//    //foreach (var text in questionTexts)
-//    //{
-//    //    text.text = currentQuestion.questionText;
-//    //}
+//        StartCoroutine(InitializeQuestionsSelectRandomQuestionsAndLoadQuestion());
 
-//    //// Mix up the answers and assign them to the panels
-//    //List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
-//    //System.Random random = new System.Random(); // Random Number Generator
+//    }
+//    private IEnumerator InitializeQuestionsSelectRandomQuestionsAndLoadQuestion()
+//    {
+//        yield return StartCoroutine(LoadSecurityTerms());
+//    }
 
-//    //// Remove the index of the correct answer
-//    //numbers.Remove(currentQuestion.correctAnswerIndex);
+//    private int GetNumberOfPlayersInRoom()
+//    {
+//        return numberOfPlayers;
+//    }
 
-//    //// Create the mixed response list
-//    //List<int> answers = new List<int>();
+//    private void ActivatePlayerBoards(int numPlayers)
+//    {
+//        for (int i = 0; i < playerBoards.Length; i++)
+//        {
+//            if (i < numPlayers)
+//            {
+//                playerBoards[i].SetActive(true); // Activar los tableros para los jugadores activos
+//            }
+//            else
+//            {
+//                playerBoards[i].SetActive(false); // Desactivar los tableros para los jugadores no activos
+//            }
+//        }
+//    }
 
-//    //// Mixing the rates of incorrect answers
-//    //numbers = numbers.OrderBy(x => random.Next()).ToList();
+//    private List<PlayerScore> playerScores = new List<PlayerScore>();
+//    private bool isGameFinished = false;
 
-//    //// Add incorrect answers
-//    //for (int i = 0; i < totalPlayers - 1; i++)
-//    //{
-//    //    answers.Add(numbers[i]);
-//    //}
+//    private void UpdateGameEnd()
+//    {
+//        if (isGameFinished)
+//        {
+//            DisplayScores();
+//            //   UploadPointsToAPI();
+//        }
+//    }
 
-//    //// Add the correct answer
-//    //answers.Add(currentQuestion.correctAnswerIndex);
+//    private void DisplayScores()
+//    {
+//        float totalPoints = 0;
+//        foreach (var score in playerScores)
+//        {
+//            Debug.Log($"{score.playerName}: {score.points} points");
+//            totalPoints += score.points;
+//        }
 
-//    //// Shuffle the final answers again
-//    //answers = answers.OrderBy(x => random.Next()).ToList();
+//        Debug.Log($"Total points: {totalPoints} points");
+//    }
 
-//    //// Assign responses to text panels
-//    //for (int i = 0; i < totalPlayers; i++)
-//    //{
-//    //    feedbackTexts[i].text = currentQuestion.answers[answers[i]];
-//    //}
+//    // Método para subir los puntos de cada jugador a la API
+//    private void UploadPointsToAPIPlayer()
+//    {
+//        // Subir los puntos de cada jugador a la API
+//        foreach (var score in playerScores)
+//        {
+//            StartCoroutine(OnQuizCompletedUpdatePoints(score.points));
+//        }
+//    }
 
-//    //timer = 5.0f; // Reset the stopwatch
-//    //isTimerRunning = true;
+//    // Método para agregar los puntajes al finalizar el juego (lo llamamos desde el GameManager cuando cada jugador termine)
+//    public void AddPlayerScore(string playerName, int points)
+//    {
+//        playerScores.Add(new PlayerScore(playerName, points));
 
-//    //// Clean and add listeners to buttons
-//    //for (int i = 0; i < totalPlayers; i++)
-//    //{
-//    //    int index = i;
-//    //    // Clear any old listeners
-//    //    answerButtons[i].onClick.RemoveAllListeners();
-//    //    // Add the current listener
-//    //    answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
-//    //}
+//        if (playerScores.Count == numberOfPlayers) // Todos los jugadores han terminado
+//        {
+//            isGameFinished = true;
+//            UpdateGameEnd(); // Procedemos con la visualización y subida de puntos
+//        }
+//    }
 
-//    //}
+//    // Método para cargar todos los términos de seguridad desde la base de datos
+//    private IEnumerator LoadSecurityTerms()
+//    {
+//        yield return activityChallengeConfigItemService.GetAllById(1);
 
+//        if (activityChallengeConfigItemService.activityChallengeConfigItems != null && activityChallengeConfigItemService.activityChallengeConfigItems.Length > 0)
+//        {
+
+//            foreach (var item in activityChallengeConfigItemService.activityChallengeConfigItems)
+//            {
+//                securityTerms[item.item]= item.value;
+//            }
+//            // -------------- ESTOS METODOS PARA REVISAR, FUNCIONAN PERO NO SE MUESTRAN CUANDO LA ESCENA ESTA CARGADA-------
+//            // Llamar al método ReceiveSecurityTerms para pasarlos al CyberSecurityPanel
+//            cyberSecurityPanel.ReceiveSecurityTerms(securityTerms);  // Pasar los términos completos al panel de ciberseguridad
+
+//            // Ahora puedes obtener 8 parejas aleatorias para el GameManager
+//            var elementsGame = GetRandomPairs(8);  // Obtener las 8 parejas aleatorias
+//          //  gameManager.SetSecurityTerms(elementsGame);  // Pasar estas 8 parejas al GameManager
+//        }
+//    }
+
+//    // Método para seleccionar 8 parejas al azar del diccionario de términos
+//    private Dictionary<string, string> GetRandomPairs(int pairCount)
+//    {
+//        // Seleccionamos términos al azar (sin repetición)
+//       // var selectedPairs = securityTerms.OrderBy(x => Random.value).Take(pairCount).ToList();
+//        var elementsGame = new Dictionary<string, string>();
+
+//       // foreach (var pair in selectedPairs)
+//        {
+//       //     elementsGame.Add(pair.Key, pair.Value); // Añadir las 8 parejas al diccionario
+//        }
+
+//        return elementsGame;
+//    }
+
+//    private IEnumerator OnQuizCompletedUpdatePoints(int points)
+//    {
+//        if (MainManager.GetUser().role != "STUDENT")
+//        {
+//            throw new System.Exception("Error: Only students get points");
+//        }
+
+//        int studentId = MainManager.GetUser().id;
+//        int activityId = CurrentActivityManager.GetCurrentActivityId();
+
+//        yield return achievementItemService.UpdatePointsByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
+//             challengeName, challengeItemItem, studentId, activityId, points);
+
+//        if (achievementItemService.responseCode != 200)
+//        {
+//            yield break;
+//        }
+
+//    }
+
+//    public class PlayerScore
+//    {
+//        public string playerName;
+//        public int points;
+
+//        public PlayerScore(string playerName, int points)
+//        {
+//            this.playerName = playerName;
+//            this.points = points;
+//        }
+
+
+//    }
 
 //}
