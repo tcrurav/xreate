@@ -17,6 +17,8 @@ public class CurrentActivityManager : MonoBehaviour
     private InActivityStudentParticipationService inActivityStudentParticipationService;
     private InActivityStudentParticipation[] inCurrentActivityStudentParticipations;
 
+    private AchievementItemService achievementItemService;
+
     private void Awake()
     {
         if (Instance != null)
@@ -31,6 +33,7 @@ public class CurrentActivityManager : MonoBehaviour
 
     private void Start()
     {
+        Instance.achievementItemService = gameObject.AddComponent<AchievementItemService>();
         Instance.inActivityStudentParticipationService = gameObject.AddComponent<InActivityStudentParticipationService>();
         Instance.activityChallengeConfigService = gameObject.AddComponent<ActivityChallengeConfigService>();
     }
@@ -57,11 +60,25 @@ public class CurrentActivityManager : MonoBehaviour
 
     public static IEnumerator Refresh()
     {
+        yield return Instance.PutResetPointsByActivityId();
+
         yield return Instance.GetInActivityStudentParticipationsByActivityId();
 
         yield return Instance.GetActivityChallengeConfigsByActivityId();
 
         SetNumberOfChallengesInActivity(Instance.inCurrentActivityChallengeConfigs.Length);
+    }
+
+    private IEnumerator PutResetPointsByActivityId()
+    {
+        yield return Instance.achievementItemService.ResetPointsByActivityId(Instance.currentActivityId);
+
+        if (Instance.achievementItemService.responseCode != 200)
+        {
+            //loadingCanvas.SetActive(false);
+            //errorCanvas.SetActive(true);
+            yield break;
+        }
     }
 
     private IEnumerator GetInActivityStudentParticipationsByActivityId()
@@ -95,14 +112,8 @@ public class CurrentActivityManager : MonoBehaviour
     {
         int teamId = GetTeamIdByStudentId(MainManager.GetUser().id);
 
-        Debug.Log($"ChangeTeamIdInPlayerSync ANTES - teamId: {teamId}");
-        DebugManager.Log($"ChangeTeamIdInPlayerSync ANTES - teamId: {teamId}");
-
         if (NetworkManager.Singleton.LocalClient != null)
         {
-            Debug.Log($"ChangeTeamIdInPlayerSync DESPUES - teamId: {teamId}");
-            DebugManager.Log($"ChangeTeamIdInPlayerSync DESPUES - teamId: {teamId}");
-
             PlayerSync player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSync>();
 
             if (player != null)

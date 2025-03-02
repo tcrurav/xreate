@@ -14,15 +14,17 @@ public class ForceAttentionController : MonoBehaviour
     {
         teleportationArea = Ground.GetComponent<TeleportationArea>();
 
-        if (MainManager.GetUser().role != "TEACHER")
-        {
-            //Only teachers can force attention
-            Debug.Log("ForceAttentionController - Only a Teacher can enable next Room");
-            ForceAttentionToggle.gameObject.GetComponent<Toggle>().enabled = false;
-        }
+        //if (MainManager.GetUser().role != "TEACHER")
+        //{
+        //    //Only teachers can force attention
+        //    Debug.Log("ForceAttentionController - Only a Teacher can enable next Room");
+        //    ForceAttentionToggle.gameObject.GetComponent<Toggle>().enabled = false;
+        //}
     }
+
     public void OnToggleValueChanged()
     {
+        DebugManager.Log($"OnToggleValueChanged - ForceAttentionToggle.isOn: {ForceAttentionToggle.isOn}");
         if (ForceAttentionToggle.isOn)
         {
             // Jail is 3 x 3 x 3, (3 cube meters).
@@ -44,6 +46,7 @@ public class ForceAttentionController : MonoBehaviour
 
     public void SetToggleValue(bool isOn)
     {
+        DebugManager.Log($"SetToggleValue - isOn: {isOn}");
         ForceAttentionToggle.isOn = isOn;
     }
 
