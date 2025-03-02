@@ -842,7 +842,6 @@ GameObject:
   - component: {fileID: 8620140424940143263}
   - component: {fileID: 7741269756987907505}
   - component: {fileID: 5173835463353670573}
-  - component: {fileID: 643111681913982611}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -955,18 +954,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &643111681913982611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355020117361297487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f1f989737db4d4b9a2bc5c760e9f67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1422446260142267329
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,7 +4576,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3703170152302431900}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ForceAttentionController, Assembly-CSharp
         m_MethodName: OnToggleValueChanged
         m_Mode: 1
@@ -9234,11 +9221,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3433338428840250429}
-  - component: {fileID: 3363408736390179918}
-  - component: {fileID: 8396051964116170511}
-  - component: {fileID: 3703170152302431900}
-  - component: {fileID: 5485555270054246640}
-  - component: {fileID: 4774561507058787486}
   m_Layer: 0
   m_Name: XCreate PanelSlide Auditorium
   m_TagString: Untagged
@@ -9263,111 +9245,6 @@ Transform:
   - {fileID: 4561713060314000981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 201.561, z: 0}
---- !u!114 &3363408736390179918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156996971981413818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2282928918
-  InScenePlacedSourceGlobalObjectIdHash: 3993241022
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &8396051964116170511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156996971981413818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 855f5aff218a7734ba7f47eaa02b60c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slides:
-  - {fileID: 4294821934555350436}
-  - {fileID: 4020973480501183513}
-  - {fileID: 3303315932523425296}
-  - {fileID: 1617409270412787507}
-  - {fileID: 4202835102159559843}
-  - {fileID: 202667150236501119}
-  - {fileID: 2741062822670484982}
-  - {fileID: 4605523815909388915}
-  - {fileID: 5141979115194818317}
-  - {fileID: 4584326398649638293}
-  GotoNextSlideButton: {fileID: 8926073447717390744}
-  GotoPreviousSlideButton: {fileID: 8736782210124409688}
---- !u!114 &3703170152302431900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156996971981413818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 745be90c73c3cdb4f8162d1e8899a4e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ForceAttentionToggle: {fileID: 7739043953266822100}
-  Jail: {fileID: 6202179454499693666}
-  Ground: {fileID: 0}
---- !u!114 &5485555270054246640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156996971981413818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d234889ea5559824b89f09b6e14c19f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  currentSlide:
-    m_InternalValue: 0
-  forceAttention:
-    m_InternalValue: 0
-  startReady:
-    m_InternalValue: 0
---- !u!114 &4774561507058787486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156996971981413818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba4e010b19124a4ba475cbf1e04b48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnableNextRoomButton: {fileID: 8966816430320147184}
-  ClickToGoButton:
-  - {fileID: 0}
-  RedText:
-  - {fileID: 0}
-  GreenText:
-  - {fileID: 0}
-  signs:
-  - {fileID: 0}
 --- !u!1 &8347462578708591135
 GameObject:
   m_ObjectHideFlags: 0
@@ -9873,7 +9750,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5485555270054246640}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SlideShowManager, Assembly-CSharp
         m_MethodName: ChangeStartReadyServerRpc
         m_Mode: 6
@@ -10006,7 +9883,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8396051964116170511}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SlideController, Assembly-CSharp
         m_MethodName: GotoPreviousSlide
         m_Mode: 1
@@ -10139,7 +10016,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8396051964116170511}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SlideController, Assembly-CSharp
         m_MethodName: GotoNextSlide
         m_Mode: 1

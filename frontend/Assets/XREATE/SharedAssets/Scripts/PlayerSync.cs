@@ -20,9 +20,6 @@ public class PlayerSync : NetworkBehaviour
         PlayerName.OnValueChanged += UpdatePlayerName; // Sync across all clients
         UpdatePlayerName(string.Empty, PlayerName.Value);
 
-        //DebugManager.Log("OnNetworkSpawn. New Network Spawn:");
-        //Debug.Log("OnNetworkSpawn. New Network Spawn:");
-
         // Set the player ID when the object is spawned on the network
         if (IsOwner)
         {
@@ -30,16 +27,6 @@ public class PlayerSync : NetworkBehaviour
 
             PlayerId.Value = MainManager.GetUser().id;
             PlayerName.Value = MainManager.GetUser().username;
-
-            //DebugManager.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
-            //Debug.Log($"OnNetworkSpawn. PlayerId.Value: {PlayerId.Value}");
-
-            //Debug.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
-            //DebugManager.Log($"OnNetworkSpawn. PlayerName.Value: {PlayerName.Value}");
-
-            //Debug.Log($"OnNetworkSpawn.  PlayerScene.Value: {PlayerScene.Value}");
-            //DebugManager.Log($"OnNetworkSpawn.  PlayerScene.Value: {PlayerScene.Value}");
-
 
             if (XreateBackPlayerName == null)
             {
@@ -59,14 +46,8 @@ public class PlayerSync : NetworkBehaviour
     [ServerRpc]
     public void SetPlayerSceneServerRpc(Scene scene)
     {
-        //Debug.Log($"SetPlayerSceneServerRpc ANTES - scene: {scene}");
-        //DebugManager.Log($"SetPlayerSceneServerRpc ANTES - scene: {scene}");
-
         if (IsServer)
         {
-            //Debug.Log($"SetPlayerSceneServerRpc DESPUES - scene: {scene}");
-            //DebugManager.Log($"SetPlayerSceneServerRpc DESPUES - scene: {scene}");
-
             PlayerScene.Value = (int)scene;
             SetVisibilityDependingOnScene(scene);
         }
@@ -74,10 +55,8 @@ public class PlayerSync : NetworkBehaviour
 
     public void SetPlayerScene(Scene scene)
     {
-        //Debug.Log($"SetPlayerScene ANTES - {scene}");
         if (IsOwner)
         {
-            //Debug.Log($"SetPlayerScene DESPUES - {scene}");
             SetPlayerSceneServerRpc(scene);
         }
     }
@@ -87,9 +66,6 @@ public class PlayerSync : NetworkBehaviour
     {
         if (IsServer)
         {
-            //Debug.Log($"SetPlayerTeamIdServerRpc - teamId: {teamId}");
-            //DebugManager.Log($"SetPlayerTeamIdServerRpc - teamId: {teamId}");
-
             PlayerTeamId.Value = teamId;
         }
     }
@@ -139,9 +115,6 @@ public class PlayerSync : NetworkBehaviour
 
     public void ShowPlayerForClient(PlayerSync player, ulong clientId, bool isVisible)
     {
-        Debug.Log($"ShowPlayerForClient clientId: {clientId}, isVisible: {isVisible}");
-        DebugManager.Log($"ShowPlayerForClient clientId: {clientId}, isVisible: {isVisible}");
-
         return;
 
         // TODO - This should work some day - But now time is knapp

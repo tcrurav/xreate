@@ -922,7 +922,7 @@ module.exports = {
       id: 11,
       challengeId: '1',
       item: 'total points of a student in this challenge',
-      points: 1,
+      points: 10,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -931,7 +931,7 @@ module.exports = {
       id: 21,
       challengeId: '2',
       item: 'total points of a student in this challenge',
-      points: 1,
+      points: 10,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -940,7 +940,7 @@ module.exports = {
       id: 31,
       challengeId: '3',
       item: 'total points of a student in this challenge',
-      points: 1,
+      points: 10,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -949,7 +949,7 @@ module.exports = {
       id: 41,
       challengeId: '4',
       item: 'total points of a student in this challenge',
-      points: 1,
+      points: 10,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -1282,7 +1282,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11110,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1290,7 +1290,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21110,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1298,7 +1298,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31110,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1306,7 +1306,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41110,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1314,7 +1314,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11120,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1322,7 +1322,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21120,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1330,7 +1330,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31120,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1338,7 +1338,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41120,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1346,7 +1346,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11130,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1354,7 +1354,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21130,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1362,7 +1362,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31130,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1370,7 +1370,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41130,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1378,7 +1378,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11140,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1386,7 +1386,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21140,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1394,7 +1394,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31140,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1402,7 +1402,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41140,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1410,7 +1410,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11150,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1418,7 +1418,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21150,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1426,7 +1426,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31150,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1434,7 +1434,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41150,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1442,7 +1442,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11211,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1450,7 +1450,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21211,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1458,7 +1458,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31211,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1466,7 +1466,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41211,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1474,7 +1474,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11221,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1482,7 +1482,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21221,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1490,7 +1490,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31221,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1498,7 +1498,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41221,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1506,7 +1506,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11231,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1514,7 +1514,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21231,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1522,7 +1522,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31231,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1530,7 +1530,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41231,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1538,7 +1538,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11241,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1546,7 +1546,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21241,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1554,7 +1554,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31241,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1562,7 +1562,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41241,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1570,7 +1570,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 11251,
-      points: 1,
+      points: 0,
       challengeItemId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1578,7 +1578,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 21251,
-      points: 1,
+      points: 0,
       challengeItemId: 21,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1586,7 +1586,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 31251,
-      points: 1,
+      points: 0,
       challengeItemId: 31,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1594,7 +1594,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('achievement_items', [{
       achievementId: 41251,
-      points: 1,
+      points: 0,
       challengeItemId: 41,
       createdAt: new Date(),
       updatedAt: new Date()

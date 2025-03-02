@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Audio;
+using NUnit.Framework;
+using System.Net.NetworkInformation;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +15,14 @@ public class GameManager : MonoBehaviour
     public int columns = 4;
     public TextMeshPro timerText;
     public float gameTime = 600f;
-    public ParticleSystem victoryParticles; // Referencia al sistema de partículas
-    private bool isGameOver = false; // Variable para que el temporizador no continue
+    public ParticleSystem victoryParticles; // Reference to the particle system
+    private bool isGameOver = false; // Variable so that the timer does not continue
+    public TextMeshPro displayedCardTextVR;  // 3D text on the "VR screen"
+    private int playerScore = 0; // New variable for points
+
+    public Renderer lockPlaneRenderer;  // Plan where the image will change
+    public Texture unlockedTexture;  // Image of open padlock
+    public TextMeshPro gameResultText;  // 3D text to display information
 
     private Dictionary<string, string> securityTerms = new Dictionary<string, string>
     {
@@ -58,12 +66,13 @@ public class GameManager : MonoBehaviour
     private float remainingTime;
     private bool isTimerStarted = false;
     private Coroutine timerCoroutine;
-    public AudioClip wrongPairSound; // sonido equivocacion
+    public AudioClip wrongPairSound;
     private AudioSource audioSource;
-    public AudioClip correctPairSound; // Sonido cuando se acierta una pareja
+    public AudioClip correctPairSound;
     private float playerTime;
+    private bool isAnyCardFlipping = false;
     public static List<float> allPlayersTime = new List<float>();
-    private float penaltyTime = 0f; // Variable para acumular el tiempo de penalización
+    private float penaltyTime = 0f;
 
     private void Start()
     {
@@ -84,42 +93,42 @@ public class GameManager : MonoBehaviour
     {
         allCards.Clear();
 
-        // Seleccionar 8 términos completos (clave + valor)
+        // Select 8 full terms (key + value)
         var selectedPairs = securityTerms.OrderBy(x => Random.value).Take(8).ToList();
 
         foreach (var pair in selectedPairs)
         {
-            allCards.Add(pair.Key);   // Añadir la clave
-            allCards.Add(pair.Value); // Añadir el valor
+            allCards.Add(pair.Key);   
+            allCards.Add(pair.Value);
         }
 
         Shuffle(allCards);
 
-        // Colocación de cartas en una cuadrícula uniforme
+        // Placing cards in a uniform grid
         int index = 0;
-        float cardSpacing = 0.5f; // Separación uniforme entre cartas (horizontal y vertical)
-        float fixedX = 0f;        // Mantener constante el eje X
-        float startZ = -(columns - 1) * cardSpacing / 2; // Centrar las columnas horizontalmente
-        float startY = -(rows - 1) * cardSpacing / 2;    // Centrar las filas verticalmente
+        float cardSpacing = 0.5f; // Uniform spacing between cards (horizontal and vertical)
+        float fixedX = 0f;        // Keep the X axis constant
+        float startZ = -(columns - 1) * cardSpacing / 2; // Center the columns horizontally
+        float startY = -(rows - 1) * cardSpacing / 2;    // Center the rows vertically
 
-        for (int row = 0; row < rows; row++)  // Recorrer filas
+        for (int row = 0; row < rows; row++)  // Loop through rows
         {
-            for (int col = 0; col < columns; col++)  // Recorrer columnas
+            for (int col = 0; col < columns; col++) // Loop through columns
             {
-                string cardText = allCards[index++];  // Asignar texto de carta
-                GameObject card = Instantiate(cardPrefab, board);  // Instanciar carta
+                string cardText = allCards[index++];  // Assign letter text
+                GameObject card = Instantiate(cardPrefab, board);  // Instantiate letter
 
-                // Posicionar las cartas en una cuadrícula uniforme
+                // Position cards in a uniform grid
                 card.transform.localPosition = new Vector3(
-                    fixedX,                          // Todas las cartas comparten el mismo plano X
-                    startY + row * cardSpacing,      // Posicionamiento vertical en el eje Y
-                    startZ + col * cardSpacing       // Posicionamiento horizontal en el eje Z
+                    fixedX,                         // All cards share the same X plane
+                    startY + row * cardSpacing,     // Vertical positioning on the Y axis
+                    startZ + col * cardSpacing      // Horizontal positioning on the Z axis
                 );
 
-                // Configuración de la carta (asociar texto y GameManager)
+                // Card configuration (associate text and GameManager)
                 VRCardFlip cardFlip = card.GetComponent<VRCardFlip>();
-                cardFlip.SetCardText(cardText);  // Asignar el texto de la carta
-                cardFlip.gameManager = this;    // Asociar el GameManager
+                cardFlip.SetCardText(cardText);  // Assign the letter text
+                cardFlip.gameManager = this;    // Associate the GameManager
             }
         }
     }
@@ -137,14 +146,13 @@ public class GameManager : MonoBehaviour
     {
         while (remainingTime > 0)
         {
-            if (isGameOver) yield break;  // Si el juego terminó, detener el temporizador
-
+            if (isGameOver) yield break;  // If the game is over, stop the timer
             yield return new WaitForSeconds(1f);
             remainingTime--;
             UpdateTimerText();
         }
 
-        if (!isGameOver)  // Evita que se active GameOver si ya se ganó
+        if (!isGameOver)  // Prevent GameOver from being activated if it has already been won
         {
             GameOver(false);
         }
@@ -178,67 +186,100 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CheckMatch()
     {
-        canFlip = false;  // Bloquear interacciones mientras se verifica
-        yield return new WaitForSeconds(1f);  // Esperar para que el jugador vea las cartas
+        canFlip = false;  // Block interactions while verifying
+        yield return new WaitForSeconds(0.5f);  // Wait for the player to see the cards
 
         if (IsMatch(firstCard, secondCard))
         {
             firstCard.LockCard();
             secondCard.LockCard();
             pairsFound++;
+            playerScore += 2; // ADD POINTS PER COUPLE
+
             audioSource.PlayOneShot(correctPairSound);
 
             if (pairsFound >= 8)
             {
-                playerTime += penaltyTime;  // Sumar penalización solo si gana
+                playerTime += penaltyTime;  // Add penalty only if you win
                 GameOver(true);
-                yield break;  // Detener la función
+                yield break;  // Stop the function
             }
         }
         else
         {
-            // Asegurar que ambas cartas se volteen si no coinciden
+            // Ensure both cards are flipped if they don't match
             firstCard?.ResetCard();
             secondCard?.ResetCard();
-            remainingTime = Mathf.Max(0, remainingTime - 10f);  // Penalización de tiempo
+            remainingTime = Mathf.Max(0, remainingTime - 10f);  // Time penalty
             UpdateTimerText();
 
-            if (wrongPairSound != null) // Reproduce sonido error
+            if (wrongPairSound != null) // Play error sound
             {
                 audioSource.PlayOneShot(wrongPairSound);
             }
         }
 
-        // Restablecer variables para la siguiente ronda
+        // Reset variables for next round
         firstCard = null;
         secondCard = null;
-        canFlip = true;  // Permitir giros nuevamente
+        canFlip = true;  // Allow turns again
     }
 
 
     private bool IsMatch(VRCardFlip card1, VRCardFlip card2)
     {
-        return securityTerms.ContainsKey(card1.cardText) && securityTerms[card1.cardText] == card2.cardText ||
-               securityTerms.ContainsKey(card2.cardText) && securityTerms[card2.cardText] == card1.cardText;
+        // If the first card is a key, we check that the second is the corresponding value
+        bool isCard1Key = securityTerms.ContainsKey(card1.cardText);
+        bool isCard2Key = securityTerms.ContainsKey(card2.cardText);
+
+        // If both are keys or both are values, there is no match
+        if (isCard1Key == isCard2Key) return false;
+
+        // Check if there is a key-value match
+        if (isCard1Key && securityTerms[card1.cardText] == card2.cardText)
+        {
+            return true;
+        }
+        if (isCard2Key && securityTerms[card2.cardText] == card1.cardText)
+        {
+            return true;
+        }
+
+        return false; // If none of the above conditions are met, there is no match
     }
 
     private void GameOver(bool won)
     {
-        isGameOver = true;  //Marcar que el juego ha terminado para evitar reinicios
+        isGameOver = true;  //Mark that the game is over to avoid restarts
 
         if (timerCoroutine != null)
         {
-            StopCoroutine(timerCoroutine);  // Detener completamente el temporizador
+            StopCoroutine(timerCoroutine);  // Completely stop the timer
             timerCoroutine = null;
         }
+
+        // Change the Plane texture to show the open lock
+        if (lockPlaneRenderer != null && unlockedTexture != null)
+        {
+            lockPlaneRenderer.material.mainTexture = unlockedTexture;
+        }
+
+        // Get the player's name (you can have him enter it before)
+        string playerName = MainManager.GetUser().username;
+
 
         if (won)
         {
             playerTime += (gameTime - remainingTime);
             allPlayersTime.Add(playerTime);
+            
+            timerText.text = $"¡GANASTE! Tiempo: {playerTime:F2} seg - Puntos: {playerScore}";
 
-            Debug.Log($" Congratulations! You have won in {playerTime:F2} seconds.");
-            timerText.text = $"YOU WIN! Time: {playerTime:F2} seconds";
+            // Update 3D text
+            gameResultText.text = $"¡Ganaste!\n" +
+                                  $"{playerName}\n" +
+                                  $"Tiempo: {playerTime:F2} seg\n" +
+                                  $"Puntos: {playerScore}";
 
             if (victoryParticles != null)
             {
@@ -248,52 +289,35 @@ public class GameManager : MonoBehaviour
         else
         {
             penaltyTime += 10f;
-            Debug.Log("Time’s up. Game Over.");
             timerText.text = "YOU HAVE LOST! Time out.";
-            StartCoroutine(RestartGameWithPenalty());  //Se ejecuta solo en caso de derrota
+
+            // Show Game Over message in the UI
+            gameResultText.text = $"¡Perdiste!\n" +
+                                  $"{playerName}\n" +
+                                  $"Tiempo: {gameTime - remainingTime:F2} seg\n" +
+                                  $"Puntos: {playerScore}";
+
         }
     }
-
-    private IEnumerator RestartGameWithPenalty()
-    {
-        yield return new WaitForSeconds(3f);  //Espera antes de reiniciar
-
-        //  Destruir cartas antiguas
-        foreach (Transform card in board)
-        {
-            Destroy(card.gameObject);
-        }
-
-        GenerateBoard();  // Generar nuevo tablero
-
-        // Reiniciar valores del juego
-        pairsFound = 0;
-        canFlip = true;
-        firstCard = null;
-        secondCard = null;
-
-        remainingTime = gameTime;  // Reiniciar solo si ha perdido
-        isTimerStarted = false;
-
-        UpdateTimerText();  //Mostrar tiempo actualizado
-        timerText.gameObject.SetActive(true);
-
-        if (timerCoroutine != null)
-        {
-            StopCoroutine(timerCoroutine);  //Detener cualquier temporizador previo
-        }
-        timerCoroutine = StartCoroutine(GameTimer());  //Iniciar de nuevo el temporizador
-    }
-
-    public TextMeshPro displayedCardTextVR;  // Texto 3D en la "pantalla VR"
 
     public void UpdateDisplayedTextVR(string text)
     {
         if (displayedCardTextVR != null)
         {
-            displayedCardTextVR.text = text;  //  Mostrar el texto de la carta girada
-            displayedCardTextVR.gameObject.SetActive(!string.IsNullOrEmpty(text)); // Mostrar solo si hay texto
+            displayedCardTextVR.text = text;  // Show the text of the rotated card
+            displayedCardTextVR.gameObject.SetActive(!string.IsNullOrEmpty(text)); // Show only if there is text
         }
+    }
+
+    public bool CanFlip()
+    {
+        return !isAnyCardFlipping && canFlip && !isGameOver; // Prevent cards from being turned over after victory/defeat
+
+    }
+
+    public void SetFlippingState(bool state)
+    {
+        isAnyCardFlipping = state;
     }
 
 }
