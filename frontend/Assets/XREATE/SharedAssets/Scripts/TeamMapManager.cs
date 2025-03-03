@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TeamMapManager : NetworkBehaviour
 {
-    public NetworkList<int> currentTeamScene = new();
+    public NetworkList<int> currentTeamScene = new(default);
 
     private TeamMapController teamMapController;
 
@@ -43,7 +43,9 @@ public class TeamMapManager : NetworkBehaviour
             currentTeamScene.OnListChanged += (NetworkListEvent<int> changeEvent) =>
             {
                 Debug.Log($"TeamMapManager - currentTeamScene.OnListChanged - changeEvent.Index: {changeEvent.Index} - changeEvent.Value: {changeEvent.Value}");
-                ChangeCurrentTeamSceneClientRpc(changeEvent.Index, changeEvent.Value);
+
+                // Notify clients only on insert, because "RemoveAt" is just to insert afterwards the new value.
+                if (changeEvent.Type == NetworkListEvent<int>.EventType.Insert) ChangeCurrentTeamSceneClientRpc(changeEvent.Index, changeEvent.Value);
             };
 
             isSubscribed = true;

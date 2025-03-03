@@ -200,7 +200,7 @@ public class QuizManager : MonoBehaviour
         List<Question> tempQuestions = new List<Question>(questions);
         for (int i = 0; i < 10 && tempQuestions.Count > 0; i++)
         {
-            int randomIndex = i;
+            int randomIndex = 0; // if NOT_RANDOM then always take the first one of the list that is still there.
             if (GameMode == "RANDOM")
             {
                 randomIndex = Random.Range(0, tempQuestions.Count);
@@ -307,15 +307,15 @@ public class QuizManager : MonoBehaviour
             // Clear any old listeners
             answerButtons[i].onClick.RemoveAllListeners();
             // Add the current listener
-            answerButtons[i].onClick.AddListener(() => CheckAnswer(i, index, answers[index]));
+            answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
         }
 
     }
 
     // Method to check if the answer is correct
-    public void CheckAnswer(int playerIndex, int selectedIndex, int selectedAnswerIndex)
+    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
     {
-        roomModuleBGameManager.ChangePanelsAnsweredServerRpc(selectedIndex, playerIndex);
+        roomModuleBGameManager.ChangePanelsAnsweredServerRpc(selectedIndex, selectedAnswerIndex);
 
         if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {

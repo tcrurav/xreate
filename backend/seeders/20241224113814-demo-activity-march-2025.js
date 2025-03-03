@@ -938,9 +938,9 @@ module.exports = {
 
     await queryInterface.bulkInsert('challenge_items', [{
       id: 31,
-      challengeId: '3',
+      challengeId: '3', 
       item: 'total points of a student in this challenge',
-      points: 10,
+      points: 250, //security concepts - maximum team points
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

@@ -35,6 +35,11 @@ public class RoomModuleBGameController : MonoBehaviour
         quizManager.GetComponent<QuizManager>().OnPlayerReady(index);
     }
 
+    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
+    {
+        quizManager.GetComponent<QuizManager>().CheckAnswer(selectedIndex, selectedAnswerIndex);
+    }
+
     public void StartGame()
     {
         Debug.Log($"RoomModuleBGameController - StartGame");

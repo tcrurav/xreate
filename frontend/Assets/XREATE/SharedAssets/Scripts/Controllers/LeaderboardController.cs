@@ -35,8 +35,8 @@ public class LeaderboardController : MonoBehaviour
         StartCoroutine(GetAllTopPlayersWithPoints(CurrentActivityManager.GetCurrentActivityId()));
 
         // TODO - It should be refactored
-        teamMapManager.GetComponent<TeamMapController>().RefreshTeamPositionsInMap(0);
-        //teamMapManager.GetComponent<TeamMapController>().RefreshTeamPositionsInAllMaps();
+        //teamMapManager.GetComponent<TeamMapController>().RefreshTeamPositionsInMap(0);
+        teamMapManager.GetComponent<TeamMapController>().RefreshTeamPositionsInAllMaps();
     }
 
     IEnumerator GetTeamsWithChallengesAndPoints()
@@ -58,12 +58,15 @@ public class LeaderboardController : MonoBehaviour
         for (int i = 0; i < teamService.teamsWithChallengesAndPoints.Length; i++)
         {
             float newX = startLinePositionX[i % 4];
+
+            Debug.Log($"ShowTeamsWithChallengesAndPoints - CurrentActivityManager.GetNumberOfChallengesInActivity(): {CurrentActivityManager.GetNumberOfChallengesInActivity()}");
             if (CurrentActivityManager.GetNumberOfChallengesInActivity() > 0) newX = startLinePositionX[i % CurrentActivityManager.GetNumberOfChallengesInActivity()];
-            
+
+            Debug.Log($"ShowTeamsWithChallengesAndPoints - teamService.teamsWithChallengesAndPoints[i].maxPoints: {teamService.teamsWithChallengesAndPoints[i].maxPoints}");
             int maxPoints = teamService.teamsWithChallengesAndPoints[i].maxPoints;
             if (maxPoints > 0)
             {
-                newX = maxPoints + teamService.teamsWithChallengesAndPoints[i].points / teamService.teamsWithChallengesAndPoints[i].maxPoints * taskLineLength;
+                newX += teamService.teamsWithChallengesAndPoints[i].points / maxPoints * taskLineLength;
             }
 
             teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D = new Vector3(

@@ -1,10 +1,11 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RoomModuleBGameManager : NetworkBehaviour
 {
-    public NetworkList<bool> startedPanels = new();                     // Contain the if the panel has been started
-    public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
+    //public NetworkList<bool> startedPanels = new();                     // Contain the if the panel has been started
+    //public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
     public NetworkVariable<bool> startReadyToGame = new(false);
     public NetworkVariable<bool> startReadyToNextRoom = new(false);
 
@@ -38,22 +39,21 @@ public class RoomModuleBGameManager : NetworkBehaviour
 
         if (IsServer)
         {
-            for (int i = 0; i < MaxNumberOfStudents; i++) startedPanels.Add(false);
-            for (int i = 0; i < MaxNumberOfQuestions; i++) panelsAnswered.Add(0);
+            //for (int i = 0; i < MaxNumberOfStudents; i++) startedPanels.Add(false);
+            //for (int i = 0; i < MaxNumberOfQuestions; i++) panelsAnswered.Add(0);
         }
 
         if (!isSubscribed)
         {
+            //startedPanels.OnListChanged += (NetworkListEvent<bool> changeEvent) =>
+            //{
+            //    ChangeStartedPanelsClientRpc(changeEvent.Index, changeEvent.Value);
+            //};
 
-            startedPanels.OnListChanged += (NetworkListEvent<bool> changeEvent) =>
-            {
-                ChangeStartedPanelsClientRpc(changeEvent.Index, changeEvent.Value);
-            };
-
-            panelsAnswered.OnListChanged += (NetworkListEvent<int> changeEvent) =>
-            {
-                ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
-            };
+            //panelsAnswered.OnListChanged += (NetworkListEvent<int> changeEvent) =>
+            //{
+            //    ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
+            //};
 
             startReadyToGame.OnValueChanged += (oldValue, newValue) =>
             {
@@ -81,8 +81,8 @@ public class RoomModuleBGameManager : NetworkBehaviour
 
     public override void OnDestroy()
     {
-        startedPanels?.Dispose();
-        panelsAnswered?.Dispose();
+        //startedPanels?.Dispose();
+        //panelsAnswered?.Dispose();
         startReadyToGame?.Dispose();
         startReadyToNextRoom?.Dispose();
     }
@@ -90,11 +90,12 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartedPanelsServerRpc(int index, bool newValue)
     {
-        if (startedPanels[index] != newValue)
-        {
-            startedPanels.RemoveAt(index);
-            startedPanels.Insert(index, newValue);
-        }
+        //if (startedPanels[index] != newValue)
+        //{
+        //    startedPanels.RemoveAt(index);
+        //    startedPanels.Insert(index, newValue);
+        //}
+        ChangeStartedPanelsClientRpc(index, newValue);
     }
 
     [ClientRpc]
@@ -113,11 +114,12 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangePanelsAnsweredServerRpc(int index, int newValue)
     {
-        if (panelsAnswered[index] != newValue)
-        {
-            panelsAnswered.RemoveAt(index);
-            panelsAnswered.Insert(index, newValue);
-        }
+        //if (panelsAnswered[index] != newValue)
+        //{
+        //    panelsAnswered.RemoveAt(index);
+        //    panelsAnswered.Insert(index, newValue);
+        //}
+        ChangePanelsAnsweredClientRpc(index, newValue);
     }
 
     [ClientRpc]
@@ -125,8 +127,7 @@ public class RoomModuleBGameManager : NetworkBehaviour
     {
         if (roomModuleBGameController != null)
         {
-            // TODO - IMPORTANT
-            roomModuleBGameController.StartGame();
+            roomModuleBGameController.CheckAnswer(index, newValue);
         }
         else
         {
@@ -138,7 +139,7 @@ public class RoomModuleBGameManager : NetworkBehaviour
     public void ChangeStartReadyToGameServerRpc(bool newStartReadyToGame)
     {
         Debug.Log("RoomModuleBGameManager - ChangeStartReadyToGameServerRpc");
-        if (roomModuleBGameController != null)
+        if (roomModuleBGameController != null && startReadyToGame.Value != newStartReadyToGame)
         {
             startReadyToGame.Value = newStartReadyToGame;
         }
@@ -167,7 +168,7 @@ public class RoomModuleBGameManager : NetworkBehaviour
     public void ChangeStartReadyToNextRoomServerRpc(bool newValue)
     {
         Debug.Log($"RoomModuleBGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
-        if (startButtonController != null)
+        if (startButtonController != null && startReadyToNextRoom.Value != newValue)
         {
             startReadyToNextRoom.Value = newValue;
         }
