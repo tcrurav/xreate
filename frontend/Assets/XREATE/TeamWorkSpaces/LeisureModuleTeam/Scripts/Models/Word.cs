@@ -1,127 +1,142 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using TMPro;
 
-public class Word : MonoBehaviour
+namespace TeamWorkSpaces.LeisureModule
 {
-    // Referencias a componentes
-    private TextMeshPro textMeshPro; // Referencia al TextMeshPro del prefab
-    private BoxCollider boxCollider;
-
-    // Estados
-    private string wordText; // Texto de la palabra
-    private bool isGrabbed = false; // Indica si la palabra est· siendo agarrada
-
-    // Material para cambios visuales
-    public Material defaultMaterial;
-    public Material grabbedMaterial;
-
-    public Transform planeTransform; // Asigna el Plane en el inspector
-
-    void Awake()
+    public class Word : MonoBehaviour
     {
-        // Obtener referencias a los componentes
-        textMeshPro = GetComponentInChildren<TextMeshPro>();
-        boxCollider = GetComponent<BoxCollider>();
+        // üîó References
+        private TextMeshPro textMeshPro;
+        private BoxCollider boxCollider;
 
-        if (textMeshPro == null)
+        // üåü States
+        private string wordText;
+        public bool isBeingAbsorbed = false; // Prevent multiple absorptions
+        public bool isCorrectWord = false; // ‚úÖ Indicates if this word belongs to a correct answer
+
+        // üé® Visual Effects
+        public Material defaultMaterial;
+        public Material grabbedMaterial;
+        public Material correctMaterial; // Material when the word is correct
+        public Transform planeTransform;
+
+        private void Awake()
         {
-            Debug.LogWarning("Aviso: Falta el componente TextMeshPro en Word. Esto puede afectar la visualizaciÛn del texto.");
+            // üîé Get component references
+            textMeshPro = GetComponentInChildren<TextMeshPro>();
+            boxCollider = GetComponent<BoxCollider>();
+
+            if (textMeshPro == null)
+            {
+                Debug.LogWarning("[Word] ‚ö†Ô∏è TextMeshPro component is missing.");
+            }
+
+            if (boxCollider == null)
+            {
+                Debug.LogWarning("[Word] ‚ö†Ô∏è BoxCollider component is missing.");
+            }
         }
 
-        if (boxCollider == null)
+        private void Start()
         {
-            Debug.LogWarning("Aviso: Falta el componente BoxCollider en Word. Esto puede afectar la funcionalidad de colisiones o arrastre.");
-        }
-    }
-
-
-
-
-    void Start()
-    {
-        // Ajustar el tamaÒo del collider al texto inicial
-        UpdateColliderSize();
-    }
-
-    // MÈtodo para establecer la palabra y convertir el texto a vertical
-    public void SetWord(string text)
-    {
-        if (string.IsNullOrEmpty(text))
-        {
-            Debug.LogWarning("El texto proporcionado a SetWord est· vacÌo o es nulo.");
-            return;
+            UpdateColliderSize(); // üìè Adjust collider to fit text
+            UpdatePlaneSize(); // üñº Adjust plane to match text
         }
 
-        wordText = text;
-        // Transformar el texto a vertical
-        string verticalText = string.Join("\n", wordText.ToCharArray());
-        if (textMeshPro != null)
+        private void OnEnable()
         {
-            textMeshPro.text = verticalText; // Asignar el texto vertical
-            textMeshPro.ForceMeshUpdate(); // Forzar la actualizaciÛn del renderizado
-            Debug.Log($"Texto actualizado: {verticalText}");
-        }
-        else
-        {
-            Debug.LogError("TextMeshPro no est· asignado en el prefab.");
-        }
-
-        // Actualizar el tamaÒo del collider seg˙n el nuevo texto
-        UpdateColliderSize();
-
-        // Ajustar el tamaÒo y posiciÛn del Plane
-        if (planeTransform != null)
-        {
+            UpdateColliderSize();
             UpdatePlaneSize();
         }
-    }
 
-    // Cambiar visuales al ser agarrado
-    public void OnGrabbed()
-    {
-        isGrabbed = true;
-        UpdateVisuals();
-    }
-
-    // Cambiar visuales al ser soltado
-    public void OnReleased()
-    {
-        isGrabbed = false;
-        UpdateVisuals();
-    }
-
-    // Actualizar el tamaÒo del collider basado en el texto renderizado
-    private void UpdateColliderSize()
-    {
-        if (textMeshPro == null || boxCollider == null)
-            return;
-
-        textMeshPro.ForceMeshUpdate(); // Asegura que los lÌmites del texto sean precisos
-        var bounds = textMeshPro.textBounds; // Usar los lÌmites del texto
-        boxCollider.size = bounds.size;
-        boxCollider.center = bounds.center;
-    }
-
-    // Ajustar el tamaÒo del Plane seg˙n el tamaÒo del texto
-    private void UpdatePlaneSize()
-    {
-        if (textMeshPro == null || planeTransform == null)
-            return;
-
-        textMeshPro.ForceMeshUpdate(); // Asegura que los lÌmites sean precisos
-        var bounds = textMeshPro.textBounds;
-
-        // Ajustar el tamaÒo del Plane seg˙n el tamaÒo del texto
-        planeTransform.localScale = new Vector3(bounds.size.x, 1, bounds.size.y);
-    }
-
-    // Actualizar visuales seg˙n el estado
-    private void UpdateVisuals()
-    {
-        var renderer = GetComponentInChildren<MeshRenderer>();
-        if (renderer != null)
+        // üìú Set the word text and convert it to vertical orientation
+        public void SetWord(string text)
         {
-            renderer.material = isGrabbed ? grabbedMaterial : defaultMaterial;
+            if (string.IsNullOrEmpty(text))
+            {
+                Debug.LogWarning("[Word] ‚ö†Ô∏è SetWord received an empty or null string.");
+                return;
+            }
+
+            wordText = text;
+            string verticalText = string.Join("\n", wordText.ToCharArray());
+
+            if (textMeshPro != null)
+            {
+                textMeshPro.text = verticalText;
+                textMeshPro.ForceMeshUpdate();
+                // Debug.Log($"[Word] ‚úÖ Word set to: {verticalText}");
+                Debug.Log($"[Word] ‚úÖ Word set to: {wordText}"); // ‚úÖ Esto imprime en horizontal
+            }
+
+            UpdateColliderSize();
+            UpdatePlaneSize();
+        }
+
+        // üîç Returns the word text without new lines
+        public string GetWord()
+        {
+            return wordText;
+        }
+
+        // ‚úã Visual feedback when grabbed
+        public void OnGrabbed()
+        {
+            UpdateVisuals(grabbedMaterial);
+        }
+
+        // ‚úã Visual feedback when released
+        public void OnReleased()
+        {
+            UpdateVisuals(defaultMaterial);
+        }
+
+        // ‚úÖ Set the word as correct or incorrect
+        public void SetWordAsCorrect(bool isCorrect)
+        {
+            isCorrectWord = isCorrect;
+            ApplyCorrectMaterial();
+        }
+
+        // üé® Applies correct material if the word is correct
+        private void ApplyCorrectMaterial()
+        {
+            if (isCorrectWord)
+            {
+                UpdateVisuals(correctMaterial);
+            }
+        }
+
+        // üìè Update the collider size to fit the rendered text
+        private void UpdateColliderSize()
+        {
+            if (textMeshPro == null || boxCollider == null) return;
+
+            textMeshPro.ForceMeshUpdate();
+            var bounds = textMeshPro.textBounds;
+            boxCollider.size = new Vector3(bounds.size.x, bounds.size.y, 0.1f); // Make sure depth isn't zero
+            boxCollider.center = bounds.center;
+        }
+
+        // üñº Adjust the plane size to match the text size
+        private void UpdatePlaneSize()
+        {
+            if (planeTransform != null && textMeshPro != null)
+            {
+                var bounds = textMeshPro.textBounds;
+                planeTransform.localScale = new Vector3(bounds.size.x, 1, bounds.size.y);
+            }
+        }
+
+
+        // üé≠ Change the material to reflect the current state
+        private void UpdateVisuals(Material material)
+        {
+            var renderer = GetComponentInChildren<MeshRenderer>();
+            if (renderer != null && material != null)
+            {
+                renderer.material = material;
+            }
         }
     }
 }

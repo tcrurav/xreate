@@ -36,7 +36,6 @@ public class SlideShowManager : NetworkBehaviour
 
             currentSlide.OnValueChanged += (oldValue, newValue) =>
             {
-                DebugManager.Log($"SlideShowManager - currentSlide.OnValueChanged - IsServer: {IsServer} - IsClient: {IsClient}");
                 ChangeCurrentSlideClientRpc(oldValue, newValue);
             };
 
@@ -98,7 +97,7 @@ public class SlideShowManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeForceAttentionServerRpc(bool newForceAttention)
     {
-        if (forceAttentionController != null)
+        if (forceAttentionController != null && forceAttention.Value != newForceAttention)
         {
             forceAttention.Value = newForceAttention;
         }
@@ -125,7 +124,7 @@ public class SlideShowManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyServerRpc(bool newStartReady)
     {
-        if (startButtonController != null)
+        if (startButtonController != null && startReady.Value != newStartReady)
         {
             startReady.Value = newStartReady;
         }

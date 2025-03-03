@@ -15,11 +15,11 @@ public class EnableNextRoomController : MonoBehaviour
 
     private void Start()
     {
-        if(MainManager.GetUser().role != "TEACHER")
-        {
-            // Only a Teacher can enable next Room
-            EnableNextRoomButton.gameObject.GetComponent<Button>().enabled = false;
-        }
+        //if(MainManager.GetUser().role != "TEACHER")
+        //{
+        //    // Only a Teacher can enable next Room
+        //    EnableNextRoomButton.gameObject.GetComponent<Button>().enabled = false;
+        //}
     }
 
     public void EnableNextRoom()

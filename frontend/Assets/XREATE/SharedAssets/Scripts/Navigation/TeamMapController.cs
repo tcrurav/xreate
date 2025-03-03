@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.Hands;
 public class TeamMapController : MonoBehaviour
 {
     // TODO - Transform in a Serialized Wrapper
-    public GameObject[] mainSlideShowMapTeamImages;                 //map 0
+    public GameObject[] mainSlideShowMapTeamImages;        //map 0
     public GameObject[] tunnelToRoomModuleBMapTeamImages;  //map 1
     public GameObject[] tunnelToRoomModuleAMapTeamImages;  //map 2
 

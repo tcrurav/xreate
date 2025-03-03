@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public class HologramLightSetController : MonoBehaviour
@@ -27,44 +28,38 @@ public class HologramLightSetController : MonoBehaviour
 
     private void Awake()
     {
-        // Agrupar las luces y part�culas para facilidad de uso
+        // Agrupar las luces y partículas para facilidad de uso
         lights = new Light[] { holoLight1, holoLight2, holoLight3 };
         particles = new ParticleSystem[] { particles1, particles2, particles3 };
 
         ResetLights();
     }
 
-    // M�todo para reiniciar los focos al estado inicial
+    // Método para reiniciar los focos al estado inicial
     public void ResetLights()
     {
-        for (int i = 0; i < lights.Length; i++)
+        if (holoLight3 != null)
         {
-            if (lights[i] != null)
-            {
-                lights[i].color = defaultColor;
-                lights[i].intensity = defaultIntensity;
-            }
-        }
-
-        foreach (var particle in particles)
-        {
-            if (particle != null)
-                particle.Stop();
+            holoLight3.color = defaultColor;
+            holoLight3.intensity = defaultIntensity;
         }
     }
 
-    // Cambiar propiedades de un foco espec�fico
+
+
+    // Cambiar propiedades de un foco específico
     public void SetLightProperties(int index, Color color, float intensity)
     {
-        if (index < 0 || index >= lights.Length) return;
-        if (lights[index] != null)
+        if (holoLight3 != null)
         {
-            lights[index].color = color;
-            lights[index].intensity = intensity;
+            holoLight3.color = color;
+            holoLight3.intensity = intensity;
         }
     }
 
-    // Activar/Desactivar part�culas de un foco espec�fico
+
+
+    // Activar/Desactivar partículas de un foco específico
     public void ToggleParticles(int index, bool enable)
     {
         if (index < 0 || index >= particles.Length) return;
@@ -81,6 +76,87 @@ public class HologramLightSetController : MonoBehaviour
         StopAllCoroutines(); // Para evitar que se acumulen coroutines
         StartCoroutine(LightSequence());
     }
+    // Método para activar o desactivar el Point Light
+    public void TogglePointLight(int lightIndex, bool enable)
+    {
+        if (holoLight3 != null)
+        {
+            holoLight3.enabled = enable;
+        }
+    }
+
+    private Coroutine chargingCoroutine; // Para controlar la animación de carga
+
+    public void StartChargingEffect(Color color1, Color color2, float minIntensity, float maxIntensity, float speed)
+    {
+        if (chargingCoroutine != null)
+        {
+            StopCoroutine(chargingCoroutine);
+        }
+        chargingCoroutine = StartCoroutine(ChargingEffect(color1, color2, minIntensity, maxIntensity, speed));
+    }
+
+    public void StopChargingEffect()
+    {
+        if (chargingCoroutine != null)
+        {
+            StopCoroutine(chargingCoroutine);
+            chargingCoroutine = null;
+        }
+
+        // Restablecer la luz a su estado original
+        if (holoLight3 != null)
+        {
+            holoLight3.color = defaultColor;
+            holoLight3.intensity = defaultIntensity;
+        }
+    }
+
+    private IEnumerator ChargingEffect(Color color1, Color color2, float minIntensity, float maxIntensity, float speed)
+    {
+        Debug.Log("⚡ Iniciando efecto de carga intermitente...");
+
+        float t = 0f;
+        bool increasing = true;
+        bool toggleColor = false;
+
+        while (true)
+        {
+            if (holoLight3 != null)
+            {
+                // Alternar entre color1 y color2 cada cierto tiempo
+                holoLight3.color = toggleColor ? color1 : color2;
+
+                // Efecto de aumento y disminución de intensidad
+                if (increasing)
+                {
+                    t += Time.deltaTime * speed;
+                    if (t >= 1f)
+                    {
+                        t = 1f;
+                        increasing = false;
+                        toggleColor = !toggleColor; // Cambia el color al llegar al máximo
+                    }
+                }
+                else
+                {
+                    t -= Time.deltaTime * speed;
+                    if (t <= 0f)
+                    {
+                        t = 0f;
+                        increasing = true;
+                        toggleColor = !toggleColor; // Cambia el color al llegar al mínimo
+                    }
+                }
+
+                // Ajustar intensidad suavemente
+                holoLight3.intensity = Mathf.Lerp(minIntensity, maxIntensity, t);
+            }
+
+            yield return null;
+        }
+    }
+
 
     private System.Collections.IEnumerator LightSequence()
     {
@@ -108,7 +184,7 @@ public class HologramLightSetController : MonoBehaviour
             if (currentIndex == lights.Length || currentIndex == -1)
             {
                 if (enableBounceEffect)
-                    direction *= -1; // Cambiar direcci�n
+                    direction *= -1; // Cambiar dirección
                 else
                     currentIndex = 0; // Reiniciar la secuencia
             }

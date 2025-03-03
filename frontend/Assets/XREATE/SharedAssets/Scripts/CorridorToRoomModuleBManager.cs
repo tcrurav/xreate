@@ -50,7 +50,7 @@ public class CorridorToRoomModuleBManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToNextRoomServerRpc(bool newValue)
     {
-        if (startButtonController != null)
+        if (startButtonController != null && startReadyToNextRoom.Value != newValue)
         {
             startReadyToNextRoom.Value = newValue;
         }

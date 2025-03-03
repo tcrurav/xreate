@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-197975133826360747
+--- !u!114 &-3057634335012243579
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hologram Wall
-  m_Shader: {fileID: 4800000, guid: d0b563e6618d59543824fd5d931f9039, type: 3}
+  m_Shader: {fileID: 4800000, guid: e99f8b80b1693284587af0c131f61f3d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -72,11 +72,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Line1:
-        m_Texture: {fileID: 2800000, guid: 636e7cd976073ed41ad41221b90ade87, type: 3}
+        m_Texture: {fileID: 2800000, guid: ef301d4822ac111469bda406e1b4bc7c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Line2:
-        m_Texture: {fileID: 2800000, guid: 8042ea3be2e0b9542a843d5efe244a8b, type: 3}
+        m_Texture: {fileID: 2800000, guid: a6ddbfbf28b5acb44921ca832c5c7f18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Line3:
@@ -84,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LineGlitch:
-        m_Texture: {fileID: 2800000, guid: 8042ea3be2e0b9542a843d5efe244a8b, type: 3}
+        m_Texture: {fileID: 2800000, guid: a6ddbfbf28b5acb44921ca832c5c7f18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
