@@ -31,9 +31,6 @@ public class AutoAssignLightSets : MonoBehaviour
         // Encuentra todos los sets hijos
         var lightSets = hologramLightRoot.GetComponentsInChildren<HologramLightSetController>();
 
-        Debug.Log("Numerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-        Debug.Log(lightSets.Length);
-
         if (lightSets.Length == 0)
         {
             Debug.LogWarning("No se encontraron hijos con el script HologramLightSetController en HologramLightRoot.");

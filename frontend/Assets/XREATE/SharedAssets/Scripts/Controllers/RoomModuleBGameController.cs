@@ -1,59 +1,97 @@
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RoomModuleBGameController : MonoBehaviour
 {
-    public GameObject[] Slides;
-    public GameObject GotoNextSlideButton;
-    public GameObject GotoPreviousSlideButton;
+    public TMP_Text[] names;
+    public GameObject[] StartButtons;
+    public GameObject[] AnswerButtons;
+    public GameObject[] Panels;
+    public int teamId;
+    public GameObject quizManager;
 
-    private SlideShowManager slideShowManager;
+    private RoomModuleBGameManager roomModuleBGameManager;
+
+    // It should be dynamic - But time is knapp
+    private int[] studentIdsInAssignedPanels;
+    private string[] studentNamesInAssignedPanels;
+
+    private int numberOfConnectedStudents = 0;
 
     private void Start()
     {
-        slideShowManager = GetComponent<SlideShowManager>();
+        Debug.Log($"RoomModuleBGameController - Start");
+        roomModuleBGameManager = GetComponent<RoomModuleBGameManager>();
+
+        studentIdsInAssignedPanels = new int[5];
+        studentNamesInAssignedPanels = new string[5];
+
+        DisableAllStartButtons();
     }
 
-    public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
+    public void OnPlayerReady(int index)
     {
-        DebugManager.Log($"SlideController - HideOldSlideAndShowNewSlide");
+        quizManager.GetComponent<QuizManager>().OnPlayerReady(index);
+    }
 
-        Slides[oldValue].gameObject.SetActive(false);
-        Slides[newValue].gameObject.SetActive(true);
+    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
+    {
+        quizManager.GetComponent<QuizManager>().CheckAnswer(selectedIndex, selectedAnswerIndex);
+    }
 
-        if (newValue >= (Slides.Length - 1))
+    public void StartGame()
+    {
+        Debug.Log($"RoomModuleBGameController - StartGame");
+
+        GetListOfConnectedUsers();
+
+        quizManager.GetComponent<QuizManager>().SetTotalPlayers(numberOfConnectedStudents);
+
+        EnableOwnStartButton();
+    }
+
+    private void EnableOwnStartButton()
+    {
+        for(int i = 0; i < numberOfConnectedStudents; i++)
         {
-            GotoNextSlideButton.SetActive(false);
-            GotoPreviousSlideButton.SetActive(true);
-            return;
+            if (names[i].text == MainManager.GetUser().username) 
+            {
+                StartButtons[i].SetActive(true);
+            }
+        }
+    }
+
+    private void DisableAllStartButtons()
+    {
+        foreach (GameObject s in StartButtons)
+        {
+            s.gameObject.SetActive( false );
+        }
+    }
+
+    private void GetListOfConnectedUsers()
+    {
+        Debug.Log($"RoomModuleBGameController - GetListOfConnectedUsers");
+        int panelIndex = 0;
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            NetworkObject playerObject = client.PlayerObject;
+
+            int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
+            int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
+
+            if (clientTeamId == teamId)
+            {
+                studentIdsInAssignedPanels[panelIndex] = studentId;
+                studentNamesInAssignedPanels[panelIndex] = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
+                names[panelIndex].text = studentNamesInAssignedPanels[panelIndex];
+                panelIndex++;
+            }
         }
 
-        if (newValue <= 0)
-        {
-            GotoNextSlideButton.SetActive(true);
-            GotoPreviousSlideButton.SetActive(false);
-            return;
-        }
+        Debug.Log($"RoomModuleBGameController - GetListOfConnectedUsers - panelIndex: {panelIndex}");
 
-        GotoNextSlideButton.SetActive(true);
-        GotoPreviousSlideButton.SetActive(true);
-    }
-
-    public void GotoNextSlide()
-    {
-        if (MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
-
-        if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) return;
-
-        slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value + 1);
-    }
-
-    public void GotoPreviousSlide()
-    {
-        if (MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
-
-        if (slideShowManager.currentSlide.Value <= 0) return;
-
-        slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value - 1);
+        numberOfConnectedStudents = panelIndex;
     }
 }
