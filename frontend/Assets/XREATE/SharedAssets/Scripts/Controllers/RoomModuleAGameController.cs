@@ -16,7 +16,7 @@ public class RoomModuleAGameController : MonoBehaviour
 
     public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
     {
-        DebugManager.Log($"SlideController - HideOldSlideAndShowNewSlide");
+        Debug.Log($"SlideController - HideOldSlideAndShowNewSlide");
 
         Slides[oldValue].gameObject.SetActive(false);
         Slides[newValue].gameObject.SetActive(true);

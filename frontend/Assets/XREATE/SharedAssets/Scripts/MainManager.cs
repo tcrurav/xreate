@@ -3,6 +3,11 @@ using UnityEngine;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
+    
+    public bool TeacherPermissionsActivated;
+    public string Team1Teacher;
+    public string Team2Teacher;
+
 
     private User user;
     private Scene scene = Scene.Login;
@@ -25,6 +30,28 @@ public class MainManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        Instance.TeacherPermissionsActivated = TeacherPermissionsActivated;
+        Instance.Team1Teacher = Team1Teacher;
+        Instance.Team2Teacher = Team2Teacher;
+    }
+
+    public static bool IsTeacherPermissionsActivated()
+    {
+        return Instance.TeacherPermissionsActivated;
+    }
+
+    public static string GetTeam1Teacher()
+    {
+        return Instance.Team1Teacher;
+    }
+
+    public static string GetTeam2Teacher()
+    {
+        return Instance.Team2Teacher;
     }
 
     public static void SetAccessToken(string accessToken)

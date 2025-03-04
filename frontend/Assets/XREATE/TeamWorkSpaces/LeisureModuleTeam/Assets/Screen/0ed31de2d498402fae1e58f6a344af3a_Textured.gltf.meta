@@ -1,0 +1,73 @@
+fileFormatVersion: 2
+guid: 019779161c3740048a2b776095c9a084
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    texturesReadable: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+  assetDependencies:
+  - type: 1
+    originalUri: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\0ab74de246214f4d9285820dfffc7299_R_panel_10_Body_Roughness.png
+    assetPath: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\0ab74de246214f4d9285820dfffc7299_R_panel_10_Body_Roughness.png
+  - type: 1
+    originalUri: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\4ae621b1626046988126201efdc729ba_RGB_panel_10_Body_BaseColor.png
+    assetPath: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\4ae621b1626046988126201efdc729ba_RGB_panel_10_Body_BaseColor.png
+  - type: 1
+    originalUri: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\8e3e7967b0a549c7b919b9cdf3946dc8_RGB_panel_10_Body_Emissive.png
+    assetPath: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\8e3e7967b0a549c7b919b9cdf3946dc8_RGB_panel_10_Body_Emissive.png
+  - type: 1
+    originalUri: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\97094f157b9049109744a71d111cc7d9_R_panel_10_Body_Metallic.png
+    assetPath: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\97094f157b9049109744a71d111cc7d9_R_panel_10_Body_Metallic.png
+  - type: 1
+    originalUri: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\c5abcf06ab6b4ffd873bc36a5e291ef8_N_panel_10_Body_Normal.png
+    assetPath: Assets\XREATE\TeamWorkSpaces\LeisureModuleTeam\Assets\Screen\c5abcf06ab6b4ffd873bc36a5e291ef8_N_panel_10_Body_Normal.png
+  reportItems:
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 19
+    messages: []

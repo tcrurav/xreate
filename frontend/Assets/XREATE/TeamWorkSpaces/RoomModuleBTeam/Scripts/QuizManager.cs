@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class QuizManager : MonoBehaviour
 {
@@ -98,8 +98,9 @@ public class QuizManager : MonoBehaviour
         // Show panels and assign events to the start buttons
         for (int i = 0; i < totalPlayers; i++)
         {
+            int index = i;
             welcomePanels[i].SetActive(true);
-            startButtons[i].onClick.AddListener(() => OnPlayerReady(i));
+            startButtons[i].onClick.AddListener(() => OnPlayerReady(index));
         }
     }
 
@@ -203,7 +204,7 @@ public class QuizManager : MonoBehaviour
             int randomIndex = 0; // if NOT_RANDOM then always take the first one of the list that is still there.
             if (GameMode == "RANDOM")
             {
-                randomIndex = Random.Range(0, tempQuestions.Count);
+                randomIndex = UnityEngine.Random.Range(0, tempQuestions.Count);
             }
 
             selectedQuestions.Add(tempQuestions[randomIndex]);

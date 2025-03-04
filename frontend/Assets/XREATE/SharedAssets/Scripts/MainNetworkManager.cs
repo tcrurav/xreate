@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -43,17 +44,17 @@ public class MainNetworkManager : MonoBehaviour
         if (devices.Count > 0)
         {
             headsetDevice = devices[0];
-            DebugManager.Log("Headset device found: " + headsetDevice.name);
+            Debug.Log("Headset device found: " + headsetDevice.name);
         }
         else
         {
-            DebugManager.Log("No headset device found.");
+            Debug.Log("No headset device found.");
         }
     }
 
     private void OnDisconnected(ulong clientId)
     {
-        DebugManager.Log($"Client {clientId} disconnected.");
+        Debug.Log($"Client {clientId} disconnected.");
         if (NetworkManager.Singleton.IsClient)
         {
             disconnected = true;
@@ -63,7 +64,7 @@ public class MainNetworkManager : MonoBehaviour
 
     private void AttemptReconnect()
     {
-        DebugManager.Log("Attempting to reconnect...");
+        Debug.Log("Attempting to reconnect...");
 
         if (!NetworkManager.Singleton.ShutdownInProgress)
         {
@@ -82,7 +83,7 @@ public class MainNetworkManager : MonoBehaviour
         int attempts = 0;
         while (attempts < maxRetries && !NetworkManager.Singleton.IsClient)
         {
-            DebugManager.Log($"Reconnect attempt {attempts + 1}/{maxRetries}...");
+            Debug.Log($"Reconnect attempt {attempts + 1}/{maxRetries}...");
             NetworkQuickJoinLoginUsingUnity6TemplateMenus();
             attempts++;
             yield return new WaitForSeconds(retryInterval);
@@ -91,12 +92,12 @@ public class MainNetworkManager : MonoBehaviour
         if (NetworkManager.Singleton.IsClient)
         {
             disconnected = false;
-            DebugManager.Log("Reconnected successfully.");
+            Debug.Log("Reconnected successfully.");
         }
         else
         {
             disconnected = true;
-            DebugManager.Log("Failed to reconnect after maximum attempts.");
+            Debug.Log("Failed to reconnect after maximum attempts.");
         }
     }
 
@@ -118,14 +119,14 @@ public class MainNetworkManager : MonoBehaviour
                 }
                 else
                 {
-                    DebugManager.Log("User presence feature not supported on this device.");
+                    Debug.Log("User presence feature not supported on this device.");
                 }
             }
             else
             {
                 if (!headSetError)
                 {
-                    DebugManager.Log("Headset device is not valid.");
+                    Debug.Log("Headset device is not valid.");
                     headSetError = true;
                 }
             }

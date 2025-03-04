@@ -32,6 +32,7 @@ public class RoomModuleBGameController : MonoBehaviour
 
     public void OnPlayerReady(int index)
     {
+        Debug.Log($"RoomModuleBGameManager - OnPlayerReady - index: {index}");
         quizManager.GetComponent<QuizManager>().OnPlayerReady(index);
     }
 

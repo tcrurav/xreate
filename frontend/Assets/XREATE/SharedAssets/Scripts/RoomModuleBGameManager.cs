@@ -1,11 +1,12 @@
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class RoomModuleBGameManager : NetworkBehaviour
 {
-    //public NetworkList<bool> startedPanels = new();                     // Contain the if the panel has been started
-    //public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
+    public NetworkList<bool> startedPanels = new();                     // Contain the if the panel has been started
+    public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
     public NetworkVariable<bool> startReadyToGame = new(false);
     public NetworkVariable<bool> startReadyToNextRoom = new(false);
 
@@ -39,32 +40,19 @@ public class RoomModuleBGameManager : NetworkBehaviour
 
         if (IsServer)
         {
-            //for (int i = 0; i < MaxNumberOfStudents; i++) startedPanels.Add(false);
-            //for (int i = 0; i < MaxNumberOfQuestions; i++) panelsAnswered.Add(0);
+            for (int i = 0; i < MaxNumberOfStudents; i++) startedPanels.Add(false);
+            for (int i = 0; i < MaxNumberOfQuestions; i++) panelsAnswered.Add(0);
         }
 
         if (!isSubscribed)
         {
-            //startedPanels.OnListChanged += (NetworkListEvent<bool> changeEvent) =>
-            //{
-            //    ChangeStartedPanelsClientRpc(changeEvent.Index, changeEvent.Value);
-            //};
+            startedPanels.OnListChanged += OnStartedPanelsChanged;
 
-            //panelsAnswered.OnListChanged += (NetworkListEvent<int> changeEvent) =>
-            //{
-            //    ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
-            //};
+            panelsAnswered.OnListChanged += OnPanelsAnsweredChanged;
 
-            startReadyToGame.OnValueChanged += (oldValue, newValue) =>
-            {
-                ChangeStartReadyToGameClientRpc(oldValue, newValue);
-            };
+            startReadyToGame.OnValueChanged += OnStartReadyToGameChanged;
 
-            startReadyToNextRoom.OnValueChanged += (oldValue, newValue) =>
-            {
-                Debug.Log($"RoomModuleBGameManager - startReadyToNextRoom.OnValueChanged - newValue: {newValue}");
-                ChangeStartReadyToNextRoomClientRpc(oldValue, newValue);
-            };
+            startReadyToNextRoom.OnValueChanged += OnStartReadyToNextRoomChanged;
 
             isSubscribed = true;
         }
@@ -79,23 +67,65 @@ public class RoomModuleBGameManager : NetworkBehaviour
         //}
     }
 
+    //public override void OnDestroy()
+    //{
+    //    startedPanels?.Dispose();
+    //    panelsAnswered?.Dispose();
+    //    startReadyToGame?.Dispose();
+    //    startReadyToNextRoom?.Dispose();
+    //}
+
+    private void OnStartedPanelsChanged(NetworkListEvent<bool> changeEvent)
+    {
+        if (changeEvent.Type == NetworkListEvent<bool>.EventType.Insert)
+        {
+            ChangeStartedPanelsClientRpc(changeEvent.Index, changeEvent.Value);
+        }
+    }
+
+    private void OnPanelsAnsweredChanged(NetworkListEvent<int> changeEvent)
+    {
+        if (changeEvent.Type == NetworkListEvent<int>.EventType.Insert)
+        {
+            ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
+        }
+    }
+
+    private void OnStartReadyToGameChanged(bool oldValue, bool newValue)
+    {
+        ChangeStartReadyToGameClientRpc(oldValue, newValue);
+    }
+
+    private void OnStartReadyToNextRoomChanged(bool oldValue, bool newValue)
+    {
+        Debug.Log($"RoomModuleBGameManager - startReadyToNextRoom.OnValueChanged - newValue: {newValue}");
+        ChangeStartReadyToNextRoomClientRpc(oldValue, newValue);
+    }
+
     public override void OnDestroy()
     {
-        //startedPanels?.Dispose();
-        //panelsAnswered?.Dispose();
-        startReadyToGame?.Dispose();
-        startReadyToNextRoom?.Dispose();
+        if (isSubscribed)
+        {
+            startedPanels.OnListChanged -= OnStartedPanelsChanged;
+            panelsAnswered.OnListChanged -= OnPanelsAnsweredChanged;
+            startReadyToGame.OnValueChanged -= OnStartReadyToGameChanged;
+            startReadyToNextRoom.OnValueChanged -= OnStartReadyToNextRoomChanged;
+
+            isSubscribed = false;
+        }
+
+        base.OnDestroy();
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartedPanelsServerRpc(int index, bool newValue)
     {
-        //if (startedPanels[index] != newValue)
-        //{
-        //    startedPanels.RemoveAt(index);
-        //    startedPanels.Insert(index, newValue);
-        //}
-        ChangeStartedPanelsClientRpc(index, newValue);
+        Debug.Log($"ChangeStartedPanelsServerRpc - index: {index}");
+        if (startedPanels[index] != newValue)
+        {
+            startedPanels.RemoveAt(index);
+            startedPanels.Insert(index, newValue);
+        }
     }
 
     [ClientRpc]
@@ -114,12 +144,11 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangePanelsAnsweredServerRpc(int index, int newValue)
     {
-        //if (panelsAnswered[index] != newValue)
-        //{
-        //    panelsAnswered.RemoveAt(index);
-        //    panelsAnswered.Insert(index, newValue);
-        //}
-        ChangePanelsAnsweredClientRpc(index, newValue);
+        if (panelsAnswered[index] != newValue)
+        {
+            panelsAnswered.RemoveAt(index);
+            panelsAnswered.Insert(index, newValue);
+        }
     }
 
     [ClientRpc]

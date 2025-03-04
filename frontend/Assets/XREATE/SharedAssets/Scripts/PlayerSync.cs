@@ -30,7 +30,7 @@ public class PlayerSync : NetworkBehaviour
 
             if (XreateBackPlayerName == null)
             {
-                DebugManager.Log("El valor del TMP es nulo");
+                Debug.Log("El valor del TMP es nulo");
             }
 
             XreateFrontPlayerName.text = MainManager.GetUser().username;

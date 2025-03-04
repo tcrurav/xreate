@@ -8,7 +8,9 @@ public class RoomChangeController : MonoBehaviour
     public Button EnableNextRoomButton;
     public TMP_Text RedText;
     public TMP_Text GreenText;
+
     public int teamId;
+    public GameObject errorCanvas;
 
     private readonly Vector3 OffsetMenu = new(0, 0, -12); // Maybe should have own controller
 
@@ -57,7 +59,11 @@ public class RoomChangeController : MonoBehaviour
     {
         // TODO - UNCOMMENT ALL THIS LINES
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
         MainNavigationManager.ChangePosition(OffsetRoomModuleA);
         SetScene(Scene.RoomModuleA);
@@ -66,7 +72,11 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToCorridorToRoomModuleA()
     {
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
         MainNavigationManager.ChangePosition(OffsetCorridorToRoomModuleA);
         SetScene(Scene.TunnelConnectorD);
@@ -75,7 +85,11 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToCorridorToRoomModuleB()
     {
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
         MainNavigationManager.ChangePosition(OffsetCorridorToRoomModuleB);
         SetScene(Scene.TunnelConnectorC);
@@ -84,7 +98,11 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToRoomModuleB()
     {
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
         MainNavigationManager.ChangePosition(OffsetRoomModuleB);
         SetScene(Scene.RoomModuleB);
@@ -99,7 +117,11 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToLeisureModule()
     {
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
         MainNavigationManager.ChangePosition(OffsetLeisureModule);
         SetScene(Scene.LeisureModule);
@@ -108,8 +130,18 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToBuildingA()
     {
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
+        MainNavigationManager.ChangePosition(OffsetBuildingA);
+        SetScene(Scene.Main);
+    }
+
+    public void PanicButtonChangingToBuildingA()
+    {
         MainNavigationManager.ChangePosition(OffsetBuildingA);
         SetScene(Scene.Main);
     }
@@ -117,13 +149,17 @@ public class RoomChangeController : MonoBehaviour
     public void ChangeToBuildingATopStairs()
     {
         // Teachers and Guest are allowed to go everywhere. Only students in the right team are allowed in the next room.
-        //if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id)) return;
+        if (MainManager.GetUser().role == "STUDENT" && teamId != CurrentActivityManager.GetTeamIdByStudentId(MainManager.GetUser().id))
+        {
+            errorCanvas.SetActive(true);
+            return;
+        }
 
         MainNavigationManager.ChangePosition(OffsetBuildingATopStairs);
         SetScene(Scene.Main);
     }
 
-    private void SetScene(Scene scene) 
+    private void SetScene(Scene scene)
     {
         // TODO - This has to be tested - May be put it in MainNavigationMAnager.ChangeSceneForLocalNetworkPlayer Or just don't do this call
         //StartCoroutine(CurrentActivityManager.WaitForPlayerObjectAndThenChangeTeamId());
