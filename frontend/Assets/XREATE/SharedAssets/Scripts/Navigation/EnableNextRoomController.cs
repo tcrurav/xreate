@@ -13,15 +13,6 @@ public class EnableNextRoomController : MonoBehaviour
     private readonly Vector3 OffsetMainScene = new(0, 0, 50);
     private readonly Vector3 OffsetAuditoriumScene = new(-103, 0, 50);
 
-    private void Start()
-    {
-        //if(MainManager.GetUser().role != "TEACHER")
-        //{
-        //    // Only a Teacher can enable next Room
-        //    EnableNextRoomButton.gameObject.GetComponent<Button>().enabled = false;
-        //}
-    }
-
     public void EnableNextRoom()
     {
         EnableNextRoomButton.gameObject.SetActive(false);

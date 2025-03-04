@@ -1,7 +1,5 @@
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RoomModuleBGameManager : NetworkBehaviour
 {
@@ -9,8 +7,8 @@ public class RoomModuleBGameManager : NetworkBehaviour
     public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
     public NetworkVariable<bool> startReadyToGame = new(false);
     public NetworkVariable<bool> startReadyToNextRoom = new(false);
+    public NetworkVariable<bool> enableStartReadyToNextRoom = new(false);
 
-    // TODO - Get how many students are participating and how many questions
     public int MaxNumberOfStudents;
     public int MaxNumberOfQuestions;
 
@@ -53,6 +51,8 @@ public class RoomModuleBGameManager : NetworkBehaviour
             startReadyToGame.OnValueChanged += OnStartReadyToGameChanged;
 
             startReadyToNextRoom.OnValueChanged += OnStartReadyToNextRoomChanged;
+
+            enableStartReadyToNextRoom.OnValueChanged += OnEnableStartReadyToNextRoomChanged;
 
             isSubscribed = true;
         }
@@ -98,8 +98,12 @@ public class RoomModuleBGameManager : NetworkBehaviour
 
     private void OnStartReadyToNextRoomChanged(bool oldValue, bool newValue)
     {
-        Debug.Log($"RoomModuleBGameManager - startReadyToNextRoom.OnValueChanged - newValue: {newValue}");
         ChangeStartReadyToNextRoomClientRpc(oldValue, newValue);
+    }
+
+    private void OnEnableStartReadyToNextRoomChanged(bool oldValue, bool newValue)
+    {
+        ChangeEnableStartReadyToNextRoomClientRpc(oldValue, newValue);
     }
 
     public override void OnDestroy()
@@ -110,6 +114,7 @@ public class RoomModuleBGameManager : NetworkBehaviour
             panelsAnswered.OnListChanged -= OnPanelsAnsweredChanged;
             startReadyToGame.OnValueChanged -= OnStartReadyToGameChanged;
             startReadyToNextRoom.OnValueChanged -= OnStartReadyToNextRoomChanged;
+            enableStartReadyToNextRoom.OnValueChanged -= OnEnableStartReadyToNextRoomChanged;
 
             isSubscribed = false;
         }
@@ -214,11 +219,40 @@ public class RoomModuleBGameManager : NetworkBehaviour
         Debug.Log($"RoomModuleBGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
-            GetComponent<StartButtonController>().EnableNextRooms();
+            startButtonController.EnableNextRooms();
         }
         else
         {
             Debug.Log("RoomModuleBGameManager - startButtonController es null");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeEnableStartReadyToNextRoomServerRpc(bool newValue)
+    {
+        Debug.Log($"RoomModuleBGameManager - ChangeEnableStartReadyToNextRoomServerRpc - newValue: {newValue}");
+        if (startButtonController != null && enableStartReadyToNextRoom.Value != newValue)
+        {
+            enableStartReadyToNextRoom.Value = newValue;
+        }
+        else
+        {
+            Debug.Log("RoomModuleBGameManager - enableStartButtonController es null");
+
+        }
+    }
+
+    [ClientRpc]
+    public void ChangeEnableStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
+    {
+        Debug.Log($"RoomModuleBGameManager - ChangeEnableStartReadyToNextRoomClientRpc - newValue: {newValue}");
+        if (startButtonController != null)
+        {
+            startButtonController.EnableButtonToEnableNextRooms();
+        }
+        else
+        {
+            Debug.Log("RoomModuleBGameManager - enableStartButtonController es null");
         }
     }
 

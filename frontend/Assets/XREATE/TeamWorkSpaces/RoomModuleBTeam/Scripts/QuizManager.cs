@@ -123,6 +123,8 @@ public class QuizManager : MonoBehaviour
             yield break;
         }
 
+        roomModuleBGameManager.ChangeEnableStartReadyToNextRoomServerRpc(true);
+
     }
 
     // Method called when a player presses the start button

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -7,9 +8,10 @@ public class RoomModuleBGameController : MonoBehaviour
     public TMP_Text[] names;
     public GameObject[] StartButtons;
     public GameObject[] AnswerButtons;
-    public GameObject[] Panels;
     public int teamId;
     public GameObject quizManager;
+
+    public int MaxNumberOfStudents;
 
     private RoomModuleBGameManager roomModuleBGameManager;
 
@@ -24,8 +26,8 @@ public class RoomModuleBGameController : MonoBehaviour
         Debug.Log($"RoomModuleBGameController - Start");
         roomModuleBGameManager = GetComponent<RoomModuleBGameManager>();
 
-        studentIdsInAssignedPanels = new int[5];
-        studentNamesInAssignedPanels = new string[5];
+        studentIdsInAssignedPanels = new int[MaxNumberOfStudents];
+        studentNamesInAssignedPanels = new string[MaxNumberOfStudents];
 
         DisableAllStartButtons();
     }
@@ -74,6 +76,17 @@ public class RoomModuleBGameController : MonoBehaviour
     private void GetListOfConnectedUsers()
     {
         Debug.Log($"RoomModuleBGameController - GetListOfConnectedUsers");
+
+        // TODO - Really ugly way - Time is Knapp
+        // initialize with big values to sort later the array names[]
+        int[] aux = new int[MaxNumberOfStudents];
+        int BIG_VALUE = 999999;
+        for (int i = 0; i < MaxNumberOfStudents; i++)
+        {
+            studentIdsInAssignedPanels[i] = BIG_VALUE;
+            aux[i] = BIG_VALUE;
+        }
+        
         int panelIndex = 0;
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
@@ -81,18 +94,20 @@ public class RoomModuleBGameController : MonoBehaviour
 
             int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
             int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
-
+            
             if (clientTeamId == teamId)
             {
                 studentIdsInAssignedPanels[panelIndex] = studentId;
+                aux[panelIndex] = studentId;
                 studentNamesInAssignedPanels[panelIndex] = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
                 names[panelIndex].text = studentNamesInAssignedPanels[panelIndex];
                 panelIndex++;
             }
         }
 
-        Debug.Log($"RoomModuleBGameController - GetListOfConnectedUsers - panelIndex: {panelIndex}");
-
         numberOfConnectedStudents = panelIndex;
+
+        Array.Sort(studentIdsInAssignedPanels, studentNamesInAssignedPanels);
+        Array.Sort(aux,names);
     }
 }

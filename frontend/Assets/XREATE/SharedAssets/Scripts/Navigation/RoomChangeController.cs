@@ -23,16 +23,6 @@ public class RoomChangeController : MonoBehaviour
     private readonly Vector3 OffsetBuildingA = new(0, 0, 38);
     private readonly Vector3 OffsetBuildingATopStairs = new(9, 4.02f, 50);
 
-    private void Start()
-    {
-        // TODO - Uncomment this for final version
-        //if(MainManager.GetUser().role != "TEACHER")
-        //{
-        //    // Only a Teacher can enable next Room
-        //    EnableNextRoomButton.gameObject.GetComponent<Button>().enabled = false;
-        //}
-    }
-
     public void EnableNextRoom()
     {
         EnableNextRoomButton.gameObject.SetActive(false);

@@ -10,6 +10,8 @@ public class StartButtonController : MonoBehaviour
     public TMP_Text[] GreenText;
     public GameObject[] signs;
 
+    public int teamId;
+
     public TeamMapManager teamMapManager;
 
     public void EnableNextRooms()
@@ -24,6 +26,21 @@ public class StartButtonController : MonoBehaviour
         }
 
         DoOtherThingsDependingOnCurrentScene();
+    }
+
+    public void EnableButtonToEnableNextRooms()
+    {
+        // Only for teacher in charge of the team 1 in case is kiosk of team 1
+        if (teamId == 1 && MainManager.GetUser().username == MainManager.GetTeam1Teacher())
+        {
+            EnableNextRoomButton.GetComponent<Button>().interactable = true;
+        }
+
+        // Only for teacher in charge of the team 2 in case is kiosk of team 2
+        if (teamId == 2 && MainManager.GetUser().username == MainManager.GetTeam2Teacher())
+        {
+            EnableNextRoomButton.GetComponent<Button>().interactable = true;
+        }
     }
 
     private void DoOtherThingsDependingOnCurrentScene()
