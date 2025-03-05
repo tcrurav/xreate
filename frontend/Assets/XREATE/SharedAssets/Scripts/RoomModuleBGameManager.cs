@@ -1,10 +1,37 @@
+﻿using System;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
 public class RoomModuleBGameManager : NetworkBehaviour
 {
+    public struct Question : INetworkSerializable, IEquatable<Question>
+    {
+        public int selectedIndex;
+        public int selectedAnswerIndex;
+
+        public Question(int selectedIndex, int selectedAnswerIndex)
+        {
+            this.selectedIndex = selectedIndex;
+            this.selectedAnswerIndex = selectedAnswerIndex;
+        }
+
+        // Required for NetworkList
+        public bool Equals(Question other)
+        {
+            return selectedIndex == other.selectedIndex && selectedAnswerIndex == other.selectedAnswerIndex;
+        }
+
+        // Required for Serialization
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref selectedIndex);
+            serializer.SerializeValue(ref selectedAnswerIndex);
+        }
+    }
+
     public NetworkList<bool> startedPanels = new();                     // Contain the if the panel has been started
-    public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
+    public NetworkList<Question> panelsAnswered = new();                      // Contains the panel answered for each question
     public NetworkVariable<bool> startReadyToGame = new(false);
     public NetworkVariable<bool> startReadyToNextRoom = new(false);
     public NetworkVariable<bool> enableStartReadyToNextRoom = new(false);
@@ -39,7 +66,7 @@ public class RoomModuleBGameManager : NetworkBehaviour
         if (IsServer)
         {
             for (int i = 0; i < MaxNumberOfStudents; i++) startedPanels.Add(false);
-            for (int i = 0; i < MaxNumberOfQuestions; i++) panelsAnswered.Add(0);
+            for (int i = 0; i < MaxNumberOfQuestions; i++) panelsAnswered.Add(new Question(0, 0));
         }
 
         if (!isSubscribed)
@@ -83,11 +110,11 @@ public class RoomModuleBGameManager : NetworkBehaviour
         }
     }
 
-    private void OnPanelsAnsweredChanged(NetworkListEvent<int> changeEvent)
+    private void OnPanelsAnsweredChanged(NetworkListEvent<Question> changeEvent)
     {
-        if (changeEvent.Type == NetworkListEvent<int>.EventType.Insert)
+        if (changeEvent.Type == NetworkListEvent<Question>.EventType.Insert)
         {
-            ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
+            ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value.selectedIndex, changeEvent.Value.selectedAnswerIndex);
         }
     }
 
@@ -147,21 +174,22 @@ public class RoomModuleBGameManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void ChangePanelsAnsweredServerRpc(int index, int newValue)
+    public void ChangePanelsAnsweredServerRpc(int questionIndex, int selectedIndex, int selectedAnsweredIndex)
     {
-        if (panelsAnswered[index] != newValue)
+        Debug.Log($"ChangePanelsAnsweredServerRpc - panelsAnswered[questionIndex].selectedIndex: {panelsAnswered[questionIndex].selectedIndex}");
+        if (panelsAnswered[questionIndex].selectedIndex == 0) // Only the first student who answers per question
         {
-            panelsAnswered.RemoveAt(index);
-            panelsAnswered.Insert(index, newValue);
+            panelsAnswered.RemoveAt(questionIndex);
+            panelsAnswered.Insert(questionIndex, new Question(selectedIndex, selectedAnsweredIndex));
         }
     }
 
     [ClientRpc]
-    public void ChangePanelsAnsweredClientRpc(int index, int newValue)
+    public void ChangePanelsAnsweredClientRpc(int index, int selectedIndex, int selectedAnsweredIndex)
     {
         if (roomModuleBGameController != null)
         {
-            roomModuleBGameController.CheckAnswer(index, newValue);
+            roomModuleBGameController.CheckAnswer(index, selectedIndex, selectedAnsweredIndex);
         }
         else
         {
@@ -173,7 +201,7 @@ public class RoomModuleBGameManager : NetworkBehaviour
     public void ChangeStartReadyToGameServerRpc(bool newStartReadyToGame)
     {
         Debug.Log("RoomModuleBGameManager - ChangeStartReadyToGameServerRpc");
-        if (roomModuleBGameController != null && startReadyToGame.Value != newStartReadyToGame)
+        if (startReadyToGame.Value != newStartReadyToGame)
         {
             startReadyToGame.Value = newStartReadyToGame;
         }

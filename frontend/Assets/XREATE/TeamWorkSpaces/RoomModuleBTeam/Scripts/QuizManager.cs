@@ -62,11 +62,15 @@ public class QuizManager : MonoBehaviour
 
     public string GameMode;
 
+    private RoomModuleBGameController roomModuleBGameController;
+
     void Start()
     {
         // Initialize the points service
         achievementItemService = gameObject.AddComponent<AchievementItemService>();
         activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
+
+        roomModuleBGameController = roomModuleBGameManager.GetComponent<RoomModuleBGameController>();
 
         // Initialize my AudioSource component
         audioSource = GetComponent<AudioSource>();
@@ -124,7 +128,6 @@ public class QuizManager : MonoBehaviour
         }
 
         roomModuleBGameManager.ChangeEnableStartReadyToNextRoomServerRpc(true);
-
     }
 
     // Method called when a player presses the start button
@@ -151,6 +154,7 @@ public class QuizManager : MonoBehaviour
         for (int i = 0; i < totalPlayers; i++)
         {
             quizPanels[i].SetActive(true);
+            Debug.Log($"QuizManager - StartQuiz - i: {i}");
         }
 
         StartCoroutine(InitializeQuestionsSelectRandomQuestionsAndLoadQuestion());
@@ -303,14 +307,21 @@ public class QuizManager : MonoBehaviour
         timer = 5.0f; // Reset the stopwatch
         isTimerRunning = true;
 
+        Debug.Log($"QuizManager - LoadQuestion - Out onClick");
         // Clean and add listeners to buttons
         for (int i = 0; i < totalPlayers; i++)
         {
             int index = i;
+            Debug.Log($"QuizManager - LoadQuestion - Before onClick - index: {index}");
             // Clear any old listeners
             answerButtons[i].onClick.RemoveAllListeners();
             // Add the current listener
-            answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
+            answerButtons[i].onClick.AddListener(() =>
+            {
+                Debug.Log($"QuizManager - LoadQuestion - onClick - currentQuestionIndex: {currentQuestionIndex}, index: {index}, answers[index]: {answers[index]}");
+                roomModuleBGameManager.ChangePanelsAnsweredServerRpc(currentQuestionIndex, index, answers[index]);
+                //CheckAnswer(index, answers[index]); // TODO - Remove this line - Original from Gabriel
+            });
         }
 
     }
@@ -318,8 +329,6 @@ public class QuizManager : MonoBehaviour
     // Method to check if the answer is correct
     public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
     {
-        roomModuleBGameManager.ChangePanelsAnsweredServerRpc(selectedIndex, selectedAnswerIndex);
-
         if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
             DisableButtons();
@@ -394,15 +403,17 @@ public class QuizManager : MonoBehaviour
 
     void EnableButtons()
     {
-        foreach (var button in answerButtons)
+        for (int i = 0; i < answerButtons.Count; i++)
         {
-            button.interactable = true;
+            Debug.Log("QuizManager - EnableButtons - i: {i}");
+            if (roomModuleBGameController.GetStudentIdByPanelIndex(i) == MainManager.GetUser().id) answerButtons[i].interactable = true;
         }
     }
 
     public void SetTotalPlayers(int value)
     {
         totalPlayers = value;
+        Debug.Log($"QuizManager - SetTotalPlayers: totalPlayers:{value}");
     }
 
 }

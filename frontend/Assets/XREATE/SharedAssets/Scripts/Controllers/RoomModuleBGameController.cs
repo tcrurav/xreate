@@ -1,6 +1,8 @@
 using System;
+using System.Threading.Tasks.Sources;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Vivox;
 using UnityEngine;
 
 public class RoomModuleBGameController : MonoBehaviour
@@ -32,13 +34,19 @@ public class RoomModuleBGameController : MonoBehaviour
         DisableAllStartButtons();
     }
 
+    public int GetStudentIdByPanelIndex( int panelIndex)
+    {
+        Debug.Log($"RoomModuleBGameController - GetStudentIdByPanelIndex - panelIndex: {panelIndex}, studentIdsInAssignedPanels[panelIndex]: {studentIdsInAssignedPanels[panelIndex]}");
+        return studentIdsInAssignedPanels[panelIndex];
+    }
+
     public void OnPlayerReady(int index)
     {
         Debug.Log($"RoomModuleBGameManager - OnPlayerReady - index: {index}");
         quizManager.GetComponent<QuizManager>().OnPlayerReady(index);
     }
 
-    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
+    public void CheckAnswer(int questionIndex, int selectedIndex, int selectedAnswerIndex)
     {
         quizManager.GetComponent<QuizManager>().CheckAnswer(selectedIndex, selectedAnswerIndex);
     }
@@ -56,11 +64,13 @@ public class RoomModuleBGameController : MonoBehaviour
 
     private void EnableOwnStartButton()
     {
-        for(int i = 0; i < numberOfConnectedStudents; i++)
+        for (int i = 0; i < numberOfConnectedStudents; i++)
         {
-            if (names[i].text == MainManager.GetUser().username) 
+            if (names[i].text == MainManager.GetUser().username)
             {
                 StartButtons[i].SetActive(true);
+                Debug.Log($"EnableOwnStartButton - i: {i}");
+                return;
             }
         }
     }
@@ -69,7 +79,7 @@ public class RoomModuleBGameController : MonoBehaviour
     {
         foreach (GameObject s in StartButtons)
         {
-            s.gameObject.SetActive( false );
+            s.gameObject.SetActive(false);
         }
     }
 
@@ -86,7 +96,7 @@ public class RoomModuleBGameController : MonoBehaviour
             studentIdsInAssignedPanels[i] = BIG_VALUE;
             aux[i] = BIG_VALUE;
         }
-        
+
         int panelIndex = 0;
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
@@ -94,7 +104,7 @@ public class RoomModuleBGameController : MonoBehaviour
 
             int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
             int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
-            
+
             if (clientTeamId == teamId)
             {
                 studentIdsInAssignedPanels[panelIndex] = studentId;
@@ -108,6 +118,13 @@ public class RoomModuleBGameController : MonoBehaviour
         numberOfConnectedStudents = panelIndex;
 
         Array.Sort(studentIdsInAssignedPanels, studentNamesInAssignedPanels);
-        Array.Sort(aux,names);
+        Array.Sort(aux, names);
+
+        // TODO - Delete this - It's only for debugging purposes
+        for (int i = 0; i < numberOfConnectedStudents; i++)
+        {
+            Debug.Log($"RoomModuleBGameController - studentIdsInAssignedPanels[i]: {studentIdsInAssignedPanels[i]}, studentNamesInAssignedPanels[i]: {studentNamesInAssignedPanels[i]}");
+            Debug.Log($"RoomModuleBGameController - aux[i]: {aux[i]}, names: {names[i].text}");
+        }
     }
 }

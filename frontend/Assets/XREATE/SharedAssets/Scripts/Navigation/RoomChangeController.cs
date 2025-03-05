@@ -12,6 +12,12 @@ public class RoomChangeController : MonoBehaviour
     public int teamId;
     public GameObject errorCanvas;
 
+    public GameObject RoomModuleBTeam1Assets;
+    public GameObject RoomModuleBTeam2Assets;
+
+    public GameObject RoomModuleATeam1Assets;
+    public GameObject RoomModuleATeam2Assets;
+
     private readonly Vector3 OffsetMenu = new(0, 0, -12); // Maybe should have own controller
 
     private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, 25.75f);
@@ -55,6 +61,18 @@ public class RoomChangeController : MonoBehaviour
             return;
         }
 
+        switch (teamId)
+        {
+            case 1:
+                RoomModuleATeam1Assets.SetActive(true);
+                RoomModuleATeam2Assets.SetActive(false);
+                break;
+            case 2:
+                RoomModuleATeam1Assets.SetActive(false);
+                RoomModuleATeam2Assets.SetActive(true);
+                break;
+        }
+
         MainNavigationManager.ChangePosition(OffsetRoomModuleA);
         SetScene(Scene.RoomModuleA);
     }
@@ -92,6 +110,18 @@ public class RoomChangeController : MonoBehaviour
         {
             errorCanvas.SetActive(true);
             return;
+        }
+
+        switch (teamId)
+        {
+            case 1:
+                RoomModuleBTeam1Assets.SetActive(true);
+                RoomModuleBTeam2Assets.SetActive(false);
+                break;
+            case 2:
+                RoomModuleBTeam1Assets.SetActive(false);
+                RoomModuleBTeam2Assets.SetActive(true);
+                break;
         }
 
         MainNavigationManager.ChangePosition(OffsetRoomModuleB);
