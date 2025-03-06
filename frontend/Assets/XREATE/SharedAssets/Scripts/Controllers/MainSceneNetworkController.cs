@@ -19,9 +19,9 @@ public class MainSceneNetworkController : MonoBehaviour
     public GameObject RoomModuleBTeam2CheckboxButton;
 
     // RoomModuleA
-    //public GameObject RoomModuleATeam1PlayButton;
+    public GameObject RoomModuleATeam1PlayButton;
     public GameObject RoomModuleATeam1CheckboxButton;
-    //public GameObject RoomModuleATeam2PlayButton;
+    public GameObject RoomModuleATeam2PlayButton;
     public GameObject RoomModuleATeam2CheckboxButton;
 
     // Leisure Module
@@ -64,10 +64,10 @@ public class MainSceneNetworkController : MonoBehaviour
                 // Room Module B
                 RoomModuleBTeam1PlayButton.SetActive(false);                    // Only teachers can Start the Task
                 RoomModuleBTeam2PlayButton.SetActive(false);                    // Only teachers can Start the Task
-                
+
                 // Room Module A
-                //RoomModuleATeam1PlayButton.SetActive(false);                  // Only teachers can Start the Task
-                //RoomModuleATeam2PlayButton.SetActive(false);                  // Only teachers can Start the Task
+                RoomModuleATeam1PlayButton.SetActive(false);                    // Only teachers can Start the Task
+                RoomModuleATeam2PlayButton.SetActive(false);                    // Only teachers can Start the Task
                 
                 // LeisureModule
                 //LeisureModuleTeam1PlayButton.SetActive(false);                // Only teachers can Start the Task
@@ -92,8 +92,8 @@ public class MainSceneNetworkController : MonoBehaviour
                     RoomModuleBTeam2PlayButton.SetActive(false);               // Only the teacher in charge of this Team can start this task
 
                     // Room Module A
-                    //RoomModuleATeam1PlayButton.SetActive(true);              // Only the teacher in charge of this Team can start this task
-                    //RoomModuleATeam2PlayButton.SetActive(false);              // Only the teacher in charge of this Team can start this task
+                    RoomModuleATeam1PlayButton.SetActive(true);              // Only the teacher in charge of this Team can start this task
+                    RoomModuleATeam2PlayButton.SetActive(false);              // Only the teacher in charge of this Team can start this task
 
                     // Leisure Module
                     //LeisureModuleTeam1PlayButton.SetActive(true);            // Only the teacher in charge of this Team can start this task
@@ -107,8 +107,8 @@ public class MainSceneNetworkController : MonoBehaviour
                     RoomModuleBTeam2PlayButton.SetActive(true);               // Only the teacher in charge of this Team can start this task
 
                     // Room Module A
-                    //RoomModuleATeam1PlayButton.SetActive(false);              // Only the teacher in charge of this Team can start this task
-                    //RoomModuleATeam2PlayButton.SetActive(true);              // Only the teacher in charge of this Team can start this task
+                    RoomModuleATeam1PlayButton.SetActive(false);              // Only the teacher in charge of this Team can start this task
+                    RoomModuleATeam2PlayButton.SetActive(true);              // Only the teacher in charge of this Team can start this task
 
                     // Leisure Module
                     //LeisureModuleTeam1PlayButton.SetActive(false);            // Only the teacher in charge of this Team can start this task

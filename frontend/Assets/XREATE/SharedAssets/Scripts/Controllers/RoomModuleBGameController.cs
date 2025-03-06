@@ -1,9 +1,8 @@
 using System;
-using System.Threading.Tasks.Sources;
 using TMPro;
 using Unity.Netcode;
-using Unity.Services.Vivox;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomModuleBGameController : MonoBehaviour
 {
@@ -68,7 +67,7 @@ public class RoomModuleBGameController : MonoBehaviour
         {
             if (names[i].text == MainManager.GetUser().username)
             {
-                StartButtons[i].SetActive(true);
+                StartButtons[i].GetComponent<Button>().interactable = true;
                 Debug.Log($"EnableOwnStartButton - i: {i}");
                 return;
             }
@@ -123,8 +122,8 @@ public class RoomModuleBGameController : MonoBehaviour
         // TODO - Delete this - It's only for debugging purposes
         for (int i = 0; i < numberOfConnectedStudents; i++)
         {
-            Debug.Log($"RoomModuleBGameController - studentIdsInAssignedPanels[i]: {studentIdsInAssignedPanels[i]}, studentNamesInAssignedPanels[i]: {studentNamesInAssignedPanels[i]}");
-            Debug.Log($"RoomModuleBGameController - aux[i]: {aux[i]}, names: {names[i].text}");
+            DebugManager.Log($"RoomModuleBGameController - studentIdsInAssignedPanels[i]: {studentIdsInAssignedPanels[i]}, studentNamesInAssignedPanels[i]: {studentNamesInAssignedPanels[i]}");
+            DebugManager.Log($"RoomModuleBGameController - aux[i]: {aux[i]}, names: {names[i].text}");
         }
     }
 }

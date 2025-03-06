@@ -405,7 +405,7 @@ public class QuizManager : MonoBehaviour
     {
         for (int i = 0; i < answerButtons.Count; i++)
         {
-            Debug.Log("QuizManager - EnableButtons - i: {i}");
+            DebugManager.Log($"QuizManager - EnableButtons - i: {i}, roomModuleBGameController.GetStudentIdByPanelIndex(i): {roomModuleBGameController.GetStudentIdByPanelIndex(i)}");
             if (roomModuleBGameController.GetStudentIdByPanelIndex(i) == MainManager.GetUser().id) answerButtons[i].interactable = true;
         }
     }
@@ -413,7 +413,7 @@ public class QuizManager : MonoBehaviour
     public void SetTotalPlayers(int value)
     {
         totalPlayers = value;
-        Debug.Log($"QuizManager - SetTotalPlayers: totalPlayers:{value}");
+        DebugManager.Log($"QuizManager - SetTotalPlayers: totalPlayers:{value}");
     }
 
 }
