@@ -20,11 +20,17 @@ public class LeaderboardController : MonoBehaviour
     private float[] startLinePositionX = { -1132.0f, 24.0f, 1179.0f, 2347.0f };
     private float taskLineLength = 844.0f;
 
-    private void OnEnable()
+    private void Start()
     {
         teamService = gameObject.AddComponent<TeamService>();
         inActivityStudentParticipationService = gameObject.AddComponent<InActivityStudentParticipationService>();
+
         Refresh();
+    }
+
+    private void OnEnable()
+    {
+        if (teamService != null && inActivityStudentParticipationService != null) Refresh();
     }
 
     public void Refresh()
@@ -63,16 +69,18 @@ public class LeaderboardController : MonoBehaviour
             if (CurrentActivityManager.GetNumberOfChallengesInActivity() > 0) newX = startLinePositionX[i % CurrentActivityManager.GetNumberOfChallengesInActivity()];
 
             Debug.Log($"ShowTeamsWithChallengesAndPoints - teamService.teamsWithChallengesAndPoints[i].maxPoints: {teamService.teamsWithChallengesAndPoints[i].maxPoints}");
-            int maxPoints = teamService.teamsWithChallengesAndPoints[i].maxPoints;
+            Debug.Log($"ShowTeamsWithChallengesAndPoints - teamService.teamsWithChallengesAndPoints[i].points: {teamService.teamsWithChallengesAndPoints[i].points}");
+            float maxPoints = teamService.teamsWithChallengesAndPoints[i].maxPoints;
             if (maxPoints > 0)
             {
-                newX += teamService.teamsWithChallengesAndPoints[i].points / maxPoints * taskLineLength;
+                Debug.Log($"ShowTeamsWithChallengesAndPoints - teamService.teamsWithChallengesAndPoints[i].points / maxPoints * taskLineLength: {teamService.teamsWithChallengesAndPoints[i].points / maxPoints * taskLineLength}");
+                newX += (float)teamService.teamsWithChallengesAndPoints[i].points / maxPoints * taskLineLength;
             }
-
-            teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D = new Vector3(
+            Debug.Log($"ShowTeamsWithChallengesAndPoints - newX: {newX}");
+            teamRawImageRings[i].GetComponent<RectTransform>().localPosition = new Vector3(
                 newX,
-                teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D.y,
-                teamRawImageRings[i].GetComponent<RectTransform>().anchoredPosition3D.z);
+                teamRawImageRings[i].GetComponent<RectTransform>().localPosition.y,
+                teamRawImageRings[i].GetComponent<RectTransform>().localPosition.z);
         }
     }
 
@@ -126,7 +134,8 @@ public class LeaderboardController : MonoBehaviour
                 if (inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].points > 0)
                 {
                     topPlayerNames[teamIndex].text = inActivityStudentParticipationService.inActivityStudentParticipationTopPlayersWithPoints[i].userName;
-                } else
+                }
+                else
                 {
                     topPlayerNames[teamIndex].text = "_________";
                 }

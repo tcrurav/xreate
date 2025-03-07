@@ -69,16 +69,12 @@ public class RoomModuleAGameController : MonoBehaviour
 
     private void GetListOfConnectedUsers()
     {
-        Debug.Log($"RoomModuleAGameController - GetListOfConnectedUsers");
-
         // TODO - Really ugly way - Time is Knapp
         // initialize with big values to sort later the array names[]
-        int[] aux = new int[MaxNumberOfStudents];
         int BIG_VALUE = 999999;
         for (int i = 0; i < MaxNumberOfStudents; i++)
         {
             studentIdsInAssignedPanels[i] = BIG_VALUE;
-            aux[i] = BIG_VALUE;
         }
 
         int panelIndex = 0;
@@ -92,9 +88,7 @@ public class RoomModuleAGameController : MonoBehaviour
             if (clientTeamId == teamId)
             {
                 studentIdsInAssignedPanels[panelIndex] = studentId;
-                aux[panelIndex] = studentId;
                 studentNamesInAssignedPanels[panelIndex] = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
-                names[panelIndex].text = studentNamesInAssignedPanels[panelIndex];
                 panelIndex++;
             }
         }
@@ -102,6 +96,10 @@ public class RoomModuleAGameController : MonoBehaviour
         numberOfConnectedStudents = panelIndex;
 
         Array.Sort(studentIdsInAssignedPanels, studentNamesInAssignedPanels);
-        Array.Sort(aux, names);
+
+        for (int i = 0; i < numberOfConnectedStudents; i++)
+        {
+            names[i].text = studentNamesInAssignedPanels[i];
+        }
     }
 }

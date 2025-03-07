@@ -200,7 +200,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToGameServerRpc(bool newStartReadyToGame)
     {
-        Debug.Log("RoomModuleBGameManager - ChangeStartReadyToGameServerRpc");
         if (startReadyToGame.Value != newStartReadyToGame)
         {
             startReadyToGame.Value = newStartReadyToGame;
@@ -215,7 +214,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToGameClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log("RoomModuleBGameManager - ChangeStartReadyToGameClientRpc");
         if (roomModuleBGameController != null)
         {
             roomModuleBGameController.StartGame();
@@ -229,7 +227,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToNextRoomServerRpc(bool newValue)
     {
-        Debug.Log($"RoomModuleBGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
         if (startButtonController != null && startReadyToNextRoom.Value != newValue)
         {
             startReadyToNextRoom.Value = newValue;
@@ -244,7 +241,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log($"RoomModuleBGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
             startButtonController.EnableNextRooms();
@@ -258,7 +254,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeEnableStartReadyToNextRoomServerRpc(bool newValue)
     {
-        Debug.Log($"RoomModuleBGameManager - ChangeEnableStartReadyToNextRoomServerRpc - newValue: {newValue}");
         if (startButtonController != null && enableStartReadyToNextRoom.Value != newValue)
         {
             enableStartReadyToNextRoom.Value = newValue;
@@ -273,7 +268,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeEnableStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log($"RoomModuleBGameManager - ChangeEnableStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
             startButtonController.EnableButtonToEnableNextRooms();

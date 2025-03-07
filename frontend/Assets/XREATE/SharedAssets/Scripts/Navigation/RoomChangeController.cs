@@ -18,6 +18,8 @@ public class RoomChangeController : MonoBehaviour
     public GameObject RoomModuleATeam1Assets;
     public GameObject RoomModuleATeam2Assets;
 
+    public GameObject Leaderboard;
+
     private readonly Vector3 OffsetMenu = new(0, 0, -12); // Maybe should have own controller
 
     private readonly Vector3 OffsetRoomModuleA = new(87f, 6.39f, 25.75f);
@@ -86,6 +88,8 @@ public class RoomChangeController : MonoBehaviour
             return;
         }
 
+        Leaderboard.GetComponent<LeaderboardController>().Refresh();
+
         MainNavigationManager.ChangePosition(OffsetCorridorToRoomModuleA);
         SetScene(Scene.TunnelConnectorD);
     }
@@ -98,6 +102,8 @@ public class RoomChangeController : MonoBehaviour
             errorCanvas.SetActive(true);
             return;
         }
+
+        Leaderboard.GetComponent<LeaderboardController>().Refresh();
 
         MainNavigationManager.ChangePosition(OffsetCorridorToRoomModuleB);
         SetScene(Scene.TunnelConnectorC);
@@ -174,6 +180,8 @@ public class RoomChangeController : MonoBehaviour
             errorCanvas.SetActive(true);
             return;
         }
+
+        if(Leaderboard.GetComponent<LeaderboardController>().isActiveAndEnabled) Leaderboard.GetComponent<LeaderboardController>().Refresh();
 
         MainNavigationManager.ChangePosition(OffsetBuildingATopStairs);
         SetScene(Scene.Main);

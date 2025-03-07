@@ -2138,7 +2138,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5556599808961177310}
-  - component: {fileID: 8278522513997653123}
   m_Layer: 0
   m_Name: Leaderboard
   m_TagString: Untagged
@@ -2172,37 +2171,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7128, y: 5544}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8278522513997653123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088641528829514585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83214bf6749b5a94a9d5c28d4272f7f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamRawImageRings:
-  - {fileID: 3223469966653796686}
-  - {fileID: 2092283995414095988}
-  - {fileID: 3908453042282252697}
-  - {fileID: 3436004974106190500}
-  - {fileID: 1472277669606325764}
-  - {fileID: 7947134472646890055}
-  - {fileID: 4327771244394908083}
-  - {fileID: 1828001368635549724}
-  teams:
-  - {fileID: 5799154685894864816}
-  - {fileID: 4346941049725454456}
-  teamPoints:
-  - {fileID: 1555118148346625884}
-  - {fileID: 2322073256499630824}
-  topPlayerNames:
-  - {fileID: 502519232148639087}
-  - {fileID: 6323750045561160443}
-  teamMapManager: {fileID: 0}
 --- !u!1 &2092283995414095988
 GameObject:
   m_ObjectHideFlags: 0
