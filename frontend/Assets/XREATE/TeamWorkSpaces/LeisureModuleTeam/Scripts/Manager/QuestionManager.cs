@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using UnityEngine.Networking;
+using System.IO;
+
 
 
 
@@ -185,9 +187,74 @@ namespace TeamWorkSpaces.LeisureModule
 
         void Start()
         {
-            StartCoroutine(LoadQuestionsFromAPI(apiEndpoint)); // Primero intentamos cargar preguntas desde la API
-            LoadDictionaryFromJson(); // Luego cargamos el diccionario local
 
+            StartCoroutine(LoadQuestionsFromAPI(apiEndpoint));
+            StartCoroutine(LoadQuestionsFromJson_AndroidFriendly());
+            StartCoroutine(LoadDictionaryFromJson_AndroidFriendly());
+
+
+            //StartCoroutine(LoadQuestionsFromAPI(apiEndpoint)); // Primero intentamos cargar preguntas desde la API
+            //LoadDictionaryFromJson(); // Luego cargamos el diccionario local
+
+        }
+        // --------------------------------------------------------------------
+        // NUEVA CORRUTINA PARA CARGAR DICCIONARIO DE MODO “ANDROID FRIENDLY”
+        // --------------------------------------------------------------------
+        private IEnumerator LoadDictionaryFromJson_AndroidFriendly()
+        {
+            // Ruta común en StreamingAssets
+            string filePath = Path.Combine(Application.streamingAssetsPath, dictionaryFileName);
+            Debug.Log($"📂 [Dictionary] Intentando cargar: {filePath}");
+
+            // Detectar si estamos en Android (ruta "jar:file://" o "content://" etc.)
+            if (filePath.Contains("://") || filePath.Contains("jar:"))
+            {
+                // === ANDROID ===
+                using (UnityWebRequest request = UnityWebRequest.Get(filePath))
+                {
+                    yield return request.SendWebRequest();
+
+                    if (request.result == UnityWebRequest.Result.Success)
+                    {
+                        string jsonContent = request.downloadHandler.text;
+                        ParseDictionaryJSON(jsonContent, "Android");
+                    }
+                    else
+                    {
+                        Debug.LogError($"❌ [Dictionary] Error leyendo JSON en Android: {request.error}");
+                    }
+                }
+            }
+            else
+            {
+                // === PC / EDITOR / otras plataformas donde System.IO funciona ===
+                if (File.Exists(filePath))
+                {
+                    string jsonContent = File.ReadAllText(filePath);
+                    ParseDictionaryJSON(jsonContent, "PC");
+                }
+                else
+                {
+                    Debug.LogError($"❌ [Dictionary] Archivo no encontrado en: {filePath}");
+                }
+            }
+        }
+
+        // --------------------------------------------------------------------
+        // MÉTODO AUXILIAR PARA PARSEAR Y GUARDAR EL DICCIONARIO
+        // --------------------------------------------------------------------
+        private void ParseDictionaryJSON(string jsonContent, string platformTag)
+        {
+            try
+            {
+                DictionaryData dictionaryData = JsonUtility.FromJson<DictionaryData>(jsonContent);
+                dictionary = dictionaryData.cybersecurity_words ?? new List<string>();
+                Debug.Log($"✅ [Dictionary] Cargadas {dictionary.Count} palabras ({platformTag}).");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"❌ [Dictionary] Error parseando JSON ({platformTag}): {e.Message}");
+            }
         }
 
         public List<string> GetRandomDistractors(int count)
@@ -732,6 +799,113 @@ namespace TeamWorkSpaces.LeisureModule
             }
         }
 
+        private IEnumerator LoadQuestionsFromStreamingAssets()
+        {
+            string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "Questions.json");
+
+            // En Android, 'Application.streamingAssetsPath' apunta a "jar:file://" o similar
+            if (filePath.Contains("://") || filePath.Contains("jar:"))
+            {
+                using (UnityWebRequest request = UnityWebRequest.Get(filePath))
+                {
+                    yield return request.SendWebRequest();
+
+                    if (request.result == UnityWebRequest.Result.Success)
+                    {
+                        Debug.Log($"✅ Cargado JSON: {request.downloadHandler.text.Length} caracteres.");
+                        ParseQuestionsJSON(request.downloadHandler.text);
+                    }
+                    else
+                    {
+                        Debug.LogError($"❌ Error al leer JSON en Android: {request.error}");
+                    }
+                }
+            }
+            else
+            {
+                // Fallback en PC o plataformas que sí admitan System.IO
+                if (System.IO.File.Exists(filePath))
+                {
+                    string jsonContent = System.IO.File.ReadAllText(filePath);
+                    ParseQuestionsJSON(jsonContent);
+                }
+                else
+                {
+                    Debug.LogError("❌ Archivo no encontrado en StreamingAssets.");
+                }
+            }
+        }
+
+
+
+        private void ParseQuestionsJSON(string jsonString)
+        {
+            try
+            {
+                QuestionData questionData = JsonUtility.FromJson<QuestionData>(jsonString);
+                questions = questionData.questions ?? new List<Question>();
+                Debug.Log($"✅ Se cargaron {questions.Count} preguntas de StreamingAssets.");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"❌ Error parseando JSON: {e.Message}");
+            }
+        }
+
+        private IEnumerator LoadQuestionsFromJson_AndroidFriendly()
+        {
+            string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, questionsFileName);
+
+            // Manejo Android vs PC
+            if (filePath.Contains("://") || filePath.Contains("jar:"))
+            {
+                using (UnityWebRequest request = UnityWebRequest.Get(filePath))
+                {
+                    yield return request.SendWebRequest();
+
+                    if (request.result == UnityWebRequest.Result.Success)
+                    {
+                        try
+                        {
+                            QuestionData questionData = JsonUtility.FromJson<QuestionData>(request.downloadHandler.text);
+                            questions = questionData.questions ?? new List<Question>();
+                            Debug.Log($"✅ Cargadas {questions.Count} preguntas desde StreamingAssets (Android).");
+                        }
+                        catch (System.Exception e)
+                        {
+                            Debug.LogError($"❌ Error parseando JSON (Android): {e.Message}");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError($"❌ Error al leer JSON en Android: {request.error}");
+                    }
+                }
+            }
+            else
+            {
+                // PC / Editor
+                if (System.IO.File.Exists(filePath))
+                {
+                    string jsonContent = System.IO.File.ReadAllText(filePath);
+                    try
+                    {
+                        QuestionData questionData = JsonUtility.FromJson<QuestionData>(jsonContent);
+                        questions = questionData.questions ?? new List<Question>();
+                        Debug.Log($"✅ Cargadas {questions.Count} preguntas desde StreamingAssets (PC).");
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.LogError($"❌ Error parseando JSON (PC): {e.Message}");
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"❌ Questions.json no encontrado en: {filePath}");
+                }
+            }
+        }
+
 
         public bool IsCorrectWord(string word)
         {
@@ -760,4 +934,3 @@ namespace TeamWorkSpaces.LeisureModule
 
     }
 }
- 

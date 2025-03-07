@@ -89,7 +89,6 @@ public class MainNavigationManager : MonoBehaviour
                 if (!player.IsSpawned)
                 {
                     Debug.Log($"ChangeSceneForLocalNetworkPlayer !IsSpawned - scene: {scene}");
-                    DebugManager.Log($"ChangeSceneForLocalNetworkPlayer !IsSpawned - scene: {scene}");
                 }
 
                 player.SetPlayerScene(scene);

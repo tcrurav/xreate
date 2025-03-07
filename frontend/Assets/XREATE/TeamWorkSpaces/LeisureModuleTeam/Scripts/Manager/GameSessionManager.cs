@@ -213,7 +213,7 @@ namespace TeamWorkSpaces.LeisureModule
             if (hologramLightManager != null)
             {
                 Debug.Log("💡 Activando luces del holograma antes de cargar las palabras...");
-                hologramLightManager.StartCoroutine("DelayedRunDemoSequence");
+                //hologramLightManager.StartCoroutine("DelayedRunDemoSequence");
             }
 
             // 🔄 Actualizar la UI con las instrucciones de Phase 1
@@ -233,32 +233,7 @@ namespace TeamWorkSpaces.LeisureModule
 
 
 
-        /// <summary>
-        /// 📌 Inicia una nueva ronda y arranca la Fase 1.
-        /// </summary>
-        public void StartNewRound1()
-        {
-            Debug.Log($"📢 Iniciando Ronda {roundNumber}...");
 
-            phase1Active = true;
-            timer = phase1TimeLimit;
-            currentWordCount = 0;
-
-            // 🔄 Actualizar UI con la nueva ronda
-            uiManager.UpdateRoundInfo(roundNumber);
-            uiManager.UpdateScoreUI(roundScores);
-
-            // 💡 Activar efecto de luces antes de cargar palabras
-            if (hologramLightManager != null)
-            {
-                Debug.Log("💡 Activando luces del holograma antes de cargar las palabras...");
-                hologramLightManager.StartCoroutine("DelayedRunDemoSequence");
-            }
-
-            // 🔥 Iniciar la Fase 1 (Forja)
-            forgeController.StartForgeSequence();
-            StartCoroutine(Phase1Timer());
-        }
 
         public void RestartCurrentRound()
         {
@@ -362,7 +337,7 @@ namespace TeamWorkSpaces.LeisureModule
             uiManager.DisplayResultsInPanels(totalWordsPlaced, correctWords, incorrectWords, phase1Score, 0, 0, 0, 0);
 
             Debug.Log($"📢 Datos enviados a UIManager: {totalWordsPlaced} palabras, {correctWords} correctas, {incorrectWords} incorrectas, Puntuación {phase1Score}/10");
-
+            DestroyAllWords();
             StartCoroutine(WaitBeforePhase2());
         }
 
@@ -401,6 +376,7 @@ namespace TeamWorkSpaces.LeisureModule
 
             // 🔄 Pasar a la siguiente ronda con tiempo de espera
             StartCoroutine(WaitBeforeNewRound());
+            DestroyAllAnswers();
         }
 
 
@@ -411,7 +387,7 @@ namespace TeamWorkSpaces.LeisureModule
         {
             Debug.Log($"⏳ Esperando {transitionTimeBetweenPhases} segundos antes de iniciar la Fase 2...");
             yield return new WaitForSeconds(transitionTimeBetweenPhases);
-
+            DestroyAllWords();
             StartPhase2();
         }
 

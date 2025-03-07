@@ -16,7 +16,7 @@ public class SlideController : MonoBehaviour
 
     public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
     {
-        DebugManager.Log($"SlideController - HideOldSlideAndShowNewSlide");
+        Debug.Log($"SlideController - HideOldSlideAndShowNewSlide");
 
         Slides[oldValue].gameObject.SetActive(false);
         Slides[newValue].gameObject.SetActive(true);
@@ -41,7 +41,7 @@ public class SlideController : MonoBehaviour
 
     public void GotoNextSlide()
     {
-        //if (MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
+        if (MainManager.IsTeacherPermissionsActivated() && MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
 
         if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) return;
 
@@ -50,7 +50,7 @@ public class SlideController : MonoBehaviour
 
     public void GotoPreviousSlide()
     {
-        //if (MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
+        if (MainManager.IsTeacherPermissionsActivated() && MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
 
         if (slideShowManager.currentSlide.Value <= 0) return;
 

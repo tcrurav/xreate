@@ -920,9 +920,9 @@ module.exports = {
 
     await queryInterface.bulkInsert('challenge_items', [{
       id: 11,
-      challengeId: '1',
+      challengeId: '1', 
       item: 'total points of a student in this challenge',
-      points: 10,
+      points: 16, // match-the-pairs
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -940,7 +940,7 @@ module.exports = {
       id: 31,
       challengeId: '3', 
       item: 'total points of a student in this challenge',
-      points: 250, //security concepts - maximum team points
+      points: 50, //security concepts
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

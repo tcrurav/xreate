@@ -111,7 +111,7 @@ exports.findAllTopPlayersByTeamAndActivityIdWithPoints = (req, res) => {
     const activityId = req.params.activityId;
 
     InActivityStudentParticipation.findAll({
-        order: ['teamId', 'points'],
+        order: [['teamId', 'ASC'], ['points', 'DESC']],
         group: ['studentId', 'teamId', 'activityId'],
         include: [{
             model: Achievement, attributes: [],
@@ -149,7 +149,7 @@ exports.findAllPointsByTeamAndActivityId = (req, res) => {
     const activityId = req.params.activityId;
 
     InActivityStudentParticipation.findAll({
-        order: ['points'],
+        order: [['teamId', 'ASC']],
         group: ['teamId', 'activityId'],
         include: [{
             model: Achievement, attributes: [],

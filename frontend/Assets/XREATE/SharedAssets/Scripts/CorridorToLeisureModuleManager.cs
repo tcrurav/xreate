@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEngine;
 
 public class CorridorToLeisureModuleManager : NetworkBehaviour
 {
@@ -14,7 +15,7 @@ public class CorridorToLeisureModuleManager : NetworkBehaviour
 
         if (startButtonController == null)
         {
-            DebugManager.Log("CorridorToLeisureModuleManager - Start - missing mandatory components in GameObject.");
+            Debug.Log("CorridorToLeisureModuleManager - Start - missing mandatory components in GameObject.");
         }
     }
 
@@ -56,7 +57,7 @@ public class CorridorToLeisureModuleManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("CorridorToLeisureModuleManager - startButtonController es null");
+            Debug.Log("CorridorToLeisureModuleManager - startButtonController es null");
 
         }
     }
@@ -70,7 +71,7 @@ public class CorridorToLeisureModuleManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("CorridorToLeisureModuleManager - startButtonController es null");
+            Debug.Log("CorridorToLeisureModuleManager - startButtonController es null");
         }
     }
 

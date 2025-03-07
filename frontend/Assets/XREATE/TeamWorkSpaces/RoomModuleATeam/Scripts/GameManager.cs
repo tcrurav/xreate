@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.Audio;
-using NUnit.Framework;
-using System.Net.NetworkInformation;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,9 +17,14 @@ public class GameManager : MonoBehaviour
     public TextMeshPro displayedCardTextVR;  // 3D text on the "VR screen"
     private int playerScore = 0; // New variable for points
 
-    public Renderer lockPlaneRenderer;  // Plan where the image will change
+    public Renderer lockPlaneRenderer;  // Plane where the image will change
     public Texture unlockedTexture;  // Image of open padlock
     public TextMeshPro gameResultText;  // 3D text to display information
+
+    public RoomModuleAGameManager roomModuleAGameManager;
+    public int panelIndex;
+
+    private AchievementItemService achievementItemService; // Service to submit points
 
     private Dictionary<string, string> securityTerms = new Dictionary<string, string>
     {
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        achievementItemService = gameObject.AddComponent<AchievementItemService>();
 
         if (board == null)
         {
@@ -98,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         foreach (var pair in selectedPairs)
         {
-            allCards.Add(pair.Key);   
+            allCards.Add(pair.Key);
             allCards.Add(pair.Value);
         }
 
@@ -259,10 +262,10 @@ public class GameManager : MonoBehaviour
         }
 
         // Change the Plane texture to show the open lock
-        if (lockPlaneRenderer != null && unlockedTexture != null)
-        {
-            lockPlaneRenderer.material.mainTexture = unlockedTexture;
-        }
+        //if (lockPlaneRenderer != null && unlockedTexture != null)
+        //{
+        //    lockPlaneRenderer.material.mainTexture = unlockedTexture;
+        //}
 
         // Get the player's name (you can have him enter it before)
         string playerName = MainManager.GetUser().username;
@@ -272,14 +275,14 @@ public class GameManager : MonoBehaviour
         {
             playerTime += (gameTime - remainingTime);
             allPlayersTime.Add(playerTime);
-            
-            timerText.text = $"¡GANASTE! Tiempo: {playerTime:F2} seg - Puntos: {playerScore}";
+
+            timerText.text = $"¡You won! Time: {playerTime:F2} sec - Points: {playerScore}";
 
             // Update 3D text
-            gameResultText.text = $"¡Ganaste!\n" +
+            gameResultText.text = $"¡You won!\n" +
                                   $"{playerName}\n" +
-                                  $"Tiempo: {playerTime:F2} seg\n" +
-                                  $"Puntos: {playerScore}";
+                                  $"Time: {playerTime:F2} sec\n" +
+                                  $"Points: {playerScore}";
 
             if (victoryParticles != null)
             {
@@ -292,11 +295,36 @@ public class GameManager : MonoBehaviour
             timerText.text = "YOU HAVE LOST! Time out.";
 
             // Show Game Over message in the UI
-            gameResultText.text = $"¡Perdiste!\n" +
+            gameResultText.text = $"¡You lost!\n" +
                                   $"{playerName}\n" +
-                                  $"Tiempo: {gameTime - remainingTime:F2} seg\n" +
-                                  $"Puntos: {playerScore}";
+                                  $"Time: {gameTime - remainingTime:F2} sec\n" +
+                                  $"Points: {playerScore}";
+        }
 
+        roomModuleAGameManager.ChangePanelsAnsweredServerRpc(panelIndex, true);
+
+        StartCoroutine(OnQuizCompletedUpdatePoints(playerScore));
+    }
+
+    private IEnumerator OnQuizCompletedUpdatePoints(int points)
+    {
+        if (MainManager.GetUser().role != "STUDENT")
+        {
+            throw new System.Exception("Error: Only students get points");
+        }
+
+        int studentId = MainManager.GetUser().id;
+        int activityId = CurrentActivityManager.GetCurrentActivityId();
+
+        string challengeName = "match-the-pairs";
+        string challengeItemItem = "total points of a student in this challenge";
+
+        yield return achievementItemService.UpdatePointsByChallengeNameAndChallengeItemItemAndStudentIdAndActivityId(
+                 challengeName, challengeItemItem, studentId, activityId, points);
+
+        if (achievementItemService.responseCode != 200)
+        {
+            yield break;
         }
     }
 
