@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class QuizManager : MonoBehaviour
 {
@@ -62,11 +62,15 @@ public class QuizManager : MonoBehaviour
 
     public string GameMode;
 
+    private RoomModuleBGameController roomModuleBGameController;
+
     void Start()
     {
         // Initialize the points service
         achievementItemService = gameObject.AddComponent<AchievementItemService>();
         activityChallengeConfigItemService = gameObject.AddComponent<ActivityChallengeConfigItemService>();
+
+        roomModuleBGameController = roomModuleBGameManager.GetComponent<RoomModuleBGameController>();
 
         // Initialize my AudioSource component
         audioSource = GetComponent<AudioSource>();
@@ -98,8 +102,13 @@ public class QuizManager : MonoBehaviour
         // Show panels and assign events to the start buttons
         for (int i = 0; i < totalPlayers; i++)
         {
+            int index = i;
             welcomePanels[i].SetActive(true);
-            startButtons[i].onClick.AddListener(() => OnPlayerReady(i));
+            startButtons[i].onClick.AddListener(() =>
+            {
+                roomModuleBGameManager.ChangeStartedPanelsServerRpc(index, true);
+                //OnPlayerReady(index); // TODO - Remove this line - Original from Gabriel
+            });
         }
     }
 
@@ -122,13 +131,13 @@ public class QuizManager : MonoBehaviour
             yield break;
         }
 
+        roomModuleBGameManager.ChangeEnableStartReadyToNextRoomServerRpc(true);
     }
 
     // Method called when a player presses the start button
     public void OnPlayerReady(int playerIndex)
     {
-        roomModuleBGameManager.ChangeStartedPanelsServerRpc(playerIndex, true);
-
+        Debug.Log($"QuizManager - OnPlayerReady - playerIndex: {playerIndex}");
         playersReady++;
         if (playersReady == totalPlayers)
         {
@@ -203,7 +212,7 @@ public class QuizManager : MonoBehaviour
             int randomIndex = 0; // if NOT_RANDOM then always take the first one of the list that is still there.
             if (GameMode == "RANDOM")
             {
-                randomIndex = Random.Range(0, tempQuestions.Count);
+                randomIndex = UnityEngine.Random.Range(0, tempQuestions.Count);
             }
 
             selectedQuestions.Add(tempQuestions[randomIndex]);
@@ -266,30 +275,57 @@ public class QuizManager : MonoBehaviour
             text.text = currentQuestion.questionText;
         }
 
-        // Mix up the answers and assign them to the panels
-        List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
-        System.Random random = new System.Random(); // Random Number Generator
-
-        // Remove the index of the correct answer
-        numbers.Remove(currentQuestion.correctAnswerIndex);
-
         // Create the mixed response list
         List<int> answers = new List<int>();
 
-        // Mixing the rates of incorrect answers
-        numbers = numbers.OrderBy(x => random.Next()).ToList();
-
-        // Add incorrect answers
-        for (int i = 0; i < totalPlayers - 1; i++)
+        if (GameMode == "RANDOM")
         {
-            answers.Add(numbers[i]);
+            // Mix up the answers and assign them to the panels
+            List<int> numbers = new List<int> { 0, 1, 2, 3, 4 };
+
+            // Remove the index of the correct answer
+            numbers.Remove(currentQuestion.correctAnswerIndex);
+
+
+
+            System.Random random = new System.Random(); // Random Number Generator
+
+            // Mixing the rates of incorrect answers
+            numbers = numbers.OrderBy(x => random.Next()).ToList();
+
+            // Add incorrect answers
+            for (int i = 0; i < totalPlayers - 1; i++)
+            {
+                answers.Add(numbers[i]);
+            }
+
+            // Add the correct answer
+            answers.Add(currentQuestion.correctAnswerIndex);
+
+            // Shuffle the final answers again
+            answers = answers.OrderBy(x => random.Next()).ToList();
         }
-
-        // Add the correct answer
-        answers.Add(currentQuestion.correctAnswerIndex);
-
-        // Shuffle the final answers again
-        answers = answers.OrderBy(x => random.Next()).ToList();
+        else
+        {
+            // The answers will have the same order as read from DB, unless the correct answer is out of range.
+            // In that case the correct answer will be the first if question number is even, and the las if odd.
+            // This solution is to avoid sending random values to all clients which is a waste of network bandwidth
+            for (int i = 0; i < totalPlayers; i++)
+            {
+                answers.Add(i);
+            }
+            if (currentQuestion.correctAnswerIndex > (totalPlayers - 1))
+            {
+                if (currentQuestionIndex % 2 == 0)
+                {
+                    answers[0] = currentQuestion.correctAnswerIndex;
+                }
+                else
+                {
+                    answers[totalPlayers - 1] = currentQuestion.correctAnswerIndex;
+                }
+            }
+        }
 
         // Assign responses to text panels
         for (int i = 0; i < totalPlayers; i++)
@@ -300,14 +336,21 @@ public class QuizManager : MonoBehaviour
         timer = 5.0f; // Reset the stopwatch
         isTimerRunning = true;
 
+        Debug.Log($"QuizManager - LoadQuestion - Out onClick");
         // Clean and add listeners to buttons
         for (int i = 0; i < totalPlayers; i++)
         {
             int index = i;
+            Debug.Log($"QuizManager - LoadQuestion - Before onClick - index: {index}");
             // Clear any old listeners
             answerButtons[i].onClick.RemoveAllListeners();
             // Add the current listener
-            answerButtons[i].onClick.AddListener(() => CheckAnswer(index, answers[index]));
+            answerButtons[i].onClick.AddListener(() =>
+            {
+                Debug.Log($"QuizManager - LoadQuestion - onClick - currentQuestionIndex: {currentQuestionIndex}, index: {index}, answers[index]: {answers[index]}");
+                roomModuleBGameManager.ChangePanelsAnsweredServerRpc(currentQuestionIndex, index, answers[index]);
+                //CheckAnswer(index, answers[index]); // TODO - Remove this line - Original from Gabriel
+            });
         }
 
     }
@@ -315,8 +358,6 @@ public class QuizManager : MonoBehaviour
     // Method to check if the answer is correct
     public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
     {
-        roomModuleBGameManager.ChangePanelsAnsweredServerRpc(selectedIndex, selectedAnswerIndex);
-
         if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
             DisableButtons();
@@ -346,6 +387,7 @@ public class QuizManager : MonoBehaviour
             }
 
             currentQuestionIndex++;
+            Debug.Log("Current Question Index: " + currentQuestionIndex);
             Debug.Log("Current Question Index: " + currentQuestionIndex);
             Invoke("LoadQuestion", 2.0f);
         }
@@ -391,15 +433,21 @@ public class QuizManager : MonoBehaviour
 
     void EnableButtons()
     {
-        foreach (var button in answerButtons)
+        for (int i = 0; i < answerButtons.Count; i++)
         {
-            button.interactable = true;
+            Debug.Log($"QuizManager - EnableButtons - i: {i}, roomModuleBGameController.GetStudentIdByPanelIndex(i): {roomModuleBGameController.GetStudentIdByPanelIndex(i)}");
+            if (roomModuleBGameController.GetStudentIdByPanelIndex(i) == MainManager.GetUser().id)
+            {
+                answerButtons[i].gameObject.SetActive(true);
+                answerButtons[i].interactable = true;
+            }
         }
     }
 
     public void SetTotalPlayers(int value)
     {
         totalPlayers = value;
+        Debug.Log($"QuizManager - SetTotalPlayers: totalPlayers:{value}");
     }
 
 }

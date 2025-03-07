@@ -94,6 +94,7 @@ exports.findAllWithPoints = (req, res) => {
 // Retrieve all Teams with Challenges with Points from the database.
 exports.findAllWithChallengesAndPoints = (req, res) => {
     Team.findAll({
+        order: [['name', 'ASC'], ['challengeName','ASC']],
         group: ['id', 'InActivityStudentParticipations.Achievements.Challenge.id'],
         include: [{
             model: InActivityStudentParticipation,

@@ -1,59 +1,105 @@
+using System;
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RoomModuleAGameController : MonoBehaviour
 {
-    public GameObject[] Slides;
-    public GameObject GotoNextSlideButton;
-    public GameObject GotoPreviousSlideButton;
+    public TMP_Text[] names;
+    public GameObject[] GameManagers;
+    public int teamId;
 
-    private SlideShowManager slideShowManager;
+    public Texture[] unlockedTextures;
+    public Renderer lockPlaneRenderer;
+
+    public int MaxNumberOfStudents;
+
+    private RoomModuleAGameManager roomModuleAGameManager;
+
+    // It should be dynamic - But time is knapp
+    private int[] studentIdsInAssignedPanels;
+    private string[] studentNamesInAssignedPanels;
+
+    private int numberOfConnectedStudents = 0;
 
     private void Start()
     {
-        slideShowManager = GetComponent<SlideShowManager>();
+        Debug.Log($"RoomModuleAGameController - Start");
+        roomModuleAGameManager = GetComponent<RoomModuleAGameManager>();
+
+        studentIdsInAssignedPanels = new int[MaxNumberOfStudents];
+        studentNamesInAssignedPanels = new string[MaxNumberOfStudents];
     }
 
-    public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
+    public void UpdateTextureForNumberOfFinishedPanels(int numberOfFinishedPanels)
     {
-        DebugManager.Log($"SlideController - HideOldSlideAndShowNewSlide");
+        Debug.Log($"RoomModuleAGameController - FinishedPanel");
 
-        Slides[oldValue].gameObject.SetActive(false);
-        Slides[newValue].gameObject.SetActive(true);
-
-        if (newValue >= (Slides.Length - 1))
+        if (lockPlaneRenderer != null && unlockedTextures[numberOfFinishedPanels] != null)
         {
-            GotoNextSlideButton.SetActive(false);
-            GotoPreviousSlideButton.SetActive(true);
-            return;
+            lockPlaneRenderer.material.mainTexture = unlockedTextures[numberOfFinishedPanels];
         }
 
-        if (newValue <= 0)
+        if (numberOfFinishedPanels == numberOfConnectedStudents)
         {
-            GotoNextSlideButton.SetActive(true);
-            GotoPreviousSlideButton.SetActive(false);
-            return;
+            roomModuleAGameManager.ChangeEnableStartReadyToNextRoomServerRpc(true);
+        }
+    }
+
+    public void StartGame()
+    {
+        Debug.Log($"RoomModuleAGameController - StartGame");
+
+        GetListOfConnectedUsers();
+
+        EnableOwnStartPanel();
+    }
+
+    private void EnableOwnStartPanel()
+    {
+        for (int i = 0; i < numberOfConnectedStudents; i++)
+        {
+            if (names[i].text == MainManager.GetUser().username)
+            {
+                // TODO - Enable other panels - Maybe just the cards at the end with final solution repeated in all maybe.
+                GameManagers[i].SetActive(true);
+            }
+        }
+    }
+
+    private void GetListOfConnectedUsers()
+    {
+        // TODO - Really ugly way - Time is Knapp
+        // initialize with big values to sort later the array names[]
+        int BIG_VALUE = 999999;
+        for (int i = 0; i < MaxNumberOfStudents; i++)
+        {
+            studentIdsInAssignedPanels[i] = BIG_VALUE;
         }
 
-        GotoNextSlideButton.SetActive(true);
-        GotoPreviousSlideButton.SetActive(true);
-    }
+        int panelIndex = 0;
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            NetworkObject playerObject = client.PlayerObject;
 
-    public void GotoNextSlide()
-    {
-        //if (MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
+            int studentId = playerObject.GetComponent<PlayerSync>().PlayerId.Value;
+            int clientTeamId = CurrentActivityManager.GetTeamIdByStudentId(studentId);
 
-        if (slideShowManager.currentSlide.Value >= (Slides.Length - 1)) return;
+            if (clientTeamId == teamId)
+            {
+                studentIdsInAssignedPanels[panelIndex] = studentId;
+                studentNamesInAssignedPanels[panelIndex] = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
+                panelIndex++;
+            }
+        }
 
-        slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value + 1);
-    }
+        numberOfConnectedStudents = panelIndex;
 
-    public void GotoPreviousSlide()
-    {
-        //if (MainManager.GetUser().role != "TEACHER") return; //Only teachers have permission to change slides
+        Array.Sort(studentIdsInAssignedPanels, studentNamesInAssignedPanels);
 
-        if (slideShowManager.currentSlide.Value <= 0) return;
-
-        slideShowManager.ChangeCurrentSlideServerRpc(slideShowManager.currentSlide.Value - 1);
+        for (int i = 0; i < numberOfConnectedStudents; i++)
+        {
+            names[i].text = studentNamesInAssignedPanels[i];
+        }
     }
 }

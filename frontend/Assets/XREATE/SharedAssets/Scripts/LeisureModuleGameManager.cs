@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEngine;
 
 public class LeisureModuleGameManager : NetworkBehaviour
 {
@@ -18,14 +19,14 @@ public class LeisureModuleGameManager : NetworkBehaviour
 
     private void Start()
     {
-        DebugManager.Log("LeisureModuleGameManager - Start");
+        Debug.Log("LeisureModuleGameManager - Start");
 
         leisureModuleGameController = GetComponent<LeisureModuleGameController>();
         startButtonController = GetComponent<StartButtonController>();
 
         if (leisureModuleGameController == null)
         {
-            DebugManager.Log("LeisureModuleGameManager - Start - missing mandatory components in GameObject.");
+            Debug.Log("LeisureModuleGameManager - Start - missing mandatory components in GameObject.");
         }
     }
 
@@ -33,7 +34,7 @@ public class LeisureModuleGameManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        DebugManager.Log($"LeisureModuleGameManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
+        Debug.Log($"LeisureModuleGameManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
 
         if (IsServer)
         {
@@ -61,7 +62,7 @@ public class LeisureModuleGameManager : NetworkBehaviour
 
             startReadyToNextRoom.OnValueChanged += (oldValue, newValue) =>
             {
-                DebugManager.Log($"LeisureModuleGameManager - startReadyToNextRoom.OnValueChanged - newValue: {newValue}");
+                Debug.Log($"LeisureModuleGameManager - startReadyToNextRoom.OnValueChanged - newValue: {newValue}");
                 ChangeStartReadyToNextRoomClientRpc(oldValue, newValue);
             };
 
@@ -142,7 +143,7 @@ public class LeisureModuleGameManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("LeisureModuleGameManager - roomModuleBGameController es null");
+            Debug.Log("LeisureModuleGameManager - roomModuleBGameController es null");
 
         }
     }
@@ -157,21 +158,21 @@ public class LeisureModuleGameManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("LeisureModuleGameManager - roomModuleBGameController es null");
+            Debug.Log("LeisureModuleGameManager - roomModuleBGameController es null");
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToNextRoomServerRpc(bool newValue)
     {
-        DebugManager.Log($"LeisureModuleGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
+        Debug.Log($"LeisureModuleGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
         if (startButtonController != null && startReadyToNextRoom.Value != newValue)
         {
             startReadyToNextRoom.Value = newValue;
         }
         else
         {
-            DebugManager.Log("LeisureModuleGameManager - startButtonController es null");
+            Debug.Log("LeisureModuleGameManager - startButtonController es null");
 
         }
     }
@@ -179,14 +180,14 @@ public class LeisureModuleGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
     {
-        DebugManager.Log($"LeisureModuleGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
+        Debug.Log($"LeisureModuleGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
             GetComponent<StartButtonController>().EnableNextRooms();
         }
         else
         {
-            DebugManager.Log("LeisureModuleGameManager - startButtonController es null");
+            Debug.Log("LeisureModuleGameManager - startButtonController es null");
         }
     }
 

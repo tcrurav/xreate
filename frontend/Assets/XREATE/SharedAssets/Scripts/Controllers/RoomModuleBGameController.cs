@@ -1,17 +1,18 @@
+using System;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomModuleBGameController : MonoBehaviour
 {
     public TMP_Text[] names;
     public GameObject[] StartButtons;
     public GameObject[] AnswerButtons;
-    public GameObject[] Panels;
     public int teamId;
     public GameObject quizManager;
 
-    private RoomModuleBGameManager roomModuleBGameManager;
+    public int MaxNumberOfStudents;
 
     // It should be dynamic - But time is knapp
     private int[] studentIdsInAssignedPanels;
@@ -21,29 +22,31 @@ public class RoomModuleBGameController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"RoomModuleBGameController - Start");
-        roomModuleBGameManager = GetComponent<RoomModuleBGameManager>();
-
-        studentIdsInAssignedPanels = new int[5];
-        studentNamesInAssignedPanels = new string[5];
+        studentIdsInAssignedPanels = new int[MaxNumberOfStudents];
+        studentNamesInAssignedPanels = new string[MaxNumberOfStudents];
 
         DisableAllStartButtons();
     }
 
+    public int GetStudentIdByPanelIndex(int panelIndex)
+    {
+        Debug.Log($"RoomModuleBGameController - GetStudentIdByPanelIndex - panelIndex: {panelIndex}, studentIdsInAssignedPanels[panelIndex]: {studentIdsInAssignedPanels[panelIndex]}");
+        return studentIdsInAssignedPanels[panelIndex];
+    }
+
     public void OnPlayerReady(int index)
     {
+        Debug.Log($"RoomModuleBGameManager - OnPlayerReady - index: {index}");
         quizManager.GetComponent<QuizManager>().OnPlayerReady(index);
     }
 
-    public void CheckAnswer(int selectedIndex, int selectedAnswerIndex)
+    public void CheckAnswer(int questionIndex, int selectedIndex, int selectedAnswerIndex)
     {
         quizManager.GetComponent<QuizManager>().CheckAnswer(selectedIndex, selectedAnswerIndex);
     }
 
     public void StartGame()
     {
-        Debug.Log($"RoomModuleBGameController - StartGame");
-
         GetListOfConnectedUsers();
 
         quizManager.GetComponent<QuizManager>().SetTotalPlayers(numberOfConnectedStudents);
@@ -53,11 +56,13 @@ public class RoomModuleBGameController : MonoBehaviour
 
     private void EnableOwnStartButton()
     {
-        for(int i = 0; i < numberOfConnectedStudents; i++)
+        for (int i = 0; i < numberOfConnectedStudents; i++)
         {
-            if (names[i].text == MainManager.GetUser().username) 
+            if (names[i].text == MainManager.GetUser().username)
             {
                 StartButtons[i].SetActive(true);
+                StartButtons[i].GetComponent<Button>().interactable = true;
+                return;
             }
         }
     }
@@ -66,13 +71,20 @@ public class RoomModuleBGameController : MonoBehaviour
     {
         foreach (GameObject s in StartButtons)
         {
-            s.gameObject.SetActive( false );
+            s.gameObject.SetActive(false);
         }
     }
 
     private void GetListOfConnectedUsers()
     {
-        Debug.Log($"RoomModuleBGameController - GetListOfConnectedUsers");
+        // TODO - Really ugly way - Time is Knapp
+        // initialize with big values to sort later the array names[]
+        int BIG_VALUE = 999999;
+        for (int i = 0; i < MaxNumberOfStudents; i++)
+        {
+            studentIdsInAssignedPanels[i] = BIG_VALUE;
+        }
+
         int panelIndex = 0;
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
@@ -85,13 +97,17 @@ public class RoomModuleBGameController : MonoBehaviour
             {
                 studentIdsInAssignedPanels[panelIndex] = studentId;
                 studentNamesInAssignedPanels[panelIndex] = playerObject.GetComponent<PlayerSync>().PlayerName.Value.ToString();
-                names[panelIndex].text = studentNamesInAssignedPanels[panelIndex];
                 panelIndex++;
             }
         }
 
-        Debug.Log($"RoomModuleBGameController - GetListOfConnectedUsers - panelIndex: {panelIndex}");
-
         numberOfConnectedStudents = panelIndex;
+
+        Array.Sort(studentIdsInAssignedPanels, studentNamesInAssignedPanels);
+
+        for (int i = 0; i < numberOfConnectedStudents; i++)
+        {
+            names[i].text = studentNamesInAssignedPanels[i];
+        }
     }
 }

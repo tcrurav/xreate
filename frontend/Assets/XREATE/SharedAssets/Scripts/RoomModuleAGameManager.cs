@@ -1,31 +1,30 @@
 using Unity.Netcode;
+using UnityEngine;
 
 public class RoomModuleAGameManager : NetworkBehaviour
 {
-    //public NetworkList<bool> startedPanels = new();                     // Contain the if the panel has been started
-    //public NetworkList<int> panelsAnswered = new();                      // Contains the panel answered for each question
+    public NetworkList<bool> panelsAnswered = new();
     public NetworkVariable<bool> startReadyToGame = new(false);
     public NetworkVariable<bool> startReadyToNextRoom = new(false);
-
-    // TODO - Get how many students are participating and how many questions
-    public int numberOfStudents;
-    public int numberOfQuestions;
+    public NetworkVariable<bool> enableStartReadyToNextRoom = new(false);
 
     private RoomModuleAGameController roomModuleAGameController;
     private StartButtonController startButtonController;
+
+    public int MaxNumberOfStudents;
 
     private bool isSubscribed = false;
 
     private void Start()
     {
-        DebugManager.Log("RoomModuleAGameManager - Start");
+        Debug.Log("RoomModuleAGameManager - Start");
 
         roomModuleAGameController = GetComponent<RoomModuleAGameController>();
         startButtonController = GetComponent<StartButtonController>();
 
-        if (roomModuleAGameController == null)
+        if (roomModuleAGameController == null || startButtonController == null)
         {
-            DebugManager.Log("RoomModuleAGameManager - Start - missing mandatory components in GameObject.");
+            Debug.Log("RoomModuleAGameManager - Start - missing mandatory components in GameObject.");
         }
     }
 
@@ -33,37 +32,22 @@ public class RoomModuleAGameManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        DebugManager.Log($"RoomModuleAGameManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
+        Debug.Log($"RoomModuleAGameManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
 
         if (IsServer)
         {
-            //for (int i = 0; i < numberOfStudents; i++) startedPanels.Add(false);
-            //for (int i = 0; i < numberOfQuestions; i++) panelsAnswered.Add(0);
+            for (int i = 0; i < MaxNumberOfStudents; i++) panelsAnswered.Add(false);
         }
 
         if (!isSubscribed)
         {
+            panelsAnswered.OnListChanged += OnPanelsAnsweredChanged;
 
-            //startedPanels.OnListChanged += (NetworkListEvent<bool> changeEvent) =>
-            //{
-            //    ChangeStartedPanelsClientRpc(changeEvent.Index, changeEvent.Value);
-            //};
+            startReadyToGame.OnValueChanged += OnStartReadyToGameChanged;
 
-            //panelsAnswered.OnListChanged += (NetworkListEvent<int> changeEvent) =>
-            //{
-            //    ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
-            //};
+            startReadyToNextRoom.OnValueChanged += OnStartReadyToNextRoomChanged;
 
-            startReadyToGame.OnValueChanged += (oldValue, newValue) =>
-            {
-                ChangeStartReadyToGameClientRpc(oldValue, newValue);
-            };
-
-            startReadyToNextRoom.OnValueChanged += (oldValue, newValue) =>
-            {
-                DebugManager.Log($"RoomModuleAGameManager - startReadyToNextRoom.OnValueChanged - newValue: {newValue}");
-                ChangeStartReadyToNextRoomClientRpc(oldValue, newValue);
-            };
+            enableStartReadyToNextRoom.OnValueChanged += OnEnableStartReadyToNextRoomChanged;
 
             isSubscribed = true;
         }
@@ -78,71 +62,83 @@ public class RoomModuleAGameManager : NetworkBehaviour
         //}
     }
 
-    public override void OnDestroy()
+    private void OnPanelsAnsweredChanged(NetworkListEvent<bool> changeEvent)
     {
-        //startedPanels?.Dispose();
-        //panelsAnswered?.Dispose();
-        startReadyToGame?.Dispose();
-        startReadyToNextRoom?.Dispose();
+        if (changeEvent.Type == NetworkListEvent<bool>.EventType.Insert)
+        {
+            ChangePanelsAnsweredClientRpc(changeEvent.Index, changeEvent.Value);
+        }
     }
 
-    //[ServerRpc(RequireOwnership = false)]
-    //public void ChangeStartedPanelsServerRpc(int index, bool newValue)
-    //{
-    //    if (startedPanels[index] != newValue)
-    //    {
-    //        startedPanels.RemoveAt(index);
-    //        startedPanels.Insert(index, newValue);
-    //    }
-    //}
+    private void OnStartReadyToGameChanged(bool oldValue, bool newValue)
+    {
+        ChangeStartReadyToGameClientRpc(oldValue, newValue);
+    }
 
-    //[ClientRpc]
-    //public void ChangeStartedPanelsClientRpc(int index, bool newValue)
-    //{
-    //    if (roomModuleAGameController != null)
-    //    {
-    //        roomModuleAGameController.GotoNextSlide();
-    //    }
-    //    else
-    //    {
-    //        DebugManager.Log("RoomModuleAGameManager - roomModuleBGameController es null");
-    //    }
-    //}
+    private void OnStartReadyToNextRoomChanged(bool oldValue, bool newValue)
+    {
+        ChangeStartReadyToNextRoomClientRpc(oldValue, newValue);
+    }
 
-    //[ServerRpc(RequireOwnership = false)]
-    //public void ChangePanelsAnsweredServerRpc(int index, int newValue)
-    //{
-    //    if (panelsAnswered[index] != newValue)
-    //    {
-    //        panelsAnswered.RemoveAt(index);
-    //        panelsAnswered.Insert(index, newValue);
-    //    }
-    //}
+    private void OnEnableStartReadyToNextRoomChanged(bool oldValue, bool newValue)
+    {
+        ChangeEnableStartReadyToNextRoomClientRpc(oldValue, newValue);
+    }
 
-    //[ClientRpc]
-    //public void ChangePanelsAnsweredClientRpc(int index, int newValue)
-    //{
-    //    if (roomModuleAGameController != null)
-    //    {
-    //        // TODO - IMPORTANT
-    //        roomModuleAGameController.GotoNextSlide();
-    //    }
-    //    else
-    //    {
-    //        DebugManager.Log("RoomModuleAGameManager - roomModuleBGameController es null");
-    //    }
-    //}
+    public override void OnDestroy()
+    {
+        if (isSubscribed)
+        {
+            panelsAnswered.OnListChanged -= OnPanelsAnsweredChanged;
+            startReadyToGame.OnValueChanged -= OnStartReadyToGameChanged;
+            startReadyToNextRoom.OnValueChanged -= OnStartReadyToNextRoomChanged;
+            enableStartReadyToNextRoom.OnValueChanged -= OnEnableStartReadyToNextRoomChanged;
+
+            isSubscribed = false;
+        }
+
+        base.OnDestroy();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangePanelsAnsweredServerRpc(int index, bool newValue)
+    {
+        if (panelsAnswered[index] != newValue)
+        {
+            panelsAnswered.RemoveAt(index);
+            panelsAnswered.Insert(index, newValue);
+        }
+    }
+
+    [ClientRpc]
+    public void ChangePanelsAnsweredClientRpc(int index, bool newValue)
+    {
+        if (roomModuleAGameController != null)
+        {
+            int numberOfFinishedPanels = 0;
+            for(int i = 0; i < panelsAnswered.Count; i++)
+            {
+                if(panelsAnswered[i]) numberOfFinishedPanels++;
+            }
+            roomModuleAGameController.UpdateTextureForNumberOfFinishedPanels(index);
+        }
+        else
+        {
+            Debug.Log("RoomModuleAGameManager - roomModuleAGameController es null");
+        }
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToGameServerRpc(bool newStartReadyToGame)
     {
+        Debug.Log("RoomModuleAGameManager - ChangeStartReadyToGameServerRpc");
         if (roomModuleAGameController != null && startReadyToGame.Value != newStartReadyToGame)
         {
             startReadyToGame.Value = newStartReadyToGame;
         }
         else
         {
-            DebugManager.Log("RoomModuleAGameManager - roomModuleBGameController es null");
+            Debug.Log("RoomModuleAGameManager - roomModuleAGameController es null");
 
         }
     }
@@ -150,28 +146,28 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToGameClientRpc(bool oldValue, bool newValue)
     {
+        Debug.Log("RoomModuleAGameManager - ChangeStartReadyToGameClientRpc");
         if (roomModuleAGameController != null)
         {
-            // TODO - IMPORTANT
-            roomModuleAGameController.GotoNextSlide();
+            roomModuleAGameController.StartGame();
         }
         else
         {
-            DebugManager.Log("RoomModuleAGameManager - roomModuleBGameController es null");
+            Debug.Log("RoomModuleAGameManager - roomModuleAGameController es null");
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToNextRoomServerRpc(bool newValue)
     {
-        DebugManager.Log($"RoomModuleAGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
+        Debug.Log($"RoomModuleAGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
         if (startButtonController != null && startReadyToNextRoom.Value != newValue)
         {
             startReadyToNextRoom.Value = newValue;
         }
         else
         {
-            DebugManager.Log("RoomModuleAGameManager - startButtonController es null");
+            Debug.Log("RoomModuleAGameManager - startButtonController es null");
 
         }
     }
@@ -179,14 +175,43 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
     {
-        DebugManager.Log($"RoomModuleAGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
+        Debug.Log($"RoomModuleAGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
-            GetComponent<StartButtonController>().EnableNextRooms();
+            startButtonController.EnableNextRooms();
         }
         else
         {
-            DebugManager.Log("RoomModuleAGameManager - startButtonController es null");
+            Debug.Log("RoomModuleAGameManager - startButtonController es null");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeEnableStartReadyToNextRoomServerRpc(bool newValue)
+    {
+        Debug.Log($"RoomModuleAGameManager - ChangeEnableStartReadyToNextRoomServerRpc - newValue: {newValue}");
+        if (startButtonController != null && enableStartReadyToNextRoom.Value != newValue)
+        {
+            enableStartReadyToNextRoom.Value = newValue;
+        }
+        else
+        {
+            Debug.Log("RoomModuleAGameManager - enableStartButtonController es null");
+
+        }
+    }
+
+    [ClientRpc]
+    public void ChangeEnableStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
+    {
+        Debug.Log($"RoomModuleAGameManager - ChangeEnableStartReadyToNextRoomClientRpc - newValue: {newValue}");
+        if (startButtonController != null)
+        {
+            startButtonController.EnableButtonToEnableNextRooms();
+        }
+        else
+        {
+            Debug.Log("RoomModuleAGameManager - enableStartButtonController es null");
         }
     }
 

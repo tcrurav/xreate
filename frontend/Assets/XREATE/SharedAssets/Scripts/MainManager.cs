@@ -3,6 +3,11 @@ using UnityEngine;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
+    
+    public bool TeacherPermissionsActivated;
+    public string Team1Teacher;
+    public string Team2Teacher;
+
 
     private User user;
     private Scene scene = Scene.Login;
@@ -25,6 +30,28 @@ public class MainManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        Instance.TeacherPermissionsActivated = TeacherPermissionsActivated;
+        Instance.Team1Teacher = Team1Teacher;
+        Instance.Team2Teacher = Team2Teacher;
+    }
+
+    public static bool IsTeacherPermissionsActivated()
+    {
+        return Instance.TeacherPermissionsActivated;
+    }
+
+    public static string GetTeam1Teacher()
+    {
+        return Instance.Team1Teacher;
+    }
+
+    public static string GetTeam2Teacher()
+    {
+        return Instance.Team2Teacher;
     }
 
     public static void SetAccessToken(string accessToken)
@@ -65,20 +92,6 @@ public class MainManager : MonoBehaviour
     {
         Instance.currentUrl = Instance.URL[locationId];
     }
-
-    //public static GameObject FindObject(GameObject parent, string name)
-    //{
-    //    Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
-    //    foreach (Transform t in trs)
-    //    {
-    //        if (t.name == name)
-    //        {
-    //            return t.gameObject;
-    //        }
-    //    }
-    //    return null;
-    //}
-    //// https://discussions.unity.com/t/how-to-find-an-inactive-game-object/129521
 }
 
 // https://learn.unity.com/tutorial/implement-data-persistence-between-scenes#

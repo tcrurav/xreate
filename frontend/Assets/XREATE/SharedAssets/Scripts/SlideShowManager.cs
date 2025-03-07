@@ -21,7 +21,7 @@ public class SlideShowManager : NetworkBehaviour
 
         if (slideController == null || forceAttentionController == null || startButtonController == null)
         {
-            DebugManager.Log("SlideShowManager - Start - Faltan componentes necesarios en el GameObject.");
+            Debug.Log("SlideShowManager - Start - Faltan componentes necesarios en el GameObject.");
         }
     }
 
@@ -29,7 +29,7 @@ public class SlideShowManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        DebugManager.Log($"SlideShowManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
+        Debug.Log($"SlideShowManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
 
         if (!isSubscribed)
         {
@@ -74,7 +74,7 @@ public class SlideShowManager : NetworkBehaviour
     {
         if (currentSlide.Value != newCurrentSlide)
         {
-            DebugManager.Log($"ChangeCurrentSlideServerRpc - newCurrentSlide: {newCurrentSlide}");
+            Debug.Log($"ChangeCurrentSlideServerRpc - newCurrentSlide: {newCurrentSlide}");
             currentSlide.Value = newCurrentSlide;
         }
     }
@@ -82,15 +82,15 @@ public class SlideShowManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeCurrentSlideClientRpc(int oldValue, int newValue)
     {
-        DebugManager.Log($"ChangeCurrentSlideClientRpc - oldValue: {oldValue}, newValue: {newValue}");
+        Debug.Log($"ChangeCurrentSlideClientRpc - oldValue: {oldValue}, newValue: {newValue}");
         if (slideController != null)
         {
-            DebugManager.Log("ChangeCurrentSlideClientRpc - Llamando a HideOldSlideAndShowNewSlide");
+            Debug.Log("ChangeCurrentSlideClientRpc - Llamando a HideOldSlideAndShowNewSlide");
             slideController.HideOldSlideAndShowNewSlide(oldValue, newValue);
         }
         else
         {
-            DebugManager.Log("ChangeCurrentSlideClientRpc - SlideController es null");
+            Debug.Log("ChangeCurrentSlideClientRpc - SlideController es null");
         }
     }
 
@@ -103,7 +103,7 @@ public class SlideShowManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("ChangeForceAttentionServerRpc - forceAttentionController es null");
+            Debug.Log("ChangeForceAttentionServerRpc - forceAttentionController es null");
 
         }
     }
@@ -117,7 +117,7 @@ public class SlideShowManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("ChangeForceAttentionClientRpc - forceAttentionController es null");
+            Debug.Log("ChangeForceAttentionClientRpc - forceAttentionController es null");
         }
     }
 
@@ -130,7 +130,7 @@ public class SlideShowManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("ChangeStartReadyServerRpc - startButtonController es null");
+            Debug.Log("ChangeStartReadyServerRpc - startButtonController es null");
 
         }
     }
@@ -144,7 +144,7 @@ public class SlideShowManager : NetworkBehaviour
         }
         else
         {
-            DebugManager.Log("ChangeStartReadyClientRpc - startButtonController es null");
+            Debug.Log("ChangeStartReadyClientRpc - startButtonController es null");
         }
     }
 }

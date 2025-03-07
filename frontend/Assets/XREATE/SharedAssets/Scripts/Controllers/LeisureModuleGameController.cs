@@ -16,7 +16,7 @@ public class LeisureModuleGameController : MonoBehaviour
 
     public void HideOldSlideAndShowNewSlide(int oldValue, int newValue)
     {
-        DebugManager.Log($"LeisureModuleGameController - HideOldSlideAndShowNewSlide");
+        Debug.Log($"LeisureModuleGameController - HideOldSlideAndShowNewSlide");
 
         Slides[oldValue].gameObject.SetActive(false);
         Slides[newValue].gameObject.SetActive(true);
