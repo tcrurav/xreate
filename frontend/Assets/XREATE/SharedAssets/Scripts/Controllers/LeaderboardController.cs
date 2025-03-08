@@ -25,7 +25,7 @@ public class LeaderboardController : MonoBehaviour
         teamService = gameObject.AddComponent<TeamService>();
         inActivityStudentParticipationService = gameObject.AddComponent<InActivityStudentParticipationService>();
 
-        Refresh();
+        //Refresh();
     }
 
     private void OnEnable()
