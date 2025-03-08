@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -46,12 +45,10 @@ public class RoomModuleBGameManager : NetworkBehaviour
 
     private void Start()
     {
-        Debug.Log("RoomModuleBGameManager - Start");
-
         roomModuleBGameController = GetComponent<RoomModuleBGameController>();
         startButtonController = GetComponent<StartButtonController>();
 
-        if (roomModuleBGameController == null)
+        if (roomModuleBGameController == null || startButtonController == null)
         {
             Debug.Log("RoomModuleBGameManager - Start - missing mandatory components in GameObject.");
         }
@@ -60,8 +57,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
-        Debug.Log($"RoomModuleBGameManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
 
         if (IsServer)
         {
@@ -152,7 +147,6 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartedPanelsServerRpc(int index, bool newValue)
     {
-        Debug.Log($"ChangeStartedPanelsServerRpc - index: {index}");
         if (startedPanels[index] != newValue)
         {
             startedPanels.RemoveAt(index);
@@ -176,12 +170,11 @@ public class RoomModuleBGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangePanelsAnsweredServerRpc(int questionIndex, int selectedIndex, int selectedAnsweredIndex)
     {
-        Debug.Log($"ChangePanelsAnsweredServerRpc - panelsAnswered[questionIndex].selectedIndex: {panelsAnswered[questionIndex].selectedIndex}");
-        if (panelsAnswered[questionIndex].selectedIndex == 0) // Only the first student who answers per question
-        {
+        //if (panelsAnswered[questionIndex].selectedIndex == 0) // Only the first student who answers per question
+        //{
             panelsAnswered.RemoveAt(questionIndex);
             panelsAnswered.Insert(questionIndex, new Question(selectedIndex, selectedAnsweredIndex));
-        }
+        //}
     }
 
     [ClientRpc]

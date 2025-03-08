@@ -117,7 +117,9 @@ public class QuizManager : MonoBehaviour
     {
         if (MainManager.GetUser().role != "STUDENT")
         {
-            throw new System.Exception("Error: Only students get points");
+            //throw new System.Exception("Error: Only students get points");
+            Debug.Log("Only students get points");
+            yield break;
         }
 
         int studentId = MainManager.GetUser().id;
@@ -128,6 +130,7 @@ public class QuizManager : MonoBehaviour
 
         if (achievementItemService.responseCode != 200)
         {
+            Debug.Log("Error: API Error");
             yield break;
         }
 
@@ -137,7 +140,7 @@ public class QuizManager : MonoBehaviour
     // Method called when a player presses the start button
     public void OnPlayerReady(int playerIndex)
     {
-        Debug.Log($"QuizManager - OnPlayerReady - playerIndex: {playerIndex}");
+        Debug.Log("QuizManager - OnPlayerReady");
         playersReady++;
         if (playersReady == totalPlayers)
         {
@@ -148,6 +151,7 @@ public class QuizManager : MonoBehaviour
     // Starts the quiz game
     void StartQuiz()
     {
+        Debug.Log($"QuizManager - StartQuiz - totalPlayers: {totalPlayers}");
         // Hide welcome panels and show quiz panels
         foreach (var panel in welcomePanels)
         {
@@ -198,7 +202,7 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No se recibieron datos o el array está vacío.");
+            Debug.LogError("Data not received or the array is empty.");
         }
     }
 
@@ -387,8 +391,6 @@ public class QuizManager : MonoBehaviour
             }
 
             currentQuestionIndex++;
-            Debug.Log("Current Question Index: " + currentQuestionIndex);
-            Debug.Log("Current Question Index: " + currentQuestionIndex);
             Invoke("LoadQuestion", 2.0f);
         }
         else
@@ -435,19 +437,19 @@ public class QuizManager : MonoBehaviour
     {
         for (int i = 0; i < answerButtons.Count; i++)
         {
-            Debug.Log($"QuizManager - EnableButtons - i: {i}, roomModuleBGameController.GetStudentIdByPanelIndex(i): {roomModuleBGameController.GetStudentIdByPanelIndex(i)}");
-            if (roomModuleBGameController.GetStudentIdByPanelIndex(i) == MainManager.GetUser().id)
+            answerButtons[i].gameObject.SetActive(true);
+            if (MainManager.GetUser().role == "STUDENT" && roomModuleBGameController.GetStudentIdByPanelIndex(i) == MainManager.GetUser().id)
             {
-                answerButtons[i].gameObject.SetActive(true);
                 answerButtons[i].interactable = true;
+                continue;
             }
+            answerButtons[i].interactable = false;
         }
     }
 
     public void SetTotalPlayers(int value)
     {
         totalPlayers = value;
-        Debug.Log($"QuizManager - SetTotalPlayers: totalPlayers:{value}");
     }
 
 }

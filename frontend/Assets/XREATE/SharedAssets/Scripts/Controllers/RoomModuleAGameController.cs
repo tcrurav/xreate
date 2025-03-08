@@ -24,7 +24,6 @@ public class RoomModuleAGameController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"RoomModuleAGameController - Start");
         roomModuleAGameManager = GetComponent<RoomModuleAGameManager>();
 
         studentIdsInAssignedPanels = new int[MaxNumberOfStudents];
@@ -33,8 +32,6 @@ public class RoomModuleAGameController : MonoBehaviour
 
     public void UpdateTextureForNumberOfFinishedPanels(int numberOfFinishedPanels)
     {
-        Debug.Log($"RoomModuleAGameController - FinishedPanel");
-
         if (lockPlaneRenderer != null && unlockedTextures[numberOfFinishedPanels] != null)
         {
             lockPlaneRenderer.material.mainTexture = unlockedTextures[numberOfFinishedPanels];
@@ -48,9 +45,7 @@ public class RoomModuleAGameController : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log($"RoomModuleAGameController - StartGame");
-
-        GetListOfConnectedUsers();
+        GetListOfConnectedStudentsInCurrentTeam();
 
         EnableOwnStartPanel();
     }
@@ -67,7 +62,7 @@ public class RoomModuleAGameController : MonoBehaviour
         }
     }
 
-    private void GetListOfConnectedUsers()
+    private void GetListOfConnectedStudentsInCurrentTeam()
     {
         // TODO - Really ugly way - Time is Knapp
         // initialize with big values to sort later the array names[]

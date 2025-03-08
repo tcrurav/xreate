@@ -141,18 +141,18 @@ public class CurrentActivityManager : MonoBehaviour
 
     public static int GetTeamIdByStudentId(int studentId)
     {
-        if (MainManager.GetUser().role != "STUDENT")
+        if (Instance.inCurrentActivityStudentParticipations == null)
         {
-            Debug.Log("Only students are in a team");
-            return 0;
+            Debug.Log("Error: CurrentActivityManager - inCurrentActivityStudentParticipation is not updated yet");
+            return 0; // inCurrentActivityStudentParticipation is not updated yet.
         }
-
-        if (Instance.inCurrentActivityStudentParticipations == null) return 0; // inCurrentActivityStudentParticipation is not updated yet.
 
         foreach (InActivityStudentParticipation i in Instance.inCurrentActivityStudentParticipations)
         {
             if (i.studentId == studentId) return i.teamId;
         }
-        return 0; // It should not happen
+
+        Debug.Log("CurrentActivityManager - User is not in a Team");
+        return 0; // When a user is not in a team. For example a Teacher. Then the teamId should be 0.
     }
 }
