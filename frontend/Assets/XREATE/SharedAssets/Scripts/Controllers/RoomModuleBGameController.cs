@@ -36,7 +36,6 @@ public class RoomModuleBGameController : MonoBehaviour
 
     public void OnPlayerReady(int index)
     {
-        Debug.Log($"RoomModuleBGameManager - OnPlayerReady - index: {index}");
         quizManager.GetComponent<QuizManager>().OnPlayerReady(index);
     }
 
@@ -47,7 +46,8 @@ public class RoomModuleBGameController : MonoBehaviour
 
     public void StartGame()
     {
-        GetListOfConnectedUsers();
+        Debug.Log($"RoomModuleBGameController - StartGame");
+        GetListOfConnectedStudentsInCurrentTeam();
 
         quizManager.GetComponent<QuizManager>().SetTotalPlayers(numberOfConnectedStudents);
 
@@ -56,11 +56,12 @@ public class RoomModuleBGameController : MonoBehaviour
 
     private void EnableOwnStartButton()
     {
+        Debug.Log($"RoomModuleBGameController - EnableOwnStartButton - numberOfConnectedStudents: {numberOfConnectedStudents}");
         for (int i = 0; i < numberOfConnectedStudents; i++)
         {
+            StartButtons[i].SetActive(true);
             if (names[i].text == MainManager.GetUser().username)
             {
-                StartButtons[i].SetActive(true);
                 StartButtons[i].GetComponent<Button>().interactable = true;
                 return;
             }
@@ -75,7 +76,7 @@ public class RoomModuleBGameController : MonoBehaviour
         }
     }
 
-    private void GetListOfConnectedUsers()
+    private void GetListOfConnectedStudentsInCurrentTeam()
     {
         // TODO - Really ugly way - Time is Knapp
         // initialize with big values to sort later the array names[]

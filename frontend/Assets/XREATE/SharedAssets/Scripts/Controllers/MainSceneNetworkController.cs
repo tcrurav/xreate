@@ -51,8 +51,8 @@ public class MainSceneNetworkController : MonoBehaviour
             RoomModuleATeam1CheckboxButton.GetComponent<Button>().interactable = false;      // Only teachers can Activate the button, but after Room task is finished
             RoomModuleATeam2CheckboxButton.GetComponent<Button>().interactable = false;      // Only teachers can Activate the button, but after Room task is finished 
 
-            LeisureModuleTeam1CheckboxButton.GetComponent<Button>().interactable = false;    // Only teachers can Activate the button, but after Room task is finished
-            LeisureModuleTeam2CheckboxButton.GetComponent<Button>().interactable = false;    // Only teachers can Activate the button, but after Room task is finished
+            //LeisureModuleTeam1CheckboxButton.GetComponent<Button>().interactable = false;    // Only teachers can Activate the button, but after Room task is finished
+            //LeisureModuleTeam2CheckboxButton.GetComponent<Button>().interactable = false;    // Only teachers can Activate the button, but after Room task is finished
 
             if (MainManager.GetUser().role != "TEACHER")
             {

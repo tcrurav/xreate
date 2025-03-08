@@ -58,8 +58,8 @@ public class StartButtonController : MonoBehaviour
             case Scene.RoomModuleB:
                 ActivateSigns(); // Activates Leaderboard in the corridor
                 if (teamId == 1) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.TunnelConnectorC);
-                //if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.TunnelConnectorC); // (BEFORE REMOVING LEISURE MODULE)
-                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.TunnelConnectorF); 
+                //if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(1, (int)Scene.TunnelConnectorC); // (BEFORE REMOVING LEISURE MODULE)
+                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(1, (int)Scene.Main); 
                 break;
             case Scene.TunnelConnectorC:
                 if (teamId == 1) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.RoomModuleA);
@@ -69,16 +69,16 @@ public class StartButtonController : MonoBehaviour
                 ActivateSigns(); // Activates Leaderboard in the corridor
                 //if (teamId == 1) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.TunnelConnectorF); // (BEFORE REMOVING LEISURE MODULE)
                 if (teamId == 1) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.Main);
-                //if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.Main); // (BEFORE REMOVING LEISURE MODULE)
-                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.TunnelConnectorF);
+                //if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(1, (int)Scene.Main); // (BEFORE REMOVING LEISURE MODULE)
+                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(1, (int)Scene.TunnelConnectorF);
                 break;
             case Scene.TunnelConnectorF:
                 //if (teamId == 1) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.LeisureModule); // (BEFORE REMOVING LEISURE MODULE)
-                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.RoomModuleB);
+                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(1, (int)Scene.RoomModuleB);
                 break;
             case Scene.LeisureModule:
                 if (teamId == 1) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.Main);
-                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(0, (int)Scene.TunnelConnectorF);
+                if (teamId == 2) teamMapManager.ChangeCurrentTeamSceneServerRpc(1, (int)Scene.TunnelConnectorF);
                 break;
             case Scene.Auditorium:
                 ActivateSigns();

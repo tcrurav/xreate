@@ -17,8 +17,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
 
     private void Start()
     {
-        Debug.Log("RoomModuleAGameManager - Start");
-
         roomModuleAGameController = GetComponent<RoomModuleAGameController>();
         startButtonController = GetComponent<StartButtonController>();
 
@@ -31,8 +29,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
-        Debug.Log($"RoomModuleAGameManager - OnNetworkSpawn - IsServer: {IsServer} - IsClient: {IsClient}");
 
         if (IsServer)
         {
@@ -120,7 +116,7 @@ public class RoomModuleAGameManager : NetworkBehaviour
             {
                 if(panelsAnswered[i]) numberOfFinishedPanels++;
             }
-            roomModuleAGameController.UpdateTextureForNumberOfFinishedPanels(index);
+            roomModuleAGameController.UpdateTextureForNumberOfFinishedPanels(numberOfFinishedPanels);
         }
         else
         {
@@ -131,7 +127,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToGameServerRpc(bool newStartReadyToGame)
     {
-        Debug.Log("RoomModuleAGameManager - ChangeStartReadyToGameServerRpc");
         if (roomModuleAGameController != null && startReadyToGame.Value != newStartReadyToGame)
         {
             startReadyToGame.Value = newStartReadyToGame;
@@ -146,7 +141,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToGameClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log("RoomModuleAGameManager - ChangeStartReadyToGameClientRpc");
         if (roomModuleAGameController != null)
         {
             roomModuleAGameController.StartGame();
@@ -160,7 +154,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeStartReadyToNextRoomServerRpc(bool newValue)
     {
-        Debug.Log($"RoomModuleAGameManager - ChangeStartReadyToNextRoomServerRpc - newValue: {newValue}");
         if (startButtonController != null && startReadyToNextRoom.Value != newValue)
         {
             startReadyToNextRoom.Value = newValue;
@@ -175,7 +168,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log($"RoomModuleAGameManager - ChangeStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
             startButtonController.EnableNextRooms();
@@ -189,7 +181,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void ChangeEnableStartReadyToNextRoomServerRpc(bool newValue)
     {
-        Debug.Log($"RoomModuleAGameManager - ChangeEnableStartReadyToNextRoomServerRpc - newValue: {newValue}");
         if (startButtonController != null && enableStartReadyToNextRoom.Value != newValue)
         {
             enableStartReadyToNextRoom.Value = newValue;
@@ -204,7 +195,6 @@ public class RoomModuleAGameManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeEnableStartReadyToNextRoomClientRpc(bool oldValue, bool newValue)
     {
-        Debug.Log($"RoomModuleAGameManager - ChangeEnableStartReadyToNextRoomClientRpc - newValue: {newValue}");
         if (startButtonController != null)
         {
             startButtonController.EnableButtonToEnableNextRooms();
