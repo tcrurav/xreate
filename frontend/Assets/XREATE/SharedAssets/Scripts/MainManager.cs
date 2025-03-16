@@ -16,7 +16,7 @@ public class MainManager : MonoBehaviour
     private readonly string[] URL = new string[] {
         "http://localhost:80",                                                          // Localhost
         "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es",      // Gran Canaria Server
-        "" };                                                                           // TODO - Switzerland Server not available yet
+        "https://xreate.niederer.synology.me:60443" };                                 // Switzerland Server not available yet
 
     //TODO: URLs should be in .env maybe
 
