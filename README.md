@@ -168,6 +168,9 @@ npm test
 * You can also access de postman end-points online: 
   - [postman collection online](https://documenter.getpostman.com/view/3446841/2sAYBPmZqP).
 
+## Last APK available
+* You can download the last APK to be installed on Meta Quest from this link: https://drive.google.com/file/d/1759waVqovmxLaAIDgTFr4sSJtUJtgcif/view?usp=sharing
+
 ## Prerequisites
 
 All you need is... some time and...
