@@ -169,7 +169,7 @@ npm test
   - [postman collection online](https://documenter.getpostman.com/view/3446841/2sAYBPmZqP).
 
 ## Last APK available
-* You can download the last APK to be installed on Meta Quest from this link: https://drive.google.com/file/d/1759waVqovmxLaAIDgTFr4sSJtUJtgcif/view?usp=sharing
+* You can download the last APK to be installed on Meta Quest from this link: https://drive.google.com/file/d/1MYJNq19eNr-uEnC3P_tIY_0m37LSwYbz/view?usp=sharing
 
 ## Prerequisites
 
