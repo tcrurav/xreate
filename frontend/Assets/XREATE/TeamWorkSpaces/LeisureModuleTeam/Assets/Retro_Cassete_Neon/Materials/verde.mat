@@ -15,7 +15,7 @@ Material:
   m_ValidKeywords:
   - _EMISSIVE
   m_InvalidKeywords:
-  - _CLEARCOAT
+  - _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -94,6 +94,7 @@ Material:
     - _BUILTIN_ZWriteControl: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
+    - _CLEARCOAT: 0
     - _CastShadows: 1
     - _Cull: 0
     - _DstBlend: 0
@@ -146,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 9
+  version: 10
 --- !u!114 &3444780575845362244
 MonoBehaviour:
   m_ObjectHideFlags: 11
