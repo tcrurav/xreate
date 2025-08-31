@@ -12,11 +12,11 @@ public class MainManager : MonoBehaviour
     private User user;
     private Scene scene = Scene.Login;
     private string accessToken;
-    private string currentUrl = "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es";
+    private string currentUrl = "https://0aa1aca0-f373-47d3-82ce.d7dd1d907efa.sites.escritorios.ieselrincon.es";
     private readonly string[] URL = new string[] {
-        "http://localhost:80",                                                          // Localhost
-        "https://8231ade2-f282-4550-af85-e7fedd0b338a.escritorios.ieselrincon.es",      // Gran Canaria Server
-        "https://xreate.niederer.synology.me:60443" };                                 // Switzerland Server not available yet
+        "http://localhost:80",                                                              // Localhost
+        "https://0aa1aca0-f373-47d3-82ce.d7dd1d907efa.sites.escritorios.ieselrincon.es",    // Gran Canaria Server
+        "https://xreate.niederer.synology.me:60443" };                                      // Switzerland Server not available yet
 
     //TODO: URLs should be in .env maybe
 
